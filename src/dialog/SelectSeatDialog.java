@@ -87,7 +87,7 @@ public class SelectSeatDialog extends JDialog {
 		setUndecorated(true); // 팝업창 위 닫기버튼들을 다 없앰
 		setBackground(new Color(0, 0, 0, 0));
 		setResizable(false); // 사용자가 팝업창 크기를 조정하는것을 해제
-		setBounds(585, 240, 750, 750);
+		setBounds(585, 240, 1000, 1000);
 		setVisible(true);
 	}
 }
