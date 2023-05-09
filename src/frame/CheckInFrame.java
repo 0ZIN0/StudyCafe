@@ -29,6 +29,9 @@ import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
 
+/*
+ * 이 프레임이 메인 프레임입니다.
+ *  */
 public class CheckInFrame extends JFrame {
 	/* 레이아웃 */
 	CardLayout card = new CardLayout();
