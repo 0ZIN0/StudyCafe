@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.SeatButton;
+import label.RemainSeatLabel;
 import label.SeatReportLabel;
 
 public class SeatReportPanel extends JPanel {
@@ -21,7 +22,11 @@ public class SeatReportPanel extends JPanel {
 
 	JButton Locker1Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/storage_box1.png"));
 	JButton Locker2Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/storage_box2.png"));
-
+	
+	/* 잔여좌석을 알려주는 라벨 */
+	JLabel remainSeatPanel = new JLabel(new ImageIcon("ui/Select_Seat_Parts_img/Seat_list_box.png"));
+	JLabel remainSeatLabel = new RemainSeatLabel();
+	
 	/* 좌석버튼 객체 */
 	JButton seat1 = new SeatButton("1");
 	JButton seat2 = new SeatButton("2");
@@ -64,7 +69,10 @@ public class SeatReportPanel extends JPanel {
 
 	public SeatReportPanel(Image seatImage) {
 		this.seatImage = seatImage;
-
+		
+		/* 잔여 좌석 라벨 설정 */
+		remainSeatPanel.setBounds(114, 22, 130, 54);
+		remainSeatLabel.setBounds(119, 19, 200, 54);
 		/* 스터디룸, 사물함 설정 */
 		studyRoom1Btn.setBounds(100, 113, 160, 60);
 		studyRoom1Btn.setContentAreaFilled(false);
@@ -155,6 +163,9 @@ public class SeatReportPanel extends JPanel {
 		add(seat30);
 		add(seat31);
 		add(seat32);
+		
+		add(remainSeatLabel);
+		add(remainSeatPanel);
 		
 		/* 좌석 현황 라벨 설정 */
 		add(seatInfoLabel);
