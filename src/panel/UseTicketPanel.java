@@ -17,23 +17,13 @@ import button.UseTicketButton;
 
 public class UseTicketPanel extends JPanel {
 	
-	ImageIcon icon = new ImageIcon("ui/SelectSeatPopup/Background.png");
+	ImageIcon icon = new ImageIcon("ui/Remain_seat_popup/UsingTicket.jpg");
 	Image image = icon.getImage();
 
-	/* 좌석 번호 알려주는 라벨 */
-	JLabel seatlabel;
-	
-	public UseTicketPanel(String seatNum) {
-		
-		/* 라벨 설정 */
-		String seatName = seatNum + "번 좌석";
-		seatlabel = new JLabel(seatName);
-		
-		seatlabel.setBounds(287, 55, 200, 50);
-		seatlabel.setForeground(new Color(0x131313));
-		seatlabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
-		
-		add(seatlabel);
+	public UseTicketPanel() {
+		setLayout(null);
+		setBackground(new Color(0, 0, 0, 0));
+		setSize(750, 450);
 	}
 	
 	/** 백그라운드 이미지 페인팅 메서드 */

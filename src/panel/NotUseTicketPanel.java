@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public class NotUseTicketPanel extends JPanel {
 	
-	ImageIcon icon = new ImageIcon("ui/SelectSeatPopup/Background.png");
+	ImageIcon icon = new ImageIcon("ui/Remain_seat_popup/Warring_Frame.jpg");
 	Image image = icon.getImage();
 	
 	/* 좌석 번호 알려주는 라벨 */
