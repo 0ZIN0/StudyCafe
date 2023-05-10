@@ -28,4 +28,54 @@ public class LockerDAO {
 		}
 		return false;
 	}
+	
+	public static int totalLocker() {
+		
+		int count = 0;
+		String query = "SELECT useable FROM locker";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+		
+			try (
+					ResultSet rs = pstmt.executeQuery();
+					) {
+				while(rs.next()) {
+					if (rs.getString("useable").equals("사용가능")) {
+						count++;
+					}
+				}
+				return count;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public static int useable() {
+		
+		int count = 0;
+		String query = "SELECT in_use FROM locker";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+		
+			try (
+					ResultSet rs = pstmt.executeQuery();
+					) {
+				while(rs.next()) {
+					if (rs.getString("in_use").equals("이용가능")) {
+						count++;
+					}
+				}
+				return count;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 }

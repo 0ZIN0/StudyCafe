@@ -20,12 +20,15 @@ public class LockerButton extends JButton implements ActionListener{
 		setText(Integer.toString(lockerNum));
 		setSize(100, 100);
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
+		setBorderPainted(false);
 		addActionListener(this);
+		
 		if(inUse) {
 			setBackground(new Color(0x8D8787));
 		} else {
 			setBackground(new Color(217, 217, 217));
 		}
+		
 	}
 
 	@Override

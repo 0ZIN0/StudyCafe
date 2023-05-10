@@ -27,6 +27,8 @@ public class LockerPanel extends JPanel {
 	List<LockerButton> lockerBtns = new ArrayList<>();
 	int btnCtn = 1;
 	LockerDAO lockerDao = new LockerDAO();
+	int countLocker = lockerDao.totalLocker();
+	int useable = lockerDao.useable();
 	/**
 	 * Create the panel.
 	 */
@@ -55,9 +57,9 @@ public class LockerPanel extends JPanel {
 		add(myLockerLabel);
 		
 		JLabel inUseLockerLabel = new JLabel();
-		inUseLockerLabel.setBounds(37, 3, 150, 100);
+		inUseLockerLabel.setBounds(37, 3, 100, 100);
 		inUseLockerLabel.setForeground(new Color(255, 255, 255));
-		inUseLockerLabel.setText("00 / 20");
+		inUseLockerLabel.setText(useable + " / " + countLocker);
 		inUseLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 		add(inUseLockerLabel);
 		
@@ -66,8 +68,6 @@ public class LockerPanel extends JPanel {
 		inUseLockerBg.setIcon(new ImageIcon("ui/Select_Locker/remain2.png"));
 		inUseLockerBg.setBackground(new Color(0,0,0,0));
 		add(inUseLockerBg);
-		
-		
 		
 		setBounds(633, 381, 1177, 617);
 		setBackground(new Color(73, 67, 68));
