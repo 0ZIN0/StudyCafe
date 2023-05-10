@@ -71,11 +71,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+	
 		int btnNum = btns.indexOf(e.getSource());
-		System.out.println(btnNum);
 		periodLabel.setText(periods[btnNum]);
 		feeLabel.setText(fees[btnNum]);
-		
 		
 		for(int i = 0; i < btns.size(); i++) {
 			if(i == btnNum) {
