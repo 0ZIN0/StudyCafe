@@ -2,7 +2,10 @@ package dialog;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -13,15 +16,24 @@ import button.DayTicketButton;
 import button.TermTicketButton;
 import button.TimeTicketButton;
 import button.UseTicketButton;
-import panel.SelectSeatPanel;
 
 public class SelectSeatDialog extends JDialog {
+	
+	/* 백그라운드 이미지 */
+	ImageIcon icon = new ImageIcon("ui/SelectSeatPopup/Background.png");
+	Image image = icon.getImage();
 	
 	/* 좌석 번호 알려주는 라벨 */
 	JLabel seatNumlabel;
 	
 	/* 패널 */
-	JPanel selectSeatPanel = new SelectSeatPanel();
+	JPanel selectSeatPanel = new JPanel() {
+		/** 백그라운드 이미지 페인팅 메서드 */
+		protected void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.drawImage(image, 0, 0, this);
+		}
+	};
 
 	public SelectSeatDialog(String seatNum) {
 		/* 버튼 */
@@ -59,6 +71,10 @@ public class SelectSeatDialog extends JDialog {
 		add(selectSeatPanel);
 
 		/* 팝업창 기본 설정 */
+		selectSeatPanel.setLayout(null);
+		selectSeatPanel.setBounds(0, 0, 750, 750);
+		selectSeatPanel.setBackground(new Color(0, 0, 0, 0));
+		
 		setModal(true); // 팝업창 이외에 다른 버튼들은 누를 수 없음
 		setLayout(null);
 		setUndecorated(true); // 팝업창 위 닫기버튼들을 다 없앰

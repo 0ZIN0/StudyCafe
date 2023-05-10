@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import dialog.NotUseTicketDialog;
 import dialog.SelectSeatDialog;
 import dialog.UseTicketDialog;
 
@@ -23,12 +24,11 @@ public class UseTicketButton extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				selectSeatPopup.dispose();
-				if (remainTicket) {
 				
-				} else {
+				if (remainTicket) {
 					JDialog UseTicketPopup = new UseTicketDialog(seatNum);
-					System.out.println("뜸");
-//					JDialog NotUseTicketPopup = new NotUseTicketDialog(seatNum);
+				} else {
+					JDialog NotUseTicketPopup = new NotUseTicketDialog(seatNum);
 				}
 			}
 		});
