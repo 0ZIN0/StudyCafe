@@ -55,7 +55,7 @@ public class LockerPanel extends JPanel {
 		add(myLockerLabel);
 		
 		JLabel myUsedLockerLabel = new JLabel();
-		myUsedLockerLabel.setBounds(23, 23, 150, 100);
+		myUsedLockerLabel.setBounds(23, 5, 150, 100);
 		myUsedLockerLabel.setIcon(new ImageIcon("ui/Select_Locker/remain2.png"));
 		add(myUsedLockerLabel);
 		
