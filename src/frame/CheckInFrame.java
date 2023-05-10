@@ -218,7 +218,7 @@ public class CheckInFrame extends JFrame {
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
 		setUndecorated(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+//		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
