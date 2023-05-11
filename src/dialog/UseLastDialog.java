@@ -33,7 +33,6 @@ public class UseLastDialog extends JDialog {
 	public UseLastDialog() {
 		
 		closeBtn.setLocation(300, 340);
-		
 		closeBtn.addActionListener(new ActionListener() {
 			
 			@Override
