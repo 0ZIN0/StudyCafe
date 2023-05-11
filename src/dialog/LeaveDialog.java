@@ -33,7 +33,7 @@ public class LeaveDialog extends JDialog {
 		setLayout(null);
 		setUndecorated(true);
 		setBackground(new Color(0, 0, 0, 0));
-		setBounds(585, 40, bg.getWidth(), bg.getHeight());
+		setBounds(585, 80, bg.getWidth(), bg.getHeight());
 		setVisible(true);
 	}
 }
