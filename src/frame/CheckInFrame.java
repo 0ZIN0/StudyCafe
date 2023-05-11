@@ -3,14 +3,11 @@ package frame;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,9 +17,9 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
-import button.SeatButton;
 import panel.LockerPanel;
 import panel.MainPanel;
+import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
 import toggle.LockerToggle;
@@ -69,16 +66,14 @@ public class CheckInFrame extends JFrame {
 	JPanel seatReportPanel = new SeatReportPanel(seatReportImage); // 좌석현황 패널
 	JPanel studyRoomPanel = new StudyRoomPanel(); // 스터디룸 예약 패널
 	JPanel lockerPanel = new LockerPanel(); // 사물함 구매 패널
-
+	MyPagePanel myPagePanel = new MyPagePanel(); // 마이페이지 패널
+	
 	/* 메인 토글버튼 */
 	JToggleButton seatReportTog = new SeatReportToggle(seatReportImageIcon, card, seatReportPanel, subPanel);
 	JToggleButton studyRoomTog = new StudyRoomToggle(studyRoomdImageIcon, card, studyRoomPanel, subPanel);
 	JToggleButton lockerTog = new LockerToggle(lockerImageIcon, card, lockerPanel, subPanel);
 	ButtonGroup togGroup = new ButtonGroup(); // 토글버튼 그룹 지정
 
-	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment(); // 전체화면 설정
-	GraphicsDevice gd = ge.getDefaultScreenDevice();
-	
 	/* 탑 버튼 */
 	JButton openDoorBtn = new OpenDoorButton(openDoorImageIcon, this);
 	JButton leaveBtn = new LeaveButton(leaveImageIcon, this);
@@ -99,7 +94,7 @@ public class CheckInFrame extends JFrame {
 
 		/* 메인패널 투명화 설정 */
 		mainPanel.setBackground(new Color(0, 0, 0, 0));
-
+		setLayout(card);
 		/* 메인 토글버튼 그룹 설정 */
 		togGroup.add(seatReportTog);
 		togGroup.add(studyRoomTog);
@@ -187,18 +182,24 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setContentAreaFilled(false);
 		mypageBtn.setBorderPainted(false);
 		
-		// 프레임에 메인 패널 붙이기
-		add(mainPanel);
+		// 프레임(getContentPane())에 메인 패널 붙이기
+		getContentPane().add(mainPanel, "main");
+		getContentPane().add(myPagePanel, "myPage");
 		
 		// 메인 패널에 잡것들 붙이기
 		mainPanel.add(subPanel);
-		
 		mainPanel.add(seatReportTog);
 		mainPanel.add(studyRoomTog);
 		mainPanel.add(lockerTog);
-		
 		mainPanel.add(logoutBtn);
 		mainPanel.add(mypageBtn);
+		mypageBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				card.show(getContentPane(), "myPage");
+			}
+		});
 		
 		mainPanel.add(openDoorBtn);
 		mainPanel.add(leaveBtn);
@@ -218,7 +219,6 @@ public class CheckInFrame extends JFrame {
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
 		setUndecorated(true);
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
