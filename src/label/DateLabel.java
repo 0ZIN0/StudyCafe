@@ -11,9 +11,14 @@ import javax.swing.JLabel;
 public class DateLabel extends JLabel {
 	
 	Calendar selectDay = Calendar.getInstance();
-	SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
 	
 	public DateLabel() {
+		selectDay.set(Calendar.HOUR, 0);
+		selectDay.set(Calendar.MINUTE, 0);
+		selectDay.set(Calendar.SECOND, 0);
+		selectDay.set(Calendar.MILLISECOND, 0);
+
 		setText(sdf.format(selectDay.getTime()));
 		setForeground(Color.white);
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
