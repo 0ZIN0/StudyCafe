@@ -37,7 +37,7 @@ public class StudyRoomPanel extends JPanel {
 	DateLabel dateLabel = new DateLabel();
 	JLabel startTimeLabel = new JLabel();
 	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
-
+	
 	public StudyRoomPanel() {
 
 		/* 버튼 설정 */
