@@ -19,9 +19,6 @@ public class StudyRoomPanel extends JPanel {
 	/* 배경 */
 	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/studyRoom_Frame.png"), new Color(0x494344));
 	
-	/* 패널 */
-	JPanel gridPanel = new GridPanel();
-	
 	/* 버튼 */
 	JButton topLeftBtn = new JButton(new ImageIcon("ui/study_room/Main_Arrow_01.png"));
 	JButton topRightBtn = new JButton(new ImageIcon("ui/study_room/Main_Arrow_03.png"));
@@ -31,6 +28,9 @@ public class StudyRoomPanel extends JPanel {
 	JButton downBtn = new JButton(new ImageIcon("ui/study_room/TimeUp_Button_04.png"));
 	JButton paymentBtn = new PaymentButton();
 
+	/* 패널 */
+	JPanel gridPanel = new GridPanel(upBtn, downBtn);
+	
 	/* 라벨 */
 	JLabel roomNumLabel = new JLabel(new ImageIcon("ui/study_room/studyRoom_01.png"));
 	JLabel isTodayLabel = new JLabel("TODAY");
@@ -44,20 +44,21 @@ public class StudyRoomPanel extends JPanel {
 		topLeftBtn.setBounds(122, 40, 40, 60);
 		topLeftBtn.setBorderPainted(false);
 		topLeftBtn.setContentAreaFilled(false);
+
+		topRightBtn.setBounds(434, 40, 40, 60);
+		topRightBtn.setBorderPainted(false);
+		topRightBtn.setContentAreaFilled(false);
+	
 		topLeftBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String room1 = "ui/study_room/studyRoom_01.png";
 				roomNumLabel.setIcon(new ImageIcon(room1));
-
+				
 				topLeftBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_01.png"));
 				topRightBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_03.png"));
 			}
 		});
-
-		topRightBtn.setBounds(434, 40, 40, 60);
-		topRightBtn.setBorderPainted(false);
-		topRightBtn.setContentAreaFilled(false);
 		topRightBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
