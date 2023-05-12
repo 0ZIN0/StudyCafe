@@ -17,9 +17,11 @@ import button.DayTicketButton;
 import button.TermTicketButton;
 import button.TimeTicketButton;
 import button.UseTicketButton;
+import dto.Seat;
 
 public class SelectSeatDialog extends JDialog {
-
+	
+	Seat seat;
 	ImageIcon icon = new ImageIcon("ui/SelectSeatPopup/Background.png");
 	Image image = icon.getImage();
 	
@@ -34,12 +36,13 @@ public class SelectSeatDialog extends JDialog {
 	JLabel label;
 	
 	/* 구매 버튼 */
-	JButton dayTicketBtn = new DayTicketButton();
+	JButton dayTicketBtn = new DayTicketButton(seat);
 	JButton timeTicketBtn = new TimeTicketButton();
 	JButton termTicketBtn = new TermTicketButton();
 	JButton useTicketBtn = new UseTicketButton();
 
-	public SelectSeatDialog(String seatNum) {
+	public SelectSeatDialog(String seatNum, Seat seat) {
+		this.seat = seat;
 		/* 닫기 버튼 설정 */
 		JButton close = new JButton(new ImageIcon("ui/SelectSeatPopup/CloseButton.png"));
 
