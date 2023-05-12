@@ -17,7 +17,7 @@ import label.DateLabel;
 public class StudyRoomPanel extends JPanel {
 
 	/* 배경 */
-	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/studyRoom_Frame.png"), new Color(0x494344));
+	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/Study_Room_Frame.png"), new Color(0x494344));
 	
 	/* 버튼 */
 	JButton topLeftBtn = new JButton(new ImageIcon("ui/study_room/Main_Arrow_01.png"));
