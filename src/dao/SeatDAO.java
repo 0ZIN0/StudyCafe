@@ -1,8 +1,15 @@
 package dao;
 
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+
+import javax.swing.JLabel;
 
 public class SeatDAO {
 	
@@ -29,4 +36,23 @@ public class SeatDAO {
 		}
 		return false;
 	}
+	
+	public static List<Integer> getSeatId() {
+		List<Integer> seatIds = new ArrayList<>();
+		String query = "SELECT seat_id FROM seat";
+		try (
+			Connection conn = OjdbcConnection.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+		) {
+			while(rs.next()) {
+				seatIds.add(rs.getInt(0));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
 }

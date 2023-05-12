@@ -8,6 +8,8 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
@@ -21,6 +23,7 @@ import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
 import button.SeatButton;
+import dto.Seat;
 import panel.LockerPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
@@ -36,7 +39,7 @@ import toggle.StudyRoomToggle;
 public class CheckInFrame extends JFrame {
 	/* 레이아웃 */
 	CardLayout card = new CardLayout();
-
+	
 	/* 이미지들 */
 	// 백그라운드 이미지
 	ImageIcon backgroundImageIcon = new ImageIcon("ui/background/Select_Seat_last_1.png");
@@ -48,7 +51,7 @@ public class CheckInFrame extends JFrame {
 	
 	// 개인석 이미지
 	ImageIcon seatReportImageIcon = new ImageIcon("ui/seatReportToggleButton.png");
-
+	
 	// 스터디룸 이미지
 	ImageIcon studyRoomdImageIcon = new ImageIcon("ui/studyRoomToggleButton.png");
 
@@ -72,6 +75,7 @@ public class CheckInFrame extends JFrame {
 	JPanel lockerPanel = new LockerPanel(); // 사물함 구매 패널
 	MyPagePanel myPagePanel = new MyPagePanel(); // 마이페이지 패널
 	
+	List<Seat> seats = SeatReportPanel.getSeats();
 	/* 메인 토글버튼 */
 	JToggleButton seatReportTog = new SeatReportToggle(seatReportImageIcon, card, seatReportPanel, subPanel);
 	JToggleButton studyRoomTog = new StudyRoomToggle(studyRoomdImageIcon, card, studyRoomPanel, subPanel);
@@ -80,7 +84,7 @@ public class CheckInFrame extends JFrame {
 
 	/* 탑 버튼 */
 	JButton openDoorBtn = new OpenDoorButton(openDoorImageIcon, this);
-	JButton leaveBtn = new LeaveButton(leaveImageIcon, this);
+	JButton leaveBtn = new LeaveButton(leaveImageIcon, seats);
 	JButton buyBtn = new BuyButton(buyImageIcon);
 	
 	/* 마이페이지, 로그아웃 버튼 */
@@ -90,12 +94,15 @@ public class CheckInFrame extends JFrame {
 	/* x버튼 */
 	JButton xBtn = new JButton("X");
 
-	
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-
+		
+		
+		System.out.println(seats.size());
+		
+		this.seats = seats;
 		/* 메인패널 투명화 설정 */
 		mainPanel.setBackground(new Color(0, 0, 0, 0));
 		setLayout(card);

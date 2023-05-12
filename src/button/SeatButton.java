@@ -10,15 +10,17 @@ import javax.swing.JDialog;
 
 import dao.SeatDAO;
 import dialog.SelectSeatDialog;
+import dto.Seat;
 
 public class SeatButton extends JButton {
 	
+	Seat seat = new Seat();
 	boolean use;
 	boolean mySeat;
 	JDialog selectSeatPopup;
 	
 	public SeatButton(String seatNum) {
-
+		seat.setSeat_id(seatNum);
 		setText(seatNum);
 		setBorderPainted(false);
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
@@ -44,7 +46,7 @@ public class SeatButton extends JButton {
 					// 사용중인 좌석을 눌렀을 때 나오는 팝업
 				} else if (!use) {
 					// 사용중이지 않은 좌석을 눌렀을때 나오는 팝업
-					selectSeatPopup = new SelectSeatDialog(seatNum);
+					selectSeatPopup = new SelectSeatDialog(seatNum, seat);
 				}
 			}
 		});
