@@ -6,9 +6,11 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import dto.Seat;
+
 public class DayTicketButton extends JButton {
 	
-	public DayTicketButton() {
+	public DayTicketButton(Seat seat) {
 		
 		setBorderPainted(false);
 		setIcon(new ImageIcon("ui/SelectSeatPopup/Button_일회이용.png"));
@@ -18,7 +20,7 @@ public class DayTicketButton extends JButton {
 			// 클릭하면 실행되는 메서드
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				seat.checkIn(100);
 			}
 		});
 		

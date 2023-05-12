@@ -57,7 +57,6 @@ public class LockerPayDialog extends JDialog {
 		setModal(true);
 		setLayout(null);
 		setUndecorated(true);
-//		setBackground(new Color(0, 0, 0, 0));
 		setResizable(false);
 		setBounds(585, 40, 750, 1000);
 		setVisible(true);

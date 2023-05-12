@@ -1,39 +1,48 @@
 package dialog;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import button.CloseButton;
+import dto.Seat;
+import panel.BackgroundPanel;
+import panel.VacatedMainPanel;
 
 public class LeaveDialog extends JDialog {
 
-	public LeaveDialog(JFrame parent) {
-		super(parent);
-
-		JButton close = new JButton("닫기");
-
-		getContentPane().setBackground(Color.WHITE);
-
-		/* 닫기 버튼 설정 */
-		close.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-
-		close.setBounds(500, 500, 100, 100);
-
-		/* 출입문 열림 팝업창 기본 설정 */
+	BackgroundPanel bg = new BackgroundPanel(new ImageIcon("ui/vacated_Frame.png"));
+	CloseButton close = new CloseButton(this);
+	
+	public LeaveDialog(List<Seat> seats) {
+		VacatedMainPanel main = new VacatedMainPanel(seats);
+		JScrollPane scroll = new JScrollPane(main);
+		close.setLocation(300, 800);
+		
+		scroll.setPreferredSize(new Dimension(200, 300));
+		scroll.setBounds(57, 237, 636, 526);
+		add(scroll);
 		add(close);
+		
+		
+		add(bg);
+		setModal(true);
 		setLayout(null);
 		setUndecorated(true);
-		setResizable(false);
-		setBounds(100, 100, 1000, 1000);
-		setModal(true);
+		setBackground(new Color(0, 0, 0, 0));
+		setBounds(585, 80, bg.getWidth(), bg.getHeight());
 		setVisible(true);
 	}
 }
