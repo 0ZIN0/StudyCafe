@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,7 +19,8 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
-import button.SeatButton;
+import dialog.CompletePaymentDialog;
+import dialog.InstallmentPaymentDialog;
 import panel.LockerPanel;
 import panel.MainPanel;
 import panel.SeatReportPanel;
@@ -226,5 +226,6 @@ public class CheckInFrame extends JFrame {
 
 	public static void main(String[] args) {
 		new CheckInFrame();
+		//InstallmentPaymentDialog sc = new InstallmentPaymentDialog();
 	}
 }
