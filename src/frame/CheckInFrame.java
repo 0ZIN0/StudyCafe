@@ -19,8 +19,6 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
-import dialog.CompletePaymentDialog;
-import dialog.InstallmentPaymentDialog;
 import panel.LockerPanel;
 import panel.MainPanel;
 import panel.SeatReportPanel;
