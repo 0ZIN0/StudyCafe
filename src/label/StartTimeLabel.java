@@ -7,10 +7,13 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.JLabel;
 
+import dto.StudyRoom_Reservation;
+import panel.StudyRoomPanel;
+
 public class StartTimeLabel extends JLabel {
 
 	LocalTime now = LocalTime.now();
-	
+	LocalTime end;
 	public StartTimeLabel() {
 
 		int minute = now.getMinute();
@@ -29,13 +32,29 @@ public class StartTimeLabel extends JLabel {
 			}
 		}
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("h:mm");
-		String time = now.format(formatter);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		String startTime = now.format(formatter);
 		
-		setText(time);
+		setText(startTime);
+		StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_date(startTime);
+		
+		
+		String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_date();
+		end = LocalTime.parse(endTime, formatter);
+		endTime = end.plusHours(1).format(formatter);
+		
+		
+		StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_date(endTime);
+		
+		end = end.plusHours(1);
+		
 		setForeground(Color.white);
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
 		setBounds(330, 267, 100, 35);
+	}
+	
+	public LocalTime getDefaultEndTime() {
+		return end; 
 	}
 	
 	public LocalTime getTime() {
