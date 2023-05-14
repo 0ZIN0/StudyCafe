@@ -22,7 +22,7 @@ public class GridPanel extends JPanel {
 
 	LocalDate selectDate = LocalDate.now();
 	LocalTime time = LocalTime.of(0, 0); // timeSelectBtn에 넣을 시간의 default값
-	
+
 	TimeSelectButton timeSelectBtn;
 	List<TimeSelectButton> btns = new ArrayList<>();
 	List<StudyRoom_Reservation> studyRoom_AllReservation = new ArrayList<>();
@@ -81,33 +81,40 @@ public class GridPanel extends JPanel {
 
 			add(timeSelectBtn);
 		}
-		
+
 		upBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-				
+
 				LocalTime start = LocalTime.parse(StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_date(), formatter);
 				LocalTime end = LocalTime.parse(StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_end_date(), formatter);
 				
+				System.out.println(btns);
+				
 				for (TimeSelectButton timeSelectBtn : btns) {
-					if (start.compareTo(timeSelectBtn.getTime()) < 0 && 
+					if (start.compareTo(timeSelectBtn.getTime()) <= 0 && 
 							end.compareTo(timeSelectBtn.getTime()) > 0) {
+						timeSelectBtn.setBackground(new Color(0xFF5C01));
+					}
+					
+					if (start.equals(LocalTime.of(22, 00)) && start.compareTo(timeSelectBtn.getTime()) <= 0 && 
+							LocalTime.of(23, 45).compareTo(timeSelectBtn.getTime()) >= 0) {
 						timeSelectBtn.setBackground(new Color(0xFF5C01));
 					}
 				}
 			}
 		});
-		
+
 		downBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-				
+
 				LocalTime start = LocalTime.parse(StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_date(), formatter);
 				LocalTime end = LocalTime.parse(StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_end_date(), formatter);
-				
+
 				for (TimeSelectButton timeSelectBtn : btns) {
 					if (start.compareTo(timeSelectBtn.getTime()) <= 0 && 
 							end.compareTo(timeSelectBtn.getTime()) > 0) {

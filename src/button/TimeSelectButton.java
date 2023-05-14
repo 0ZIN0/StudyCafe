@@ -54,7 +54,7 @@ public class TimeSelectButton extends JButton {
 		});
 
 	}
-
+	
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
