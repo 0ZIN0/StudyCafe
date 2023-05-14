@@ -4,7 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Formatter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -12,10 +17,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.PaymentButton;
+import dto.StudyRoom_Reservation;
 import label.DateLabel;
+import label.StartTimeLabel;
 
 public class StudyRoomPanel extends JPanel {
-
+	
+	/* DTO */
+	StudyRoom_Reservation studyRoom_Reservation = new StudyRoom_Reservation();
+	
 	/* 배경 */
 	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/Study_Room_Frame.png"), new Color(0x494344));
 	
@@ -28,15 +38,15 @@ public class StudyRoomPanel extends JPanel {
 	JButton downBtn = new JButton(new ImageIcon("ui/study_room/TimeUp_Button_04.png"));
 	JButton paymentBtn = new PaymentButton();
 
-	/* 패널 */
-	JPanel gridPanel = new GridPanel(upBtn, downBtn);
-	
 	/* 라벨 */
 	JLabel roomNumLabel = new JLabel(new ImageIcon("ui/study_room/studyRoom_01.png"));
 	JLabel isTodayLabel = new JLabel("TODAY");
 	DateLabel dateLabel = new DateLabel();
-	JLabel startTimeLabel = new JLabel();
+	StartTimeLabel startTimeLabel = new StartTimeLabel();
 	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
+	
+	/* 패널 */
+	GridPanel gridPanel = new GridPanel(upBtn, downBtn, startTimeLabel);
 	
 	public StudyRoomPanel() {
 
@@ -57,6 +67,8 @@ public class StudyRoomPanel extends JPanel {
 				
 				topLeftBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_01.png"));
 				topRightBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_03.png"));
+				
+				studyRoom_Reservation.setStudyRoom_id("SI-1");
 			}
 		});
 		topRightBtn.addActionListener(new ActionListener() {
@@ -67,6 +79,8 @@ public class StudyRoomPanel extends JPanel {
 
 				topLeftBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_04.png"));
 				topRightBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_02.png"));
+				
+				studyRoom_Reservation.setStudyRoom_id("SI-2");
 			}
 		});
 
@@ -84,24 +98,20 @@ public class StudyRoomPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				Calendar now = Calendar.getInstance();
-
-				now.set(Calendar.HOUR, 0);
-				now.set(Calendar.MINUTE, 0);
-				now.set(Calendar.SECOND, 0);
-				now.set(Calendar.MILLISECOND, 0);
+				LocalDate now = LocalDate.now();
 
 				if (!now.equals(dateLabel.getSelectDay())) {
 					isTodayLabel.setVisible(false);
-					dateLabel.getSelectDay().add(Calendar.DATE, -1);
-					dateLabel.setSelectDay(dateLabel.getSelectDay());
-
+					dateLabel.setSelectDay(dateLabel.getSelectDay().minusDays(1));
 				}
-
+				
 				if (now.equals(dateLabel.getSelectDay())) {
 					isTodayLabel.setVisible(true);
 					bottomLeftBtn.setIcon(new ImageIcon("ui/study_room/Sub_Arrow_01.png"));
 				}
+				
+				Date date = java.sql.Date.valueOf(dateLabel.getSelectDay());
+				studyRoom_Reservation.setStudyRoom_reservation_date(date);
 			}
 		});
 
@@ -111,24 +121,21 @@ public class StudyRoomPanel extends JPanel {
 		bottomRightBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Calendar now = Calendar.getInstance();
-
-				now.set(Calendar.HOUR, 0);
-				now.set(Calendar.MINUTE, 0);
-				now.set(Calendar.SECOND, 0);
-				now.set(Calendar.MILLISECOND, 0);
-
 				
-				dateLabel.getSelectDay().add(Calendar.DATE, 1);
-				dateLabel.setSelectDay(dateLabel.getSelectDay());
-
+				LocalDate now = LocalDate.now();
+				
+				dateLabel.setSelectDay(dateLabel.getSelectDay().plusDays(1));
+				
 				if (!now.equals(dateLabel.getSelectDay())) {
 					isTodayLabel.setVisible(false);
 					bottomLeftBtn.setIcon(new ImageIcon("ui/study_room/Sub_Arrow_04.png"));
 				}
+				
+				Date date = java.sql.Date.valueOf(dateLabel.getSelectDay());
+				studyRoom_Reservation.setStudyRoom_reservation_date(date);
 			}
 		});
-
+		
 		// ======================================================================================
 		upBtn.setBounds(330, 328, 34, 20);
 		upBtn.setBorderPainted(false);
@@ -180,6 +187,7 @@ public class StudyRoomPanel extends JPanel {
 		image.add(roomNumLabel);
 		image.add(dateLabel);
 		image.add(whatTimeLabel);
+		image.add(startTimeLabel);
 
 		/* 패널 설정 */
 		image.setLayout(null);
