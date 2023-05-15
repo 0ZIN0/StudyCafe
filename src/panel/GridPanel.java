@@ -39,7 +39,7 @@ public class GridPanel extends JPanel {
 			StudyRoom_Reservation myStudyRoom_Reservation) {
 		this.studyRoom_AllReservation = studyRoom_AllReservation;
 
-		System.out.println(studyRoom_AllReservation);
+		System.out.println();
 
 		GridLayout grid = new GridLayout(12, 8);
 
