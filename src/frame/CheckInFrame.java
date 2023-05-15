@@ -3,12 +3,9 @@ package frame;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -21,8 +18,10 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
-import button.SeatButton;
+import dialog.CompletePaymentDialog;
+import dialog.InstallmentPaymentDialog;
 import dto.Seat;
+import panel.OnePassChargePanel;
 import panel.LockerPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
@@ -223,7 +222,8 @@ public class CheckInFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		xBtn.setBounds(1850, 10, 50, 50);
+		//원래값 xBtn.setBounds(1600, 10, 50, 50); 
+		xBtn.setBounds(1850, 10, 50, 50); 
 		mainPanel.add(xBtn);
 
 		/* 기본 설정 */
@@ -234,8 +234,7 @@ public class CheckInFrame extends JFrame {
 		setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		new CheckInFrame();
-		//InstallmentPaymentDialog sc = new InstallmentPaymentDialog();
 	}
 }

@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import dialog.ChargeDialog;
+import dialog.TimeOrPeriodChargeDialog;
 
 public class BuyButton extends JButton implements ActionListener{
 	
@@ -20,7 +20,6 @@ public class BuyButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ChargeDialog chageDialog = new ChargeDialog();
-		
+		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog();
 	}
 }

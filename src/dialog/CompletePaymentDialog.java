@@ -13,12 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import panel.OnePassChargePanel;
 import panel.MainPanel;
    
 public class CompletePaymentDialog extends JDialog {
 
+	static int amountPaid = InsertCardDialog.getAmountPaid(); 
+	
    public CompletePaymentDialog() {
 
+	   System.out.println("결제완료금액: " + amountPaid);
+	   
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -37,6 +42,7 @@ public class CompletePaymentDialog extends JDialog {
 	      btnNewButton6.setContentAreaFilled(false);
 	      btnNewButton6.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
+	        	
 	            dispose();
 	         }
 	      });
@@ -59,4 +65,8 @@ public class CompletePaymentDialog extends JDialog {
 	      setVisible(true);
 		
    }
+   
+   public static int getAmountPaid() {
+		return amountPaid;
+	}
 }

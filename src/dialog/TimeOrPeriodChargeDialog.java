@@ -7,9 +7,15 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-public class ChargeDialog extends JDialog {
+import panel.OnePassChargePanel;
+import panel.TimeChargePanel;
+
+public class TimeOrPeriodChargeDialog extends JDialog {
 	
-	public ChargeDialog() {
+	
+	public TimeOrPeriodChargeDialog() {
+		
+		
 		
 		JButton button1 = new JButton("시간충전권"); // 시간충전권
         JButton button2 = new JButton("기간이용권"); // 기간이용권
@@ -33,7 +39,8 @@ public class ChargeDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // chargeDialog 닫기
                 //TimeChargeDialog timeChargeDialog = new TimeChargeDialog();
-                OnePassChargeDialog onePassChargeDialog = new OnePassChargeDialog();
+             //   OnePassChargeDialog onePassChargeDialog = new OnePassChargeDialog();
+                TimeChargeDialog timeCharge = new TimeChargeDialog();
             }
         });
         setLayout(null);	

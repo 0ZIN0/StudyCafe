@@ -6,11 +6,14 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import dialog.TimeOrPeriodChargeDialog;
+import dialog.OnePassChargeDialog;
+import dialog.SelectSeatDialog;
 import dto.Seat;
 
 public class DayTicketButton extends JButton {
 	
-	public DayTicketButton(Seat seat) {
+	public DayTicketButton(Seat seat, SelectSeatDialog dialog) {
 		
 		setBorderPainted(false);
 		setIcon(new ImageIcon("ui/SelectSeatPopup/Button_일회이용.png"));
@@ -20,7 +23,8 @@ public class DayTicketButton extends JButton {
 			// 클릭하면 실행되는 메서드
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				seat.checkIn(100);
+				dialog.dispose();
+				OnePassChargeDialog onePass = new OnePassChargeDialog();
 			}
 		});
 		
