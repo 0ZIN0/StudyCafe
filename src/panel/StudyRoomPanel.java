@@ -25,7 +25,6 @@ public class StudyRoomPanel extends JPanel {
 	
 	/* DTO */
 	public static StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
-	List<StudyRoom_Reservation> studyRoom_AllReservation;
 	
 	/* 배경 */
 	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/Study_Room_Frame.png"), new Color(0x494344));
@@ -46,6 +45,9 @@ public class StudyRoomPanel extends JPanel {
 	StartTimeLabel startTimeLabel = new StartTimeLabel();
 	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
 	
+	List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay(), "SI-1");
+	
+	
 	/* 패널 */
 	GridPanel gridPanel = new GridPanel(upBtn, downBtn, startTimeLabel, studyRoom_AllReservation, whatTimeLabel);
 	
@@ -59,6 +61,8 @@ public class StudyRoomPanel extends JPanel {
 		topRightBtn.setBounds(434, 40, 40, 60);
 		topRightBtn.setBorderPainted(false);
 		topRightBtn.setContentAreaFilled(false);
+		
+		myStudyRoom_Reservation.setStudyRoom_id("SI-1");
 		
 		// 스터디룸번호 버튼
 		topLeftBtn.addActionListener(new ActionListener() {
@@ -97,6 +101,9 @@ public class StudyRoomPanel extends JPanel {
 		isTodayLabel.setForeground(new Color(0xFF5C00));
 		isTodayLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
 		
+		Date date = java.sql.Date.valueOf(dateLabel.getSelectDay());
+		myStudyRoom_Reservation.setStudyRoom_reservation_date(date);
+		
 		// 날짜 버튼
 		bottomLeftBtn.addActionListener(new ActionListener() {
 			@Override
@@ -114,7 +121,7 @@ public class StudyRoomPanel extends JPanel {
 					bottomLeftBtn.setIcon(new ImageIcon("ui/study_room/Sub_Arrow_01.png"));
 				}
 				
-				studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay());
+				studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay(), myStudyRoom_Reservation.getStudyRoom_id());
 				
 				Date date = java.sql.Date.valueOf(dateLabel.getSelectDay());
 				myStudyRoom_Reservation.setStudyRoom_reservation_date(date);
@@ -137,7 +144,7 @@ public class StudyRoomPanel extends JPanel {
 					bottomLeftBtn.setIcon(new ImageIcon("ui/study_room/Sub_Arrow_04.png"));
 				}
 				
-				studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay());
+				studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay(), myStudyRoom_Reservation.getStudyRoom_id());
 				
 				Date date = java.sql.Date.valueOf(dateLabel.getSelectDay());
 				myStudyRoom_Reservation.setStudyRoom_reservation_date(date);
@@ -160,11 +167,11 @@ public class StudyRoomPanel extends JPanel {
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				
-				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_date();
+				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
 				LocalTime end = LocalTime.parse(endTime, formatter);
 				endTime = end.plusHours(2).format(formatter);
 					
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_date(endTime);
+				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 			}
 		});
 		
@@ -181,11 +188,11 @@ public class StudyRoomPanel extends JPanel {
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				
-				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_date();
+				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
 				LocalTime end = LocalTime.parse(endTime, formatter);
 				endTime = end.plusHours(1).format(formatter);
 
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_date(endTime);
+				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 			}
 		});
 		
@@ -218,5 +225,9 @@ public class StudyRoomPanel extends JPanel {
 		/* 패널 설정 */
 		image.setLayout(null);
 		add(image);
+	}
+	
+	public List<StudyRoom_Reservation> getStudyRoom_AllReservation() {
+		return studyRoom_AllReservation;
 	}
 }

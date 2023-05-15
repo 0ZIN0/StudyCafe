@@ -48,8 +48,8 @@ public class StudyRoomDAO {
 			pstmt.setString(1, studyRoom_Reservation.getStudyRoom_id());	
 			pstmt.setString(2, studyRoom_Reservation.getMember_id());	
 			pstmt.setString(3, studyRoom_Reservation.getStudyRoom_reservation_date().toString());	
-			pstmt.setString(4, studyRoom_Reservation.getStudyRoom_start_date());	
-			pstmt.setString(5, studyRoom_Reservation.getStudyRoom_end_date());	
+			pstmt.setString(4, studyRoom_Reservation.getStudyRoom_start_time());	
+			pstmt.setString(5, studyRoom_Reservation.getStudyRoom_end_time());	
 				
 			pstmt.executeUpdate();
 			
@@ -84,8 +84,8 @@ public class StudyRoomDAO {
 					mr.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
 					mr.setStudyRoom_id(rs.getString("studyroom_id"));
 					mr.setMember_id(rs.getString("member_id"));
-					mr.setStudyRoom_start_date(rs.getString("study_room_start_time"));
-					mr.setStudyRoom_end_date(rs.getString("study_room_end_time"));
+					mr.setStudyRoom_start_time(rs.getString("study_room_start_time"));
+					mr.setStudyRoom_end_time(rs.getString("study_room_end_time"));
 					
 					myReservations.add(mr);
 				}
@@ -122,8 +122,8 @@ public class StudyRoomDAO {
 					mr.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
 					mr.setStudyRoom_id(rs.getString("studyroom_id"));
 					mr.setMember_id(rs.getString("member_id"));
-					mr.setStudyRoom_start_date(rs.getString("study_room_start_time"));
-					mr.setStudyRoom_end_date(rs.getString("study_room_end_time"));
+					mr.setStudyRoom_start_time(rs.getString("study_room_start_time"));
+					mr.setStudyRoom_end_time(rs.getString("study_room_end_time"));
 					
 					otherReservations.add(mr);
 				}
@@ -138,31 +138,35 @@ public class StudyRoomDAO {
 	
 	
 	/* 유저가 날짜를 던져주면 예약한 시간대를 확인하는 메서드 */
-	public static List<StudyRoom_Reservation> getAllReservations(LocalDate date) {
+	public static List<StudyRoom_Reservation> getAllReservations(LocalDate date, String studyroom_id) {
 		
 		List<StudyRoom_Reservation> reservations = new ArrayList<>();
 		StudyRoom_Reservation rv = new StudyRoom_Reservation();
 		
-		String query = "SELECT * FROM STUDYROOM_RESERVATION WHERE studyroom_reservation_date=TO_DATE(?, 'yyyy.mm.dd')";
+		String query = "SELECT * FROM \r\n"
+				+ "STUDYROOM_RESERVATION WHERE studyroom_reservation_date=TO_DATE(?, 'yyyy.mm.dd') and studyroom_id=?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
 				) {
-			
 				pstmt.setString(1, date.toString());
+				pstmt.setString(2, studyroom_id);
 			
 			try (
 					ResultSet rs = pstmt.executeQuery();
 					) {
-				Date getDate = rs.getDate("studyroom_reservation_date");
-				rv.setStudyRoom_reservation_date(getDate);
-				rv.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
-				rv.setStudyRoom_id(rs.getString("studyroom_id"));
-				rv.setMember_id(rs.getString("member_id"));
-				rv.setStudyRoom_start_date(rs.getString("study_room_start_time"));
-				rv.setStudyRoom_end_date(rs.getString("study_room_end_time"));
 				
-				reservations.add(rv);
+				while (rs.next()) {
+					Date getDate = rs.getDate("studyroom_reservation_date");
+					rv.setStudyRoom_reservation_date(getDate);
+					rv.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
+					rv.setStudyRoom_id(rs.getString("studyroom_id"));
+					rv.setMember_id(rs.getString("member_id"));
+					rv.setStudyRoom_start_time(rs.getString("study_room_start_time"));
+					rv.setStudyRoom_end_time(rs.getString("study_room_end_time"));
+					
+					reservations.add(rv);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

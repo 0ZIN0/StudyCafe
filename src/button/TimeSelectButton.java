@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import dao.StudyRoomDAO;
 import dto.StudyRoom_Reservation;
 import label.StartTimeLabel;
 import panel.StudyRoomPanel;
@@ -37,9 +38,9 @@ public class TimeSelectButton extends JButton {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				
 				String startTime = time.format(formatter);
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_date(startTime);
+				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(startTime);
 				
-				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_date();
+				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
 				LocalTime endLocalTime = LocalTime.parse(endTime, formatter);
 
 				startTimeLabel.setText(startTime);
@@ -49,7 +50,7 @@ public class TimeSelectButton extends JButton {
 				} else {
 					endTime = endLocalTime.plusHours(2).format(formatter);
 				}
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_date(endTime);
+				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 			}
 		});
 
