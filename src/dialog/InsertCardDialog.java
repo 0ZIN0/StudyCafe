@@ -19,12 +19,14 @@ import panel.OnePassChargePanel;
 import panel.TimeChargePanel;
 
 public class InsertCardDialog extends JDialog {
+	
 
 	int TimeChargePrice = TimeChargePanel.getTimeChargePrice();
 	int OnePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	static int amountPaid = 0; 
 
 	public InsertCardDialog() {
+		System.out.println("testing...");
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/Payment_CreditCard.png");
 		Image bgImage = imageIcon.getImage();
