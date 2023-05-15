@@ -36,7 +36,7 @@ public class StudyRoomPanel extends JPanel {
 	JButton bottomRightBtn = new JButton(new ImageIcon("ui/study_room/Sub_Arrow_03.png"));
 	JButton upBtn = new JButton(new ImageIcon("ui/study_room/TimeUp_Button_01.png"));
 	JButton downBtn = new JButton(new ImageIcon("ui/study_room/TimeUp_Button_04.png"));
-	JButton paymentBtn = new PaymentButton();
+	JButton paymentBtn = new PaymentButton(myStudyRoom_Reservation);
 
 	/* 라벨 */
 	JLabel roomNumLabel = new JLabel(new ImageIcon("ui/study_room/studyRoom_01.png"));
@@ -49,7 +49,7 @@ public class StudyRoomPanel extends JPanel {
 	
 	
 	/* 패널 */
-	GridPanel gridPanel = new GridPanel(upBtn, downBtn, startTimeLabel, studyRoom_AllReservation, whatTimeLabel, myStudyRoom_Reservation);
+	GridPanel_Fix gridPanel = new GridPanel_Fix(upBtn, downBtn, startTimeLabel, studyRoom_AllReservation, whatTimeLabel, myStudyRoom_Reservation, paymentBtn);
 	
 	public StudyRoomPanel() {
 		
@@ -88,6 +88,7 @@ public class StudyRoomPanel extends JPanel {
 				topRightBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_02.png"));
 				
 				myStudyRoom_Reservation.setStudyRoom_id("SI-2");
+
 			}
 		});
 
