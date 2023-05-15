@@ -110,10 +110,11 @@ public class GridPanel extends JPanel {
 
 				LocalTime start = LocalTime.parse(myStudyRoom_Reservation.getStudyRoom_start_time(), formatter);
 				LocalTime end = LocalTime.parse(myStudyRoom_Reservation.getStudyRoom_end_time(), formatter);
+
 				for (TimeSelectButton timeSelectBtn : btns) {
 					
-					if(selected[btns.indexOf(timeSelectBtn)] && btns.indexOf(timeSelectBtn) + 8 < 96) {
-						for(int i = btns.indexOf(timeSelectBtn) ; i <=  btns.indexOf(timeSelectBtn) + 8 && i + 8 < 96; i++) {
+					if(selected[btns.indexOf(timeSelectBtn)] && btns.indexOf(timeSelectBtn) + 8 <= 96) {
+						for(int i = btns.indexOf(timeSelectBtn) ; i <=  btns.indexOf(timeSelectBtn) + 8 && i + 8 <= 96; i++) {
 							if(reserved[i]) {
 								hasReserved = true;
 								break;
@@ -121,7 +122,7 @@ public class GridPanel extends JPanel {
 						}
 					}
 					if(hasReserved) {
-						for(int i = btns.indexOf(timeSelectBtn); i <=  btns.indexOf(timeSelectBtn) + 8 && i + 8 < 96; i++) {
+						for(int i = btns.indexOf(timeSelectBtn); i <=  btns.indexOf(timeSelectBtn) + 8 && i + 8 <= 96; i++) {
 							if(!(reserved[i])) {
 								btns.get(i).setBackground(LIGHTGRAY);
 							} 
