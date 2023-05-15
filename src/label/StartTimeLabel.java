@@ -14,7 +14,7 @@ public class StartTimeLabel extends JLabel {
 
 	LocalTime now = LocalTime.now();
 	LocalTime end;
-	public StartTimeLabel() {
+	public StartTimeLabel(StudyRoom_Reservation myStudyRoom_Reservation) {
 
 		int minute = now.getMinute();
 
@@ -36,15 +36,15 @@ public class StartTimeLabel extends JLabel {
 		String startTime = now.format(formatter);
 		
 		setText(startTime);
-		StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(startTime);
+		myStudyRoom_Reservation.setStudyRoom_start_time(startTime);
 		
 		
-		String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
+		String endTime = myStudyRoom_Reservation.getStudyRoom_start_time();
 		end = LocalTime.parse(endTime, formatter);
 		endTime = end.plusHours(1).format(formatter);
 		
 		
-		StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
+		myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 		
 		end = end.plusHours(1);
 		

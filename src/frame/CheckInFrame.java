@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
@@ -93,14 +95,23 @@ public class CheckInFrame extends JFrame {
 	
 	/* x버튼 */
 	JButton xBtn = new JButton("X");
-
+	
+	// 실시간 라벨
+	
+	
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-		
-		
-		System.out.println(seats.size());
+		Timer timer = new Timer();
+		TimerTask task = new TimerTask(){
+		    @Override
+		    public void run() {
+		    	
+			
+		    }	
+		};
+		timer.schedule(task, 1000, 1000); //실행 Task, 1초뒤 실행, 1초마다 반복
 		
 		this.seats = seats;
 		/* 메인패널 투명화 설정 */

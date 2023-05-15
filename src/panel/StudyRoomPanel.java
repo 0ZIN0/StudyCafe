@@ -24,7 +24,7 @@ import label.StartTimeLabel;
 public class StudyRoomPanel extends JPanel {
 	
 	/* DTO */
-	public static StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
+	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
 	
 	/* 배경 */
 	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/Study_Room_Frame.png"), new Color(0x494344));
@@ -42,14 +42,14 @@ public class StudyRoomPanel extends JPanel {
 	JLabel roomNumLabel = new JLabel(new ImageIcon("ui/study_room/studyRoom_01.png"));
 	JLabel isTodayLabel = new JLabel("TODAY");
 	DateLabel dateLabel = new DateLabel();
-	StartTimeLabel startTimeLabel = new StartTimeLabel();
+	StartTimeLabel startTimeLabel = new StartTimeLabel(myStudyRoom_Reservation);
 	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
 	
 	List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay(), "SI-1");
 	
 	
 	/* 패널 */
-	GridPanel gridPanel = new GridPanel(upBtn, downBtn, startTimeLabel, studyRoom_AllReservation, whatTimeLabel);
+	GridPanel gridPanel = new GridPanel(upBtn, downBtn, startTimeLabel, studyRoom_AllReservation, whatTimeLabel, myStudyRoom_Reservation);
 	
 	public StudyRoomPanel() {
 		
@@ -167,11 +167,11 @@ public class StudyRoomPanel extends JPanel {
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				
-				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
+				String endTime = myStudyRoom_Reservation.getStudyRoom_start_time();
 				LocalTime end = LocalTime.parse(endTime, formatter);
 				endTime = end.plusHours(2).format(formatter);
 					
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
+				myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 			}
 		});
 		
@@ -188,11 +188,11 @@ public class StudyRoomPanel extends JPanel {
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				
-				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
+				String endTime = myStudyRoom_Reservation.getStudyRoom_start_time();
 				LocalTime end = LocalTime.parse(endTime, formatter);
 				endTime = end.plusHours(1).format(formatter);
 
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
+				myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 			}
 		});
 		

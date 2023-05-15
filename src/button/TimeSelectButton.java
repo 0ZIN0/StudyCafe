@@ -19,7 +19,8 @@ public class TimeSelectButton extends JButton {
 	LocalTime time;
 	StudyRoom_Reservation myStudyRoom_Reservation;
 	
-	public TimeSelectButton(JButton upBtn, JButton downBtn, StartTimeLabel startTimeLabel, JLabel whatTimeLabel) {
+	public TimeSelectButton(JButton upBtn, JButton downBtn, StartTimeLabel startTimeLabel, JLabel whatTimeLabel,
+			StudyRoom_Reservation myStudyRoom_Reservation) {
 		
 		setBorderPainted(false);
 
@@ -38,9 +39,9 @@ public class TimeSelectButton extends JButton {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				
 				String startTime = time.format(formatter);
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(startTime);
+				myStudyRoom_Reservation.setStudyRoom_start_time(startTime);
 				
-				String endTime = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time();
+				String endTime = myStudyRoom_Reservation.getStudyRoom_start_time();
 				LocalTime endLocalTime = LocalTime.parse(endTime, formatter);
 
 				startTimeLabel.setText(startTime);
@@ -50,7 +51,7 @@ public class TimeSelectButton extends JButton {
 				} else {
 					endTime = endLocalTime.plusHours(2).format(formatter);
 				}
-				StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
+				myStudyRoom_Reservation.setStudyRoom_end_time(endTime);
 			}
 		});
 
