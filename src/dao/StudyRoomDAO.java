@@ -141,7 +141,7 @@ public class StudyRoomDAO {
 	public static List<StudyRoom_Reservation> getAllReservations(LocalDate date, String studyroom_id) {
 		
 		List<StudyRoom_Reservation> reservations = new ArrayList<>();
-		StudyRoom_Reservation rv = new StudyRoom_Reservation();
+		
 		
 		String query = "SELECT * FROM \r\n"
 				+ "STUDYROOM_RESERVATION WHERE studyroom_reservation_date=TO_DATE(?, 'yyyy.mm.dd') and studyroom_id=?";
@@ -157,6 +157,7 @@ public class StudyRoomDAO {
 					) {
 				
 				while (rs.next()) {
+					StudyRoom_Reservation rv = new StudyRoom_Reservation();
 					Date getDate = rs.getDate("studyroom_reservation_date");
 					rv.setStudyRoom_reservation_date(getDate);
 					rv.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
