@@ -75,16 +75,13 @@ public class GridPanel extends JPanel {
 						TimeSelectButton selectBtn = btns.get(i);
 						if (!reserved[i]) {
 							if ( i > btnNum && i <= btnNum + 3) {
-								selected[i] = true;
 								selectBtn.setBackground(ORANGE);
 							} else if (whatTimeLabel.getText().equals("2") && 
 									i > btnNum && i <= btnNum + 7) {
-								selected[i] = true;
 								selectBtn.setBackground(ORANGE);
 							} else if (btnNum != i) {
 								selectBtn.setBackground(LIGHTGRAY);
 								if (selectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
-									selected[i] = false;
 									selectBtn.setEnabled(false);
 									selectBtn.setBackground(GRAY);
 								}
@@ -100,6 +97,8 @@ public class GridPanel extends JPanel {
 		upBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				btnReset();
 				getReservationInfo(8);
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -117,16 +116,16 @@ public class GridPanel extends JPanel {
 						}						
 					}
 					
-//					if (!reserved[btns.indexOf(timeSelectBtn)]) {
-//						if (start.compareTo(timeSelectBtn.getTime()) <= 0 && 
-//								end.compareTo(timeSelectBtn.getTime()) > 0) {
-//							timeSelectBtn.setBackground(ORANGE);
-//						}
-//						if (start.equals(LocalTime.of(22, 00)) && start.compareTo(timeSelectBtn.getTime()) <= 0 && 
-//								LocalTime.of(23, 45).compareTo(timeSelectBtn.getTime()) >= 0) {
-//							timeSelectBtn.setBackground(ORANGE);
-//						}
-//					}
+					if (!reserved[btns.indexOf(timeSelectBtn)]) {
+						if (start.compareTo(timeSelectBtn.getTime()) <= 0 && 
+								end.compareTo(timeSelectBtn.getTime()) > 0) {
+							timeSelectBtn.setBackground(ORANGE);
+						}
+						if (start.equals(LocalTime.of(22, 00)) && start.compareTo(timeSelectBtn.getTime()) <= 0 && 
+								LocalTime.of(23, 45).compareTo(timeSelectBtn.getTime()) >= 0) {
+							timeSelectBtn.setBackground(ORANGE);
+						}
+					}
 				}
 				disable = false;
 			}
@@ -136,6 +135,7 @@ public class GridPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				btnReset();
 				getReservationInfo(4);
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -167,20 +167,29 @@ public class GridPanel extends JPanel {
 		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
 			
 			for(TimeSelectButton timeSelectBtn : btns) {
-				timeSelectBtn.setEnabled(true);
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				LocalTime start = LocalTime.parse(studyRoom_reserv.getStudyRoom_start_time(), formatter);
 				LocalTime end = LocalTime.parse(studyRoom_reserv.getStudyRoom_end_time(), formatter);
 				
 				if (start.compareTo(timeSelectBtn.getTime()) <= 0 && 
 						end.compareTo(timeSelectBtn.getTime()) > 0) {
-					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn); i++) {
-						btns.get(i).setEnabled(false);
-					}
+//					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn); i++) {
+//						btns.get(i).setEnabled(false);
+//					}
 					timeSelectBtn.setEnabled(false);
 					timeSelectBtn.setBackground(GRAY);
 					reserved[btns.indexOf(timeSelectBtn)] = true;
 				}				
+			}
+		}
+	}
+	
+	public void btnReset() {
+		for(TimeSelectButton timeSelectButton : btns) {
+			if(reserved[btns.indexOf(timeSelectButton)]) {
+				timeSelectButton.setEnabled(false);
+			} else {
+				timeSelectButton.setEnabled(true);
 			}
 		}
 	}
