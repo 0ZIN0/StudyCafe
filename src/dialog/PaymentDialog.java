@@ -6,11 +6,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.CloseButton;
+import button.NextButton;
 import dto.StudyRoom_Reservation;
 
 public class PaymentDialog extends JDialog {
@@ -28,6 +30,7 @@ public class PaymentDialog extends JDialog {
 	
 	/* 버튼 */
 	CloseButton closeBtn = new CloseButton(this);
+	JButton nextBtn = new NextButton(this);
 	
 	/* 라벨 */
 	JLabel label1 = new JLabel("이용 상품");
@@ -77,7 +80,8 @@ public class PaymentDialog extends JDialog {
 		
 		
 		/* button */
-		closeBtn.setLocation(300, 400);
+		closeBtn.setLocation(202, 410);
+		nextBtn.setBounds(402, 410, 150, 80);
 		
 		/* 기본 설정 */
 		paymentPanel.add(label1);
@@ -88,6 +92,7 @@ public class PaymentDialog extends JDialog {
 		paymentPanel.add(useTimeLabel);
 		paymentPanel.add(payInfoLabel);
 		paymentPanel.add(closeBtn);
+		paymentPanel.add(nextBtn);
 		
 		paymentPanel.setLayout(null);
 		paymentPanel.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
