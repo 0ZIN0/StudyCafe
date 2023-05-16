@@ -156,7 +156,7 @@ public class TimeChargePanel extends JPanel {
 			chargeBtn.doClick();
 
 		}
-		setBounds(100, 100, 420, 420);
+		setBounds(200, 100, 420, 420);
 		setBackground(Color.white);
 		setLayout(grid);
 		setVisible(true);

@@ -108,10 +108,12 @@ public class TimeChargeDialog extends JDialog {
 		priceIs.setName("label");
 		add(priceIs);
 
-		background.setBackground(new Color(0,0,0,0));
-		//background.setBackground(Color.blue);
+//		background.setBackground(new Color(0,0,0,0));
+		background.setLocation(0, 0);
+		background.setBackground(Color.blue);
 		add(background);
 		setModal(true);
+//		setLayout(null);
 		setUndecorated(true);
 		setBackground(new Color(0,0,0,0));
 		setResizable(false);
