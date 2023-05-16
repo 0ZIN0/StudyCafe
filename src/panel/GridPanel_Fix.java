@@ -222,7 +222,6 @@ public class GridPanel_Fix extends JPanel {
 			if(!(btn.getTime().compareTo(LocalTime.now()) <= 0) &&
 					btn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
 				reserved[btns.indexOf(btn)] = false;
-				System.out.println(btns.indexOf(btn));
 				btn.setBackground(LIGHTGRAY);
 				btn.setEnabled(true);
 			}
