@@ -30,26 +30,63 @@ public class PaymentDialog extends JDialog {
 	CloseButton closeBtn = new CloseButton(this);
 	
 	/* 라벨 */
-	JLabel startTimeLabel = new JLabel();
-	JLabel endTimeLabel = new JLabel();
+	JLabel label1 = new JLabel("이용 상품");
+	JLabel label2 = new JLabel("이용 시간");
+	JLabel label3 = new JLabel("결제 금액");
 	
-	public PaymentDialog(StudyRoom_Reservation myStudyRoom_Reservation) {
+	JLabel studyRoom_numLabel = new JLabel();
+	JLabel useTimeLabel = new JLabel();
+	JLabel payInfoLabel = new JLabel();
+	
+	public PaymentDialog(StudyRoom_Reservation myStudyRoom_Reservation, JLabel whatTimeLabel) {
 		
-		/* temp Label */
-		startTimeLabel.setText("시작 시간: " + myStudyRoom_Reservation.getStudyRoom_start_time());
-		startTimeLabel.setBounds(385, 240, 250, 40);
-		startTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
+		/* Label */
+		label1.setBounds(220, 184, 150, 40);
+		label1.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+
+		label2.setBounds(220, 236, 150, 40);
+		label2.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 		
-		endTimeLabel.setText("퇴실 시간: " + myStudyRoom_Reservation.getStudyRoom_end_time());
-		endTimeLabel.setBounds(385, 340, 250, 40);
-		endTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
+		label3.setBounds(220, 288, 150, 40);
+		label3.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 		
-		/* temp button */
-		closeBtn.setLocation(500, 500);
+		String roomNum;
+		if (myStudyRoom_Reservation.getStudyRoom_id().equals("SI-1")) {
+			roomNum = "스터디룸 4인 1";
+		} else {
+			roomNum = "스터디룸 4인 2";
+		}
+		studyRoom_numLabel.setText(roomNum);
+		studyRoom_numLabel.setBounds(410, 184, 250, 40);
+		studyRoom_numLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		
+		useTimeLabel.setText(myStudyRoom_Reservation.getStudyRoom_start_time() + " ~ " + myStudyRoom_Reservation.getStudyRoom_end_time());
+		useTimeLabel.setBounds(410, 236, 250, 40);
+		useTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		
+		String pay;
+		if (whatTimeLabel.getText().equals("1")) {
+			pay = "7,000원";
+		} else {
+			pay = "14,000원";
+		}
+		payInfoLabel.setText(pay);
+		payInfoLabel.setBounds(410, 288, 250, 40);
+		payInfoLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		
+		
+		
+		/* button */
+		closeBtn.setLocation(300, 400);
 		
 		/* 기본 설정 */
-		paymentPanel.add(startTimeLabel);
-		paymentPanel.add(endTimeLabel);
+		paymentPanel.add(label1);
+		paymentPanel.add(label2);
+		paymentPanel.add(label3);
+		
+		paymentPanel.add(studyRoom_numLabel);
+		paymentPanel.add(useTimeLabel);
+		paymentPanel.add(payInfoLabel);
 		paymentPanel.add(closeBtn);
 		
 		paymentPanel.setLayout(null);

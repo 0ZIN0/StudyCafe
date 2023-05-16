@@ -36,7 +36,6 @@ public class StudyRoomPanel extends JPanel {
 	JButton bottomRightBtn = new JButton(new ImageIcon("ui/study_room/Sub_Arrow_03.png"));
 	JButton upBtn = new JButton(new ImageIcon("ui/study_room/TimeUp_Button_01.png"));
 	JButton downBtn = new JButton(new ImageIcon("ui/study_room/TimeUp_Button_04.png"));
-	JButton paymentBtn = new PaymentButton(myStudyRoom_Reservation);
 
 	/* 라벨 */
 	JLabel roomNumLabel = new JLabel(new ImageIcon("ui/study_room/studyRoom_01.png"));
@@ -45,6 +44,8 @@ public class StudyRoomPanel extends JPanel {
 	StartTimeLabel startTimeLabel = new StartTimeLabel(myStudyRoom_Reservation);
 	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
 	
+	JButton paymentBtn = new PaymentButton(myStudyRoom_Reservation, whatTimeLabel);
+
 	List<StudyRoom_Reservation> studyRoom_AllReservation;
 	
 	
