@@ -15,7 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.TimeSelectButton;
+import dao.StudyRoomDAO;
+import dto.StudyRoom;
 import dto.StudyRoom_Reservation;
+import label.DateLabel;
 import label.StartTimeLabel;
 
 public class GridPanel_Fix extends JPanel {
@@ -23,23 +26,33 @@ public class GridPanel_Fix extends JPanel {
 	final static Color ORANGE = new Color(0xFF5C01);
 	final static Color GRAY = new Color(0x8D8787);
 	final static Color LIGHTGRAY = new Color(0xD9D9D9);
-
+	DateLabel dateLabel;
+	 // 라벨의 날짜
+	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
+	
+	
 	LocalDate selectDate = LocalDate.now();
 	LocalTime time = LocalTime.of(0, 0); // timeSelectBtn에 넣을 시간의 default값
 
 	TimeSelectButton timeSelectBtn;
 	List<TimeSelectButton> btns = new ArrayList<>();
-	List<StudyRoom_Reservation> studyRoom_AllReservation = new ArrayList<>();
+	int btnQty = 4;
+	
 	boolean[] reserved = new boolean[96]; 
 	boolean[] selected = new boolean[96]; 
 	boolean disable = false;
 
-	public GridPanel_Fix(JButton upBtn, JButton downBtn, StartTimeLabel startTimeLabel, 
-			List<StudyRoom_Reservation> studyRoom_AllReservation, JLabel whatTimeLabel, 
-			StudyRoom_Reservation myStudyRoom_Reservation, JButton paymentBtn) {
-		this.studyRoom_AllReservation = studyRoom_AllReservation;
-		
+	public GridPanel_Fix(JButton upBtn, JButton downBtn, 
+			JButton topLeftBtn, JButton topRightBtn,
+			JButton BottomLeftBtn, JButton BottomRightBtn,
+			StartTimeLabel startTimeLabel, 
+			JLabel whatTimeLabel,StudyRoom_Reservation myStudyRoom_Reservation, 
+			JButton paymentBtn, DateLabel dateLabel) {
+		this.myStudyRoom_Reservation = myStudyRoom_Reservation;
+		this.dateLabel = dateLabel;
 		GridLayout grid = new GridLayout(12, 8);
+		
+		myStudyRoom_Reservation.setStudyRoom_id("SI-1");
 		
 		grid.setHgap(3);
 		grid.setVgap(3);
@@ -56,7 +69,7 @@ public class GridPanel_Fix extends JPanel {
 			if (timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
 				timeSelectBtn.setEnabled(false);
 				timeSelectBtn.setBackground(GRAY);
-				reserved[i] = true;
+				
 			}
 
 			// 현재 시간 이전에는 다 비활성화 시키기
@@ -74,7 +87,7 @@ public class GridPanel_Fix extends JPanel {
 					int btnNum = btns.indexOf(e.getSource());
 
 					for (int i = 0; i < btns.size(); ++i) {
-
+						
 						TimeSelectButton selectBtn = btns.get(i);
 						if (!reserved[i]) {
 							if ( i > btnNum && i <= btnNum + 3) {
@@ -95,19 +108,60 @@ public class GridPanel_Fix extends JPanel {
 			});
 		}
 		// 예약된 정보들 가져오기
-		getReservationInfo(4);
+		getReservationInfo(btnQty);
+		
+		topLeftBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnReset();
+				getReservationInfo(btnQty);
+				
+			}
+		});
+		
+		topRightBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnReset();
+				getReservationInfo(btnQty);
+				
+			}
+		});
+		 BottomLeftBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnReset();
+				getReservationInfo(btnQty);
+
+			}
+		});
+		 BottomRightBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				btnReset();
+				getReservationInfo(btnQty);
+
+			}
+		});
 
 		upBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				btnQty = 8;
 				for(TimeSelectButton timeSelectBtn : btns) {
-					if (!reserved[btns.indexOf(timeSelectBtn)]) {
+					if (!reserved[btns.indexOf(timeSelectBtn)] && timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) <= 0) {
 						timeSelectBtn.setBackground(LIGHTGRAY);
+						paymentBtn.setEnabled(false);
+					} else if (timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
+						timeSelectBtn.setBackground(GRAY);
 						paymentBtn.setEnabled(false);
 					}
 				}
-				getReservationInfo(8);
+				getReservationInfo(btnQty);
 			}
 		});
 
@@ -115,17 +169,19 @@ public class GridPanel_Fix extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				btnQty = 4;
 				btnReset();
-				getReservationInfo(4);
-				
+
 				for(TimeSelectButton timeSelectBtn : btns) {
-					if (!reserved[btns.indexOf(timeSelectBtn)]) {
+					if (!reserved[btns.indexOf(timeSelectBtn)] && timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) <= 0) {
 						timeSelectBtn.setBackground(LIGHTGRAY);
+						paymentBtn.setEnabled(false);
+					} else if (timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
+						timeSelectBtn.setBackground(GRAY);
 						paymentBtn.setEnabled(false);
 					}
 				}
-
+				getReservationInfo(btnQty);
 			}
 		});
 
@@ -136,10 +192,12 @@ public class GridPanel_Fix extends JPanel {
 
 	// 예약된 정보들을 가져와 버튼에 색을 지정하는 메서드
 	public void getReservationInfo(int btnNum) {
+		LocalDate labelDate = dateLabel.getSelectDay();
+		String studyroom_id = myStudyRoom_Reservation.getStudyRoom_id(); 
+		List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(labelDate, studyroom_id);
 		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
 
 			for(TimeSelectButton timeSelectBtn : btns) {
-
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				LocalTime start = LocalTime.parse(studyRoom_reserv.getStudyRoom_start_time(), formatter);
 				LocalTime end = LocalTime.parse(studyRoom_reserv.getStudyRoom_end_time(), formatter);
@@ -160,11 +218,13 @@ public class GridPanel_Fix extends JPanel {
 
 	/** 비활성화 리셋 */
 	public void btnReset() {
-		for(TimeSelectButton timeSelectButton : btns) {
-			if(reserved[btns.indexOf(timeSelectButton)] || timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
-				timeSelectButton.setEnabled(false);
-			} else {
-				timeSelectButton.setEnabled(true);
+		for(TimeSelectButton btn : btns) {
+			if(!(btn.getTime().compareTo(LocalTime.now()) <= 0) &&
+					btn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
+				reserved[btns.indexOf(btn)] = false;
+				System.out.println(btns.indexOf(btn));
+				btn.setBackground(LIGHTGRAY);
+				btn.setEnabled(true);
 			}
 		}
 	}

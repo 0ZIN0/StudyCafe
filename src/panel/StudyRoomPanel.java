@@ -49,7 +49,9 @@ public class StudyRoomPanel extends JPanel {
 	
 	
 	/* 패널 */
-	GridPanel_Fix gridPanel = new GridPanel_Fix(upBtn, downBtn, startTimeLabel, studyRoom_AllReservation, whatTimeLabel, myStudyRoom_Reservation, paymentBtn);
+	GridPanel_Fix gridPanel = new GridPanel_Fix(upBtn, downBtn, topLeftBtn,
+			topRightBtn, bottomLeftBtn, bottomRightBtn, startTimeLabel,
+			whatTimeLabel, myStudyRoom_Reservation, paymentBtn, dateLabel);
 	
 	public StudyRoomPanel() {
 		
@@ -87,7 +89,7 @@ public class StudyRoomPanel extends JPanel {
 				topLeftBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_04.png"));
 				topRightBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_02.png"));
 				
-				myStudyRoom_Reservation.setStudyRoom_id("SI-2");
+				myStudyRoom_Reservation.setStudyRoom_id("SI-21");
 
 			}
 		});
@@ -111,7 +113,7 @@ public class StudyRoomPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				LocalDate now = LocalDate.now();
-
+				
 				if (!now.equals(dateLabel.getSelectDay())) {
 					isTodayLabel.setVisible(false);
 					dateLabel.setSelectDay(dateLabel.getSelectDay().minusDays(1));

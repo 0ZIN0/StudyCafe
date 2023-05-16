@@ -211,7 +211,8 @@ public class GridPanel extends JPanel {
 
 	public void btnReset() {
 		for(TimeSelectButton timeSelectButton : btns) {
-			if(reserved[btns.indexOf(timeSelectButton)] || timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
+			if(reserved[btns.indexOf(timeSelectButton)] || 
+					timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
 				timeSelectButton.setEnabled(false);
 			} else {
 				timeSelectButton.setEnabled(true);
