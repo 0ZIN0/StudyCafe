@@ -8,7 +8,12 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,6 +23,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -98,21 +104,14 @@ public class CheckInFrame extends JFrame {
 	
 	// 실시간 라벨
 	
-	
+	JLabel timeLabel = new JLabel();
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-		Timer timer = new Timer();
-		TimerTask task = new TimerTask(){
-		    @Override
-		    public void run() {
-		    	
-			
-		    }	
-		};
-		timer.schedule(task, 1000, 1000); //실행 Task, 1초뒤 실행, 1초마다 반복
-		
+		timeLabel.setBounds(100, 0, 500, 100);
+		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
+		timeLabel.setForeground(Color.white);
 		this.seats = seats;
 		/* 메인패널 투명화 설정 */
 		mainPanel.setBackground(new Color(0, 0, 0, 0));
@@ -215,6 +214,8 @@ public class CheckInFrame extends JFrame {
 		mainPanel.add(lockerTog);
 		mainPanel.add(logoutBtn);
 		mainPanel.add(mypageBtn);
+		mainPanel.add(timeLabel);
+		
 		mypageBtn.addActionListener(new ActionListener() {
 			
 			@Override
@@ -244,9 +245,25 @@ public class CheckInFrame extends JFrame {
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		timeGet();
 	}
 
 	public static void main(String[] args) {
 		new CheckInFrame();
+		
 	}
+	
+	public void timeGet() {
+		while(true) {
+			LocalDateTime now = LocalDateTime.now();
+			System.out.println(now);
+			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
+			try {
+				Thread.sleep(100);
+				timeLabel.setText(formatedNow);
+			} catch (Exception e) {
+			}
+		}
+	}
+	
 }
