@@ -17,6 +17,7 @@ public class BackgroundPanel extends JPanel{
 		setBackground(new Color(0, 0, 0, 0));
 		setLayout(null);
 		setVisible(true);
+		setLayout(null);
 	}
 	
 	public BackgroundPanel(ImageIcon icon, Color color) {
