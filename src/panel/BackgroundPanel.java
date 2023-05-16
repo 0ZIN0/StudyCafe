@@ -15,6 +15,7 @@ public class BackgroundPanel extends JPanel{
 		this.image = icon.getImage();
 		setSize(image.getWidth(null),image.getHeight(null));
 		setBackground(new Color(0, 0, 0, 0));
+		setLayout(null);
 		setVisible(true);
 	}
 	
@@ -22,6 +23,7 @@ public class BackgroundPanel extends JPanel{
 	    this.image = icon.getImage();
 	    setSize(image.getWidth(null),image.getHeight(null));
 	    setBackground(color);
+	    setLayout(null);
 	    setVisible(true);
 	}
 	

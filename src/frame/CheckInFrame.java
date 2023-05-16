@@ -1,6 +1,7 @@
 package frame;
 
 import java.awt.CardLayout;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -25,6 +26,7 @@ import button.OpenDoorButton;
 import button.SeatButton;
 import dto.Seat;
 import panel.LockerPanel;
+import panel.LoginMainPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
@@ -74,6 +76,8 @@ public class CheckInFrame extends JFrame {
 	JPanel studyRoomPanel = new StudyRoomPanel(); // 스터디룸 예약 패널
 	JPanel lockerPanel = new LockerPanel(); // 사물함 구매 패널
 	MyPagePanel myPagePanel = new MyPagePanel(); // 마이페이지 패널
+	LoginMainPanel logingMainPanel = new LoginMainPanel(); //로그인패널 첫화면
+	
 	
 	List<Seat> seats = SeatReportPanel.getSeats();
 	/* 메인 토글버튼 */
@@ -194,8 +198,10 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 		
 		// 프레임(getContentPane())에 메인 패널 붙이기
+		getContentPane().add(logingMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
+		
 		
 		// 메인 패널에 잡것들 붙이기
 		mainPanel.add(subPanel);
@@ -204,6 +210,9 @@ public class CheckInFrame extends JFrame {
 		mainPanel.add(lockerTog);
 		mainPanel.add(logoutBtn);
 		mainPanel.add(mypageBtn);
+		
+		
+		
 		mypageBtn.addActionListener(new ActionListener() {
 			
 			@Override
