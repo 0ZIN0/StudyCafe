@@ -72,14 +72,16 @@ public class LoginMainPanel extends JPanel{
 		
 		memberShipBtn.setContentAreaFilled(false);
 		memberShipBtn.setBorderPainted(false);
+		memberShipBtn.setFocusPainted(false);
 		memberShipBtn.setBounds(220,800,400,148);
-//		memberShipBtn.setBackground(new Color(0, 0, 0, 0));
+
 		
 		
 		loginBtn.setBorderPainted(false);
 		loginBtn.setContentAreaFilled(false);
+		loginBtn.setFocusPainted(false);
 		loginBtn.setBounds(640,800,400,148);
-//		loginBtn.setBackground(new Color(0,0,0,0));
+
 		
 		
 		inFramebg.setLocation(135,230);
