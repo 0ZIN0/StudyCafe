@@ -245,12 +245,7 @@ public class CheckInFrame extends JFrame {
 		getContentPane().add(logingMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
-<<<<<<< HEAD
-		
-		
-=======
 
->>>>>>> refs/heads/check_in_roa
 		// 메인 패널에 잡것들 붙이기
 		mainPanel.add(subPanel);
 		mainPanel.add(seatReportTog);
@@ -258,15 +253,9 @@ public class CheckInFrame extends JFrame {
 		mainPanel.add(lockerTog);
 		mainPanel.add(logoutBtn);
 		mainPanel.add(mypageBtn);
-<<<<<<< HEAD
-		
-		
-		
-=======
 
 		mainPanel.add(timeLabel);
 		
->>>>>>> refs/heads/check_in_roa
 		mypageBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -303,10 +292,7 @@ public class CheckInFrame extends JFrame {
 		new CheckInFrame();
 		
 	}
-<<<<<<< HEAD
-}
-=======
-	
+
 	public void timeGet() {
 		while(true) {
 			LocalDateTime now = LocalDateTime.now();
@@ -317,7 +303,6 @@ public class CheckInFrame extends JFrame {
 			} catch (Exception e) {
 			}
 		}
-	}
-	
+	}	
 }
->>>>>>> refs/heads/check_in_roa
+
