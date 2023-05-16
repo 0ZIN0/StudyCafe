@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import button.CloseButton;
 import button.LockerTicketButton;
-import button.Nextbutton;
+import button.NextButton;
 import panel.ButtonPanel;
 
 import javax.swing.JLabel;
@@ -32,8 +32,7 @@ public class LockerPayDialog extends JDialog {
 	ImageIcon icon = new ImageIcon("ui/Locker_PopUp/Locker_PopUp_Background.png");
 	Image image = icon.getImage();
 	
-	CloseButton close = new CloseButton(this);
-	Nextbutton next = new Nextbutton();
+	
 	
 	
 	/* 패널 */
@@ -48,6 +47,8 @@ public class LockerPayDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public LockerPayDialog(String lockerNum) {
+		CloseButton close = new CloseButton(this);
+		NextButton next = new NextButton(this);
 		
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
@@ -103,7 +104,7 @@ public class LockerPayDialog extends JDialog {
 		close.setLocation(207, 860);
 		add(close);
 		
-		next.setLocation(375, 860);
+		next.setBounds(375,860, 150, 80);
 		add(next);
 		
 		background.setBackground(new Color(0,0,0,0));
