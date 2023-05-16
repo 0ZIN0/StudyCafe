@@ -36,7 +36,6 @@ public class SeatDAO {
 		}
 		return false;
 	}
-<<<<<<< HEAD
 	
 	public static List<Integer> getSeatId() {
 		List<Integer> seatIds = new ArrayList<>();
@@ -56,8 +55,6 @@ public class SeatDAO {
 	}
 
 	
-=======
-
 	/** 좌석 현황을 알려주는 메서드 */
 	public static int[] isRemain() {
 		int[] remain = new int[2];
@@ -81,5 +78,4 @@ public class SeatDAO {
 
 		return remain;
 	}
->>>>>>> refs/heads/open_door_roa
 }

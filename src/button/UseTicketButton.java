@@ -10,12 +10,13 @@ import javax.swing.JDialog;
 import dialog.NotUseTicketDialog;
 import dialog.SelectSeatDialog;
 import dialog.UseTicketDialog;
+import dto.Seat;
 
 public class UseTicketButton extends JButton {
 	
 	boolean remainTicket;
 	
-	public UseTicketButton(SelectSeatDialog selectSeatPopup, String seatNum) {
+	public UseTicketButton(SelectSeatDialog selectSeatPopup, String seatNum, Seat seat) {
 		
 		setBorderPainted(false);
 		setIcon(new ImageIcon("ui/SelectSeatPopup/Button_사용중.png"));
@@ -26,9 +27,9 @@ public class UseTicketButton extends JButton {
 				selectSeatPopup.dispose();
 				
 				if (remainTicket) {
-					JDialog UseTicketPopup = new UseTicketDialog(seatNum);
+					JDialog UseTicketPopup = new UseTicketDialog(seatNum, seat);
 				} else {
-					JDialog NotUseTicketPopup = new NotUseTicketDialog(seatNum);
+					JDialog NotUseTicketPopup = new NotUseTicketDialog(seatNum, seat);
 				}
 			}
 		});

@@ -20,11 +20,8 @@ import dto.Seat;
 
 public class SelectSeatDialog extends JDialog {
 	
-<<<<<<< HEAD
 	Seat seat;
-=======
 	/* 백그라운드 이미지 */
->>>>>>> refs/heads/open_door_roa
 	ImageIcon icon = new ImageIcon("ui/SelectSeatPopup/Background.png");
 	Image image = icon.getImage();
 	
@@ -39,32 +36,19 @@ public class SelectSeatDialog extends JDialog {
 			g.drawImage(image, 0, 0, this);
 		}
 	};
-<<<<<<< HEAD
 	
 	JLabel label;
 	
-	/* 구매 버튼 */
-	JButton dayTicketBtn = new DayTicketButton(seat);
-	JButton timeTicketBtn = new TimeTicketButton();
-	JButton termTicketBtn = new TermTicketButton();
-	JButton useTicketBtn = new UseTicketButton();
-=======
->>>>>>> refs/heads/open_door_roa
 
-<<<<<<< HEAD
 	public SelectSeatDialog(String seatNum, Seat seat) {
 		this.seat = seat;
-		/* 닫기 버튼 설정 */
-		JButton close = new JButton(new ImageIcon("ui/SelectSeatPopup/CloseButton.png"));
-=======
-	public SelectSeatDialog(String seatNum) {
-		/* 버튼 */
-		JButton dayTicketBtn = new DayTicketButton();
+		
+		/* 구매 버튼 */
+		JButton dayTicketBtn = new DayTicketButton(seat);
 		JButton timeTicketBtn = new TimeTicketButton();
 		JButton termTicketBtn = new TermTicketButton();
-		JButton useTicketBtn = new UseTicketButton(this, seatNum);
+		JButton useTicketBtn = new UseTicketButton(this, seatNum, seat);
 		JButton close = new CloseButton(this);
->>>>>>> refs/heads/open_door_roa
 
 		/* 닫기 버튼 설정 */
 		close.setLocation(300, 640);

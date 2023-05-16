@@ -13,6 +13,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dto.Seat;
+
 public class NotUseTicketDialog extends JDialog {
 
 	ImageIcon icon = new ImageIcon("ui/Remain_seat_popup/NotUseTicket.png");
@@ -34,7 +36,7 @@ public class NotUseTicketDialog extends JDialog {
 	/* 버튼 */
 	JButton beforeBtn = new JButton(new ImageIcon("ui/Remain_seat_popup/Before_Button.png"));
 	
-	public NotUseTicketDialog(String seatNum) {
+	public NotUseTicketDialog(String seatNum, Seat seat) {
 		
 		/* 라벨 설정 */
 		String seatName = seatNum + "번 좌석";
@@ -56,7 +58,7 @@ public class NotUseTicketDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SelectSeatDialog selectSeatPopup = new SelectSeatDialog(seatNum);
+				SelectSeatDialog selectSeatPopup = new SelectSeatDialog(seatNum, seat);
 			}
 		});
 		
