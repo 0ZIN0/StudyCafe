@@ -110,7 +110,7 @@ public class TimeChargeDialog extends JDialog {
 
 //		background.setBackground(new Color(0,0,0,0));
 		background.setLocation(0, 0);
-		background.setBackground(Color.blue);
+//		background.setBackground(Color.blue);
 		add(background);
 		setModal(true);
 //		setLayout(null);
