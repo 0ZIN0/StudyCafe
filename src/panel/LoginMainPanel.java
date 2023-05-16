@@ -22,8 +22,15 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
+import button.CloseButton;
+
 public class LoginMainPanel extends JPanel{
 	
+	BackgroundPanel bg = new BackgroundPanel(new ImageIcon("ui/background/background.png"));
+	BackgroundPanel inFramebg = new BackgroundPanel(new ImageIcon("ui/background/Main_Default_Ui_Frame.png"));
+	JButton memberShipBtn = new JButton(new ImageIcon("ui/main_membership_Btn.png"));
+	JButton loginBtn = new JButton(new ImageIcon("ui/main_Login_Btn.png"));
+	JButton test = new JButton(new ImageIcon("ui/SelectSeatPopup/CloseButton.png"));
 	CardLayout card = new CardLayout();
 
 	public LoginMainPanel() {
@@ -50,49 +57,52 @@ public class LoginMainPanel extends JPanel{
 		/*
 		  Bottom 회원가입 / 로그인 버튼
 		 */
+		test.setContentAreaFilled(false);
+		test.setBorderPainted(false);
+		test.setBounds(1200, 800, 400, 148);
+		test.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		add(test);
 		
-		ImageIcon memberBtnImg = new ImageIcon("ui/main_membership_Btn.png");
-		ImageIcon loginBtnImg = new ImageIcon("ui/main_Login_Btn.png");
-		
-		JButton memberShipBtn = new JButton();
-		memberShipBtn.setIcon(memberBtnImg);
-		memberShipBtn.setBounds(80,600,400,148);
-		memberShipBtn.setBackground(new Color(0, 0, 0, 0));
-		memberShipBtn.setBorderPainted(false);
 		memberShipBtn.setContentAreaFilled(false);
+		memberShipBtn.setBorderPainted(false);
+		memberShipBtn.setBounds(220,800,400,148);
+//		memberShipBtn.setBackground(new Color(0, 0, 0, 0));
 		
-		JButton loginBtn = new JButton();
-		loginBtn.setIcon(loginBtnImg);
-		loginBtn.setBounds(510,600,400,148);
-		loginBtn.setBackground(new Color(0,0,0,0));
+		
 		loginBtn.setBorderPainted(false);
 		loginBtn.setContentAreaFilled(false);
+		loginBtn.setBounds(640,800,400,148);
+//		loginBtn.setBackground(new Color(0,0,0,0));
 		
-		BackgroundPanel inFramebg = new BackgroundPanel(new ImageIcon("ui/background/Main_Default_Ui_Frame.png"));
+		
 		inFramebg.setLocation(135,230);
 		inFramebg.setBackground(new Color(0,0,0,0));
 		
+		add(inFramebg);
 		// Bottom Button
-		inFramebg.add(memberShipBtn);
-		inFramebg.add(loginBtn);
+		add(memberShipBtn);
+		add(loginBtn);
 		
 		// Top Label 
 		inFramebg.add(seat);
 		inFramebg.add(studyRoom);
 		inFramebg.add(locker);
 		
-		BackgroundPanel bg = new BackgroundPanel(new ImageIcon("ui/background/background.png"));
-		inFramebg.setLayout(null);
-		
-		bg.add(inFramebg);
+		add(bg);
 		bg.setLocation(0, 0);
-		bg.setLayout(null);
 		bg.setBackground(new Color(0,0,0,0));
 		
-		setBackground(new Color(0, 0, 0, 0));
+
 		setLayout(null);
 		
-		add(bg);
+		
 	}
  }
 
