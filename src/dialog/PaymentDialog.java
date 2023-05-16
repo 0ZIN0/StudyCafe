@@ -15,7 +15,7 @@ import dto.StudyRoom_Reservation;
 
 public class PaymentDialog extends JDialog {
 	
-	ImageIcon icon = new ImageIcon("ui/SelectSeatPopup/Background.png");
+	ImageIcon icon = new ImageIcon("ui/study_room/Study_Room_payment_Popup.png");
 	Image image = icon.getImage();
 	
 	/* 패널 */
@@ -53,7 +53,7 @@ public class PaymentDialog extends JDialog {
 		paymentPanel.add(closeBtn);
 		
 		paymentPanel.setLayout(null);
-		paymentPanel.setBounds(0, 0, 750, 750);
+		paymentPanel.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
 		paymentPanel.setBackground(new Color(0, 0, 0, 0));
 		
 		add(paymentPanel);
@@ -63,7 +63,7 @@ public class PaymentDialog extends JDialog {
 		setUndecorated(true); // 팝업창 위 닫기버튼들을 다 없앰
 		setBackground(new Color(0, 0, 0, 0));
 		setResizable(false); // 사용자가 팝업창 크기를 조정하는것을 해제
-		setBounds(585, 240, 750, 750);
+		setBounds(585, 340, icon.getIconWidth(), icon.getIconHeight());
 		setVisible(true);
 	}
 }

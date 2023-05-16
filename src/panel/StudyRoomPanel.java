@@ -45,11 +45,11 @@ public class StudyRoomPanel extends JPanel {
 	StartTimeLabel startTimeLabel = new StartTimeLabel(myStudyRoom_Reservation);
 	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
 	
-	List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(dateLabel.getSelectDay(), "SI-1");
+	List<StudyRoom_Reservation> studyRoom_AllReservation;
 	
 	
 	/* 패널 */
-	GridPanel_Fix gridPanel = new GridPanel_Fix(upBtn, downBtn, topLeftBtn,
+	GridPanel gridPanel = new GridPanel(upBtn, downBtn, topLeftBtn,
 			topRightBtn, bottomLeftBtn, bottomRightBtn, startTimeLabel,
 			whatTimeLabel, myStudyRoom_Reservation, paymentBtn, dateLabel);
 	
@@ -89,7 +89,7 @@ public class StudyRoomPanel extends JPanel {
 				topLeftBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_04.png"));
 				topRightBtn.setIcon(new ImageIcon("ui/study_room/Main_Arrow_02.png"));
 				
-				myStudyRoom_Reservation.setStudyRoom_id("SI-21");
+				myStudyRoom_Reservation.setStudyRoom_id("SI-2");
 
 			}
 		});
