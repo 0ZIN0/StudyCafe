@@ -291,7 +291,6 @@ public class CheckInFrame extends JFrame {
 	public void timeGet() {
 		while(true) {
 			LocalDateTime now = LocalDateTime.now();
-			System.out.println(now);
 			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
 			try {
 				Thread.sleep(100);
