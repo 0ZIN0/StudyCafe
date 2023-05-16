@@ -45,7 +45,7 @@ public class PaymentDialog extends JDialog {
 		endTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
 		
 		/* temp button */
-		closeBtn.setLocation(300, 640);
+		closeBtn.setLocation(500, 500);
 		
 		/* 기본 설정 */
 		paymentPanel.add(startTimeLabel);
@@ -63,7 +63,7 @@ public class PaymentDialog extends JDialog {
 		setUndecorated(true); // 팝업창 위 닫기버튼들을 다 없앰
 		setBackground(new Color(0, 0, 0, 0));
 		setResizable(false); // 사용자가 팝업창 크기를 조정하는것을 해제
-		setBounds(585, 340, icon.getIconWidth(), icon.getIconHeight());
+		setBounds(585, 315, icon.getIconWidth(), icon.getIconHeight());
 		setVisible(true);
 	}
 }
