@@ -14,18 +14,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import panel.OnePassChargePanel;
+import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
 
 public class PaymentInformationDialog extends JDialog { 
 
 
-	static int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
-	static int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
+	int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
+	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 
-	static int timeChargeItem = TimeChargePanel.getTimeChargeItem();
-	static int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	int timeChargeItem = TimeChargePanel.getTimeChargeItem();
+	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	
+	int periodChargeItem = PeriodChargePanel.getPeriodChargeItem();
+	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 
-
+	
 	private ImageIcon check;
 
 
@@ -122,7 +126,11 @@ public class PaymentInformationDialog extends JDialog {
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				onePassChargePrice = 0;
+				onePassChargeItem = 0;
 				timeChargePrice = 0;
+				timeChargeItem = 0;
+				periodChargePrice = 0;
+				periodChargeItem = 0;
 				dispose();
 			}
 		});
@@ -180,6 +188,14 @@ public class PaymentInformationDialog extends JDialog {
 		howPrice.setName("label");
 		add(howPrice);
 
+		howHours.setText("이용시간");
+		howHours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+		howHours.setForeground(new Color(35, 35, 35));
+		howHours.setBounds(230, 278, 200, 35);
+		howHours.setName("label");
+		add(howHours);
+
+		
 
 		if(onePassChargePrice != 0) {
 			nameIs.setText("일회이용권"); //////////////////////////////변하는 값
@@ -194,10 +210,22 @@ public class PaymentInformationDialog extends JDialog {
 			priceIs.setBounds(382, 331, 200, 35);
 			priceIs.setName("label");
 			add(priceIs);
+			
+			if(onePassChargeItem == 99) {
+				hours.setText("종일권(2시까지)"); //변하는 값
+				hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+				hours.setForeground(new Color(35, 35, 35));
+				hours.setBounds(382, 278, 200, 35);
+				add(hours);
+			} else {
+				hours.setText(onePassChargeItem + "시간"); //변하는 값
+				hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+				hours.setForeground(new Color(35, 35, 35));
+				hours.setBounds(382, 278, 200, 35);
+				add(hours);
+			}
 
-		}
-
-		if (timeChargePrice != 0) {
+		}  else if (timeChargePrice != 0) {
 			nameIs.setText("시간충전권"); 
 			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			nameIs.setForeground(new Color(35, 35, 35));
@@ -210,31 +238,38 @@ public class PaymentInformationDialog extends JDialog {
 			priceIs.setBounds(382, 331, 200, 35);
 			priceIs.setName("label");
 			add(priceIs);
+			
+			hours.setText(timeChargeItem + "시간"); //변하는 값
+			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			hours.setForeground(new Color(35, 35, 35));
+			hours.setBounds(382, 278, 200, 35);
+			add(hours);
+
+		} else if (periodChargePrice != 0) {
+			nameIs.setText("기간이용권"); 
+			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			nameIs.setForeground(new Color(35, 35, 35));
+			nameIs.setBounds(382, 225, 200, 35);
+			add(nameIs);
+
+			priceIs.setText(String.format("%,d원", periodChargePrice));
+			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			priceIs.setForeground(new Color(35, 35, 35));
+			priceIs.setBounds(382, 331, 200, 35);
+			priceIs.setName("label");
+			add(priceIs);
+			
+			hours.setText(periodChargeItem + "주"); //변하는 값
+			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			hours.setForeground(new Color(35, 35, 35));
+			hours.setBounds(382, 278, 200, 35);
+			add(hours);
 
 		}
 
 
 
-		howHours.setText("이용시간");
-		howHours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
-		howHours.setForeground(new Color(35, 35, 35));
-		howHours.setBounds(230, 278, 200, 35);
-		howHours.setName("label");
-		add(howHours);
-
-		if(onePassChargeItem == 99) {
-			hours.setText("종일권(2시까지)"); //변하는 값
-			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
-			hours.setForeground(new Color(35, 35, 35));
-			hours.setBounds(382, 278, 200, 35);
-			add(hours);
-		} else {
-			hours.setText(onePassChargeItem + "시간"); //변하는 값
-			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
-			hours.setForeground(new Color(35, 35, 35));
-			hours.setBounds(382, 278, 200, 35);
-			add(hours);
-		}
+		
 
 
 
@@ -259,21 +294,21 @@ public class PaymentInformationDialog extends JDialog {
 	}
 
 
-	public static int getOnePassChargeItem() {
-		return onePassChargeItem;
-	}
-
-	public static int getOnePassChargePrice() {
-		return onePassChargePrice;
-	}
-
-	public static int getTimeChargeItem() {
-		return timeChargeItem;
-	}
-
-	public static int getTimeChargePrice() {
-		return timeChargePrice;
-	}
+//	public static int getOnePassChargeItem() {
+//		return onePassChargeItem;
+//	}
+//
+//	public  int getOnePassChargePrice() {
+//		return onePassChargePrice;
+//	}
+//
+//	public  int getTimeChargeItem() {
+//		return timeChargeItem;
+//	}
+//
+//	public  int getTimeChargePrice() {
+//		return timeChargePrice;
+//	}
 
 
 

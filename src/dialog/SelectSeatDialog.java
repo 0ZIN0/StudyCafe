@@ -38,7 +38,7 @@ public class SelectSeatDialog extends JDialog {
 	/* 구매 버튼 */
 	JButton dayTicketBtn = new DayTicketButton(seat, this);
 	JButton timeTicketBtn = new TimeTicketButton(this);
-	JButton termTicketBtn = new TermTicketButton();
+	JButton termTicketBtn = new TermTicketButton(this);
 	JButton useTicketBtn = new UseTicketButton();
 
 	public SelectSeatDialog(String seatNum, Seat seat) {

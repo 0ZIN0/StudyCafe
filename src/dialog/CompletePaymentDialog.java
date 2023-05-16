@@ -14,15 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import panel.OnePassChargePanel;
+import panel.PeriodChargePanel;
+import panel.TimeChargePanel;
 import panel.MainPanel;
    
 public class CompletePaymentDialog extends JDialog {
 
-	static int amountPaid = InsertCardDialog.getAmountPaid(); 
 	
    public CompletePaymentDialog() {
-
-	   System.out.println("결제완료금액: " + amountPaid);
+	   System.out.println("결제완료금액: " + InsertCardDialog.amountPaid); 
 	   
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
@@ -36,21 +36,26 @@ public class CompletePaymentDialog extends JDialog {
 		
 	      
 	      ImageIcon buttonIcon2 = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/MainButton.png");
-	      JButton btnNewButton6 = new JButton(buttonIcon2);
+	      JButton mainButton = new JButton(buttonIcon2);
 	      
-	      btnNewButton6.setBorderPainted(false);
-	      btnNewButton6.setContentAreaFilled(false);
-	      btnNewButton6.addActionListener(new ActionListener() {
+	      mainButton.setBorderPainted(false);
+	      mainButton.setContentAreaFilled(false);
+	      mainButton.addActionListener(new ActionListener() {
 	         public void actionPerformed(ActionEvent e) {
 	        	
+	        	 TimeChargePanel.timeChargePrice  = 0; 
+	        	 OnePassChargePanel.onePassChargePrice = 0;
+	        	 PeriodChargePanel.periodChargePrice = 0;
+	        	 
 	            dispose();
+	            
 	         }
 	      });
 	  
-	      btnNewButton6.setBounds(250, 320, 250, 80);
+	      mainButton.setBounds(250, 320, 250, 80);
 	      
 	     
-	      add(btnNewButton6);
+	      add(mainButton);
 	      
 	      
 	      background.setBackground(new Color(0,0,0,0));
@@ -66,7 +71,5 @@ public class CompletePaymentDialog extends JDialog {
 		
    }
    
-   public static int getAmountPaid() {
-		return amountPaid;
-	}
+  
 }

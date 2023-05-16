@@ -18,7 +18,20 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import panel.OnePassChargePanel;
+import panel.PeriodChargePanel;
+import panel.TimeChargePanel;
+
 public class InstallmentPaymentDialog extends JDialog {
+	
+	int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
+	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
+
+	int timeChargeItem = TimeChargePanel.getTimeChargeItem();
+	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	
+	int periodChargeItem = PeriodChargePanel.getPeriodChargeItem();
+	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 
 	public InstallmentPaymentDialog() {
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_2/Pay_PopUp2_revision.png");
@@ -48,30 +61,36 @@ public class InstallmentPaymentDialog extends JDialog {
 		installmentLabel.setBounds(236, 180, 150, 62);
 		add(installmentLabel);
 
-		JButton btnNewButton5 = new JButton(new ImageIcon("ui/결제 팝업/PayInfo_Default_2/CloseButton.png"));
-		btnNewButton5.setBorderPainted(false);
-		btnNewButton5.setContentAreaFilled(false);
-		btnNewButton5.addActionListener(new ActionListener() {
+		JButton closeButton = new JButton(new ImageIcon("ui/결제 팝업/PayInfo_Default_2/closeButton.png"));
+		closeButton.setBorderPainted(false);
+		closeButton.setContentAreaFilled(false);
+		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				onePassChargePrice = 0;
+				onePassChargeItem = 0;
+				timeChargePrice = 0;
+				timeChargeItem = 0;
+				periodChargePrice = 0;
+				periodChargeItem = 0;
 				dispose();
 			}
 		});
 
-		JButton btnNewButton6 = new JButton (new ImageIcon("ui/결제 팝업/PayInfo_Default_2/NextButton.png"));
+		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/PayInfo_Default_2/NextButton.png"));
 
-		btnNewButton6.setBorderPainted(false);
-		btnNewButton6.setContentAreaFilled(false);
-		btnNewButton6.addActionListener(new ActionListener() {
+		nextButton.setBorderPainted(false);
+		nextButton.setContentAreaFilled(false);
+		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				InsertCardDialog insertCardDialog = new InsertCardDialog();
 			}
 		});
-		btnNewButton5.setBounds(207, 350, 150, 80);
-		btnNewButton6.setBounds(375, 350, 150, 80);
+		closeButton.setBounds(207, 350, 150, 80);
+		nextButton.setBounds(375, 350, 150, 80);
 
-		add(btnNewButton5);
-		add(btnNewButton6);
+		add(closeButton);
+		add(nextButton);
 
 
 

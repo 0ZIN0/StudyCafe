@@ -19,9 +19,10 @@ import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
 import panel.OnePassChargePanel;
+import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
 
-public class TimeChargeDialog extends JDialog {
+public class PeriodChargeDialog extends JDialog {
 
 
 	
@@ -34,11 +35,11 @@ public class TimeChargeDialog extends JDialog {
 	JLabel priceIs = new JLabel();
 
 	
-	TimeChargePanel ticketPanel = new TimeChargePanel(whatName, nameIs, howHours, hours, howPrice, priceIs);
+	PeriodChargePanel ticketPanel = new PeriodChargePanel(whatName, nameIs, howHours, hours, howPrice, priceIs);
 
-	public TimeChargeDialog() {
+	public PeriodChargeDialog() {
 
-		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/시간충전권_팝업/시간충전권_팝업.png");
+		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/기간이용권_팝업/기간이용권_팝업_BG.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
 			protected void paintComponent(Graphics g) {
@@ -51,7 +52,7 @@ public class TimeChargeDialog extends JDialog {
 		ticketPanel.setLocation(53, 400);
 		add(ticketPanel);
 
-		ChargeTimeButton closeButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/시간충전권_팝업/CloseButton.png"));
+		ChargeTimeButton closeButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/기간이용권_팝업/CloseButton.png"));
 		closeButton.setBounds(207, 842, 150, 80);
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
@@ -62,7 +63,7 @@ public class TimeChargeDialog extends JDialog {
 			}
 		});
 
-		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/시간충전권_팝업/NextButton.png"));  // 다음버튼, (결제버튼)
+		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/기간이용권_팝업/NextButton.png"));  // 다음버튼, (결제버튼)
 		nextButton.setBorderPainted(false);
 		nextButton.setContentAreaFilled(false);
 		nextButton.setBounds(375, 842, 150, 80);

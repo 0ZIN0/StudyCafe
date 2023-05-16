@@ -16,30 +16,29 @@ import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
 
-public class TimeChargePanel extends JPanel {
+public class PeriodChargePanel extends JPanel {
 
-	private static int timeChargeItem; 
-	public static int timeChargePrice;
-	
+	private static int periodChargeItem; 
+	public static int periodChargePrice;
 	
 	GridLayout grid = new GridLayout(2, 2, 20, 20);
 	List<ChargeTimeButton> chargeBtns = new ArrayList<>();
 	ImageIcon[] basicIcons = new ImageIcon[] {
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_30시간_choice.png"),
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_50시간_choice.png"),
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_100시간_choice.png"),
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_200시간_choice.png")
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_2Weeks_choice.png"),
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_4Weeks_choice.png"),
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_8Weeks_choice.png"),
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_12Weeks_choice.png")
 	};
 
 	ImageIcon[] selectedIcons = new ImageIcon[] { 
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_30시간_choice_line.png"),
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_50시간_choice_line.png"),
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_100시간_choice_line.png"),
-			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_200시간_choice_line.png")
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_2Weeks_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_4Weeks_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_8Weeks_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_12Weeks_choice_line.png")
 	};
 
 
-	public TimeChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
+	public PeriodChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
 
 		
 		for(int i = 0; i < basicIcons.length; i++) {
@@ -48,14 +47,14 @@ public class TimeChargePanel extends JPanel {
 
 			String labelText = "";
 			if (i == 0) {
-				labelText = "45,000원";
+				labelText = "90,000원";
 			} else if (i == 1) {
-				labelText = "70,000원";
+				labelText = "160,000원";
 			} else if (i == 2) {
-				labelText = "130,000원";
+				labelText = "300,000원";
 			} else if (i == 3) {
-				labelText = "240,000원";
-			} 
+				labelText = "420,000원";
+			}
 			JLabel label = new JLabel(labelText);
 			label.setHorizontalAlignment(JLabel.CENTER);
 			chargeBtn.setLayout(new BorderLayout());
@@ -79,53 +78,53 @@ public class TimeChargePanel extends JPanel {
 
 							NumberFormat nf = NumberFormat.getNumberInstance();
 
-							timeChargeItem = 0;
-							timeChargePrice = 0;
+							periodChargeItem = 0;
+							periodChargePrice = 0;
 
 
 							if (i == 0) {
-								timeChargePrice = 45000;
+								periodChargePrice = 90000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
-								priceIs.setText(nf.format(timeChargePrice) + "원");
+								priceIs.setText(nf.format(periodChargePrice) + "원");
 
-								timeChargeItem = 30;
+								periodChargeItem = 2;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
-								hours.setText(nf.format(timeChargeItem) + "시간");
+								hours.setText(nf.format(periodChargeItem) + "주");
 
 							} else if (i == 1) {
-								timeChargePrice = 70000;
+								periodChargePrice = 160000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
-								priceIs.setText(nf.format(timeChargePrice) + "원");
+								priceIs.setText(nf.format(periodChargePrice) + "원");
 
-								timeChargeItem = 50;
+								periodChargeItem = 4;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
-								hours.setText(nf.format(timeChargeItem) + "시간");
+								hours.setText(nf.format(periodChargeItem) + "주");
 
 							} else if (i == 2) {
-								timeChargePrice = 130000;
+								periodChargePrice = 300000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
-								priceIs.setText(nf.format(timeChargePrice) + "원");
+								priceIs.setText(nf.format(periodChargePrice) + "원");
 
-								timeChargeItem = 100;
+								periodChargeItem = 8;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
-								hours.setText(nf.format(timeChargeItem) + "시간");
+								hours.setText(nf.format(periodChargeItem) + "주");
 
 							} else if (i == 3) {
-								timeChargePrice = 240000;
+								periodChargePrice = 420000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
-								priceIs.setText(nf.format(timeChargePrice) + "원");
+								priceIs.setText(nf.format(periodChargePrice) + "원");
 
-								timeChargeItem = 200;
+								periodChargeItem = 12;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
-								hours.setText(nf.format(timeChargeItem) + "시간");
+								hours.setText(nf.format(periodChargeItem) + "주");
 
 
 							} 
@@ -139,7 +138,7 @@ public class TimeChargePanel extends JPanel {
 
 					Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 					NameIs.setFont(font1);
-					NameIs.setText("시간충전권");
+					NameIs.setText("기간이용권");
 
 					Font font2 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 					howHours.setFont(font2);
@@ -162,20 +161,20 @@ public class TimeChargePanel extends JPanel {
 		setVisible(true);
 	}
 
-	public static int getTimeChargeItem() {
-		return timeChargeItem;
+	public static int getPeriodChargeItem() {
+		return periodChargeItem;
 	}
 	
-	public static int getTimeChargePrice() {
-		return timeChargePrice;
+	public static int getPeriodChargePrice() {
+		return periodChargePrice;
 	}
 	
 	public void setTimeChargePrice(int price) {
-		timeChargePrice = price;
+		periodChargePrice = price;
 	}
 	
 	public void setTimeChargeItem(int item) {
-		timeChargeItem = item;
+		periodChargeItem = item;
 		
 	}
 

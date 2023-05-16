@@ -16,17 +16,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import panel.OnePassChargePanel;
+import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
 
 public class InsertCardDialog extends JDialog {
 	
 
-	int TimeChargePrice = TimeChargePanel.getTimeChargePrice();
-	int OnePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
-	static int amountPaid = 0; 
+	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
+	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
+	static int amountPaid; 
 
 	public InsertCardDialog() {
-		System.out.println("testing...");
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/Payment_CreditCard.png");
 		Image bgImage = imageIcon.getImage();
@@ -39,8 +40,8 @@ public class InsertCardDialog extends JDialog {
 
 
 
-		ImageIcon buttonIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/CloseButton.png");
-		JButton CloseButton = new JButton(buttonIcon);
+		ImageIcon buttonIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/closeButton.png");
+		JButton closeButton = new JButton(buttonIcon);
 
 		JLabel howPrice = new JLabel();
 		howPrice.setText("결제하실 금액");
@@ -51,17 +52,29 @@ public class InsertCardDialog extends JDialog {
 		add(howPrice);
 
 
-		if (OnePassChargePrice != 0) {
+		if (onePassChargePrice != 0) {
 			JLabel priceIs = new JLabel();
-			priceIs.setText(String.format("%,d원", OnePassChargePrice));
+			priceIs.setText(String.format("%,d원", onePassChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
 			priceIs.setForeground(new Color(35, 35, 35));
 			priceIs.setBounds(430, 115, 200, 200);
 			priceIs.setName("label");
 			add(priceIs);
-		} else if (TimeChargePrice != 0) {
+		} 
+		
+		if (timeChargePrice != 0) {
 			JLabel priceIs = new JLabel();
-			priceIs.setText(String.format("%,d원", TimeChargePrice));
+			priceIs.setText(String.format("%,d원", timeChargePrice));
+			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
+			priceIs.setForeground(new Color(35, 35, 35));
+			priceIs.setBounds(430, 115, 200, 200);
+			priceIs.setName("label");
+			add(priceIs);
+		}
+		
+		if (periodChargePrice != 0 ) {
+			JLabel priceIs = new JLabel();
+			priceIs.setText(String.format("%,d원", periodChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
 			priceIs.setForeground(new Color(35, 35, 35));
 			priceIs.setBounds(430, 115, 200, 200);
@@ -73,14 +86,24 @@ public class InsertCardDialog extends JDialog {
 
 
 
-		CloseButton.setBorderPainted(false);
-		CloseButton.setContentAreaFilled(false);
-		CloseButton.addActionListener(new ActionListener() {
+		closeButton.setBorderPainted(false);
+		closeButton.setContentAreaFilled(false);
+		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-
-				amountPaid = OnePassChargePrice;
-				amountPaid = TimeChargePrice;
+				if (onePassChargePrice != 0) {
+					amountPaid = onePassChargePrice;
+				} 
+				
+				if (timeChargePrice != 0) {
+					amountPaid = timeChargePrice;
+				}
+				
+				if (periodChargePrice != 0) {
+					amountPaid = periodChargePrice;
+				}
+				
+				
 
 				dispose();
 
@@ -88,10 +111,10 @@ public class InsertCardDialog extends JDialog {
 			}
 		});
 
-		CloseButton.setBounds(300, 874, 150, 80);
+		closeButton.setBounds(300, 874, 150, 80);
 
 
-		add(CloseButton);
+		add(closeButton);
 
 
 		background.setBackground(new Color(0,0,0,0));

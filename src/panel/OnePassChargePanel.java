@@ -18,32 +18,34 @@ import button.ChargeTimeButton;
 
 public class OnePassChargePanel extends JPanel {
 
-	private static int onePassChargeItem; 
-	private static int onePassChargePrice;
-
+	public static int onePassChargeItem; 
+	public static int onePassChargePrice;
+	
+	
 	GridLayout grid = new GridLayout(2, 3, 20, 20);
 	List<ChargeTimeButton> chargeBtns = new ArrayList<>();
 	ImageIcon[] basicIcons = new ImageIcon[] {
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_2시간.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_3시간.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권.png")
-	};
-
-	ImageIcon[] selectedIcons = new ImageIcon[] { 
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_2시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_3시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간_choice.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice.png")
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice.png")	
+	};
+
+	ImageIcon[] selectedIcons = new ImageIcon[] { 
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_2시간_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_3시간_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간_choice_line.png"),
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_line.png")
 	};
 
 
 	public OnePassChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
 
+		
 		for(int i = 0; i < basicIcons.length; i++) {
 
 			ChargeTimeButton chargeBtn = new ChargeTimeButton(basicIcons[i]);
@@ -90,7 +92,7 @@ public class OnePassChargePanel extends JPanel {
 								onePassChargePrice = 5000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
-								priceIs.setText(nf.format(onePassChargePrice) + "priceIs");
+								priceIs.setText(nf.format(onePassChargePrice) + "원");
 
 								onePassChargeItem = 2;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
@@ -186,16 +188,21 @@ public class OnePassChargePanel extends JPanel {
 		setVisible(true);
 	}
 
-	public static int getOnePassChargeItem() {
+	public static  int getOnePassChargeItem() {
 		return onePassChargeItem;
 	}
 	
-	public static int getOnePassChargePrice() {
+	public static  int getOnePassChargePrice() {
 		return onePassChargePrice;
 	}
 
 	public void setOnePassChargePrice(int price) {
 		onePassChargePrice = price;
+		
+	}
+	
+	public void setOnePassChargeItem(int item) {
+		onePassChargeItem = item;
 		
 	}
 
