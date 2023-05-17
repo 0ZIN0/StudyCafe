@@ -1,16 +1,23 @@
 package panel;
 
 import java.awt.Color;
-
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,9 +28,11 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+//import panel.LoginMainPanel2.PasswordFieldFocusListener;
+//import panel.LoginMainPanel2.PhoneNumberFieldFocusListener;
+
 public class LoginPanel extends JPanel {
 	
-	//public JButton memberJoinBtn;
 	
 	private static String driverName = "oracle.jdbc.driver.OracleDriver";
 	private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -32,61 +41,111 @@ public class LoginPanel extends JPanel {
 	
 	
 	
-	GridLayout grid = new GridLayout(4,1);
+	//GridLayout grid = new GridLayout(4,1);
 	JTextField userPhonNumber = new JTextField();
 	JPasswordField userPassField = new JPasswordField();
 	JButton loginButton = new JButton("로그인");
 	JButton memberJoinBtn=new JButton("회원가입");
 	
 	
+	ImageIcon im =new ImageIcon("ui/main/Main_Left_Frame.png");
+	Image image=im.getImage();
+	
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(image, 0, 0, this);
+	};
+	
+	
 	
 	
 	public LoginPanel() {
 		
-		//setBorder(new TitledBorder(new LineBorder(Color.red,5)));
-		//setLayout(null);
-		//setBounds(0,200,1920,880);
 		
-		//memberJoinBtn.setBounds(0,0,200,200);
+		setLayout(null);
 		
-		//JPanel loginP = new JPanel(grid);
-		//loginP.setBounds(0,0,500,500);
+		// 핸드폰 번호 입력 TextField 
+		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		userPhonNumber.setText("핸드폰 번호");
+		userPhonNumber.setOpaque(false);
+		userPhonNumber.setBounds(0, 0, 800, 100);
+		userPhonNumber.setSelectionColor(new Color(0, 0, 0, 0));
+		add(userPhonNumber);
+		userPhonNumber.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		 
+		// 비밀 번호 입력 TextField 
+		userPassField.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		userPassField.setText("비밀번호");
+		userPassField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		userPassField.setEchoChar((char) 0); // 텍스트가 가려지지 않도록 EchoChar를 0으로 설정
+		userPassField.setOpaque(false);
+		userPassField.setBounds(0, 100, 800, 100);
+		userPassField.setSelectionColor(new Color(0, 0, 0, 0));
+		add(userPassField);
 		
-		setLayout(grid);
+		userPassField.addKeyListener(new KeyAdapter(){
+			public void keyTyped(KeyEvent key) {
+				JPasswordField src = (JPasswordField)key.getSource();
+				if(src.getPassword().length >= 6) {
+					key.consume();
+				}
+			}
+		});
+		
+		
+		/*
+		  Bottom 회원가입 / 로그인 버튼
+		 */
+		
+		memberJoinBtn.setContentAreaFilled(false);
+		memberJoinBtn.setBorderPainted(false);
+		memberJoinBtn.setFocusPainted(false);
+		memberJoinBtn.setBounds(0,200,400,148);
+		
+		loginButton.setBorderPainted(false);
+		loginButton.setContentAreaFilled(false);
+		loginButton.setFocusPainted(false);
+		loginButton.setBounds(0,348,400,148);
+		
+		
+		
+		
+		
+		
+		
+		//setLayout(grid);
 		setBackground(new Color(73,67,68));
 	
 		add(userPhonNumber);
 		add(userPassField);
 		add(loginButton);
 		add(memberJoinBtn);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		userPhonNumber.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				String command = e.getActionCommand();
-//		        if (command.equals("지우기")) {  // Clear 버튼 클릭 시 텍스트필드 초기화
-//		        	textField.setText("");
-//		        } else {  // 숫자 버튼 클릭 시 해당 숫자를 텍스트 필드에 추가
-//		            textField.setText(textField.getText() + command);
-//		        }
-//				
-//			}
-//		});
-		
-		
-		
-		
 		
 		loginButton.addActionListener(new ActionListener() {
 			
