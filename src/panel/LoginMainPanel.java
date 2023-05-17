@@ -4,7 +4,9 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.RootPaneContainer;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.AncestorEvent;
@@ -24,15 +27,17 @@ import javax.swing.event.AncestorListener;
 public class LoginMainPanel extends JPanel{
 	
 	CardLayout card = new CardLayout();
-
+	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
+	public NumberKeypad numpad= new NumberKeypad();
+	LoginPanel loginpanel = new LoginPanel();
+	MemberJoinPanel memberJoinPanel = new MemberJoinPanel();
+	
+	
 	public LoginMainPanel() {
 		setLayout(null);
-		NumberKeypad numpad= new NumberKeypad();
+		
 		//numpad.setBounds(0,0,500,500);
 		
-		
-		
-		BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
 		background.setLayout(null);
 		//background.setBounds(0,0,1920,1080);
 		add(background);
@@ -41,8 +46,14 @@ public class LoginMainPanel extends JPanel{
 		
 		JPanel cardPanel = new JPanel();
 		cardPanel.setLayout(card);
+		background.add(cardPanel);
+		cardPanel.setBounds(200,300,500,600);
+		cardPanel.setBorder(new TitledBorder(new LineBorder(Color.red,1)));
+		//cardPanel.setBackground(new Color(73,67,68));
 		
-		
+		cardPanel.add(loginpanel,"login");
+		cardPanel.add(memberJoinPanel,"memberjoin");
+		card.show(cardPanel, "login");
 		
 		
 		

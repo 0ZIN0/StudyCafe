@@ -32,42 +32,39 @@ public class LoginPanel extends JPanel {
 	
 	
 	
-	GridLayout grid = new GridLayout(5,5);
+	GridLayout grid = new GridLayout(4,1);
 	JTextField userPhonNumber = new JTextField();
 	JPasswordField userPassField = new JPasswordField();
 	JButton loginButton = new JButton("로그인");
 	JButton memberJoinBtn=new JButton("회원가입");
-	NumberKeypad numpad = new NumberKeypad();
+	
+	
 	
 	
 	public LoginPanel() {
 		
-		setBorder(new TitledBorder(new LineBorder(Color.red,5)));
-		setLayout(null);
-		setBounds(0,200,1920,880);
+		//setBorder(new TitledBorder(new LineBorder(Color.red,5)));
+		//setLayout(null);
+		//setBounds(0,200,1920,880);
 		
 		//memberJoinBtn.setBounds(0,0,200,200);
 		
-		JPanel loginP = new JPanel(grid);
-		loginP.setBounds(0,0,500,500);
+		//JPanel loginP = new JPanel(grid);
+		//loginP.setBounds(0,0,500,500);
 		
-		NumberKeypad numpad = new NumberKeypad();
-		numpad.setBounds(0,0,300,200);
-		
-		loginP.setLayout(grid);
-		
-		add(loginP);
-		loginP.add(userPhonNumber);
-		loginP.add(userPassField);
-		loginP.add(loginButton);
-		loginP.add(memberJoinBtn);
-		add(numpad);
+		setLayout(grid);
+		setBackground(new Color(73,67,68));
+	
+		add(userPhonNumber);
+		add(userPassField);
+		add(loginButton);
+		add(memberJoinBtn);
 		
 		
-		numpad.setBounds(1000,200,300,500);
 		
 		
-		loginP.setBounds(0,0,600,600);
+		
+		
 		
 		
 		
@@ -106,10 +103,10 @@ public class LoginPanel extends JPanel {
 		            ResultSet rs = stmt.executeQuery();	
 		            
 					if (rs.next()) {
-						JOptionPane.showMessageDialog(loginP, "@@로그인성공@@");
+						JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
 		               System.out.println("로그인성공");
 		            } else {
-		            	JOptionPane.showMessageDialog(loginP, "로그인실패!!!");
+		            	JOptionPane.showMessageDialog(new LoginMainPanel().background, "로그인실패!!!");
 		                System.out.println("로그인 실패");
 		            }
 
@@ -122,12 +119,5 @@ public class LoginPanel extends JPanel {
 				
 			}
 		});
-		
-		
 	}
-	
-	public static void main(String[] args) {
-		
-	}
-
 }
