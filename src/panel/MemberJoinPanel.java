@@ -9,28 +9,54 @@ import javax.swing.text.PlainDocument;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.regex.Pattern;
 
-public class MemberJoinPanel extends JPanel implements ActionListener {
 
-    public JLabel phoneLabel, passwordLabel, confirmPasswordLabel, birthdayLabel;
-    public JTextField phoneField, birthdayField;
-    public JPasswordField passwordField, confirmPasswordField;
-    public JButton submitButton;
+public class MemberJoinPanel extends JPanel implements ActionListener {
+	JLabel phoneLabel, passwordLabel, confirmPasswordLabel, birthdayLabel;
+    JTextField phoneField, birthdayField;
+    JPasswordField passwordField, confirmPasswordField;
+    JButton submitButton;
     
+    GridLayout grid = new GridLayout(10,2);
     
+
+
     private MaskFormatter createFormatter(String s) {
-        MaskFormatter formatter = null;
-        try {
-            formatter = new MaskFormatter(s);
-        } catch (java.text.ParseException exc) {
-            System.err.println("formatter is bad: " + exc.getMessage());
-            System.exit(-1);
-        }
+    	
+        MaskFormatter formatter=null;
+		try {
+			
+			formatter = new MaskFormatter(s);
+		} catch (ParseException e) {
+			//formatter.setCommitsOnValidEdit(false);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+		
+        
+//        try {
+//            formatter = new MaskFormatter(s);
+//        } catch (java.text.ParseException exc) {
+//            exc.printStackTrace();
+//        }
+		
         return formatter;
     }
     
-    //핸드폰 정규표현식
+    
+    
+    
+    
+    
+
+
+
+
+
+	//핸드폰 정규표현식
     static String phonnumRegular = "^(01\\d{1}|02|0505|0502|0506|0\\d{1,2})-?(\\d{3,4})-?(\\d{4})";
     
     // 생년월일 정규표현식
@@ -38,32 +64,33 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
    
     
 
-    public MemberJoinPanel() {
+    public MemberJoinPanel(NumberKeypad numpad) {
+    	
+    	
+    	setLayout(grid);
+    	
+    	phoneLabel = new JLabel("핸드폰번호:");
+	    passwordLabel = new JLabel("비밀번호:");
+	    confirmPasswordLabel = new JLabel("비밀번호 확인:");
+	    birthdayLabel = new JLabel("생일:");
+		 
+	    phoneField = new JFormattedTextField(createFormatter("###-####-####"));
+	    passwordField = new JPasswordField();
+	    confirmPasswordField = new JPasswordField();
+	    birthdayField = new JFormattedTextField(createFormatter("####-##-##"));
+		
+	    submitButton = new JButton("회원가입");
+	    submitButton.addActionListener(this);
 
-        phoneLabel = new JLabel("핸드폰번호:");
-        passwordLabel = new JLabel("비밀번호:");
-        confirmPasswordLabel = new JLabel("비밀번호 확인:");
-        birthdayLabel = new JLabel("생일:");
-
-        phoneField = new JFormattedTextField(createFormatter("###-####-####"));
-        passwordField = new JPasswordField();
-        confirmPasswordField = new JPasswordField();
-        birthdayField = new JFormattedTextField(createFormatter("####-##-##"));
-
-        submitButton = new JButton("회원가입");
-        submitButton.addActionListener(this);
-
-        GridLayout grid = new GridLayout(2,10);
-        setLayout(grid);
         
-        LoginMainPanel a = new LoginMainPanel();
         
-//        passwordField.addFocusListener(new FocusAdapter() {
-//        	@Override
-//        	public void focusLost(FocusEvent e) {
-//        		//a.numpad.setTextField(passwordField);
-//        	}
-//		});
+        
+        passwordField.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		numpad.setTextField(passwordField);
+        	}
+		});
         
         
         //JPanel panel = new JPanel();
@@ -72,13 +99,13 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
         //panel.setBounds(0,0,600,600);
         //add(panel);
         add(phoneLabel);
-//        add(phoneField);
+        add(phoneField);
         add(passwordLabel);
         add(passwordField);
         add(confirmPasswordLabel);
         add(confirmPasswordField);
         add(birthdayLabel);
-//        add(birthdayField);
+        add(birthdayField);
         add(submitButton);
         
         setBackground(new Color(73,67,68));
@@ -87,6 +114,10 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
 
         //setBounds(0,0,1920,880);
     }
+    
+    
+    
+    
     
 
 	public void actionPerformed(ActionEvent event) {
@@ -151,6 +182,8 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(MemberJoinPanel.this, "오류");
             }
            
+            
+            
           
 //            if (password.equals(confirmPassword)) {
 //                

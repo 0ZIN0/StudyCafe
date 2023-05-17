@@ -30,10 +30,10 @@ public class LoginMainPanel extends JPanel{
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
 	public NumberKeypad numpad= new NumberKeypad();
 	LoginPanel loginpanel = new LoginPanel();
-	MemberJoinPanel memberJoinPanel = new MemberJoinPanel();
+	MemberJoinPanel memberJoinPanel = new MemberJoinPanel(numpad);
 	
 	
-	public LoginMainPanel() {
+	public LoginMainPanel( ) {
 		setLayout(null);
 		
 		//numpad.setBounds(0,0,500,500);
@@ -53,7 +53,7 @@ public class LoginMainPanel extends JPanel{
 		
 		cardPanel.add(loginpanel,"login");
 		cardPanel.add(memberJoinPanel,"memberjoin");
-		card.show(cardPanel, "login");
+		
 		
 		
 		
@@ -83,11 +83,11 @@ public class LoginMainPanel extends JPanel{
 		
 		//card.show(MainPanel.this, "p1");
 		
-//		m1.memberJoinBtn.addActionListener(new ActionListener() {
-//		    public void actionPerformed(ActionEvent e) {
-//		        card.show(LoginMainPanel.this, "p2");
-//		    }
-//		});
+		loginpanel.memberJoinBtn.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        card.show(cardPanel, "memberjoin");
+		    }
+		});
 		
 		
 		
