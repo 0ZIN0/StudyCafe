@@ -24,9 +24,6 @@ import panel.TimeChargePanel;
 
 public class PeriodChargeDialog extends JDialog {
 
-
-	
-	
 	JLabel whatName = new JLabel();
 	JLabel nameIs = new JLabel();
 	JLabel howHours = new JLabel();
@@ -49,16 +46,16 @@ public class PeriodChargeDialog extends JDialog {
 		};
 
 
-		ticketPanel.setLocation(53, 400);
+		ticketPanel.setLocation(160, 400);
 		add(ticketPanel);
 
 		ChargeTimeButton closeButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/기간이용권_팝업/CloseButton.png"));
-		closeButton.setBounds(207, 842, 150, 80);
+		closeButton.setBounds(210, 842, 150, 80);
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ticketPanel.setTimeChargePrice(0);
-				ticketPanel.setTimeChargeItem(0);
+				ticketPanel.setPeriodChargePrice(0);
+				ticketPanel.setPeriodChargeItem(0);
 				dispose();
 			}
 		});
@@ -66,7 +63,7 @@ public class PeriodChargeDialog extends JDialog {
 		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/기간이용권_팝업/NextButton.png"));  // 다음버튼, (결제버튼)
 		nextButton.setBorderPainted(false);
 		nextButton.setContentAreaFilled(false);
-		nextButton.setBounds(375, 842, 150, 80);
+		nextButton.setBounds(380, 842, 150, 80);
 		add(nextButton);	
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,8 +107,9 @@ public class PeriodChargeDialog extends JDialog {
 		add(priceIs);
 
 		background.setBackground(new Color(0,0,0,0));
-		//background.setBackground(Color.blue);
+		background.setBounds(0,0,750,960);
 		add(background);
+		setLayout(null);
 		setModal(true);
 		setUndecorated(true);
 		setBackground(new Color(0,0,0,0));

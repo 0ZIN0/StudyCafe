@@ -48,11 +48,11 @@ public class TimeChargeDialog extends JDialog {
 		};
 
 
-		ticketPanel.setLocation(53, 400);
+		ticketPanel.setLocation(160, 400);
 		add(ticketPanel);
 
 		ChargeTimeButton closeButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/시간충전권_팝업/CloseButton.png"));
-		closeButton.setBounds(207, 842, 150, 80);
+		closeButton.setBounds(210, 842, 150, 80);
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -65,7 +65,7 @@ public class TimeChargeDialog extends JDialog {
 		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/시간충전권_팝업/NextButton.png"));  // 다음버튼, (결제버튼)
 		nextButton.setBorderPainted(false);
 		nextButton.setContentAreaFilled(false);
-		nextButton.setBounds(375, 842, 150, 80);
+		nextButton.setBounds(380, 842, 150, 80);
 		add(nextButton);	
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,12 +108,11 @@ public class TimeChargeDialog extends JDialog {
 		priceIs.setName("label");
 		add(priceIs);
 
-//		background.setBackground(new Color(0,0,0,0));
-		background.setLocation(0, 0);
-//		background.setBackground(Color.blue);
+		background.setBackground(new Color(0,0,0,0));
+		background.setBounds(0, 0, 750, 960);
 		add(background);
+		setLayout(null);
 		setModal(true);
-//		setLayout(null);
 		setUndecorated(true);
 		setBackground(new Color(0,0,0,0));
 		setResizable(false);

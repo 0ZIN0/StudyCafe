@@ -18,9 +18,8 @@ import button.ChargeTimeButton;
 
 public class TimeChargePanel extends JPanel {
 
-	private static int timeChargeItem; 
+	public static int timeChargeItem; 
 	public static int timeChargePrice;
-	
 	
 	GridLayout grid = new GridLayout(2, 2, 20, 20);
 	List<ChargeTimeButton> chargeBtns = new ArrayList<>();
@@ -154,9 +153,10 @@ public class TimeChargePanel extends JPanel {
 			chargeBtns.add(chargeBtn);
 			add(chargeBtn);
 			chargeBtn.doClick();
+			
 
 		}
-		setBounds(200, 100, 420, 420);
+		setBounds(100, 100, 420, 420);
 		setBackground(Color.white);
 		setLayout(grid);
 		setVisible(true);

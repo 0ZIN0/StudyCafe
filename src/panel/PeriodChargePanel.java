@@ -18,7 +18,7 @@ import button.ChargeTimeButton;
 
 public class PeriodChargePanel extends JPanel {
 
-	private static int periodChargeItem; 
+	public static int periodChargeItem; 
 	public static int periodChargePrice;
 	
 	GridLayout grid = new GridLayout(2, 2, 20, 20);
@@ -169,11 +169,11 @@ public class PeriodChargePanel extends JPanel {
 		return periodChargePrice;
 	}
 	
-	public void setTimeChargePrice(int price) {
+	public void setPeriodChargePrice(int price) {
 		periodChargePrice = price;
 	}
 	
-	public void setTimeChargeItem(int item) {
+	public void setPeriodChargeItem(int item) {
 		periodChargeItem = item;
 		
 	}

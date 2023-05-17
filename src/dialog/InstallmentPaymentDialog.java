@@ -72,6 +72,16 @@ public class InstallmentPaymentDialog extends JDialog {
 				timeChargeItem = 0;
 				periodChargePrice = 0;
 				periodChargeItem = 0;
+				
+				TimeChargePanel.timeChargePrice  = 0; 
+	        	 OnePassChargePanel.onePassChargePrice = 0;
+	        	 PeriodChargePanel.periodChargePrice = 0;
+	        	 
+	        	 TimeChargePanel.timeChargeItem  = 0; 
+	        	 OnePassChargePanel.onePassChargePrice = 0;
+	        	 PeriodChargePanel.periodChargePrice = 0;
+	        	 
+				
 				dispose();
 			}
 		});
