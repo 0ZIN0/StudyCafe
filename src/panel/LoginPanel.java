@@ -105,6 +105,7 @@ public class LoginPanel extends JPanel {
 					if (rs.next()) {
 						JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
 		               System.out.println("로그인성공");
+		               
 		            } else {
 		            	JOptionPane.showMessageDialog(new LoginMainPanel().background, "로그인실패!!!");
 		                System.out.println("로그인 실패");
