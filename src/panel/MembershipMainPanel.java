@@ -9,7 +9,7 @@ public class MembershipMainPanel extends JPanel {
 	
 	public MembershipMainPanel() {
 	
-		BackgroundPanel msBg = new BackgroundPanel(new ImageIcon("ui/background/Main_Membership_Ui_BG.png"));
+		BackgroundPanel msBg = new BackgroundPanel(new ImageIcon("ui/Membership_ui/Main_Membership_BG.png"));
 		add(msBg);
 		msBg.setLocation(0, 0);
 		msBg.setBackground(new Color(0,0,0,0));

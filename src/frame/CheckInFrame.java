@@ -32,6 +32,7 @@ import dto.Seat;
 import panel.LockerPanel;
 import panel.LoginMainPanel;
 import panel.MainPanel;
+import panel.MembershipMainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
@@ -82,6 +83,7 @@ public class CheckInFrame extends JFrame {
 	MyPagePanel myPagePanel = new MyPagePanel(); // 마이페이지 패널
 
 	LoginMainPanel logingMainPanel = new LoginMainPanel(); //로그인패널 첫화면
+	MembershipMainPanel membership = new MembershipMainPanel();
 	
 	List<Seat> seats = SeatReportPanel.getSeats();
 	/* 메인 토글버튼 */
@@ -242,7 +244,7 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-		getContentPane().add(logingMainPanel, "login");
+		getContentPane().add(membership, "mem");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
