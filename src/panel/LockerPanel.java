@@ -57,10 +57,10 @@ public class LockerPanel extends JPanel {
 		add(myLockerLabel);
 		
 		JLabel inUseLockerLabel = new JLabel();
-		inUseLockerLabel.setBounds(37, 3, 100, 100);
+		inUseLockerLabel.setBounds(26, 3, 200, 100);
 		inUseLockerLabel.setForeground(new Color(255, 255, 255));
-		inUseLockerLabel.setText(useable + " / " + countLocker);
-		inUseLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		inUseLockerLabel.setText(String.format("%02d / %02d", useable, countLocker));
+		inUseLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		add(inUseLockerLabel);
 		
 		JLabel inUseLockerBg = new JLabel();

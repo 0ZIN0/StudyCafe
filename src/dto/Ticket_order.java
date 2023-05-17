@@ -47,6 +47,5 @@ public class Ticket_order {
 	public void setOrder_date(Date order_date) {
 		this.order_date = order_date;
 	}
-	
-	
+
 }
