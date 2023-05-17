@@ -29,11 +29,11 @@ public class GridPanel extends JPanel {
 	final static Color LEMON = new Color(0xffdc74);
 
 	DateLabel dateLabel; // 라벨의 날짜
-	
+
 	/* dto */
 	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
 	Member member = new Member();
-	
+
 	/* 날짜, 시간 */
 	StartTimeLabel startTimeLabel;
 	LocalDate nowDate = LocalDate.now();
@@ -45,8 +45,8 @@ public class GridPanel extends JPanel {
 	boolean[] reserved = new boolean[96]; 
 	boolean[] selected = new boolean[96]; 
 	boolean disable = false;
-	
-	
+
+
 	public GridPanel(JButton upBtn, JButton downBtn, 
 			JButton topLeftBtn, JButton topRightBtn,
 			JButton BottomLeftBtn, JButton BottomRightBtn,
@@ -59,7 +59,7 @@ public class GridPanel extends JPanel {
 		this.startTimeLabel = startTimeLabel;
 		this.member = member;
 		GridLayout grid = new GridLayout(12, 8);
-		
+
 		myStudyRoom_Reservation.setStudyRoom_id("SI-1");
 
 		grid.setHgap(3);
@@ -218,7 +218,6 @@ public class GridPanel extends JPanel {
 		String studyroom_id = myStudyRoom_Reservation.getStudyRoom_id(); 
 		List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(labelDate, studyroom_id);
 		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
-
 			for(TimeSelectButton timeSelectBtn : btns) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 				LocalTime start = LocalTime.parse(studyRoom_reserv.getStudyRoom_start_time(), formatter);
@@ -226,18 +225,20 @@ public class GridPanel extends JPanel {
 
 				if (start.compareTo(timeSelectBtn.getTime()) <= 0 && 
 						end.compareTo(timeSelectBtn.getTime()) > 0) {
-
 					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn); i++) {
 						btns.get(i).setEnabled(false);
 					}
 					timeSelectBtn.setEnabled(false);
+
 					if (timeSelectBtn.getTime().compareTo(startTimeLabel.getTime()) <= 0 && labelDate.equals(nowDate)) {
 						timeSelectBtn.setBackground(GRAY);
 					} else {
 						if (myStudyRoom_Reservation.getMember_id().equals(studyRoom_reserv.getMember_id())) {
-							timeSelectBtn.setBackground(ORANGE);
+							if (nowDate.equals(labelDate)) {
+								timeSelectBtn.setBackground(LEMON);
+							}
 						} else {
-							timeSelectBtn.setBackground(LEMON);
+							timeSelectBtn.setBackground(GRAY);
 						}
 					}
 					reserved[btns.indexOf(timeSelectBtn)] = true;
@@ -250,10 +251,12 @@ public class GridPanel extends JPanel {
 	public void btnReset() {
 		for(TimeSelectButton btn : btns) {
 			if(!(btn.getTime().compareTo(LocalTime.now()) <= 0) &&
-					btn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
+					btn.getTime().compareTo(LocalTime.of(22, 00)) <= 0) {
 				reserved[btns.indexOf(btn)] = false;
 				btn.setBackground(LIGHTGRAY);
 				btn.setEnabled(true);
+			} else if (btn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
+				btn.setBackground(GRAY);
 			}
 		}
 	}
@@ -266,7 +269,11 @@ public class GridPanel extends JPanel {
 				if (reserved[btns.indexOf(btn)]) {
 					reserved[btns.indexOf(btn)] = false;
 					btn.setEnabled(true);
-					btn.setBackground(LIGHTGRAY);
+					if (btn.getTime().compareTo(LocalTime.of(22, 00)) <= 0) {
+						btn.setBackground(LIGHTGRAY);
+					} else {
+						btn.setBackground(GRAY);
+					}
 				}
 			}
 		}
