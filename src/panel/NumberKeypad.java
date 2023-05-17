@@ -16,7 +16,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
     
     JTextField textField;// 입력값을 보여줄 텍스트 필드
     
-    public  NumberKeypad() {
+    public NumberKeypad() {
         setLayout(new GridLayout(4, 3));  // 4행 3열의 그리드 레이아웃
         
         // 버튼 생성
