@@ -7,7 +7,6 @@ public class Member {
 	private String phone_number;
 	private Integer member_password;
 	private Date date_of_birth;
-	private Integer mileage;
 	private Integer remain_time;
 	private String locker_number;
 	private Integer locker_password;
@@ -35,12 +34,6 @@ public class Member {
 	}
 	public void setDate_of_birth(Date date_of_birth) {
 		this.date_of_birth = date_of_birth;
-	}
-	public Integer getMileage() {
-		return mileage;
-	}
-	public void setMileage(Integer mileage) {
-		this.mileage = mileage;
 	}
 	public Integer getRemain_time() {
 		return remain_time;
