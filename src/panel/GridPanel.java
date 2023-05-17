@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import button.TimeSelectButton;
 import dao.StudyRoomDAO;
-import dto.StudyRoom;
+import dto.Member;
 import dto.StudyRoom_Reservation;
 import label.DateLabel;
 import label.StartTimeLabel;
@@ -27,41 +27,47 @@ public class GridPanel extends JPanel {
 	final static Color GRAY = new Color(0x8D8787);
 	final static Color LIGHTGRAY = new Color(0xD9D9D9);
 	final static Color LEMON = new Color(0xffdc74);
-	
-	DateLabel dateLabel;
-	 // 라벨의 날짜
-	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
-	
-	
-	LocalDate selectDate = LocalDate.now();
-	LocalTime time = LocalTime.of(0, 0); // timeSelectBtn에 넣을 시간의 default값
 
+	DateLabel dateLabel; // 라벨의 날짜
+	
+	/* dto */
+	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
+	Member member = new Member();
+	
+	/* 날짜, 시간 */
+	StartTimeLabel startTimeLabel;
+	LocalDate nowDate = LocalDate.now();
+	LocalTime time = LocalTime.of(0, 0); // timeSelectBtn에 넣을 시간의 default값
 	TimeSelectButton timeSelectBtn;
 	List<TimeSelectButton> btns = new ArrayList<>();
 	int btnQty = 4;
-	
+
 	boolean[] reserved = new boolean[96]; 
 	boolean[] selected = new boolean[96]; 
 	boolean disable = false;
-
+	
+	
 	public GridPanel(JButton upBtn, JButton downBtn, 
 			JButton topLeftBtn, JButton topRightBtn,
 			JButton BottomLeftBtn, JButton BottomRightBtn,
 			StartTimeLabel startTimeLabel, 
 			JLabel whatTimeLabel,StudyRoom_Reservation myStudyRoom_Reservation, 
-			JButton paymentBtn, DateLabel dateLabel) {
+			JButton paymentBtn, DateLabel dateLabel, Member member) {
+
 		this.myStudyRoom_Reservation = myStudyRoom_Reservation;
 		this.dateLabel = dateLabel;
+		this.startTimeLabel = startTimeLabel;
+		this.member = member;
 		GridLayout grid = new GridLayout(12, 8);
 		
 		myStudyRoom_Reservation.setStudyRoom_id("SI-1");
-		
+
 		grid.setHgap(3);
 		grid.setVgap(3);
 		paymentBtn.setEnabled(false);
-		
+
 		for (int i = 0; i < 96; ++i) {
-			
+
 			timeSelectBtn = new TimeSelectButton(upBtn, downBtn, startTimeLabel, whatTimeLabel, myStudyRoom_Reservation);
 			btns.add(timeSelectBtn);
 			timeSelectBtn.setTime(time.plusMinutes(i * 15));
@@ -71,7 +77,7 @@ public class GridPanel extends JPanel {
 			if (timeSelectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
 				timeSelectBtn.setEnabled(false);
 				timeSelectBtn.setBackground(GRAY);
-				
+
 			}
 
 			// 현재 시간 이전에는 다 비활성화 시키기
@@ -89,7 +95,7 @@ public class GridPanel extends JPanel {
 					int btnNum = btns.indexOf(e.getSource());
 
 					for (int i = 0; i < btns.size(); ++i) {
-						
+
 						TimeSelectButton selectBtn = btns.get(i);
 						if (!reserved[i]) {
 							if ( i > btnNum && i <= btnNum + 3) {
@@ -111,40 +117,54 @@ public class GridPanel extends JPanel {
 		}
 		// 예약된 정보들 가져오기
 		getReservationInfo(btnQty);
-		
+
 		topLeftBtn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				paymentBtn.setEnabled(false);
 				btnReset();
 				getReservationInfo(btnQty);
-				
+
 			}
 		});
-		
+
 		topRightBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btnReset();
-				getReservationInfo(btnQty);
-				
-			}
-		});
-		 BottomLeftBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				paymentBtn.setEnabled(false);
 				btnReset();
 				getReservationInfo(btnQty);
 
 			}
 		});
-		 BottomRightBtn.addActionListener(new ActionListener() {
+		BottomLeftBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				paymentBtn.setEnabled(false);
 				btnReset();
+				getReservationInfo(btnQty);
+
+				if (nowDate.equals(dateLabel.getSelectDay())) {
+					for (TimeSelectButton btn : btns) {
+						if (LocalTime.now().compareTo(btn.getTime()) >= 0) {
+							btn.setBackground(GRAY);
+							btn.setEnabled(false);
+							reserved[btns.indexOf(btn)] = true;
+						}
+					}
+				}
+			}
+		});
+		BottomRightBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				paymentBtn.setEnabled(false);
+				btnReset();
+				selectReset();
 				getReservationInfo(btnQty);
 
 			}
@@ -211,7 +231,15 @@ public class GridPanel extends JPanel {
 						btns.get(i).setEnabled(false);
 					}
 					timeSelectBtn.setEnabled(false);
-					timeSelectBtn.setBackground(LEMON);
+					if (timeSelectBtn.getTime().compareTo(startTimeLabel.getTime()) <= 0 && labelDate.equals(nowDate)) {
+						timeSelectBtn.setBackground(GRAY);
+					} else {
+						if (myStudyRoom_Reservation.getMember_id().equals(studyRoom_reserv.getMember_id())) {
+							timeSelectBtn.setBackground(ORANGE);
+						} else {
+							timeSelectBtn.setBackground(LEMON);
+						}
+					}
 					reserved[btns.indexOf(timeSelectBtn)] = true;
 				}				
 			}
@@ -224,15 +252,23 @@ public class GridPanel extends JPanel {
 			if(!(btn.getTime().compareTo(LocalTime.now()) <= 0) &&
 					btn.getTime().compareTo(LocalTime.of(22, 00)) < 0) {
 				reserved[btns.indexOf(btn)] = false;
-				System.out.println(btns.indexOf(btn));
 				btn.setBackground(LIGHTGRAY);
 				btn.setEnabled(true);
 			}
 		}
 	}
-	
+
 	/* 선택된 버튼 리셋 */
 	public void selectReset() {
-		
+		LocalDate labelDate = dateLabel.getSelectDay();
+		if (!labelDate.equals(nowDate)) {
+			for (TimeSelectButton btn : btns) {
+				if (reserved[btns.indexOf(btn)]) {
+					reserved[btns.indexOf(btn)] = false;
+					btn.setEnabled(true);
+					btn.setBackground(LIGHTGRAY);
+				}
+			}
+		}
 	}
 }

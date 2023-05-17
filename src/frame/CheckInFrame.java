@@ -6,15 +6,9 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -27,6 +21,7 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
+import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
 import panel.MainPanel;
@@ -74,12 +69,13 @@ public class CheckInFrame extends JFrame {
 	/* 패널 */
 	JPanel mainPanel = new MainPanel(backgroundImage); // 백그라운드 패널
 	JPanel subPanel = new JPanel(); // seat, study, locker 패널들의 부모가 될 서브 패널
-	JPanel seatReportPanel = new SeatReportPanel(seatReportImage); // 좌석현황 패널
-	JPanel studyRoomPanel = new StudyRoomPanel(); // 스터디룸 예약 패널
-	JPanel lockerPanel = new LockerPanel(); // 사물함 구매 패널
-	MyPagePanel myPagePanel = new MyPagePanel(); // 마이페이지 패널
+	JPanel seatReportPanel; // 좌석현황 패널
+	JPanel studyRoomPanel; // 스터디룸 예약 패널
+	JPanel lockerPanel; // 사물함 구매 패널
+	MyPagePanel myPagePanel; // 마이페이지 패널
 
 	List<Seat> seats = SeatReportPanel.getSeats();
+	
 	/* 메인 토글버튼 */
 	JToggleButton seatReportTog = new SeatReportToggle(seatReportImageIcon, card, seatReportPanel, subPanel);
 	JToggleButton studyRoomTog = new StudyRoomToggle(studyRoomdImageIcon, card, studyRoomPanel, subPanel);
@@ -99,16 +95,31 @@ public class CheckInFrame extends JFrame {
 	JButton xBtn = new JButton("X");
 
 	// 실시간 라벨
-
 	JLabel timeLabel = new JLabel();
+	
+	/* DTO */ 
+	Member member = new Member();
+	
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
+		
+		/*temp dto set */
+		member.setMember_id("M-1");
+		member.setPhone_number("010-2222-2222");
+		member.setRemain_time(0);
+		
+		/* 패널 */
+		seatReportPanel = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
+		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
+		lockerPanel = new LockerPanel(); // 사물함 구매 패널
+		myPagePanel = new MyPagePanel(); // 마이페이지 패널
+		
 		timeLabel.setBounds(100, 0, 500, 100);
 		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
 		timeLabel.setForeground(Color.white);
-		this.seats = seats;
+		
 		/* 메인패널 투명화 설정 */
 		mainPanel.setBackground(new Color(0, 0, 0, 0));
 		setLayout(card);
@@ -134,7 +145,7 @@ public class CheckInFrame extends JFrame {
 
 				studyRoomPanel.removeAll();
 
-				JPanel studyRoomPanel = new StudyRoomPanel();
+				JPanel studyRoomPanel = new StudyRoomPanel(member);
 
 				studyRoomPanel.setBackground(new Color(0x494344));
 				studyRoomPanel.setLayout(null);
@@ -168,7 +179,7 @@ public class CheckInFrame extends JFrame {
 
 				studyRoomPanel.removeAll();
 
-				JPanel studyRoomPanel = new StudyRoomPanel();
+				JPanel studyRoomPanel = new StudyRoomPanel(member);
 
 				studyRoomPanel.setBackground(new Color(0x494344));
 				studyRoomPanel.setLayout(null);
@@ -183,7 +194,7 @@ public class CheckInFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				studyRoomPanel.removeAll();
 
-				JPanel studyRoomPanel = new StudyRoomPanel();
+				JPanel studyRoomPanel = new StudyRoomPanel(member);
 
 				studyRoomPanel.setBackground(new Color(0x494344));
 				studyRoomPanel.setLayout(null);
