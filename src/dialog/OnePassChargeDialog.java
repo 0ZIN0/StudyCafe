@@ -56,8 +56,6 @@ public class OnePassChargeDialog extends JDialog {
 		add(CloseButton);
 		CloseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ticketPanel.setOnePassChargePrice(0);
-				ticketPanel.setOnePassChargeItem(0);
 				dispose();
 			}
 		});
@@ -108,10 +106,7 @@ public class OnePassChargeDialog extends JDialog {
 		priceIs.setName("label");
 		add(priceIs);
 
-
-
-
-
+		
 		background.setBackground(new Color(0,0,0,0));
 		//background.setBackground(Color.blue);
 		add(background);

@@ -31,7 +31,7 @@ public class PeriodChargeDialog extends JDialog {
 	JLabel howPrice = new JLabel();
 	JLabel priceIs = new JLabel();
 
-	
+
 	PeriodChargePanel ticketPanel = new PeriodChargePanel(whatName, nameIs, howHours, hours, howPrice, priceIs);
 
 	public PeriodChargeDialog() {
@@ -54,8 +54,6 @@ public class PeriodChargeDialog extends JDialog {
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ticketPanel.setPeriodChargePrice(0);
-				ticketPanel.setPeriodChargeItem(0);
 				dispose();
 			}
 		});
@@ -117,9 +115,5 @@ public class PeriodChargeDialog extends JDialog {
 		setBounds(585, 60, 750, 960);
 		setVisible(true);
 	}
-
-
-
-
 }
 

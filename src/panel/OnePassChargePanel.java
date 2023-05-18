@@ -15,11 +15,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
+import dialog.PaymentDialog;
 
 public class OnePassChargePanel extends JPanel {
 
 	public static int onePassChargeItem; 
 	public static int onePassChargePrice;
+	
+	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
+
+	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	
+	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
 	
 	
 	GridLayout grid = new GridLayout(2, 3, 20, 20);
@@ -70,6 +77,8 @@ public class OnePassChargePanel extends JPanel {
 			chargeBtn.add(label, BorderLayout.SOUTH);
 			Font font3 = new Font("Noto Sans KR Medium", Font.PLAIN, 32);
 			label.setFont(font3);
+			label.setForeground(new Color(35, 35, 35));
+			
 
 			chargeBtn.addActionListener(new ActionListener() {
 
@@ -87,6 +96,11 @@ public class OnePassChargePanel extends JPanel {
 
 							NumberFormat nf = NumberFormat.getNumberInstance();
 
+							TimeChargePanel.timeChargePrice  = 0; 
+				        	 OnePassChargePanel.onePassChargePrice = 0;
+				        	 PeriodChargePanel.periodChargePrice = 0;
+				        	 PaymentDialog.studyRoomChargePrice = 0;
+							
 
 							if (i == 0) {
 								onePassChargePrice = 5000;

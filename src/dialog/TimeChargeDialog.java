@@ -56,8 +56,6 @@ public class TimeChargeDialog extends JDialog {
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ticketPanel.setTimeChargePrice(0);
-				ticketPanel.setTimeChargeItem(0);
 				dispose();
 			}
 		});

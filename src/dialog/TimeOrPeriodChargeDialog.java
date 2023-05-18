@@ -18,9 +18,8 @@ import panel.TimeChargePanel;
 
 public class TimeOrPeriodChargeDialog extends JDialog {
 
-
 	public TimeOrPeriodChargeDialog() {
-		
+
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/상품충전_팝업/상품충전_BG.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -36,12 +35,10 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 		closeButton.setContentAreaFilled(false);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TimeChargePanel.timeChargePrice  = 0; 
-				OnePassChargePanel.onePassChargePrice = 0;
 				dispose();
 			}
 		});
-		
+
 		ImageIcon buttonIcon2 = new ImageIcon("ui/결제 팝업/상품충전_팝업/Button_시간충전.png");
 		JButton TimeButton = new JButton(buttonIcon2);
 		TimeButton.setBorderPainted(false);
@@ -52,27 +49,25 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 				TimeChargeDialog timeCharge = new TimeChargeDialog();
 			}
 		});
-		
+
 		ImageIcon buttonIcon3 = new ImageIcon("ui/결제 팝업/상품충전_팝업/Button_기간이용.png");
 		JButton PeriodButton = new JButton(buttonIcon3);
 		PeriodButton.setBorderPainted(false);
 		PeriodButton.setContentAreaFilled(false);
 		PeriodButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				dispose();
 				PeriodChargeDialog periodCharge = new PeriodChargeDialog();
-
 			}
 		});
-		
+
 		closeButton.setBounds(300, 415, 150, 80);
 		add(closeButton);
 		TimeButton.setBounds(165, 162, 200, 200);
 		add(TimeButton);
 		PeriodButton.setBounds(385, 162, 200, 200);
 		add(PeriodButton);
-		
+
 		background.setBackground(new Color(0,0,0,0));
 		add(background);
 		setModal(true);
@@ -81,6 +76,5 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 		setResizable(false);
 		setBounds(585, 270, 750, 535);
 		setVisible(true);
-
 	}
 }
