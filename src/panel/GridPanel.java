@@ -200,8 +200,8 @@ public class GridPanel extends JPanel {
 
             if (start.compareTo(selectTime) <= 0 && 
                   end.compareTo(selectTime) > 0) {
-               for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn); i++) {
-                  btns.get(i).setEnabled(false); //
+               for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) && btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
+                  btns.get(i).setEnabled(false);
                }
                if (selectTime.compareTo(startTimeLabel.getTime()) <= 0 &&
                      labelDate.equals(nowDate)) {

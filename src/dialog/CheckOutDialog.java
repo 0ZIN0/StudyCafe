@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.OkButton;
+import dao.SeatDAO;
 import dto.Seat;
+import frame.CheckInFrame;
 
 public class CheckOutDialog extends JDialog {
 	
@@ -48,6 +50,15 @@ public class CheckOutDialog extends JDialog {
 			}
 		});
 		
+		okBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				SeatDAO.setCheckOut(CheckInFrame.member.getMember_id());
+				JDialog exitPopup = new JDialog(); // 만들어야됨
+			}
+		});
 		
 		/* 라벨 설정 */
 		checkLabel.setText("퇴실하시겠습니까?");

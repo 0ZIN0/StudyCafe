@@ -135,6 +135,7 @@ public class SeatReportPanel extends JPanel {
 		} else {
 			seatNumLabel.setVisible(false);
 		}
+		
 		add(seatNumLabel);
 		add(seatInfoLabel);
 	}

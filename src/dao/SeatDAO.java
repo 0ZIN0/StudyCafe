@@ -26,9 +26,7 @@ public class SeatDAO {
 					) {
 				rs.next();
 
-				Date date_of_birth = rs.getDate("date_of_birth");
 				Date remain_date = rs.getDate("remain_date");
-				member.setDate_of_birth(date_of_birth);
 				member.setRemain_date(remain_date);
 				member.setMember_id(rs.getString("member_id"));
 				member.setPhone_number(rs.getString("phone_number"));
@@ -40,6 +38,38 @@ public class SeatDAO {
 		}
 
 		return member;
+	}
+
+	/* 퇴실할때 퇴실 시간 찍어주는 메서드 */
+	public static void setCheckOut(String member_id) {
+		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				) {
+
+			pstmt1.setString(1, member_id);
+			try (
+					ResultSet rs = pstmt1.executeQuery();
+					) {
+				String query2 = "UPDATE SEAT_RESERVATION SET SEAT_RESERVATION_END_TIME= WHERE SEAT_RESERVATION_ID=?";
+
+				try (
+						PreparedStatement pstmt2 = conn.prepareStatement(query2);
+						) {
+					rs.next();
+					java.util.Date utilCheckOutTime = new java.util.Date();
+					java.sql.Date sqlCheckOutDate = new java.sql.Date(utilCheckOutTime.getTime());
+
+					pstmt2.setDate(1, sqlCheckOutDate);
+					pstmt2.setString(2, rs.getString("seat_reservaion_id"));
+					
+					pstmt2.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/** 좌석 버튼 색 변경하는 메서드 */

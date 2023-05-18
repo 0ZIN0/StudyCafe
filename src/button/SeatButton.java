@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import dao.SeatDAO;
+import dialog.ChangeSeatDialog;
 import dialog.MySeatDialog;
 import dialog.SelectSeatDialog;
 import dto.Seat;
@@ -49,10 +50,11 @@ public class SeatButton extends JButton {
 				} else if (!use) {
 					if (SeatReportPanel.seatInfoLabel.getText().equals("원하시는 좌석을 선택해주세요.")) {
 						// 좌석 이동 팝업
-						JDialog changePopup = new JDialog();
+						JDialog changeSeatPopup = new ChangeSeatDialog(seatNum, seat);
+					} else {
+						// 사용중이지 않은 좌석을 눌렀을때 나오는 팝업
+						JDialog selectSeatPopup = new SelectSeatDialog(seatNum, seat);
 					}
-					// 사용중이지 않은 좌석을 눌렀을때 나오는 팝업
-					JDialog selectSeatPopup = new SelectSeatDialog(seatNum, seat);
 				}
 			}
 		});

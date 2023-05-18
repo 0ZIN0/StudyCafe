@@ -16,13 +16,5 @@ public class OkButton extends JButton {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		setBounds(402, 310, 154, 88);
-		
-		addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				parent.dispose();
-			}
-		});
 	}
 }
