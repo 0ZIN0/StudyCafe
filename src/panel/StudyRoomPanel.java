@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import button.PaymentButton;
 import dao.StudyRoomDAO;
+import dto.Member;
 import dto.StudyRoom_Reservation;
 import label.DateLabel;
 import label.StartTimeLabel;
@@ -50,11 +51,15 @@ public class StudyRoomPanel extends JPanel {
 	
 	
 	/* 패널 */
-	GridPanel gridPanel = new GridPanel(upBtn, downBtn, topLeftBtn,
-			topRightBtn, bottomLeftBtn, bottomRightBtn, startTimeLabel,
-			whatTimeLabel, myStudyRoom_Reservation, paymentBtn, dateLabel);
+	GridPanel gridPanel;
 	
-	public StudyRoomPanel() {
+	public StudyRoomPanel(Member member) {
+		
+		myStudyRoom_Reservation.setMember_id(member.getMember_id());
+		
+		gridPanel = new GridPanel(upBtn, downBtn, topLeftBtn,
+				topRightBtn, bottomLeftBtn, bottomRightBtn, startTimeLabel,
+				whatTimeLabel, myStudyRoom_Reservation, paymentBtn, dateLabel, member);
 		
 		/* 버튼 설정 */
 		topLeftBtn.setBounds(122, 40, 40, 60);

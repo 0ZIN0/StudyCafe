@@ -14,6 +14,6 @@ public class RemainSeatLabel extends JLabel {
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		setForeground(Color.WHITE);
 		int remain[] = SeatDAO.isRemain();
-		setText(remain[0] + " / " + remain[1]);
+		setText(String.format("%02d / %02d",remain[0],remain[1]));
 	}
 }

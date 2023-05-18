@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.SeatButton;
+import dto.Member;
 import dto.Seat;
 import label.RemainSeatLabel;
 import label.SeatReportLabel;
@@ -74,7 +75,7 @@ public class SeatReportPanel extends JPanel {
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
 	JLabel seatInfoLabel = new SeatReportLabel();
 
-	public SeatReportPanel(Image seatImage) {
+	public SeatReportPanel(Image seatImage, Member member) {
 		
 		for(int i = 0; i < 32; i++) {
 			Seat seat = new Seat();

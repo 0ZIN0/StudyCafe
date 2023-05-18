@@ -16,7 +16,7 @@ public class CloseButton extends JButton implements ActionListener {
 		setIcon(new ImageIcon("ui/SelectSeatPopup/CloseButton.png"));
 		setContentAreaFilled(false);
 		setBorderPainted(false);
-		setBounds(300, 860, 150, 80);
+		setSize(150, 80);
 		addActionListener(this);
 	}
 

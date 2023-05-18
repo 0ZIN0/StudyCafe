@@ -16,7 +16,7 @@ public class SeatDAO {
 	/** 좌석 버튼 색 변경하는 메서드 */
 	public static boolean isUse(int num) {
 
-		String query = "SELECT * FROM seat WHERE SEAT_NUMBER=?"; // 추후에 SEAT_ID로 변경할 거임
+		String query = "SELECT * FROM seat WHERE SEAT_ID=?"; // 추후에 SEAT_ID로 변경할 거임
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
@@ -34,6 +34,13 @@ public class SeatDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return false;
+	}
+	
+	/* 사용자가 사용하고 있는 좌석이 있는지 확인하는 메서드 */
+	public static boolean isMySeat(String member_id) {
+		
+		
 		return false;
 	}
 	
