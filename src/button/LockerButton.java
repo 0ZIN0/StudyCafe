@@ -30,8 +30,6 @@ public class LockerButton extends JButton implements ActionListener{
 			setBackground(new Color(217, 217, 217));
 			
 		}
-		System.out.println(usingLocker);
-		
 	}
 
 	@Override
