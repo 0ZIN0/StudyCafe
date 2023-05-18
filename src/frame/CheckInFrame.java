@@ -1,6 +1,7 @@
 package frame;
 
 import java.awt.CardLayout;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
@@ -28,6 +29,7 @@ import button.OpenDoorButton;
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
+import panel.LoginMainPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
@@ -77,7 +79,8 @@ public class CheckInFrame extends JFrame {
 	JPanel studyRoomPanel; // 스터디룸 예약 패널
 	JPanel lockerPanel; // 사물함 구매 패널
 	MyPagePanel myPagePanel; // 마이페이지 패널
-
+	LoginMainPanel loginMainPanel;
+	
 	List<Seat> seats = SeatReportPanel.getSeats();
 
 	/* 메인 토글버튼 */
@@ -129,7 +132,8 @@ public class CheckInFrame extends JFrame {
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
 		myPagePanel = new MyPagePanel(); // 마이페이지 패널
-
+		loginMainPanel = new LoginMainPanel(); // 로그인 패널
+		
 		timeLabel.setBounds(100, 0, 500, 100);
 		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
 		timeLabel.setForeground(Color.white);
@@ -263,6 +267,7 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
+		getContentPane().add(loginMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
@@ -273,7 +278,6 @@ public class CheckInFrame extends JFrame {
 		mainPanel.add(lockerTog);
 		mainPanel.add(logoutBtn);
 		mainPanel.add(mypageBtn);
-
 		mainPanel.add(timeLabel);
 
 		mypageBtn.addActionListener(new ActionListener() {
