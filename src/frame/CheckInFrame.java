@@ -36,6 +36,7 @@ import panel.MembershipMainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
+import panel.UserInfoCheckPanel;
 import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
@@ -84,6 +85,7 @@ public class CheckInFrame extends JFrame {
 
 	LoginMainPanel logingMainPanel = new LoginMainPanel(); //로그인패널 첫화면
 	MembershipMainPanel membership = new MembershipMainPanel();
+	UserInfoCheckPanel userInfo = new UserInfoCheckPanel();
 	
 	List<Seat> seats = SeatReportPanel.getSeats();
 	/* 메인 토글버튼 */
@@ -244,7 +246,7 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-		getContentPane().add(membership, "mem");
+		getContentPane().add(userInfo, "user");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
