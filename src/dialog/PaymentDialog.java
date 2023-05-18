@@ -48,7 +48,6 @@ public class PaymentDialog extends JDialog {
 	public PaymentDialog(StudyRoom_Reservation myStudyRoom_Reservation, JLabel whatTimeLabel) {
 		
 		
-		System.out.println("paymentDialog창");
 		
 		/* Label */
 		label1.setBounds(220, 184, 150, 40);

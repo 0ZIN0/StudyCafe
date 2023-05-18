@@ -65,7 +65,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		} 
 		
-		if (timeChargePrice != 0) {
+		else if (timeChargePrice != 0) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", timeChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
@@ -75,7 +75,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		if (periodChargePrice != 0 ) {
+		else if (periodChargePrice != 0 ) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", periodChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
@@ -85,7 +85,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		if (studyRoomChargePrice == 7000) {
+		else if (studyRoomChargePrice == 7000) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
@@ -95,7 +95,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		if (periodChargePrice == 14000) {
+		else if (studyRoomChargePrice == 14000) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));

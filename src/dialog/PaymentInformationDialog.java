@@ -270,26 +270,6 @@ public class PaymentInformationDialog extends JDialog {
 			hours.setBounds(382, 278, 200, 35);
 			add(hours);
 
-		} else if (studyRoomChargePrice == 7000) {
-			nameIs.setText("스터디룸 4인 1"); 
-			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
-			nameIs.setForeground(new Color(35, 35, 35));
-			nameIs.setBounds(382, 225, 200, 35);
-			add(nameIs);
-
-			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
-			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
-			priceIs.setForeground(new Color(35, 35, 35));
-			priceIs.setBounds(382, 331, 200, 35);
-			priceIs.setName("label");
-			add(priceIs);
-			
-			hours.setText("1시간"); //변하는 값
-			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
-			hours.setForeground(new Color(35, 35, 35));
-			hours.setBounds(382, 278, 200, 35);
-			add(hours);
-
 		} else if (studyRoomChargePrice == 14000) {
 			nameIs.setText("스터디룸 4인 2"); 
 			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
@@ -310,7 +290,27 @@ public class PaymentInformationDialog extends JDialog {
 			hours.setBounds(382, 278, 200, 35);
 			add(hours);
 
-		}
+		}  else if (studyRoomChargePrice == 7000) {
+			nameIs.setText("스터디룸 4인 1"); 
+			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			nameIs.setForeground(new Color(35, 35, 35));
+			nameIs.setBounds(382, 225, 200, 35);
+			add(nameIs);
+
+			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
+			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			priceIs.setForeground(new Color(35, 35, 35));
+			priceIs.setBounds(382, 331, 200, 35);
+			priceIs.setName("label");
+			add(priceIs);
+			
+			hours.setText("1시간"); //변하는 값
+			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
+			hours.setForeground(new Color(35, 35, 35));
+			hours.setBounds(382, 278, 200, 35);
+			add(hours);
+
+		}  
 
 
 

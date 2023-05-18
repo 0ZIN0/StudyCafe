@@ -80,7 +80,7 @@ public class OnePassChargePanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i < chargeBtns.size(); i++) {
 
-
+						
 						if(chargeBtns.indexOf(e.getSource()) == i) {
 
 							chargeBtns.get(i).setIcon(selectedIcons[i]);
