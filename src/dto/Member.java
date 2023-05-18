@@ -8,6 +8,7 @@ public class Member {
 	private Integer member_password;
 	private Date date_of_birth;
 	private Integer remain_time;
+	private Date remain_date;
 	private String locker_number;
 	private Integer locker_password;
 	
@@ -40,6 +41,12 @@ public class Member {
 	}
 	public void setRemain_time(Integer remain_time) {
 		this.remain_time = remain_time;
+	}
+	public Date getRemain_date() {
+		return remain_date;
+	}
+	public void setRemain_date(Date remain_date) {
+		this.remain_date = remain_date;
 	}
 	public String getLocker_number() {
 		return locker_number;

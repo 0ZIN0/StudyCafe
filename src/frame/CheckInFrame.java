@@ -6,8 +6,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -75,7 +79,7 @@ public class CheckInFrame extends JFrame {
 	MyPagePanel myPagePanel; // 마이페이지 패널
 
 	List<Seat> seats = SeatReportPanel.getSeats();
-	
+
 	/* 메인 토글버튼 */
 	JToggleButton seatReportTog = new SeatReportToggle(seatReportImageIcon, card, seatReportPanel, subPanel);
 	JToggleButton studyRoomTog = new StudyRoomToggle(studyRoomdImageIcon, card, studyRoomPanel, subPanel);
@@ -96,30 +100,40 @@ public class CheckInFrame extends JFrame {
 
 	// 실시간 라벨
 	JLabel timeLabel = new JLabel();
-	
+
 	/* DTO */ 
-	Member member = new Member();
-	
+	public static Member member = new Member();
+
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-		
+
 		/*temp dto set */
 		member.setMember_id("M-1");
 		member.setPhone_number("010-2222-2222");
 		member.setRemain_time(0);
+		
+		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");
+		Date date;
+		try {
+			date = formatter.parse("23/05/18");
+			member.setRemain_date(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		/* 패널 */
 		seatReportPanel = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
 		myPagePanel = new MyPagePanel(); // 마이페이지 패널
-		
+
 		timeLabel.setBounds(100, 0, 500, 100);
 		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
 		timeLabel.setForeground(Color.white);
-		
+
 		/* 메인패널 투명화 설정 */
 		mainPanel.setBackground(new Color(0, 0, 0, 0));
 		setLayout(card);
@@ -261,7 +275,7 @@ public class CheckInFrame extends JFrame {
 		mainPanel.add(mypageBtn);
 
 		mainPanel.add(timeLabel);
-		
+
 		mypageBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -296,9 +310,9 @@ public class CheckInFrame extends JFrame {
 
 	public static void main(String[] args) {
 		new CheckInFrame();
-		
+
 	}
-	
+
 	public void timeGet() {
 		while(true) {
 			LocalDateTime now = LocalDateTime.now();
@@ -310,5 +324,5 @@ public class CheckInFrame extends JFrame {
 			}
 		}
 	}
-	
+
 }

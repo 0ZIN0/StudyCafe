@@ -14,7 +14,7 @@ import dto.Seat;
 
 public class UseTicketButton extends JButton {
 	
-	boolean remainTicket;
+	boolean remainTicket = true;
 	
 	public UseTicketButton(SelectSeatDialog selectSeatPopup, String seatNum, Seat seat) {
 		
