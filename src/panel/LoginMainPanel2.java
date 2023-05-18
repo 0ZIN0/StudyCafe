@@ -115,9 +115,6 @@ public class LoginMainPanel2 extends JPanel{
 		
 		
 		
-		
-		
-		
 		// Bottom Button
 		add(memberShipBtn);
 		add(loginBtn);

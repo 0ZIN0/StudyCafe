@@ -1,5 +1,6 @@
 package panel;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.text.AttributeSet;
@@ -18,43 +19,46 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
     JTextField phoneField, birthdayField;
     JPasswordField passwordField, confirmPasswordField;
     JButton submitButton;
+    JButton phonduplicationBtn;
     
     GridLayout grid = new GridLayout(10,2);
+    NumberKeypad numpad= new NumberKeypad();
     
-
-
-    private MaskFormatter createFormatter(String s) {
-    	
-        MaskFormatter formatter=null;
-		try {
-			
-			formatter = new MaskFormatter(s);
-		} catch (ParseException e) {
-			//formatter.setCommitsOnValidEdit(false);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+    
+    
+	@Override
+    public void setBorder(Border border) {
 		
-        
-//        try {
-//            formatter = new MaskFormatter(s);
-//        } catch (java.text.ParseException exc) {
-//            exc.printStackTrace();
-//        }
-		
-        return formatter;
     }
     
     
-    
-    
-    
-    
 
 
 
-
+//    private MaskFormatter createFormatter(String s) {
+//    	
+//        MaskFormatter formatter=null;
+//		try {
+//			
+//			formatter = new MaskFormatter(s);
+//		} catch (ParseException e) {
+//			//formatter.setCommitsOnValidEdit(false);
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        
+//		
+//        
+////        try {
+////            formatter = new MaskFormatter(s);
+////        } catch (java.text.ParseException exc) {
+////            exc.printStackTrace();
+////        }
+//		
+//        return formatter;
+//    }
+    
+    
 
 	//핸드폰 정규표현식
     static String phonnumRegular = "^(01\\d{1}|02|0505|0502|0506|0\\d{1,2})-?(\\d{3,4})-?(\\d{4})";
@@ -63,61 +67,178 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
     static String dayRegular = "(19|20)\\d{2}\\-((11|12)|(0?(\\d)))\\-(30|31|((0|1|2)?\\d))";
    
     
+	ImageIcon im =new ImageIcon("ui/main/Main_membership_Left_Frame.jpg");
+	Image image=im.getImage();
+	
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(image, 0, 0, this);
+	};
+    
+	
+	
+	
+	
 
-    public MemberJoinPanel(NumberKeypad numpad) {
+    public MemberJoinPanel() {
+    	setLayout(null);
+    	JPanel MemberJoinPanel = new JPanel();
+    	
+    	phoneField = new JTextField();
+        
+       	passwordField = new JPasswordField();
+       	
+       	confirmPasswordField = new JPasswordField();
+       	
+       	phoneField.setBorder(getBorder());
+       	passwordField.setBorder(getBorder());
+       	confirmPasswordField.setBorder(getBorder());
+    	
+    	submitButton = new JButton("회원가입");
+    	phonduplicationBtn= new JButton("중복버튼");
     	
     	
-    	setLayout(grid);
+    	add(MemberJoinPanel);
+    	add(numpad);
     	
-    	phoneLabel = new JLabel("핸드폰번호:");
-	    passwordLabel = new JLabel("비밀번호:");
-	    confirmPasswordLabel = new JLabel("비밀번호 확인:");
-	    birthdayLabel = new JLabel("생일:");
+		numpad.setBounds(1080,50,550,690);
+    	MemberJoinPanel.setBounds(0,0,990,760);
+    	MemberJoinPanel.setOpaque(false);;
+    	
+    	
+    	MemberJoinPanel.setLayout(null);
+    	
+
 		 
-	    phoneField = new JFormattedTextField(createFormatter("###-####-####"));
-	    passwordField = new JPasswordField();
-	    confirmPasswordField = new JPasswordField();
-	    birthdayField = new JFormattedTextField(createFormatter("####-##-##"));
-		
-	    submitButton = new JButton("회원가입");
+	    
+	    phoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+	    phoneField.setText("핸드폰 번호");
+	    phoneField.setOpaque(false);
+	    phoneField.setBounds(80, 117, 900, 110);
+	    phoneField.setOpaque(false);
+	    
+	    
+	    
+	    passwordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+	    passwordField.setText("비밀번호 (6자리)");
+	    passwordField.setEchoChar((char) 0);
+	    passwordField.setOpaque(false);
+	    passwordField.setBounds(80, 288, 900, 110);
+	    passwordField.setOpaque(false);
+	    
+	    
+	    
+	    confirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+	    confirmPasswordField.setText("비밀번호 확인 (6자리)");
+	    confirmPasswordField.setOpaque(false);
+	    confirmPasswordField.setBounds(80, 456, 900, 110);
+	    confirmPasswordField.setOpaque(false);
+	    
+	    submitButton.setBounds(80, 650, 200, 50);
 	    submitButton.addActionListener(this);
+	    
+	    
+	    // 폰번호 포커스 이벤트
+	    phoneField.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		numpad.setTextField(phoneField);
+        		numpad.setMax(10);
+        	}
+        	
+        	@Override
+			public void focusGained(FocusEvent e) {
+        		phoneField.setText("");
+				
+			}
+		});
 
-        
-        
-        
+	    
+	    // 비밀번호 포커스 이벤트
         passwordField.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusLost(FocusEvent e) {
         		numpad.setTextField(passwordField);
+        		numpad.setMax(5);
+        		char[] password = passwordField.getPassword();
+    	        String passwordString = new String(password);
+    	        passwordField.setText("");
+    	        passwordField.setEchoChar('●');
+//        		if (passwordString.equals("비밀번호")) {
+//        			
+//        			 // 입력한 텍스트를 *로 가려줌
+//    	        }
+        		
         	}
+        	
+        	@Override
+			public void focusGained(FocusEvent e) {
+        		passwordField.setText("");
+				
+			}
 		});
         
+        // 비밀번호확인 포커스 이벤트
+        confirmPasswordField.addFocusListener(new FocusAdapter() {
+        	@Override
+        	public void focusLost(FocusEvent e) {
+        		numpad.setTextField(confirmPasswordField);
+        		numpad.setMax(6);
+        	}
+        	@Override
+			public void focusGained(FocusEvent e) {
+        		confirmPasswordField.setText("");
+				
+			}
+        	
+		});
         
-        //JPanel panel = new JPanel();
-        //panel.setBorder(new TitledBorder(new LineBorder(Color.red,1)));
-        //panel.setLayout(grid);
-        //panel.setBounds(0,0,600,600);
-        //add(panel);
-        add(phoneLabel);
-        add(phoneField);
-        add(passwordLabel);
-        add(passwordField);
-        add(confirmPasswordLabel);
-        add(confirmPasswordField);
-        add(birthdayLabel);
-        add(birthdayField);
-        add(submitButton);
+        // 생년월일 포커스 이벤트
+//        birthdayField.addFocusListener(new FocusAdapter() {
+//        	@Override
+//        	public void focusLost(FocusEvent e) {
+//        		numpad.setTextField(birthdayField);
+//        		numpad.setMax(8);
+//        	}
+//        	@Override
+//			public void focusGained(FocusEvent e) {
+//        		birthdayField.setText("");
+//				
+//			}
+//		});
         
-        setBackground(new Color(73,67,68));
         
-        //setBorder(new TitledBorder(new LineBorder(Color.green,1)));
-
-        //setBounds(0,0,1920,880);
+       
+        MemberJoinPanel.add(phoneField);
+        
+        MemberJoinPanel.add(passwordField);
+        
+        MemberJoinPanel.add(confirmPasswordField);
+        
+        MemberJoinPanel.add(submitButton);
+        
+        MemberJoinPanel.add(phonduplicationBtn);
+        
+        //MemberJoinPanel.add(birthdayField);
+        
+        //setBackground(new Color(73,67,68));
+        
+        
+//        try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
+//        		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM member where phone_number = ?")) {
+//               	//String searchValue = "search_value";
+//        		String phone = phoneField.getText();
+//               	stmt.setString(1, phone);
+//               	ResultSet rs = stmt.executeQuery();
+//               	if (rs.next()) {
+//            	   JOptionPane.showMessageDialog(MemberJoinPanel.this, "이미 저장된 번호입니다");
+//                   return;
+//               }
+//        } catch (SQLException e) {
+//           e.printStackTrace();
+//        }
+        
     }
-    
-    
-    
-    
     
 
 	public void actionPerformed(ActionEvent event) {
@@ -125,7 +246,7 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
             String phone = phoneField.getText();
             String password = new String(passwordField.getPassword());
             String confirmPassword = new String(confirmPasswordField.getPassword());
-            String birthday = birthdayField.getText();
+            //String birthday = birthdayField.getText();
             
             if(Pattern.matches(phonnumRegular, phone)) {
                 System.out.println("올바른 휴대전화 형식입니다. ");
@@ -148,48 +269,23 @@ public class MemberJoinPanel extends JPanel implements ActionListener {
             	return;
 			}
             
-            if(Pattern.matches(dayRegular, birthday)) {
-        	   System.out.println("날짜 정상 입력");
-            } else {
-        	   JOptionPane.showMessageDialog(MemberJoinPanel.this, "양식에 맞는 날짜를 입력하시오");
-        	   return;
-            }
-            
-            try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
-            		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM member where phone_number = ?")) {
-                   	//String searchValue = "search_value";
-                   	stmt.setString(1, phone);
-                   	ResultSet rs = stmt.executeQuery();
-                   	if (rs.next()) {
-                	   JOptionPane.showMessageDialog(MemberJoinPanel.this, "이미 저장된 번호입니다");
-                       return;
-                   }
-            } catch (SQLException e) {
-               e.printStackTrace();
-            }
-            
             
             try (
             		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
-                    Statement stmt = conn.createStatement();
-            		
             ){
-                String query = "INSERT INTO member (phone_number, member_password, date_of_birth) VALUES ('" + phone + "', '" + password + "', '" + birthday + "')";
-                stmt.executeUpdate(query);
+            	   String query = "INSERT INTO member (phone_number, member_password) VALUES (?, ?)";
+            	   PreparedStatement stmt = conn.prepareStatement(query);
+            	   stmt.setString(1, phone);
+            	   stmt.setString(2, password);
+            	   stmt.executeUpdate();
+                
                 JOptionPane.showMessageDialog(MemberJoinPanel.this, "회원가입이 완료되었습니다.");
             } catch (SQLException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(MemberJoinPanel.this, "오류");
             }
            
-            
-            
-          
-//            if (password.equals(confirmPassword)) {
-//                
-//            } else {
-//                JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
-//            }
+
         }
     }
 
