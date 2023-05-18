@@ -103,9 +103,20 @@ public class LockerPayDialog extends JDialog {
 		
 		close.setLocation(207, 860);
 		add(close);
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		
 		next.setBounds(375,860, 150, 80);
 		add(next);
+		next.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PaymentInformationDialog payInfo = new PaymentInformationDialog();
+			}
+		});
 		
 		background.setBackground(new Color(0,0,0,0));
 		background.setSize(750, 1000);

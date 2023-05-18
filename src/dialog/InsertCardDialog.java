@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import panel.ButtonPanel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
@@ -26,6 +27,7 @@ public class InsertCardDialog extends JDialog {
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
+	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
 	static int amountPaid; 
 
 	
@@ -105,6 +107,16 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
+		else if (lockerChargePrice != 0) {
+			JLabel priceIs = new JLabel();
+			priceIs.setText(String.format("%,d원", lockerChargePrice));
+			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
+			priceIs.setForeground(new Color(35, 35, 35));
+			priceIs.setBounds(430, 115, 200, 200);
+			priceIs.setName("label");
+			add(priceIs);
+		}
+		
 
 
 
@@ -130,6 +142,10 @@ public class InsertCardDialog extends JDialog {
 				if (studyRoomChargePrice != 0) {
 					amountPaid = studyRoomChargePrice;
 				}
+				
+				if (lockerChargePrice != 0) {
+					amountPaid = lockerChargePrice;
+				}
 
 				dispose();
 
@@ -144,12 +160,10 @@ public class InsertCardDialog extends JDialog {
 
 
 		background.setBackground(new Color(0,0,0,0));
-		//panel.setBackground(Color.RED);
 		add(background);
 		setModal(true);
 		setUndecorated(true);
 		setBackground(new Color(0,0,0,0));
-		// setBackground(Color.BLUE);
 		setResizable(false);
 		setBounds(585, 40, 750, 1000);
 		setVisible(true);

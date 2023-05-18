@@ -16,9 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import button.LockerTicketButton;
+import dialog.PaymentDialog;
 
 public class ButtonPanel extends JPanel implements ActionListener{
    
+	public static int lockerChargePrice; 
+	public static int lockerChargeItem;
+
+	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
+	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
+	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
+	
 	ImageIcon[] images = new ImageIcon[] {
 			new ImageIcon("ui/Locker_PopUp/Button_2.png"),
 			new ImageIcon("ui/Locker_PopUp/Button_4.png"),
@@ -79,13 +88,49 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		for(int i = 0; i < btns.size(); i++) {
 			if(i == btnNum) {
 				btns.get(btnNum).setIcon(selectedImages[btnNum]);
+				
+				/* 버튼 선택값 초기화 */
+				OnePassChargePanel.onePassChargePrice = 0;
+				TimeChargePanel.timeChargePrice  = 0; 
+				PeriodChargePanel.periodChargePrice = 0;
+				PaymentDialog.studyRoomChargePrice = 0;
+				ButtonPanel.lockerChargePrice = 0;
+				
+				if(btnNum == 0) {
+					lockerChargePrice = 6000;
+					lockerChargeItem = 2;
+					
+				} else if (btnNum == 1) {
+					lockerChargePrice = 10000;
+					lockerChargeItem = 4;
+					
+				} else if (btnNum == 2) {
+					lockerChargePrice = 20000;
+					lockerChargeItem = 8;
+					
+				} else if (btnNum == 3) {
+					lockerChargePrice = 30000;
+					lockerChargeItem = 12;
+				}
+				
+				
+				
 			} else {
 				btns.get(i).setIcon(images[i]);
 			}
+			
+			
+			
 		}
 		
 	}
 	
+	public static int getLockerChargePrice() {
+		return lockerChargePrice;
+	}
 	
+	public static int getLockerChargeItem() {
+		return lockerChargeItem;
+	}
 	
 }

@@ -89,10 +89,11 @@ public class PeriodChargePanel extends JPanel {
 
 							NumberFormat nf = NumberFormat.getNumberInstance();
 
-							TimeChargePanel.timeChargePrice  = 0; 
 							OnePassChargePanel.onePassChargePrice = 0;
+							TimeChargePanel.timeChargePrice  = 0; 
 							PeriodChargePanel.periodChargePrice = 0;
 							PaymentDialog.studyRoomChargePrice = 0;
+							ButtonPanel.lockerChargePrice = 0;
 
 
 							if (i == 0) {

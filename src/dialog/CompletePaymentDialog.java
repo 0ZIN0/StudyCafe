@@ -48,12 +48,10 @@ public class CompletePaymentDialog extends JDialog {
 		add(mainButton);
 
 		background.setBackground(new Color(0,0,0,0));
-		//panel.setBackground(Color.RED);
 		add(background);
 		setModal(true);
 		setUndecorated(true);
 		setBackground(new Color(0,0,0,0));
-		// setBackground(Color.BLUE);
 		setResizable(false);
 		setBounds(585, 315, 750, 450);
 		setVisible(true);

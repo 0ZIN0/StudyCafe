@@ -89,20 +89,16 @@ public class OnePassChargePanel extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i < chargeBtns.size(); i++) {
-
-						
 						if(chargeBtns.indexOf(e.getSource()) == i) {
-
 							chargeBtns.get(i).setIcon(selectedIcons[i]);
-
 							NumberFormat nf = NumberFormat.getNumberInstance();
-
-							TimeChargePanel.timeChargePrice  = 0; 
-				        	 OnePassChargePanel.onePassChargePrice = 0;
-				        	 PeriodChargePanel.periodChargePrice = 0;
-				        	 PaymentDialog.studyRoomChargePrice = 0;
 							
-
+							OnePassChargePanel.onePassChargePrice = 0;
+							TimeChargePanel.timeChargePrice  = 0; 
+							PeriodChargePanel.periodChargePrice = 0;
+							PaymentDialog.studyRoomChargePrice = 0;
+							ButtonPanel.lockerChargePrice = 0;
+							
 							if (i == 0) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-1");
 								onePassChargePrice = 5000;

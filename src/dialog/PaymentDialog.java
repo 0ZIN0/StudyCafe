@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import button.CloseButton;
 import button.NextButton;
 import dto.StudyRoom_Reservation;
+import panel.ButtonPanel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
@@ -24,13 +25,12 @@ public class PaymentDialog extends JDialog {
 
 
 	public static int studyRoomChargePrice; 
+	public static int studyRoomChargeItem;
 
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
-
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
-
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
-
+	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
 
 
 	ImageIcon icon = new ImageIcon("ui/study_room/Study_Room_payment_Popup.png");
@@ -72,10 +72,13 @@ public class PaymentDialog extends JDialog {
 		label3.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 
 		String roomNum;
+		
+		/* 버튼 선택값 초기화 */
 		TimeChargePanel.timeChargePrice  = 0; 
 		OnePassChargePanel.onePassChargePrice = 0;
 		PeriodChargePanel.periodChargePrice = 0;
 		PaymentDialog.studyRoomChargePrice = 0;
+		ButtonPanel.lockerChargePrice = 0;
 
 		if (myStudyRoom_Reservation.getStudyRoom_id().equals("SI-1")) {
 			roomNum = "스터디룸 4인 1";
@@ -94,9 +97,11 @@ public class PaymentDialog extends JDialog {
 		if (whatTimeLabel.getText().equals("1")) {
 			pay = "7,000원";
 			studyRoomChargePrice = 7000;
+			studyRoomChargeItem = 1;
 		} else {
 			pay = "14,000원";
 			studyRoomChargePrice = 14000;
+			studyRoomChargeItem = 2;
 		}
 		payInfoLabel.setText(pay);
 		payInfoLabel.setBounds(410, 288, 250, 40);
@@ -143,5 +148,9 @@ public class PaymentDialog extends JDialog {
 
 	public static int getStudyRoomchargePrice() {
 		return studyRoomChargePrice;
+	}
+	
+	public static int getStudyRoomchargeItem() {
+		return studyRoomChargeItem;
 	}
 }

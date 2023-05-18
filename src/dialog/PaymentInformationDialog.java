@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import frame.CheckInFrame;
+import panel.ButtonPanel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
@@ -24,7 +25,11 @@ public class PaymentInformationDialog extends JDialog {
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
-
+	int studyRoomChargeItem = PaymentDialog.getStudyRoomchargeItem();
+	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
+	int lockerChargeItem = ButtonPanel.getLockerChargeItem();
+	
+	
 	int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
 	int timeChargeItem = TimeChargePanel.getTimeChargeItem();
 	int periodChargeItem = PeriodChargePanel.getPeriodChargeItem();
@@ -34,7 +39,7 @@ public class PaymentInformationDialog extends JDialog {
 
 	public PaymentInformationDialog() {
 
-		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_1/SeatUse_Pay_info_default_1_revision.png");
+		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_1/SeatUse_Pay_info_default_1.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
 			protected void paintComponent(Graphics g) {
@@ -97,10 +102,10 @@ public class PaymentInformationDialog extends JDialog {
 			}
 		});
 
-		JButton closeButton = new JButton(new ImageIcon("ui/결제 팝업/일회이용권/CloseButton.png"));
+		JButton closeButton = new JButton(new ImageIcon("ui/결제 팝업/버튼_수정/CloseButton.png"));
 		closeButton.setBorderPainted(false);
 		closeButton.setContentAreaFilled(false);
-		closeButton.setBounds(207, 842, 150, 80);
+		closeButton.setBounds(207, 842, 150, 100);
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,10 +113,10 @@ public class PaymentInformationDialog extends JDialog {
 			}
 		});
 
-		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/일회이용권/NextButton.png"));  // 다음버튼, (결제버튼)
+		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/버튼_수정/NextButton.png"));  // 다음버튼, (결제버튼)
 		nextButton.setBorderPainted(false);
 		nextButton.setContentAreaFilled(false);
-		nextButton.setBounds(375, 842, 150, 80);
+		nextButton.setBounds(375, 842, 150, 100);
 		add(nextButton);	
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +139,7 @@ public class PaymentInformationDialog extends JDialog {
 		whatNum.setText("회원번호");
 		whatNum.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 		whatNum.setForeground(new Color(35, 35, 35));
-		whatNum.setBounds(230, 172, 200, 35);
+		whatNum.setBounds(236, 172, 200, 35);
 		add(whatNum);
 
 		String[] userNum = CheckInFrame.member.getPhone_number().split("-");
@@ -147,20 +152,20 @@ public class PaymentInformationDialog extends JDialog {
 		whatName.setText("결제상품"); 
 		whatName.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 		whatName.setForeground(new Color(35, 35, 35));
-		whatName.setBounds(230, 225, 200, 35);
+		whatName.setBounds(236, 225, 200, 35);
 		add(whatName);
 
 		howPrice.setText("결제금액");
 		howPrice.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 		howPrice.setForeground(new Color(35, 35, 35));
-		howPrice.setBounds(230, 331, 200, 35);
+		howPrice.setBounds(236, 331, 200, 35);
 		howPrice.setName("label");
 		add(howPrice);
 
 		howHours.setText("이용시간");
 		howHours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 		howHours.setForeground(new Color(35, 35, 35));
-		howHours.setBounds(230, 278, 200, 35);
+		howHours.setBounds(236, 278, 200, 35);
 		howHours.setName("label");
 		add(howHours);
 
@@ -234,28 +239,33 @@ public class PaymentInformationDialog extends JDialog {
 			hours.setBounds(382, 278, 200, 35);
 			add(hours);
 
-		} else if (studyRoomChargePrice == 14000) {
-			nameIs.setText("스터디룸 4인 2"); 
+			
+			
+			
+		} else if (lockerChargePrice != 0) {
+			nameIs.setText("사물함 이용권"); 
 			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			nameIs.setForeground(new Color(35, 35, 35));
 			nameIs.setBounds(382, 225, 200, 35);
 			add(nameIs);
 
-			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
+			priceIs.setText(String.format("%,d원", lockerChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			priceIs.setForeground(new Color(35, 35, 35));
 			priceIs.setBounds(382, 331, 200, 35);
 			priceIs.setName("label");
 			add(priceIs);
 
-			hours.setText("2시간"); //변하는 값
+			hours.setText(lockerChargeItem + "주"); //변하는 값
 			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			hours.setForeground(new Color(35, 35, 35));
 			hours.setBounds(382, 278, 200, 35);
 			add(hours);
-
-		}  else if (studyRoomChargePrice == 7000) {
-			nameIs.setText("스터디룸 4인 1"); 
+		}
+		
+		
+		 else if (studyRoomChargePrice != 0) {
+			nameIs.setText("스터디룸 4인 " + studyRoomChargeItem); 
 			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			nameIs.setForeground(new Color(35, 35, 35));
 			nameIs.setBounds(382, 225, 200, 35);
@@ -268,7 +278,7 @@ public class PaymentInformationDialog extends JDialog {
 			priceIs.setName("label");
 			add(priceIs);
 
-			hours.setText("1시간"); //변하는 값
+			hours.setText(studyRoomChargeItem + "시간"); //변하는 값
 			hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			hours.setForeground(new Color(35, 35, 35));
 			hours.setBounds(382, 278, 200, 35);
