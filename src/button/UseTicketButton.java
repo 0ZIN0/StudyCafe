@@ -7,14 +7,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import dao.TicketDAO;
 import dialog.NotUseTicketDialog;
 import dialog.SelectSeatDialog;
 import dialog.UseTicketDialog;
 import dto.Seat;
+import frame.CheckInFrame;
 
 public class UseTicketButton extends JButton {
 	
-	boolean remainTicket = true;
+	boolean remainTicket = TicketDAO.isUsingTicket(CheckInFrame.member.getMember_id());
 	
 	public UseTicketButton(SelectSeatDialog selectSeatPopup, String seatNum, Seat seat) {
 		

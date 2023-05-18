@@ -26,6 +26,7 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
+import dao.SeatDAO;
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
@@ -105,27 +106,12 @@ public class CheckInFrame extends JFrame {
 	JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = new Member();
+	public static Member member = SeatDAO.setMember("010-1112-1112");
 
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-		
-		/*temp dto set */
-		member.setMember_id("M-1");
-		member.setPhone_number("010-2222-2222");
-		member.setRemain_time(0);
-		
-		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");
-		Date date;
-		try {
-			date = formatter.parse("23/05/18");
-			member.setRemain_date(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		/* 패널 */
 		seatReportPanel = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
@@ -315,7 +301,7 @@ public class CheckInFrame extends JFrame {
 
 	public static void main(String[] args) {	
 		new CheckInFrame();
-
+		
 	}
 
 	public void timeGet() {
