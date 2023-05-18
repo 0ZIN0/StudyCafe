@@ -39,14 +39,13 @@ public class SelectSeatDialog extends JDialog {
 	
 	JLabel label;
 	
-
 	public SelectSeatDialog(String seatNum, Seat seat) {
 		this.seat = seat;
 		
 		/* 구매 버튼 */
-		JButton dayTicketBtn = new DayTicketButton(seat);
-		JButton timeTicketBtn = new TimeTicketButton();
-		JButton termTicketBtn = new TermTicketButton();
+		JButton dayTicketBtn = new DayTicketButton(seat, this);
+		JButton timeTicketBtn = new TimeTicketButton(this);
+		JButton termTicketBtn = new TermTicketButton(this);
 		JButton useTicketBtn = new UseTicketButton(this, seatNum, seat);
 		JButton close = new CloseButton(this);
 

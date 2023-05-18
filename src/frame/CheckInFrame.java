@@ -111,7 +111,7 @@ public class CheckInFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-
+		
 		/*temp dto set */
 		member.setMember_id("M-1");
 		member.setPhone_number("010-2222-2222");
@@ -300,7 +300,8 @@ public class CheckInFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		xBtn.setBounds(1850, 10, 50, 50);
+		//원래값 xBtn.setBounds(1600, 10, 50, 50); 
+		xBtn.setBounds(1850, 10, 50, 50); 
 		mainPanel.add(xBtn);
 
 		/* 기본 설정 */
@@ -312,7 +313,7 @@ public class CheckInFrame extends JFrame {
 		timeGet();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
 		new CheckInFrame();
 
 	}

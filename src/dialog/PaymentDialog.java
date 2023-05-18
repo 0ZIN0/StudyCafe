@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +18,8 @@ import button.NextButton;
 import dto.StudyRoom_Reservation;
 
 public class PaymentDialog extends JDialog {
+	
+	public static int studyRoomChargePrice; 
 	
 	ImageIcon icon = new ImageIcon("ui/study_room/Study_Room_payment_Popup.png");
 	Image image = icon.getImage();
@@ -42,6 +46,9 @@ public class PaymentDialog extends JDialog {
 	JLabel payInfoLabel = new JLabel();
 	
 	public PaymentDialog(StudyRoom_Reservation myStudyRoom_Reservation, JLabel whatTimeLabel) {
+		
+		
+		System.out.println("paymentDialog창");
 		
 		/* Label */
 		label1.setBounds(220, 184, 150, 40);
@@ -70,8 +77,10 @@ public class PaymentDialog extends JDialog {
 		String pay;
 		if (whatTimeLabel.getText().equals("1")) {
 			pay = "7,000원";
+			studyRoomChargePrice = 7000;
 		} else {
 			pay = "14,000원";
+			studyRoomChargePrice = 14000;
 		}
 		payInfoLabel.setText(pay);
 		payInfoLabel.setBounds(410, 288, 250, 40);
@@ -94,6 +103,13 @@ public class PaymentDialog extends JDialog {
 		paymentPanel.add(closeBtn);
 		paymentPanel.add(nextBtn);
 		
+		nextBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PaymentInformationDialog payInfor = new PaymentInformationDialog();
+			}
+		});
+		
 		paymentPanel.setLayout(null);
 		paymentPanel.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());
 		paymentPanel.setBackground(new Color(0, 0, 0, 0));
@@ -107,5 +123,9 @@ public class PaymentDialog extends JDialog {
 		setResizable(false); // 사용자가 팝업창 크기를 조정하는것을 해제
 		setBounds(585, 315, icon.getIconWidth(), icon.getIconHeight());
 		setVisible(true);
+	}
+	
+	public static int getStudyRoomchargePrice() {
+		return studyRoomChargePrice;
 	}
 }
