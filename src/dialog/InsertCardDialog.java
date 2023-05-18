@@ -25,6 +25,7 @@ public class InsertCardDialog extends JDialog {
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
+	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
 	static int amountPaid; 
 
 	public InsertCardDialog() {
@@ -81,6 +82,27 @@ public class InsertCardDialog extends JDialog {
 			priceIs.setName("label");
 			add(priceIs);
 		}
+		
+		if (studyRoomChargePrice == 7000 ) {
+			JLabel priceIs = new JLabel();
+			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
+			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
+			priceIs.setForeground(new Color(35, 35, 35));
+			priceIs.setBounds(430, 115, 200, 200);
+			priceIs.setName("label");
+			add(priceIs);
+		}
+		
+		if (periodChargePrice == 14000 ) {
+			JLabel priceIs = new JLabel();
+			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
+			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
+			priceIs.setForeground(new Color(35, 35, 35));
+			priceIs.setBounds(430, 115, 200, 200);
+			priceIs.setName("label");
+			add(priceIs);
+		}
+		
 
 
 
@@ -103,7 +125,9 @@ public class InsertCardDialog extends JDialog {
 					amountPaid = periodChargePrice;
 				}
 				
-				
+				if (studyRoomChargePrice != 0) {
+					amountPaid = studyRoomChargePrice;
+				}
 
 				dispose();
 

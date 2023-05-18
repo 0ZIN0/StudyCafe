@@ -47,6 +47,8 @@ public class CompletePaymentDialog extends JDialog {
 	        	 OnePassChargePanel.onePassChargePrice = 0;
 	        	 PeriodChargePanel.periodChargePrice = 0;
 	        	 
+	        //	 insertOrder(TimeOrPeriodChargeDialog.ticket_order);
+	        	 
 	            dispose();
 	            
 	         }
