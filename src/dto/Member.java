@@ -6,7 +6,6 @@ public class Member {
 	private String member_id;
 	private String phone_number;
 	private Integer member_password;
-	private Date date_of_birth;
 	private Integer remain_time;
 	private Date remain_date;
 	private String locker_number;
@@ -29,12 +28,6 @@ public class Member {
 	}
 	public void setMember_password(Integer member_password) {
 		this.member_password = member_password;
-	}
-	public Date getDate_of_birth() {
-		return date_of_birth;
-	}
-	public void setDate_of_birth(Date date_of_birth) {
-		this.date_of_birth = date_of_birth;
 	}
 	public Integer getRemain_time() {
 		return remain_time;
