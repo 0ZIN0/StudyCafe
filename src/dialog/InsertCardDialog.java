@@ -28,6 +28,8 @@ public class InsertCardDialog extends JDialog {
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
 	static int amountPaid; 
 
+	
+	
 	public InsertCardDialog() {
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/Payment_CreditCard.png");
@@ -83,7 +85,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		if (studyRoomChargePrice == 7000 ) {
+		if (studyRoomChargePrice == 7000) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
@@ -93,7 +95,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		if (periodChargePrice == 14000 ) {
+		if (periodChargePrice == 14000) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
