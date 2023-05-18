@@ -20,6 +20,7 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
+import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
 import panel.MainPanel;
@@ -94,10 +95,21 @@ public class CheckInFrame extends JFrame {
 	// 실시간 라벨
 
 
+	
+	/* DTO */ 
+	public static Member member = new Member();
+	
 	/**
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
+		
+		
+		/*temp dto set */
+		member.setMember_id("M-1");
+		member.setPhone_number("010-2222-2222");
+		member.setRemain_time(0);
+		
 		Timer timer = new Timer();
 		TimerTask task = new TimerTask(){
 			@Override
