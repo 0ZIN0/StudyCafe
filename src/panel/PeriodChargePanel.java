@@ -16,19 +16,20 @@ import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
 import dialog.PaymentDialog;
+import dialog.TimeOrPeriodChargeDialog;
 
 public class PeriodChargePanel extends JPanel {
 
 	public static int periodChargeItem; 
 	public static int periodChargePrice;
-	
+
 	//int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
-	
+
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
-	
+
 	GridLayout grid = new GridLayout(2, 2, 20, 20);
 	List<ChargeTimeButton> chargeBtns = new ArrayList<>();
 	ImageIcon[] basicIcons = new ImageIcon[] {
@@ -48,7 +49,7 @@ public class PeriodChargePanel extends JPanel {
 
 	public PeriodChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
 
-		
+
 		for(int i = 0; i < basicIcons.length; i++) {
 
 			ChargeTimeButton chargeBtn = new ChargeTimeButton(basicIcons[i]);
@@ -80,7 +81,7 @@ public class PeriodChargePanel extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i < chargeBtns.size(); i++) {
 
-						
+
 
 						if(chargeBtns.indexOf(e.getSource()) == i) {
 
@@ -89,12 +90,13 @@ public class PeriodChargePanel extends JPanel {
 							NumberFormat nf = NumberFormat.getNumberInstance();
 
 							TimeChargePanel.timeChargePrice  = 0; 
-				        	 OnePassChargePanel.onePassChargePrice = 0;
-				        	 PeriodChargePanel.periodChargePrice = 0;
-				        	 PaymentDialog.studyRoomChargePrice = 0;
-							
-							
+							OnePassChargePanel.onePassChargePrice = 0;
+							PeriodChargePanel.periodChargePrice = 0;
+							PaymentDialog.studyRoomChargePrice = 0;
+
+
 							if (i == 0) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-11");
 								periodChargePrice = 90000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -106,6 +108,7 @@ public class PeriodChargePanel extends JPanel {
 								hours.setText(nf.format(periodChargeItem) + "주");
 
 							} else if (i == 1) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-12");
 								periodChargePrice = 160000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -117,6 +120,7 @@ public class PeriodChargePanel extends JPanel {
 								hours.setText(nf.format(periodChargeItem) + "주");
 
 							} else if (i == 2) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-13");
 								periodChargePrice = 300000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -128,6 +132,7 @@ public class PeriodChargePanel extends JPanel {
 								hours.setText(nf.format(periodChargeItem) + "주");
 
 							} else if (i == 3) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-14");
 								periodChargePrice = 420000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -137,8 +142,6 @@ public class PeriodChargePanel extends JPanel {
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
 								hours.setText(nf.format(periodChargeItem) + "주");
-
-
 							} 
 						} else {
 							chargeBtns.get(i).setIcon(basicIcons[i]);
@@ -176,18 +179,18 @@ public class PeriodChargePanel extends JPanel {
 	public static int getPeriodChargeItem() {
 		return periodChargeItem;
 	}
-	
+
 	public static int getPeriodChargePrice() {
 		return periodChargePrice;
 	}
-	
+
 	public void setPeriodChargePrice(int price) {
 		periodChargePrice = price;
 	}
-	
+
 	public void setPeriodChargeItem(int item) {
 		periodChargeItem = item;
-		
+
 	}
 
 }

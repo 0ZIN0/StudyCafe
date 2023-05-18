@@ -20,6 +20,6 @@ public class BuyButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog();
+		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(null);
 	}
 }

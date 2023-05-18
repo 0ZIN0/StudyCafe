@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
 import dialog.PaymentDialog;
+import dialog.TimeOrPeriodChargeDialog;
 
 public class TimeChargePanel extends JPanel {
 
@@ -78,6 +79,7 @@ public class TimeChargePanel extends JPanel {
 							PaymentDialog.studyRoomChargePrice = 0;
 
 							if (i == 0) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-7");
 								timeChargePrice = 45000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -89,6 +91,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 1) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-8");
 								timeChargePrice = 70000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -100,6 +103,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 2) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-9");
 								timeChargePrice = 130000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -111,6 +115,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 3) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-10");
 								timeChargePrice = 240000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);

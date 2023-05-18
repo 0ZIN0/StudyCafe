@@ -13,12 +13,16 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dto.Member;
+import dto.Ticket_order;
 import panel.OnePassChargePanel;
 import panel.TimeChargePanel;
 
 public class TimeOrPeriodChargeDialog extends JDialog {
 
-	public TimeOrPeriodChargeDialog() {
+	public static Ticket_order ticket_order = new Ticket_order();
+	
+	public TimeOrPeriodChargeDialog(Member member) {
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/상품충전_팝업/상품충전_BG.png");
 		Image bgImage = imageIcon.getImage();
