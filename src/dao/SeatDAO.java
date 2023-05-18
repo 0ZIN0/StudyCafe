@@ -4,12 +4,16 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 
 import javax.swing.JLabel;
+
+import dto.Seat;
 
 public class SeatDAO {
 
@@ -84,5 +88,34 @@ public class SeatDAO {
 		}
 
 		return remain;
+	}
+	
+	public static List<int[]> leaveSeat() {
+		LocalTime time = LocalTime.now();
+		List<int[]> remaintime = new ArrayList<>();
+		
+		String query = "SELECT \r\n"
+				+ "    res.seat_id, \r\n"
+				+ "    (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) AS remain\r\n"
+				+ "FROM \r\n"
+				+ "    seat_reservation res, seat seat\r\n"
+				+ "WHERE \r\n"
+				+ "    seat.seat_id = res.seat_id \r\n"
+				+ "    AND seat_state = '사용중' \r\n"
+				+ "    AND (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) < 10";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				ResultSet rs = pstmt.executeQuery();
+				) {
+
+			while (rs.next()) {
+				remaintime.add(new int[]{rs.getInt("seat_id"),rs.getInt("remain")}); 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return remaintime;
 	}
 }
