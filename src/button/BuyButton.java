@@ -7,9 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import dialog.TimeOrPeriodChargeDialog;
+import dto.Member;
 
 public class BuyButton extends JButton implements ActionListener{
 	
+	Member member;
+
 	public BuyButton(ImageIcon buyImageIcon) {
 
 		setContentAreaFilled(false);
@@ -20,6 +23,6 @@ public class BuyButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(null);
+		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(member);
 	}
 }
