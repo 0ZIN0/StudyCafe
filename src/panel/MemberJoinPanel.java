@@ -82,7 +82,7 @@ public class MemberJoinPanel extends JPanel  {
 	
    
     
-	ImageIcon im =new ImageIcon("ui/main/membeJoin/Main_membership_Left_Frame.jpg");
+	ImageIcon im =new ImageIcon("ui/main/Memberjoin/Main_membership_Left_Frame.jpg");
 	Image image=im.getImage();
 	
 	protected void paintComponent(Graphics g) {
@@ -118,7 +118,7 @@ public class MemberJoinPanel extends JPanel  {
     	
 		numpad.setBounds(1080,50,550,690);
     	MemberJoinPanel.setBounds(0,0,990,760);
-    	MemberJoinPanel.setOpaque(false);;
+    	MemberJoinPanel.setOpaque(false);
     	
     	
     	MemberJoinPanel.setLayout(null);
