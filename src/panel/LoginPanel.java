@@ -30,6 +30,8 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import dialog.setPopup;
+
 //import panel.LoginMainPanel2.PasswordFieldFocusListener;
 //import panel.LoginMainPanel2.PhoneNumberFieldFocusListener;
 
@@ -42,17 +44,30 @@ public class LoginPanel extends JPanel {
 	private static String password = "1234";
 	
 	NumberKeypad numpad= new NumberKeypad();
-	JTextField userPhonNumber = new JTextField();
 	
-	JPasswordField userPassField = new JPasswordField();
+	
+	// 필드 테두리 제거
+	JTextField userPhonNumber = new JTextField() {
+		@Override
+		public void setBorder(Border border) {
+		}
+		
+	};
+	
+	// 필드 테두리 제거
+	JPasswordField userPassField = new JPasswordField(){
+		@Override
+		public void setBorder(Border border) {
+		}
+	};
 	
 	JButton loginButton = new JButton(new ImageIcon("ui/main/button/main_Login_Button.png"));
 	JButton memberJoinBtn=new JButton(new ImageIcon("ui/main/button/main_MemeberShip_Button.png"));
 	
 	
-	ImageIcon im =new ImageIcon("ui/main/Main_Default_Ui_Frame");
+	ImageIcon im =new ImageIcon("ui/main/Login/Main_Left_Frame.jpg");
 	Image image=im.getImage();
-	
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(image, 0, 0, this);
@@ -63,21 +78,20 @@ public class LoginPanel extends JPanel {
 		setLayout(null);
 		
 		JPanel loginPanel = new JPanel();
+		
 		loginPanel.setLayout(null);
 		
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
 		add(loginPanel);
 		loginPanel.setBounds(0,0,990,760);
-		
+		loginPanel.setOpaque(false);
 		
 		loginPanel.add(userPhonNumber);
 		loginPanel.add(userPassField);
 		loginPanel.add(loginButton);
 		loginPanel.add(memberJoinBtn);
 		
-		setBackground(new Color(73,67,68));
-		loginPanel.setBackground(new Color(73,67,68));
 		
 		
 		
@@ -170,12 +184,17 @@ public class LoginPanel extends JPanel {
 		            ResultSet rs = stmt.executeQuery();	
 		            
 					if (rs.next()) {
-						JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
-		               System.out.println("로그인성공");
+//						ImageIcon imageIcon = new ImageIcon("");
+//			            JLabel imageLabel = new JLabel(imageIcon);
+						//JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
+		               System.out.println("로그인성공로그인성공로그인성공로그인성공");
+		               new setPopup("로그인 실패").setVisible(true);
 		               
 		            } else {
-		            	JOptionPane.showMessageDialog(new LoginMainPanel().background, "로그인실패!!!");
+		            	//JOptionPane.showMessageDialog(new LoginMainPanel().background,"@@로그인실패!!" );
 		                System.out.println("로그인 실패");
+		                new setPopup("로그인 실패","(핸드폰번호와 비밀번호를 확인하세요)").setVisible(true);
+		                
 		            }
 
 		            rs.close();

@@ -15,7 +15,9 @@ public class NumberKeypad extends JPanel implements ActionListener {
 	int max;
 
 	public  NumberKeypad() {
-		setLayout(new GridLayout(4, 3));  // 4행 3열의 그리드 레이아웃
+		setLayout(new GridLayout(4, 3, 5, 5));  // 4행 3열의 그리드 레이아웃
+		setOpaque(false);
+		
 
 		// 버튼 생성
 		for (int i = 1; i <= 9; i++) {
@@ -33,7 +35,6 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		clearButton.setBackground(new Color(35,35,35));
 		clearButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
 		clearButton.setForeground(Color.white);
-
 		clearButton.addActionListener(this);
 		add(clearButton);
 
