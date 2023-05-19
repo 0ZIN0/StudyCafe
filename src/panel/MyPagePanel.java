@@ -40,9 +40,11 @@ public class MyPagePanel extends JPanel {
 			"사용중인 좌석 : ",
 			"사용중인 사물함 : "
 	};
+	public static JLabel time;
 	
 	public MyPagePanel(CardLayout card, Member member) {
 		this.member = member;
+		
 		for(int i = 0; i < labelText.length; i++) {
 			JLabel label = new JLabel();
 			label.setForeground(Color.WHITE);
@@ -51,8 +53,6 @@ public class MyPagePanel extends JPanel {
 			label.setBounds(570, 320 + 120 * i, 500, 100);
 			label.setForeground(new Color(0xD9D9D9));
 			add(label);
-			
-			
 		}
 		
 		JLabel phoneNum = new JLabel(member.getPhone_number());
@@ -60,7 +60,7 @@ public class MyPagePanel extends JPanel {
 		phoneNum.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		phoneNum.setForeground(Color.WHITE);
 		
-		JLabel time = new JLabel(Integer.toString(member.getRemain_time()) + "분");
+		time = new JLabel(Integer.toString(member.getRemain_time()) + "분");
 		time.setBounds(1010, 440, 500, 100);
 		time.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		time.setForeground(Color.WHITE);

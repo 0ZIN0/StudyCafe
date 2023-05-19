@@ -26,6 +26,7 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
+import dao.MemberDAO;
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
@@ -34,6 +35,8 @@ import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
+import thread.TimeRun;
+import thread.UpdateInfo;
 import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
@@ -43,7 +46,7 @@ import toggle.StudyRoomToggle;
  *  */
 public class CheckInFrame extends JFrame {
 	/* 레이아웃 */
-	CardLayout card = new CardLayout();
+	public static CardLayout card = new CardLayout();
 
 	/* 이미지들 */
 	// 백그라운드 이미지
@@ -101,12 +104,15 @@ public class CheckInFrame extends JFrame {
 	/* x버튼 */
 	JButton xBtn = new JButton("X");
 
-	// 실시간 라벨
-	JLabel timeLabel = new JLabel();
+	// 시간 라벨
+	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
 	public static Member member = new Member();
-
+	
+	// 쓰레드 클래스
+	static TimeRun timeRun = new TimeRun(timeLabel);
+	static UpdateInfo updateInfo = new UpdateInfo();
 	/**
 	 * Create the frame.
 	 */
@@ -313,24 +319,19 @@ public class CheckInFrame extends JFrame {
 		setVisible(true);
 		
 		// 쓰레드
-		timeGet();
+		
 	}
 
 	public static void main(String[] args) {	
 		new CheckInFrame();
+		Thread thread1 = new Thread(updateInfo);
+		Thread thread2 = new Thread(timeRun);
+		thread1.start();
+		thread2.start();
 
 	}
-
-	public void timeGet() {
-		while(true) {
-			LocalDateTime now = LocalDateTime.now();
-			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
-			try {
-				Thread.sleep(100);
-				timeLabel.setText(formatedNow);
-			} catch (Exception e) {
-			}
-		}
-	}
-
+	
+	
+	
+	
 }
