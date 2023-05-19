@@ -106,7 +106,7 @@ public class CheckInFrame extends JFrame {
 	JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = SeatDAO.setMember("010-1112-1112");
+	public static Member member = SeatDAO.setMember("010-1111-1111");
 
 	/**
 	 * Create the frame.
