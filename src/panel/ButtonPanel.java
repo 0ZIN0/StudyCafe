@@ -113,16 +113,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
 					lockerChargeItem = 12;
 				}
 				
-				
-				
 			} else {
 				btns.get(i).setIcon(images[i]);
 			}
-			
-			
-			
 		}
-		
 	}
 	
 	public static int getLockerChargePrice() {

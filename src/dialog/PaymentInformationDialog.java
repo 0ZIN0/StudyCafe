@@ -22,19 +22,21 @@ import panel.TimeChargePanel;
 public class PaymentInformationDialog extends JDialog { 
 
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
+	int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
+	
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	int timeChargeItem = TimeChargePanel.getTimeChargeItem();
+	
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
+	int periodChargeItem = PeriodChargePanel.getPeriodChargeItem();
+	
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
 	int studyRoomChargeItem = PaymentDialog.getStudyRoomchargeItem();
+	
 	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
 	int lockerChargeItem = ButtonPanel.getLockerChargeItem();
 	
 	
-	int onePassChargeItem = OnePassChargePanel.getOnePassChargeItem();
-	int timeChargeItem = TimeChargePanel.getTimeChargeItem();
-	int periodChargeItem = PeriodChargePanel.getPeriodChargeItem();
-
-
 	private ImageIcon check;
 
 	public PaymentInformationDialog() {

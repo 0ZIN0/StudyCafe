@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import dao.TicketOrderDAO;
+import dao.temDAO;
+import dto.Ticket_order;
+import dto.temDTO;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
@@ -39,6 +44,17 @@ public class CompletePaymentDialog extends JDialog {
 		mainButton.setContentAreaFilled(false);
 		mainButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+//				temDTO dto = new temDTO("dto dao", "테스트중임");
+//				temDAO dao = new temDAO();
+//				dao.addTem(dto);
+				
+				Ticket_order ticDto = new Ticket_order();
+				TicketOrderDAO ticOr = new TicketOrderDAO();  
+				ticOr.addOrder(ticDto);
+				
+				
+				
 				dispose();
 			}
 		});
