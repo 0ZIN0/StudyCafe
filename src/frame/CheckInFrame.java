@@ -295,6 +295,8 @@ public class CheckInFrame extends JFrame {
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		
+		// 쓰레드
 		timeGet();
 	}
 
