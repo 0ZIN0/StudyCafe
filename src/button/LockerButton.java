@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import dao.LockerDAO;
 import dialog.LockerPayDialog;
 
-public class LockerButton extends JButton implements ActionListener{
+public class LockerButton extends JButton implements ActionListener {
 	
 	boolean inUse;
 	
