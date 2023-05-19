@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,7 +17,7 @@ public class VacatedMiniPanel extends JPanel {
 	JLabel seatLabel = new JLabel();
 	JLabel remainTimeLabel = new JLabel();
 	
-	public VacatedMiniPanel(Seat seat) {
+	public VacatedMiniPanel(List<int[]> remainTime, int i) {
 		JPanel backPanel = new JPanel();
 		backPanel.setBackground(Color.WHITE);
 		backPanel.setBounds(3, 3, 620, 90);
@@ -26,12 +27,12 @@ public class VacatedMiniPanel extends JPanel {
 		
 		backPanel.add(seatLabel);
 		seatLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
-		seatLabel.setText(seat.getSeat_id());
+		seatLabel.setText(remainTime.get(i)[0] + "번");
 		seatLabel.setBounds(140, 20, 100, 50);
 		
 		backPanel.add(remainTimeLabel);
 		remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
-		remainTimeLabel.setText(seat.getRemain_time()+ "분");
+		remainTimeLabel.setText(remainTime.get(i)[1] + "분");
 		remainTimeLabel.setBounds(447, 20, 100, 50);
 		
 		setPreferredSize(new Dimension(300, 100));

@@ -27,7 +27,7 @@ public class LeaveDialog extends JDialog {
 	CloseButton close = new CloseButton(this);
 	
 	public LeaveDialog(List<Seat> seats) {
-		VacatedMainPanel main = new VacatedMainPanel(seats);
+		VacatedMainPanel main = new VacatedMainPanel();
 		JScrollPane scroll = new JScrollPane(main);
 		close.setLocation(300, 800);
 		
