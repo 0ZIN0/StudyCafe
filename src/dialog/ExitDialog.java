@@ -3,6 +3,8 @@ package dialog;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -40,6 +42,14 @@ public class ExitDialog extends JDialog {
 		exitPanel.setBackground(new Color(0,0,0,0));
 		exitPanel.setBounds(0, 0, 750, 450);
 		exitPanel.setLayout(null);
+		
+		closeBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// 메인을 초기화 시키고 로그인창으로 넘어가게끔 만드는 메서드
+			}
+		});
 		
 		exitPanel.add(closeBtn);
 		

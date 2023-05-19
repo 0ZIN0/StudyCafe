@@ -52,8 +52,8 @@ public class CheckInFrame extends JFrame {
 	Image backgroundImage = backgroundImageIcon.getImage(); 
 
 	// 개인석 패널 이미지
-	ImageIcon seatReportPanelImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/seatReport_Frame.png");
-	Image seatReportImage = seatReportPanelImageIcon.getImage(); 
+	public static ImageIcon seatReportPanelImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/seatReport_Frame.png");
+	public static Image seatReportImage = seatReportPanelImageIcon.getImage(); 
 
 	// 개인석 이미지
 	ImageIcon seatReportImageIcon = new ImageIcon("ui/seatReportToggleButton.png");
@@ -76,7 +76,7 @@ public class CheckInFrame extends JFrame {
 	/* 패널 */
 	JPanel mainPanel = new MainPanel(backgroundImage); // 백그라운드 패널
 	JPanel subPanel = new JPanel(); // seat, study, locker 패널들의 부모가 될 서브 패널
-	JPanel seatReportPanel; // 좌석현황 패널
+	public JPanel seatReportPanel; // 좌석현황 패널
 	JPanel studyRoomPanel; // 스터디룸 예약 패널
 	JPanel lockerPanel; // 사물함 구매 패널
 	MyPagePanel myPagePanel; // 마이페이지 패널
@@ -106,7 +106,7 @@ public class CheckInFrame extends JFrame {
 	JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = SeatDAO.setMember("010-1111-1111");
+	public static Member member = SeatDAO.setMember("010-1114-1114");
 
 	/**
 	 * Create the frame.
@@ -114,7 +114,7 @@ public class CheckInFrame extends JFrame {
 	public CheckInFrame() {
 		
 		/* 패널 */
-		seatReportPanel = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
+		seatReportPanel  = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
 		myPagePanel = new MyPagePanel(); // 마이페이지 패널

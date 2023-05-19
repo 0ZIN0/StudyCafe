@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,9 +25,6 @@ public class SeatReportPanel extends JPanel {
 	
 	Image seatImage;
 	
-	static List<Seat> seats = new ArrayList<>();
-	static List<SeatButton> seatBtns = new ArrayList<>();
-	
 	/* 스터디룸, 사물함 버튼 */
 	JButton studyRoom1Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/StudyRoom_1.png"));
 	JButton studyRoom2Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/StudyRoom_2.png"));
@@ -40,10 +38,12 @@ public class SeatReportPanel extends JPanel {
 	
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
 	public static JLabel seatInfoLabel = new SeatReportLabel();
-	public static int mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
+	public static Integer mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
 	public static JLabel seatNumLabel = new JLabel(String.valueOf(mySeat));
 	
-	
+	static List<Seat> seats = new ArrayList<>();
+	public static List<SeatButton> seatBtns = new ArrayList<>();
+
 	public SeatReportPanel(Image seatImage, Member member) {
 		
 		for(int i = 0; i < 32; i++) {
@@ -52,7 +52,7 @@ public class SeatReportPanel extends JPanel {
 		}
 		
 		for(int i = 0; i < 32; i++) {
-			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1));
+			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1), mySeat);
 			seatBtns.add(seatBtn);
 		}
 		this.seatImage = seatImage;
@@ -130,7 +130,7 @@ public class SeatReportPanel extends JPanel {
 		if (mySeat != 0) {
 			seatNumLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 			seatNumLabel.setForeground(new Color(0xFF5C01));
-			seatNumLabel.setBounds(497, 28, 550, 50);
+			seatNumLabel.setBounds(477, 28, 550, 50);
 			seatNumLabel.setVisible(true);
 		} else {
 			seatNumLabel.setVisible(false);
@@ -150,4 +150,5 @@ public class SeatReportPanel extends JPanel {
 	public static List<Seat> getSeats() {
 		return seats;
 	}
+	
 }

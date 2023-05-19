@@ -39,7 +39,63 @@ public class SeatDAO {
 
 		return member;
 	}
+	
+	/* 좌석 이동 시 유저의 데이터를 변경하는 메서드 */
+	public static void setChangeSeat(String member_id, String seatNum) {
+		String query1 = "SELECT * FROM SEAT_RESERVATION INNER JOIN SEAT USING(SEAT_ID) WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
+		
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+		) {
 
+			pstmt1.setString(1, member_id);
+			
+			try (
+					ResultSet rs1 = pstmt1.executeQuery();
+			) {
+				String query2 = "UPDATE SEAT SET SEAT_STATE='비어있음' WHERE SEAT_ID=?";
+
+				try (
+						PreparedStatement pstmt2 = conn.prepareStatement(query2);
+						) {
+					rs1.next();
+					pstmt2.setString(1, rs1.getString("seat_id"));
+					
+					String query3 = "UPDATE SEAT SET SEAT_STATE='사용중' WHERE SEAT_ID=?";
+					try (
+							PreparedStatement pstmt3 = conn.prepareStatement(query3);
+					) {
+						pstmt3.setString(1, seatNum);
+						
+						String query4 = "SELECT * FROM SEAT_RESERVATION INNER JOIN SEAT USING (SEAT_ID) WHERE SEAT_STATE='비어있음'";
+						try (
+								PreparedStatement pstmt4 = conn.prepareStatement(query4);
+								ResultSet rs2 = pstmt1.executeQuery();
+						) {
+							String query5 = "UPDATE SEAT_RESERVATION SET SEAT_ID=? WHERE SEAT_RESERVATION_ID=?";
+							try (
+									PreparedStatement pstmt5 = conn.prepareStatement(query5);
+							) {
+								
+								rs2.next();
+								pstmt5.setString(1, seatNum);
+								pstmt5.setString(2, rs2.getString("seat_reservation_id"));
+								
+								pstmt5.executeUpdate();
+							}
+						}
+						pstmt3.executeUpdate();
+					}
+					
+					pstmt2.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/* 퇴실할때 퇴실 시간 찍어주는 메서드 */
 	public static void setCheckOut(String member_id) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
