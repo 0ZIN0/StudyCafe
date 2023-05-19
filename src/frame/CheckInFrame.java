@@ -26,11 +26,8 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
-<<<<<<< HEAD
 import dao.SeatDAO;
-=======
 import dao.MemberDAO;
->>>>>>> refs/heads/check_in_roa
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
@@ -310,25 +307,7 @@ public class CheckInFrame extends JFrame {
 
 	public static void main(String[] args) {	
 		new CheckInFrame();
-<<<<<<< HEAD
-		
-	}
-
-	public void timeGet() {
-		while(true) {
-			LocalDateTime now = LocalDateTime.now();
-			String formatedNow = now.format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분 ss초"));
-			try {
-				Thread.sleep(100);
-				timeLabel.setText(formatedNow);
-			} catch (Exception e) {
-			}
-		}
-	}
-
-=======
 		Thread thread = new Thread(timeRun);
 		thread.start();
 	}	
->>>>>>> refs/heads/check_in_roa
 }
