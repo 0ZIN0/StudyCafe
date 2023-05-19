@@ -321,7 +321,9 @@ public class CheckInFrame extends JFrame {
 
 	public static void main(String[] args) {	
 		new CheckInFrame();
-		Thread thread = new Thread(timeRun);
-		thread.start();
+		Thread thread1 = new Thread(timeRun);
+		Thread thread2 = new Thread(updateInfo);
+		thread1.start();
+		thread2.start();
 	}	
 }
