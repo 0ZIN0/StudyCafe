@@ -26,7 +26,11 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
+<<<<<<< HEAD
 import dao.SeatDAO;
+=======
+import dao.MemberDAO;
+>>>>>>> refs/heads/check_in_roa
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
@@ -35,6 +39,8 @@ import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
+import thread.TimeRun;
+import thread.UpdateInfo;
 import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
@@ -44,7 +50,7 @@ import toggle.StudyRoomToggle;
  *  */
 public class CheckInFrame extends JFrame {
 	/* 레이아웃 */
-	CardLayout card = new CardLayout();
+	public static CardLayout card = new CardLayout();
 
 	/* 이미지들 */
 	// 백그라운드 이미지
@@ -102,11 +108,15 @@ public class CheckInFrame extends JFrame {
 	/* x버튼 */
 	JButton xBtn = new JButton("X");
 
-	// 실시간 라벨
-	JLabel timeLabel = new JLabel();
+	// 시간 라벨
+	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
 	public static Member member = SeatDAO.setMember("010-1114-1114");
+
+	// 쓰레드 클래스
+	static TimeRun timeRun = new TimeRun(timeLabel);
+	static UpdateInfo updateInfo = new UpdateInfo();
 
 	/**
 	 * Create the frame.
@@ -117,7 +127,7 @@ public class CheckInFrame extends JFrame {
 		seatReportPanel  = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
-		myPagePanel = new MyPagePanel(); // 마이페이지 패널
+		myPagePanel = new MyPagePanel(card, member); // 마이페이지 패널
 		loginMainPanel = new LoginMainPanel(); // 로그인 패널
 		
 		timeLabel.setBounds(100, 0, 500, 100);
@@ -296,11 +306,11 @@ public class CheckInFrame extends JFrame {
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		timeGet();
 	}
 
 	public static void main(String[] args) {	
 		new CheckInFrame();
+<<<<<<< HEAD
 		
 	}
 
@@ -316,4 +326,9 @@ public class CheckInFrame extends JFrame {
 		}
 	}
 
+=======
+		Thread thread = new Thread(timeRun);
+		thread.start();
+	}	
+>>>>>>> refs/heads/check_in_roa
 }
