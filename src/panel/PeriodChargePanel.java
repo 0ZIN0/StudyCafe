@@ -97,7 +97,7 @@ public class PeriodChargePanel extends JPanel {
 
 
 							if (i == 0) {
-								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-11");
+								//TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-11");
 								periodChargePrice = 90000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);

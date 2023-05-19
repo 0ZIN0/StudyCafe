@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -49,11 +51,27 @@ public class CompletePaymentDialog extends JDialog {
 //				temDAO dao = new temDAO();
 //				dao.addTem(dto);
 				
-				Ticket_order ticDto = new Ticket_order();
-				TicketOrderDAO ticOr = new TicketOrderDAO();  
-				ticOr.addOrder(ticDto);
-				
-				
+
+				String dateString = "2021-03-15";
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = null;
+
+				try {
+				    date = dateFormat.parse(dateString);
+				} catch (ParseException e1) {
+				    e1.printStackTrace();
+				    // 예외 처리: 날짜 형식이 잘못된 경우
+				}
+
+				if (date != null) {
+				    Ticket_order dto23 = new Ticket_order("가", "나", "다", date, "마");
+				    TicketOrderDAO dao12 = new TicketOrderDAO();
+				    dao12.saveOrder(dto23);
+				}
+
+
+
+
 				
 				dispose();
 			}

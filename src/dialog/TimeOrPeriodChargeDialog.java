@@ -20,7 +20,7 @@ import panel.TimeChargePanel;
 
 public class TimeOrPeriodChargeDialog extends JDialog {
 
-	public static Ticket_order ticket_order = new Ticket_order();
+	//public static Ticket_order ticket_order = new Ticket_order();
 	
 	public TimeOrPeriodChargeDialog(Member member) {
 
