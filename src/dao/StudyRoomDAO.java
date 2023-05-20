@@ -142,8 +142,11 @@ public class StudyRoomDAO {
 		List<StudyRoom_Reservation> reservations = new ArrayList<>();
 		
 		
-		String query = "SELECT * FROM \r\n"
-				+ "STUDYROOM_RESERVATION WHERE studyroom_reservation_date=TO_DATE(?, 'yyyy.mm.dd') and studyroom_id=?";
+		String query = "SELECT STUDYROOM_RESERVATION_ID, STUDYROOM_ID, MEMBER_ID, \r\n"
+				+ "TRUNC(STUDYROOM_START_TIME) AS RESERVATION_DATE, TO_CHAR(STUDYROOM_START_TIME, 'HH24:MI') AS START_TIME, \r\n"
+				+ "TO_CHAR(STUDYROOM_END_TIME, 'HH24:MI') AS END_TIME\r\n"
+				+ "FROM STUDYROOM_RESERVATION\r\n"
+				+ "WHERE TRUNC(STUDYROOM_START_TIME)=TO_DATE(?, 'YY/MM/DD') AND STUDYROOM_ID=?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
@@ -156,14 +159,15 @@ public class StudyRoomDAO {
 					) {
 				
 				while (rs.next()) {
+					
 					StudyRoom_Reservation rv = new StudyRoom_Reservation();
-					Date getDate = rs.getDate("studyroom_reservation_date");
+					Date getDate = rs.getDate("RESERVATION_DATE");
 					rv.setStudyRoom_reservation_date(getDate);
 					rv.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
 					rv.setStudyRoom_id(rs.getString("studyroom_id"));
 					rv.setMember_id(rs.getString("member_id"));
-					rv.setStudyRoom_start_time(rs.getString("study_room_start_time"));
-					rv.setStudyRoom_end_time(rs.getString("study_room_end_time"));
+					rv.setStudyRoom_start_time(rs.getString("START_TIME"));
+					rv.setStudyRoom_end_time(rs.getString("END_TIME"));
 					
 					reservations.add(rv);
 				}

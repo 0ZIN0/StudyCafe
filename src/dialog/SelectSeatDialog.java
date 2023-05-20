@@ -62,7 +62,7 @@ public class SelectSeatDialog extends JDialog {
 		String seatName = seatNum + "번 좌석";
 		seatNumlabel = new JLabel(seatName);
 		seatNumlabel.setBounds(287, 55, 200, 50);
-		seatNumlabel.setForeground(new Color(0x131313));
+		seatNumlabel.setForeground(new Color(0x232323));
 		seatNumlabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		
 		/* 패널에 잡것들 붙이기 */

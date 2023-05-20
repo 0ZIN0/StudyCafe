@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dto.Seat;
+import frame.CheckInFrame;
 
 public class UseTicketDialog extends JDialog {
 	
@@ -32,7 +35,9 @@ public class UseTicketDialog extends JDialog {
 	/* 라벨 */
 	JLabel seatlabel;
 	JLabel remainTimeLabel = new JLabel();
-	
+	JLabel remainDate = new JLabel();
+	JLabel remainDateLabel = new JLabel();
+
 	/* 버튼 */
 	JButton beforeBtn = new JButton(new ImageIcon("ui/Remain_seat_popup/Before_Button.png"));
 	JButton useStartBtn = new JButton(new ImageIcon("ui/Remain_seat_popup//useStart_Button.png"));
@@ -42,14 +47,38 @@ public class UseTicketDialog extends JDialog {
 		/* 라벨 설정 */
 		String seatName = seatNum + "번 좌석";
 		seatlabel = new JLabel(seatName);
-		seatlabel.setBounds(298, 120, 200, 50);
-		seatlabel.setForeground(new Color(0x131313));
+		seatlabel.setBounds(288, 120, 200, 50);
+		seatlabel.setForeground(new Color(0x232323));
 		seatlabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		
-		remainTimeLabel.setText(60 + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
-		remainTimeLabel.setBounds(408, 218, 100, 40);
-		remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
-		remainTimeLabel.setForeground(new Color(0x232323));
+		remainDate.setOpaque(true);
+		remainDate.setText("유효기간");
+		remainDate.setForeground(new Color(0x232323));
+		remainDate.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
+		remainDate.setBackground(Color.WHITE);
+		remainDate.setBounds(238, 220, 130, 40);
+		
+		if (!CheckInFrame.member.getRemain_date().equals(null)) {
+			remainDate.setVisible(true);
+			
+			Date remain = CheckInFrame.member.getRemain_date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm 종료");
+			String remainDateStr = sdf.format(remain);
+			remainDateLabel.setText(remainDateStr);
+			remainDateLabel.setBounds(408, 218, 300, 40);
+			remainDateLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
+			remainDateLabel.setForeground(new Color(0x232323));
+			remainDateLabel.setVisible(true);
+			remainTimeLabel.setVisible(false);
+		} else {
+			remainDate.setVisible(false);
+			remainTimeLabel.setText(60 + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
+			remainTimeLabel.setBounds(408, 218, 100, 40);
+			remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+			remainTimeLabel.setForeground(new Color(0x232323));
+			remainTimeLabel.setVisible(true);
+			remainDateLabel.setVisible(false);
+		}
 		
 		/* 버튼 설정 */
 		beforeBtn.setBounds(202, 340, 150, 80);
@@ -80,6 +109,8 @@ public class UseTicketDialog extends JDialog {
 		useTicketPanel.add(seatlabel);
 		useTicketPanel.add(beforeBtn);
 		useTicketPanel.add(remainTimeLabel);
+		useTicketPanel.add(remainDate);
+		useTicketPanel.add(remainDateLabel);
 		useTicketPanel.add(useStartBtn);
 		
 		/* 다이얼로그에 패널붙이기 */

@@ -1,5 +1,7 @@
 package panel;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -7,21 +9,21 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.SeatButton;
+import dao.SeatDAO;
 import dto.Member;
 import dto.Seat;
+import frame.CheckInFrame;
 import label.RemainSeatLabel;
 import label.SeatReportLabel;
 
 public class SeatReportPanel extends JPanel {
 	
 	Image seatImage;
-	
-	static List<Seat> seats = new ArrayList<>();
-	static List<SeatButton> seatBtns = new ArrayList<>();
 	
 	/* 스터디룸, 사물함 버튼 */
 	JButton studyRoom1Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/StudyRoom_1.png"));
@@ -34,46 +36,13 @@ public class SeatReportPanel extends JPanel {
 	JLabel remainSeatPanel = new JLabel(new ImageIcon("ui/Select_Seat_Parts_img/Seat_list_box.png"));
 	JLabel remainSeatLabel = new RemainSeatLabel();
 	
-	/* 좌석버튼 객체 */
-	
-	JButton seat1 = new SeatButton("1");
-	JButton seat2 = new SeatButton("2");
-	JButton seat3 = new SeatButton("3");
-	JButton seat4 = new SeatButton("4");
-	JButton seat5 = new SeatButton("5");
-	JButton seat6 = new SeatButton("6");
-	JButton seat7 = new SeatButton("7");
-	JButton seat8 = new SeatButton("8");
-	JButton seat9 = new SeatButton("9");
-	JButton seat10 = new SeatButton("10");
-	JButton seat11 = new SeatButton("11");
-	JButton seat12 = new SeatButton("12");
-	JButton seat13 = new SeatButton("13");
-	JButton seat14 = new SeatButton("14");
-	JButton seat15 = new SeatButton("15");
-	JButton seat16 = new SeatButton("16");
-	JButton seat17 = new SeatButton("17");
-	JButton seat18 = new SeatButton("18");
-	JButton seat19 = new SeatButton("19");
-	JButton seat20 = new SeatButton("20");
-	JButton seat21 = new SeatButton("21");
-	JButton seat22 = new SeatButton("22");
-	JButton seat23 = new SeatButton("23");
-	JButton seat24 = new SeatButton("24");
-	JButton seat25 = new SeatButton("25");
-	JButton seat26 = new SeatButton("26");
-	JButton seat27 = new SeatButton("27");
-	JButton seat28 = new SeatButton("28");
-	JButton seat29 = new SeatButton("29");
-	JButton seat30 = new SeatButton("30");
-	JButton seat31 = new SeatButton("31");
-	JButton seat32 = new SeatButton("32");
-
-	/* 스터디카페의 좌석 현황을 숫자로 보여주는 라벨 */
-	JLabel seatReportLabel = new JLabel();
-	
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
-	JLabel seatInfoLabel = new SeatReportLabel();
+	public static JLabel seatInfoLabel = new SeatReportLabel();
+	public static Integer mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
+	public static JLabel seatNumLabel = new JLabel(String.valueOf(mySeat));
+	
+	static List<Seat> seats = new ArrayList<>();
+	public static List<SeatButton> seatBtns = new ArrayList<>();
 
 	public SeatReportPanel(Image seatImage, Member member) {
 		
@@ -83,7 +52,7 @@ public class SeatReportPanel extends JPanel {
 		}
 		
 		for(int i = 0; i < 32; i++) {
-			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1));
+			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1), mySeat);
 			seatBtns.add(seatBtn);
 		}
 		this.seatImage = seatImage;
@@ -152,47 +121,23 @@ public class SeatReportPanel extends JPanel {
 			add(seatBtns.get(i));
 		}
 		
-//		add(seat1);
-//		add(seat2);
-//		add(seat3);
-//		add(seat4);
-//		add(seat5);
-//		add(seat6);
-//		add(seat7);
-//		add(seat8);
-//		add(seat9);
-//		add(seat10);
-//		add(seat11);
-//		add(seat12);
-//		add(seat13);
-//		add(seat14);
-//		add(seat15);
-//		add(seat16);
-//		add(seat17);
-//		add(seat18);
-//		add(seat19);
-//		add(seat20);
-//		add(seat21);
-//		add(seat22);
-//		add(seat23);
-//		add(seat24);
-//		add(seat25);
-//		add(seat26);
-//		add(seat27);
-//		add(seat28);
-//		add(seat29);
-//		add(seat30);
-//		add(seat31);
-//		add(seat32);
-		
+		/* 좌석 현황 라벨 설정 */
 		add(remainSeatLabel);
 		add(remainSeatPanel);
 		
-		/* 좌석 현황 라벨 설정 */
-		add(seatInfoLabel);
-		
 		/* 좌석 이용 유무 라벨 설정 */
-		add(seatReportLabel);
+		
+		if (mySeat != 0) {
+			seatNumLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
+			seatNumLabel.setForeground(new Color(0xFF5C01));
+			seatNumLabel.setBounds(477, 28, 550, 50);
+			seatNumLabel.setVisible(true);
+		} else {
+			seatNumLabel.setVisible(false);
+		}
+		
+		add(seatNumLabel);
+		add(seatInfoLabel);
 	}
 
 	/** 좌석현황 패널 이미지 적용하는 메서드 */
@@ -205,4 +150,5 @@ public class SeatReportPanel extends JPanel {
 	public static List<Seat> getSeats() {
 		return seats;
 	}
+	
 }

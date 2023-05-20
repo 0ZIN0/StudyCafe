@@ -13,10 +13,10 @@ public class CloseButton extends JButton implements ActionListener {
 	
 	public CloseButton(JDialog dialog) {
 		this.dialog = dialog;
-		setIcon(new ImageIcon("ui/SelectSeatPopup/CloseButton.png"));
+		setIcon(new ImageIcon("ui/button/CloseButton.png"));
 		setContentAreaFilled(false);
 		setBorderPainted(false);
-		setSize(150, 80);
+		setSize(150, 88);
 		addActionListener(this);
 	}
 
