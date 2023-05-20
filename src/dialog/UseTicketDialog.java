@@ -115,7 +115,7 @@ public class UseTicketDialog extends JDialog {
 				SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 				SeatReportPanel.seatBtns.get(seat - 1).setBackground(new Color(0xFF5C01));
 				SeatReportPanel.seatBtns.get(seat - 1).use = true;
-				SeatButton.mySeat = Integer.parseInt(seatNum);
+				SeatReportPanel.mySeat = Integer.parseInt(seatNum);
 				
 				RemainSeatLabel.remain = SeatDAO.isRemain();
 				SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));

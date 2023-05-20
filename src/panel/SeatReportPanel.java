@@ -37,8 +37,8 @@ public class SeatReportPanel extends JPanel {
 	public static JLabel remainSeatLabel = new RemainSeatLabel();
 	
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
-	public static JLabel seatInfoLabel = new SeatReportLabel();
 	public static Integer mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
+	public static JLabel seatInfoLabel = new SeatReportLabel();
 	
 	static List<Seat> seats = new ArrayList<>();
 	public static List<SeatButton> seatBtns = new ArrayList<>();
