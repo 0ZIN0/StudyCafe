@@ -28,7 +28,7 @@ import panel.MainPanel;
 
 public class CompletePaymentDialog extends JDialog {
 
-	public CompletePaymentDialog(String description) {
+	public CompletePaymentDialog() {
 		System.out.println("결제완료금액: " + InsertCardDialog.amountPaid); 
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
@@ -51,11 +51,9 @@ public class CompletePaymentDialog extends JDialog {
 //				temDTO dto = new temDTO("2시", description);
 //				temDAO dao = new temDAO();
 //				dao.addTem(dto);
-
-
-				Ticket_order dto = new Ticket_order();
 				TicketOrderDAO dao = new TicketOrderDAO();
-				dao.saveOrder(dto);
+				dao.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
+
 
 
 
