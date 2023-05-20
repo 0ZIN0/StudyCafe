@@ -20,8 +20,6 @@ public class TicketOrderDAO {
 				) {
 			pstmt.setString(1, order.getMember_id());
 			pstmt.setString(2, order.getTicket_id());
-			System.out.println(order.getMember_id());
-			System.out.println(order.getTicket_id());
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
