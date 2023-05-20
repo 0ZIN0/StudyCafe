@@ -84,9 +84,6 @@ public class TimeChargePanel extends JPanel {
 							
 							if (i == 0) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-07");
-								// temDTO dto = new temDTO("2시", "");
-								//dto.setDescription("30시간");
-								
 								timeChargePrice = 45000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -98,11 +95,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 1) {
-								//ticketOrder.setTicket_id("ti-08");
-								
-								 temDTO dto = new temDTO("2시", "");
-									dto.setDescription("50시간");
-								
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-08");
 								timeChargePrice = 70000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -114,7 +107,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 2) {
-								//TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-09");
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-09");
 								timeChargePrice = 130000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -126,7 +119,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 3) {
-								//TimeOrPeriodChargeDialog.ticket_order.setTicket_id("TI-10");
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-10");
 								timeChargePrice = 240000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
