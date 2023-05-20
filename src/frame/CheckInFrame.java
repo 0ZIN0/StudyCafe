@@ -22,6 +22,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import button.BuyButton;
 import button.LeaveButton;
@@ -305,7 +307,7 @@ public class CheckInFrame extends JFrame {
 		setVisible(true);
 	}
 
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
 		new CheckInFrame();
 		Thread thread = new Thread(timeRun);
 		thread.start();
