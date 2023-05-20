@@ -39,7 +39,6 @@ public class SeatReportPanel extends JPanel {
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
 	public static JLabel seatInfoLabel = new SeatReportLabel();
 	public static Integer mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
-	public static JLabel seatNumLabel = new JLabel(String.valueOf(mySeat));
 	
 	static List<Seat> seats = new ArrayList<>();
 	public static List<SeatButton> seatBtns = new ArrayList<>();
@@ -52,7 +51,7 @@ public class SeatReportPanel extends JPanel {
 		}
 		
 		for(int i = 0; i < 32; i++) {
-			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1), mySeat);
+			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1));
 			seatBtns.add(seatBtn);
 		}
 		this.seatImage = seatImage;
@@ -127,16 +126,6 @@ public class SeatReportPanel extends JPanel {
 		
 		/* 좌석 이용 유무 라벨 설정 */
 		
-		if (mySeat != 0) {
-			seatNumLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
-			seatNumLabel.setForeground(new Color(0xFF5C01));
-			seatNumLabel.setBounds(477, 28, 550, 50);
-			seatNumLabel.setVisible(true);
-		} else {
-			seatNumLabel.setVisible(false);
-		}
-		
-		add(seatNumLabel);
 		add(seatInfoLabel);
 	}
 
