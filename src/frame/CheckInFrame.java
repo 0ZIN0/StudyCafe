@@ -121,7 +121,6 @@ public class CheckInFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public CheckInFrame() {
-		
 		/* 패널 */
 		seatReportPanel  = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널

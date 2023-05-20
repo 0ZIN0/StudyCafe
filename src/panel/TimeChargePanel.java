@@ -21,7 +21,6 @@ import dto.temDTO;
 
 public class TimeChargePanel extends JPanel {
 	
-	
 
 	public static int timeChargeItem; 
 	public static int timeChargePrice;
@@ -84,7 +83,7 @@ public class TimeChargePanel extends JPanel {
 
 							
 							if (i == 0) {
-								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("ti-07");
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-07");
 								// temDTO dto = new temDTO("2시", "");
 								//dto.setDescription("30시간");
 								

@@ -21,9 +21,8 @@ import panel.TimeChargePanel;
 public class TimeOrPeriodChargeDialog extends JDialog {
 
 	public static Ticket_order ticket_order = new Ticket_order();
-	
-	public TimeOrPeriodChargeDialog(Member member) {
 
+	public TimeOrPeriodChargeDialog(Member member) {
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/상품충전_팝업/상품충전_BG.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -32,7 +31,8 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 				g.drawImage(bgImage, 0, 0, this);
 			};
 		};
-
+		
+		
 		ImageIcon buttonIcon = new ImageIcon("ui/결제 팝업/버튼_수정/CloseButton.png");
 		JButton closeButton = new JButton(buttonIcon);
 		closeButton.setBorderPainted(false);

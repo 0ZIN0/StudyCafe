@@ -21,6 +21,7 @@ import dao.temDAO;
 import dto.Ticket;
 import dto.Ticket_order;
 import dto.temDTO;
+import frame.CheckInFrame;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
 import panel.TimeChargePanel;
@@ -51,12 +52,9 @@ public class CompletePaymentDialog extends JDialog {
 //				temDTO dto = new temDTO("2시", description);
 //				temDAO dao = new temDAO();
 //				dao.addTem(dto);
-				TicketOrderDAO dao = new TicketOrderDAO();
-				dao.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
-
-
-
-
+				
+				TimeOrPeriodChargeDialog.ticket_order.setMember_id(CheckInFrame.member.getMember_id());
+				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 
 				dispose();
 			}
