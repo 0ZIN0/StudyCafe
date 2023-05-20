@@ -19,7 +19,6 @@ import javax.swing.JSeparator;
 
 import dao.MemberDAO;
 import dto.Member;
-import oracle.sql.DATE;
 
 public class MyPagePanel extends JPanel {
 	
@@ -60,12 +59,12 @@ public class MyPagePanel extends JPanel {
 		phoneNum.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		phoneNum.setForeground(Color.WHITE);
 		
-		time = new JLabel(Integer.toString(member.getRemain_time()) + "분");
+		time = new JLabel(0 + "분");
 		time.setBounds(1010, 440, 500, 100);
 		time.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		time.setForeground(Color.WHITE);
 		
-		JLabel period = new JLabel(sdFormat.format(member.getRemain_date()) + "까지");
+		JLabel period = new JLabel(0 + "까지");
 		period.setBounds(1010, 560, 500, 100);
 		period.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		period.setForeground(Color.WHITE);

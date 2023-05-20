@@ -22,6 +22,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import button.BuyButton;
 import button.LeaveButton;
@@ -319,7 +321,13 @@ public class CheckInFrame extends JFrame {
 		setVisible(true);
 	}
 
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
+		
+		try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            ((Throwable) e).printStackTrace();
+        }
 		new CheckInFrame();
 		Thread thread1 = new Thread(timeRun);
 		Thread thread2 = new Thread(updateInfo);
