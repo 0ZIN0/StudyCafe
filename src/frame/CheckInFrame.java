@@ -48,6 +48,7 @@ import toggle.StudyRoomToggle;
  * 이 프레임이 메인 프레임입니다.
  *  */
 public class CheckInFrame extends JFrame {
+
 	/* 레이아웃 */
 	public static CardLayout card = new CardLayout();
 
@@ -86,7 +87,7 @@ public class CheckInFrame extends JFrame {
 	JPanel lockerPanel; // 사물함 구매 패널
 	MyPagePanel myPagePanel; // 마이페이지 패널
 	LoginMainPanel loginMainPanel;
-	
+
 	List<Seat> seats = SeatReportPanel.getSeats();
 
 	/* 메인 토글버튼 */
@@ -111,7 +112,7 @@ public class CheckInFrame extends JFrame {
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = SeatDAO.setMember("010-1114-1114");
+	public static Member member = SeatDAO.setMember("010-1111-1111");
 
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(timeLabel);
@@ -127,7 +128,7 @@ public class CheckInFrame extends JFrame {
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
 		myPagePanel = new MyPagePanel(card, member); // 마이페이지 패널
 		loginMainPanel = new LoginMainPanel(); // 로그인 패널
-		
+
 		timeLabel.setBounds(100, 0, 500, 100);
 		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
 		timeLabel.setForeground(Color.white);
@@ -261,7 +262,7 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-//		getContentPane().add(loginMainPanel, "login");
+		//		getContentPane().add(loginMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
