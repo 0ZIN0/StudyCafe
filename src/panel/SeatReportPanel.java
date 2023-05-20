@@ -34,7 +34,7 @@ public class SeatReportPanel extends JPanel {
 	
 	/* 잔여좌석을 알려주는 라벨 */
 	JLabel remainSeatPanel = new JLabel(new ImageIcon("ui/Select_Seat_Parts_img/Seat_list_box.png"));
-	JLabel remainSeatLabel = new RemainSeatLabel();
+	public static JLabel remainSeatLabel = new RemainSeatLabel();
 	
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
 	public static JLabel seatInfoLabel = new SeatReportLabel();

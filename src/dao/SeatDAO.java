@@ -122,7 +122,7 @@ public class SeatDAO {
 					java.sql.Date sqlCheckOutDate = new java.sql.Date(utilCheckOutTime.getTime());
 
 					pstmt2.setDate(1, sqlCheckOutDate);
-					pstmt2.setString(2, rs.getString("seat_reservaion_id"));
+					pstmt2.setString(2, rs.getString("SEAT_RESERVATION_ID"));
 					
 					pstmt2.executeUpdate();
 				}
@@ -131,7 +131,34 @@ public class SeatDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* 입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
+	public static void setReservation(String member_id, String seatNum) {
+		
+		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, sysdate, NULL)";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				) {
 
+			pstmt1.setString(1, seatNum);
+			pstmt1.setString(2, member_id);
+			
+			pstmt1.executeUpdate();
+			
+			String query2 = "UPDATE SEAT SET SEAT_STATE='사용중' WHERE SEAT_ID=?";
+			try (
+					PreparedStatement pstmt2 = conn.prepareStatement(query2);
+			) {
+				pstmt2.setString(1, seatNum);
+				
+				pstmt2.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/** 좌석 버튼 색 변경하는 메서드 */
 	public static boolean isUse(int num) {
 

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,8 +16,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import button.SeatButton;
+import dao.SeatDAO;
 import dto.Seat;
 import frame.CheckInFrame;
+import label.RemainSeatLabel;
+import panel.SeatReportPanel;
 
 public class UseTicketDialog extends JDialog {
 	
@@ -101,6 +106,20 @@ public class UseTicketDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+
+				SeatDAO.setReservation(CheckInFrame.member.getMember_id(), seatNum);
+				
+				int seat = Integer.parseInt(seatNum);
+				
+				SeatReportPanel.seatInfoLabel.setText(seatNum + "번 좌석을 사용중입니다.");
+				SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
+				SeatReportPanel.seatBtns.get(seat - 1).setBackground(new Color(0xFF5C01));
+				SeatReportPanel.seatBtns.get(seat - 1).use = true;
+				SeatButton.mySeat = Integer.parseInt(seatNum);
+				
+				RemainSeatLabel.remain = SeatDAO.isRemain();
+				SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
+				
 				UseLastDialog useLastPopup = new UseLastDialog();
 			}
 		});
