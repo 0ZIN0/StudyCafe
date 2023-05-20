@@ -27,8 +27,7 @@ public class LockerPanel extends JPanel {
 	List<LockerButton> lockerBtns = new ArrayList<>();
 	int btnCtn = 1;
 	LockerDAO lockerDao = new LockerDAO();
-	int countLocker = lockerDao.totalLocker();
-	int useable = lockerDao.useable();
+	int usable = 20 - lockerDao.isUse().size();
 	/**
 	 * Create the panel.
 	 */
@@ -59,7 +58,7 @@ public class LockerPanel extends JPanel {
 		JLabel inUseLockerLabel = new JLabel();
 		inUseLockerLabel.setBounds(26, 3, 200, 100);
 		inUseLockerLabel.setForeground(new Color(255, 255, 255));
-		inUseLockerLabel.setText(String.format("%02d / %02d", useable, countLocker));
+		inUseLockerLabel.setText(String.format("%02d / %02d", usable, 20));
 		inUseLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		add(inUseLockerLabel);
 		
