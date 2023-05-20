@@ -30,7 +30,7 @@ import panel.MainPanel;
 public class CompletePaymentDialog extends JDialog {
 
 	public CompletePaymentDialog() {
-		System.out.println("결제완료금액: " + InsertCardDialog.amountPaid); 
+		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
