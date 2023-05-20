@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import dao.TicketOrderDAO;
 import dao.temDAO;
+import dto.Ticket;
 import dto.Ticket_order;
 import dto.temDTO;
 import panel.OnePassChargePanel;
@@ -27,7 +28,7 @@ import panel.MainPanel;
 
 public class CompletePaymentDialog extends JDialog {
 
-	public CompletePaymentDialog() {
+	public CompletePaymentDialog(String description) {
 		System.out.println("결제완료금액: " + InsertCardDialog.amountPaid); 
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
@@ -46,33 +47,19 @@ public class CompletePaymentDialog extends JDialog {
 		mainButton.setContentAreaFilled(false);
 		mainButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-//				temDTO dto = new temDTO("dto dao", "테스트중임");
+
+//				temDTO dto = new temDTO("2시", description);
 //				temDAO dao = new temDAO();
 //				dao.addTem(dto);
-				
 
-				String dateString = "2021-03-15";
-				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date date = null;
 
-				try {
-				    date = dateFormat.parse(dateString);
-				} catch (ParseException e1) {
-				    e1.printStackTrace();
-				    // 예외 처리: 날짜 형식이 잘못된 경우
-				}
-
-				if (date != null) {
-				    Ticket_order dto23 = new Ticket_order("가", "나", "다", date, "마");
-				    TicketOrderDAO dao12 = new TicketOrderDAO();
-				    dao12.saveOrder(dto23);
-				}
+				Ticket_order dto = new Ticket_order();
+				TicketOrderDAO dao = new TicketOrderDAO();
+				dao.saveOrder(dto);
 
 
 
 
-				
 				dispose();
 			}
 		});

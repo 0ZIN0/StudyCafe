@@ -149,7 +149,7 @@ public class InsertCardDialog extends JDialog {
 
 				dispose();
 
-				CompletePaymentDialog completePaymentDialog = new CompletePaymentDialog();
+				CompletePaymentDialog completePaymentDialog = new CompletePaymentDialog(); 
 			}
 		});
 

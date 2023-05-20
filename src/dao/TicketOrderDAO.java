@@ -17,7 +17,7 @@ public class TicketOrderDAO {
             connection = OjdbcConnection.getConnection();  // 적절한 데이터베이스 연결 메서드를 호출하여 connection을 얻으세요.
             
             // SQL 문 작성
-            String sql = "INSERT INTO ticket_order (order_id, member_id, ticket_id, order_total_price, order_date, pay_state) " +
+            String sql = "INSERT INTO ticket_order (order_id, member_id, ticket_id, order_date, pay_state) " +
                     "VALUES (?, ?, ?, ?, ?, ?)";
             
             // PreparedStatement 객체 생성
@@ -28,8 +28,7 @@ public class TicketOrderDAO {
             statement.setString(2, order.getMember_id());
             statement.setString(3, order.getTicket_id());
             statement.setString(4, order.getPay_id());
-            statement.setInt(5, order.getOrder_total_price());
-            statement.setDate(6, new java.sql.Date(order.getOrder_date().getTime())); // java.util.Date를 java.sql.Date로 변환
+            statement.setDate(5, new java.sql.Date(order.getOrder_date().getTime())); // java.util.Date를 java.sql.Date로 변환
             
             // SQL 문 실행
             statement.executeUpdate();

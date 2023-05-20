@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import button.ChargeTimeButton;
 import dialog.PaymentDialog;
 import dialog.TimeOrPeriodChargeDialog;
-import dto.Ticket_order;
+import dto.temDTO;
 
 public class TimeChargePanel extends JPanel {
 	
@@ -84,7 +84,9 @@ public class TimeChargePanel extends JPanel {
 
 							
 							if (i == 0) {
-								// ticketOrder.setTicket_id("ti-07");
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("ti-07");
+								// temDTO dto = new temDTO("2시", "");
+								//dto.setDescription("30시간");
 								
 								timeChargePrice = 45000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
@@ -98,6 +100,10 @@ public class TimeChargePanel extends JPanel {
 
 							} else if (i == 1) {
 								//ticketOrder.setTicket_id("ti-08");
+								
+								 temDTO dto = new temDTO("2시", "");
+									dto.setDescription("50시간");
+								
 								timeChargePrice = 70000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);

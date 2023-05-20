@@ -41,15 +41,15 @@ public class Ticket_order {
 //		return order_total_price;
 //	}
 	
-	public Integer getOrder_total_price() {
-	    if (order_total_price == null) {
-	        return 0; // 기본 값으로 0을 반환하거나 원하는 값을 반환합니다.
-	    }
-	    return order_total_price;
-	}
-	public void setOrder_total_price(Integer order_total_price) {
-		this.order_total_price = order_total_price;
-	}
+//	public Integer getOrder_total_price() {
+//	    if (order_total_price == null) {
+//	        return 0; // 기본 값으로 0을 반환하거나 원하는 값을 반환합니다.
+//	    }
+//	    return order_total_price;
+//	}
+//	public void setOrder_total_price(Integer order_total_price) {
+//		this.order_total_price = order_total_price;
+//	}
 	public Date getOrder_date() {
 		return order_date;
 	}
@@ -57,14 +57,7 @@ public class Ticket_order {
 		this.order_date = order_date;
 	}
 	
-	public Ticket_order(String order_id, String member_id, String ticket_id, Date order_date, String pay_id) {
-        this.order_id = order_id;
-        this.member_id = member_id;
-        this.ticket_id = ticket_id;
-        this.order_date = order_date;
-        this.pay_id = pay_id;
-       
-    }
+	
 	
 
 }
