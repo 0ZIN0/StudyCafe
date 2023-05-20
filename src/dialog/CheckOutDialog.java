@@ -55,8 +55,8 @@ public class CheckOutDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SeatDAO.setCheckOut(CheckInFrame.member.getMember_id());
-				JDialog exitPopup = new ExitDialog(); // 만들어야됨
+				int useMinute = SeatDAO.setCheckOut(CheckInFrame.member.getMember_id());
+				JDialog exitPopup = new ExitDialog(useMinute);
 			}
 		});
 		

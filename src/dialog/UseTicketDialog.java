@@ -57,13 +57,13 @@ public class UseTicketDialog extends JDialog {
 		seatlabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		
 		remainDate.setOpaque(true);
-		remainDate.setText("유효기간");
+		remainDate.setText("만료일");
 		remainDate.setForeground(new Color(0x232323));
 		remainDate.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
 		remainDate.setBackground(Color.WHITE);
 		remainDate.setBounds(238, 220, 130, 40);
 		
-		if (!CheckInFrame.member.getRemain_date().equals(null)) {
+		if (CheckInFrame.member.getRemain_date() != null) {
 			remainDate.setVisible(true);
 			
 			Date remain = CheckInFrame.member.getRemain_date();
@@ -77,7 +77,7 @@ public class UseTicketDialog extends JDialog {
 			remainTimeLabel.setVisible(false);
 		} else {
 			remainDate.setVisible(false);
-			remainTimeLabel.setText(60 + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
+			remainTimeLabel.setText(SeatDAO.getRemainTime(CheckInFrame.member.getMember_id()) + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
 			remainTimeLabel.setBounds(408, 218, 100, 40);
 			remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 			remainTimeLabel.setForeground(new Color(0x232323));
@@ -131,9 +131,6 @@ public class UseTicketDialog extends JDialog {
 		useTicketPanel.add(remainDate);
 		useTicketPanel.add(remainDateLabel);
 		useTicketPanel.add(useStartBtn);
-		
-		/* 다이얼로그에 패널붙이기 */
-		add(useTicketPanel);
 		
 		/* 팝업창 기본 설정 */
 		useTicketPanel.setLayout(null);

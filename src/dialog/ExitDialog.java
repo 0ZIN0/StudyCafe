@@ -1,10 +1,13 @@
 package dialog;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -12,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.CloseButton;
+import dao.SeatDAO;
+import frame.CheckInFrame;
 
 public class ExitDialog extends JDialog {
 	
@@ -30,28 +35,77 @@ public class ExitDialog extends JDialog {
 	/* 버튼 */
 	CloseButton closeBtn = new CloseButton(this);
 	
+	int useMinute;
 	/* 라벨 */
-	JLabel remainLabel = new JLabel();
+	JLabel remainTime = new JLabel("잔여시간");
 	JLabel remainTimeLabel = new JLabel();
+	JLabel remainDate = new JLabel("만료일");
+	JLabel remainDateLabel = new JLabel();
 	
-	public ExitDialog() {
+	public ExitDialog(int useMinute) {
+		this.useMinute = useMinute;
 		
-		closeBtn.setLocation(300, 800);
+		/* 라벨 */ 
+		if (CheckInFrame.member.getRemain_date() != null) {
+			// date
+			remainDate.setForeground(new Color(0x232323));
+			remainDate.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
+			remainDate.setBounds(238, 220, 130, 40);
+			
+			Date remain = CheckInFrame.member.getRemain_date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm 종료");
+			String remainDateStr = sdf.format(remain);
+			remainDateLabel.setText(remainDateStr);
+			remainDateLabel.setBounds(408, 218, 300, 40);
+			remainDateLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
+			remainDateLabel.setForeground(new Color(0x232323));
+			
+			exitPanel.add(remainDate);
+			exitPanel.add(remainDateLabel);
+		} else {
+			// time
+			remainTime.setBounds(238, 220, 130, 40);
+			remainTime.setForeground(new Color(0x232323));
+			remainTime.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+			
+			int newRemainTime = SeatDAO.getRemainTime(CheckInFrame.member.getMember_id()) - this.useMinute;
+			String remain = newRemainTime + "분";	
+			
+			if (newRemainTime >= 60 ) {
+				int hour = newRemainTime / 60;
+				int minute = newRemainTime % 60;
+				remain = hour + "시간 " + minute + "분";
+			}
+				
+			remainTimeLabel.setText(remain);
+			remainTimeLabel.setBounds(408, 218, 100, 40);
+			remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+			remainTimeLabel.setForeground(new Color(0x232323));
+			
+			exitPanel.add(remainTime);
+			exitPanel.add(remainTimeLabel);
+		}
 		
 		/* 패널 */
 		exitPanel.setBackground(new Color(0,0,0,0));
 		exitPanel.setBounds(0, 0, 750, 450);
 		exitPanel.setLayout(null);
 		
+		closeBtn.setLocation(300, 325);
 		closeBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 				// 메인을 초기화 시키고 로그인창으로 넘어가게끔 만드는 메서드
 			}
 		});
 		
 		exitPanel.add(closeBtn);
+		
+		exitPanel.setLayout(null);
+		exitPanel.setBackground(new Color(0, 0, 0, 0));
+		exitPanel.setBounds(0, 0, 750, 450);
 		
 		add(exitPanel);
 		setModal(true); // 팝업창 이외에 다른 버튼들은 누를 수 없음
@@ -61,5 +115,11 @@ public class ExitDialog extends JDialog {
 		setResizable(false); // 사용자가 팝업창 크기를 조정하는것을 해제
 		setBounds(585, 315, 750, 450);
 		setVisible(true);
+	}
+	
+	// 아직 구현 안됨 구현해야함
+	public int setRemainMinute(int getRemainMinute) {
+		
+		return 0;
 	}
 }
