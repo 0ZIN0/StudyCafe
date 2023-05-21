@@ -33,6 +33,7 @@ import javax.swing.border.TitledBorder;
 import dao.MemberDAO;
 import dialog.setPopup;
 import dto.Member;
+import frame.CheckInFrame;
 
 //import panel.LoginMainPanel2.PasswordFieldFocusListener;
 //import panel.LoginMainPanel2.PhoneNumberFieldFocusListener;
@@ -185,12 +186,15 @@ public class LoginPanel extends JPanel {
 						//JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
 		               System.out.println("로그인성공로그인성공로그인성공로그인성공");
 		               new setPopup("로그인 성공").setVisible(true);
+		               Member loginMember=MemberDAO.setMember(phon);
+		               CheckInFrame.card.show(getParent(), "main");
 		               
 		            } else {
 		            	//JOptionPane.showMessageDialog(new LoginMainPanel().background,"@@로그인실패!!" );
 		                System.out.println("로그인 실패");
 		                new setPopup("로그인 실패","(핸드폰번호와 비밀번호를 확인하세요)").setVisible(true);
-		                Member loginMember=MemberDAO.setMember(phon);
+		                
+		                
 		            }
 
 		            rs.close();

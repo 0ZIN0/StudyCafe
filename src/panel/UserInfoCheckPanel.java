@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import dialog.setPopup;
 import dto.MemberJoin;
 
 public class UserInfoCheckPanel extends JPanel {
@@ -151,7 +152,10 @@ public class UserInfoCheckPanel extends JPanel {
 			            	   stmt.setString(2, password);
 			            	   stmt.executeUpdate();
 			                
-			                JOptionPane.showMessageDialog(UserInfoCheckPanel.this, "회원가입이 완료되었습니다.");
+			                //JOptionPane.showMessageDialog(UserInfoCheckPanel.this, "회원가입이 완료되었습니다.");
+			                new setPopup("회원가입이 완료되었습니다.").setVisible(true);
+			                
+			                card.show(getParent(), "login");
 			            } catch (SQLException e2) {
 			                e2.printStackTrace();
 			                JOptionPane.showMessageDialog(UserInfoCheckPanel.this, "오류");
