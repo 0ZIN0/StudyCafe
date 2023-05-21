@@ -17,6 +17,7 @@ import frame.CheckInFrame;
 public class UseTicketButton extends JButton {
 	
 	boolean remainTicket = TicketDAO.isUsingTicket(CheckInFrame.member.getMember_id());
+	public static boolean useSeat;
 	
 	public UseTicketButton(SelectSeatDialog selectSeatPopup, String seatNum, Seat seat) {
 		
@@ -29,7 +30,9 @@ public class UseTicketButton extends JButton {
 				selectSeatPopup.dispose();
 				
 				if (remainTicket) {
-					JDialog UseTicketPopup = new UseTicketDialog(seatNum, seat);
+					if (!useSeat) {
+						JDialog UseTicketPopup = new UseTicketDialog(seatNum, seat);
+					}
 				} else {
 					JDialog NotUseTicketPopup = new NotUseTicketDialog(seatNum, seat);
 				}

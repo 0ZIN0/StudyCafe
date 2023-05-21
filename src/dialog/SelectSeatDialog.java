@@ -50,10 +50,15 @@ public class SelectSeatDialog extends JDialog {
 		JButton termTicketBtn = new TermTicketButton(this);
 		JButton useTicketBtn = new UseTicketButton(this, seatNum, seat);
 		JButton close = new CloseButton(this);
-
+		
+		if (UseTicketButton.useSeat) {
+			useTicketBtn.setEnabled(false);
+		}
+		
+		
 		/* 닫기 버튼 설정 */
 		close.setLocation(300, 640);
-
+		
 		/* 이용권 버튼들 크기 설정 */
 		dayTicketBtn.setBounds(165, 165, 200, 200);
 		timeTicketBtn.setBounds(385, 165, 200, 200);
