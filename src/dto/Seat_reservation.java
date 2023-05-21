@@ -5,6 +5,7 @@ public class Seat_reservation {
 	private String seat_reservation_id;
 	private Integer seat_id;
 	private String member_id;
+	private String use_ticket_category;
 	private String seat_reservation_start_time;
 	private String seat_reservation_end_time;
 	
@@ -25,6 +26,12 @@ public class Seat_reservation {
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+	public String getUse_ticket_category() {
+		return use_ticket_category;
+	}
+	public void setUse_ticket_category(String use_ticket_category) {
+		this.use_ticket_category = use_ticket_category;
 	}
 	public String getSeat_reservation_start_time() {
 		return seat_reservation_start_time;
