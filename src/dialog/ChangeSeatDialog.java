@@ -75,9 +75,8 @@ public class ChangeSeatDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				
-				SeatReportPanel.seatInfoLabel.setText("번 좌석을 사용중입니다.");
+				SeatReportPanel.seatInfoLabel.setText(seatNum + "번 좌석을 사용중입니다.");
 				SeatReportPanel.seatInfoLabel.setBounds(537, 28, 550, 50);
-				SeatReportPanel.seatNumLabel.setVisible(true);
 				JDialog mySeatPopup = new MySeatDialog(seatNum, seat);
 			}
 		});
@@ -92,10 +91,8 @@ public class ChangeSeatDialog extends JDialog {
 				Integer afterNum = Integer.parseInt(seatNum);
 				
 				SeatDAO.setChangeSeat(CheckInFrame.member.getMember_id(), seatNum);
-				SeatReportPanel.seatInfoLabel.setText("번 좌석을 사용중입니다.");
-				SeatReportPanel.seatInfoLabel.setBounds(537, 28, 550, 50);
-				SeatReportPanel.seatNumLabel.setText(seatNum);
-				SeatReportPanel.seatNumLabel.setVisible(true);
+				SeatReportPanel.seatInfoLabel.setText(seatNum + "번 좌석을 사용중입니다.");
+				SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 				SeatReportPanel.seatBtns.get(beforeNum - 1).setBackground(new Color(0xD9D9D9));
 				
 				SeatReportPanel.seatBtns.get(beforeNum - 1).use = false;

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,8 +16,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import button.SeatButton;
+import dao.SeatDAO;
 import dto.Seat;
 import frame.CheckInFrame;
+import label.RemainSeatLabel;
+import panel.SeatReportPanel;
 
 public class UseTicketDialog extends JDialog {
 	
@@ -52,13 +57,13 @@ public class UseTicketDialog extends JDialog {
 		seatlabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		
 		remainDate.setOpaque(true);
-		remainDate.setText("유효기간");
+		remainDate.setText("만료일");
 		remainDate.setForeground(new Color(0x232323));
 		remainDate.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
 		remainDate.setBackground(Color.WHITE);
 		remainDate.setBounds(238, 220, 130, 40);
 		
-		if (!CheckInFrame.member.getRemain_date().equals(null)) {
+		if (CheckInFrame.member.getRemain_date() != null) {
 			remainDate.setVisible(true);
 			
 			Date remain = CheckInFrame.member.getRemain_date();
@@ -72,7 +77,7 @@ public class UseTicketDialog extends JDialog {
 			remainTimeLabel.setVisible(false);
 		} else {
 			remainDate.setVisible(false);
-			remainTimeLabel.setText(60 + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
+			remainTimeLabel.setText(SeatDAO.getRemainTime(CheckInFrame.member.getMember_id()) + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
 			remainTimeLabel.setBounds(408, 218, 100, 40);
 			remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 			remainTimeLabel.setForeground(new Color(0x232323));
@@ -101,6 +106,20 @@ public class UseTicketDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+
+				SeatDAO.setReservation(CheckInFrame.member.getMember_id(), seatNum);
+				
+				int seat = Integer.parseInt(seatNum);
+				
+				SeatReportPanel.seatInfoLabel.setText(seatNum + "번 좌석을 사용중입니다.");
+				SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
+				SeatReportPanel.seatBtns.get(seat - 1).setBackground(new Color(0xFF5C01));
+				SeatReportPanel.seatBtns.get(seat - 1).use = true;
+				SeatReportPanel.mySeat = Integer.parseInt(seatNum);
+				
+				RemainSeatLabel.remain = SeatDAO.isRemain();
+				SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
+				
 				UseLastDialog useLastPopup = new UseLastDialog();
 			}
 		});
@@ -112,9 +131,6 @@ public class UseTicketDialog extends JDialog {
 		useTicketPanel.add(remainDate);
 		useTicketPanel.add(remainDateLabel);
 		useTicketPanel.add(useStartBtn);
-		
-		/* 다이얼로그에 패널붙이기 */
-		add(useTicketPanel);
 		
 		/* 팝업창 기본 설정 */
 		useTicketPanel.setLayout(null);

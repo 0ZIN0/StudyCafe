@@ -14,9 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.OkButton;
+import color.MyColor;
 import dao.SeatDAO;
 import dto.Seat;
 import frame.CheckInFrame;
+import panel.SeatReportPanel;
 
 public class CheckOutDialog extends JDialog {
 	
@@ -55,8 +57,13 @@ public class CheckOutDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SeatDAO.setCheckOut(CheckInFrame.member.getMember_id());
-				JDialog exitPopup = new ExitDialog(); // 만들어야됨
+				SeatReportPanel.seatInfoLabel.setText("사용중인 좌석이 없습니다.");
+				SeatReportPanel.seatBtns.get(SeatReportPanel.mySeat - 1).setBackground(MyColor.LIGHTGRAY);
+				SeatReportPanel.seatBtns.get(SeatReportPanel.mySeat - 1).use = false;
+				SeatReportPanel.mySeat = 0;
+
+				int useMinute = SeatDAO.setCheckOut(CheckInFrame.member.getMember_id());
+				JDialog exitPopup = new ExitDialog(useMinute);
 			}
 		});
 		

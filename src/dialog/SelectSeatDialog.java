@@ -17,6 +17,7 @@ import button.TermTicketButton;
 import button.TimeTicketButton;
 import button.UseTicketButton;
 import dto.Seat;
+import dto.Ticket_order;
 
 public class SelectSeatDialog extends JDialog {
 	
@@ -41,6 +42,7 @@ public class SelectSeatDialog extends JDialog {
 	
 	public SelectSeatDialog(String seatNum, Seat seat) {
 		this.seat = seat;
+		
 		
 		/* 구매 버튼 */
 		JButton dayTicketBtn = new DayTicketButton(seat, this);

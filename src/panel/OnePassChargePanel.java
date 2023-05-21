@@ -15,11 +15,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
+import dialog.PaymentDialog;
+import dialog.TimeOrPeriodChargeDialog;
 
 public class OnePassChargePanel extends JPanel {
 
 	public static int onePassChargeItem; 
 	public static int onePassChargePrice;
+	
+	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
+
+	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
+	
+	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
 	
 	
 	GridLayout grid = new GridLayout(2, 3, 20, 20);
@@ -70,6 +78,8 @@ public class OnePassChargePanel extends JPanel {
 			chargeBtn.add(label, BorderLayout.SOUTH);
 			Font font3 = new Font("Noto Sans KR Medium", Font.PLAIN, 32);
 			label.setFont(font3);
+			label.setForeground(new Color(35, 35, 35));
+			
 
 			chargeBtn.addActionListener(new ActionListener() {
 
@@ -79,16 +89,18 @@ public class OnePassChargePanel extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					for(int i = 0; i < chargeBtns.size(); i++) {
-
-
 						if(chargeBtns.indexOf(e.getSource()) == i) {
-
 							chargeBtns.get(i).setIcon(selectedIcons[i]);
-
 							NumberFormat nf = NumberFormat.getNumberInstance();
-
-
+							
+							OnePassChargePanel.onePassChargePrice = 0;
+							TimeChargePanel.timeChargePrice  = 0; 
+							PeriodChargePanel.periodChargePrice = 0;
+							PaymentDialog.studyRoomChargePrice = 0;
+							ButtonPanel.lockerChargePrice = 0;
+							
 							if (i == 0) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-01");
 								onePassChargePrice = 5000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -100,6 +112,7 @@ public class OnePassChargePanel extends JPanel {
 								hours.setText(nf.format(onePassChargeItem) + "시간");
 
 							} else if (i == 1) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-02");
 								onePassChargePrice = 6000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -111,6 +124,7 @@ public class OnePassChargePanel extends JPanel {
 								hours.setText(nf.format(onePassChargeItem) + "시간");
 
 							} else if (i == 2) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-03");
 								onePassChargePrice = 7000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -122,6 +136,7 @@ public class OnePassChargePanel extends JPanel {
 								hours.setText(nf.format(onePassChargeItem) + "시간");
 
 							} else if (i == 3) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-04");
 								onePassChargePrice = 9000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -134,6 +149,7 @@ public class OnePassChargePanel extends JPanel {
 
 
 							} else if (i == 4) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-05");
 								onePassChargePrice = 12000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -145,6 +161,7 @@ public class OnePassChargePanel extends JPanel {
 								hours.setText(nf.format(onePassChargeItem) + "시간");
 
 							} else if (i == 5) {
+								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-06");
 								onePassChargePrice = 15000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -198,12 +215,10 @@ public class OnePassChargePanel extends JPanel {
 
 	public void setOnePassChargePrice(int price) {
 		onePassChargePrice = price;
-		
 	}
 	
 	public void setOnePassChargeItem(int item) {
 		onePassChargeItem = item;
-		
 	}
 
 	
