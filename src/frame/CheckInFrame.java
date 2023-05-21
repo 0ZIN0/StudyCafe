@@ -262,7 +262,7 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-		//		getContentPane().add(loginMainPanel, "login");
+//		getContentPane().add(loginMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 

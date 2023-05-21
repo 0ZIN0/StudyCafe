@@ -8,7 +8,7 @@ public class OjdbcConnection {
 
 	private static String driverName = "oracle.jdbc.driver.OracleDriver";
 	private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static String user = "testuser";
+	private static String user = "TESTUSER";
 	private static String password = "1234";
 	
 	static {
