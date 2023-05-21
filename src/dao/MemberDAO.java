@@ -49,8 +49,9 @@ public class MemberDAO {
 			try (
 					ResultSet rs = pstmt.executeQuery();
 					) {
-				rs.next();
-				return rs.getInt("seat_id");
+				if(rs.next()) {
+					return rs.getInt("seat_id");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

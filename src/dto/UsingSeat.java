@@ -4,11 +4,9 @@ import java.util.Date;
 
 public class UsingSeat {
 	
-	int seat_id;
-	int useTime;
-	String seat_state;
-	int remainTime;
-	
+	Integer seat_id;
+	Integer remainTime;
+
 	public int getSeat_id() {
 		return seat_id;
 	}
@@ -16,18 +14,6 @@ public class UsingSeat {
 		this.seat_id = seat_id;
 	}
 	
-	public int getUseTime() {
-		return useTime;
-	}
-	public void setUseTime(int useTime) {
-		this.useTime = useTime;
-	}
-	public String getSeat_state() {
-		return seat_state;
-	}
-	public void setSeat_state(String seat_state) {
-		this.seat_state = seat_state;
-	}
 	public int getRemainTime() {
 		return remainTime;
 	}
