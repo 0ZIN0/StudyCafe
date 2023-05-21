@@ -16,14 +16,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import button.SeatButton;
+import color.MyColor;
+import dao.SeatDAO;
 import dao.TicketOrderDAO;
 import dao.temDAO;
 import dto.Ticket;
 import dto.Ticket_order;
 import dto.temDTO;
 import frame.CheckInFrame;
+import label.RemainSeatLabel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
+import panel.SeatReportPanel;
 import panel.TimeChargePanel;
 import panel.MainPanel;
 
@@ -49,10 +54,49 @@ public class CompletePaymentDialog extends JDialog {
 		mainButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-//				temDTO dto = new temDTO("2시", description);
-//				temDAO dao = new temDAO();
-//				dao.addTem(dto);
+				//				temDTO dto = new temDTO("2시", description);
+				//				temDAO dao = new temDAO();
+				//				dao.addTem(dto);
 				
+				/* 건들지 마시오 (로아) */
+				String ticket_id = TimeOrPeriodChargeDialog.ticket_order.getTicket_id();
+				String[] num = ticket_id.split("-0");
+				if (Integer.parseInt(num[1]) >= 1 && Integer.parseInt(num[1]) <= 6) {
+					int ticket_value = 0;
+					if (ticket_id.equals("T-01")) {
+						ticket_value = 120;
+					} else if (ticket_id.equals("T-02")) {
+						ticket_value = 180;
+					} else if (ticket_id.equals("T-03")) {
+						ticket_value = 240;
+					} else if (ticket_id.equals("T-04")) {
+						ticket_value = 360;
+					} else if (ticket_id.equals("T-05")) {
+						ticket_value = 480;
+					} else if (ticket_id.equals("T-06")) {
+						ticket_value = 1440;
+					}
+
+					if (SeatReportPanel.mySeat == 0 ) {
+						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
+						
+						int seat = SeatReportPanel.seat_reservation.getSeat_id();
+						
+						SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
+						SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
+						SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);
+						SeatReportPanel.seatBtns.get(seat - 1).use = true;
+						SeatReportPanel.mySeat = seat;
+						
+						RemainSeatLabel.remain = SeatDAO.isRemain();
+						SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
+					} else {
+						int seat = SeatReportPanel.seat_reservation.getSeat_id();
+						SeatDAO.plusOneDayTicket(seat, ticket_value);
+					}
+				}
+				/* 여기까지 절대 건들지 마시오 (로아) */
+
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(CheckInFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 

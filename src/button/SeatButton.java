@@ -27,9 +27,9 @@ public class SeatButton extends JButton {
 		setText(seatNum);
 		setBorderPainted(false);
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
-
+		
 		use = SeatDAO.isUse(Integer.parseInt(seatNum));
-
+		
 		if (use) {
 			setBackground(new Color(0x8D8787)); // 사용중인 좌석
 			if (Integer.parseInt(seatNum) == SeatReportPanel.mySeat) {
@@ -45,6 +45,8 @@ public class SeatButton extends JButton {
 				
 				System.out.println("seatNum" + seatNum);
 				System.out.println("myseat" + SeatReportPanel.mySeat);
+
+				SeatReportPanel.seat_reservation.setSeat_id(Integer.parseInt(seatNum));
 				
 				if (use) {
 					if (SeatReportPanel.mySeat != 0) {

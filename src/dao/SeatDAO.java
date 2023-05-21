@@ -41,7 +41,7 @@ public class SeatDAO {
 
 		return member;
 	}
-	
+
 	/* 유저의 잔여시간을 꺼내는 메서드 */
 	public static int getRemainTime(String member_id) {
 		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID=?";
@@ -50,73 +50,72 @@ public class SeatDAO {
 				PreparedStatement pstmt = conn.prepareStatement(query);
 				ResultSet rs = pstmt.executeQuery();
 				) {
-			
+
 			rs.next();
 			return rs.getInt("remain_time");
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
-	
+
 	/* 좌석 이동 시 유저의 데이터를 변경하는 메서드 */
 	public static void setChangeSeat(String member_id, String seatNum) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION INNER JOIN SEAT USING(SEAT_ID) WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
-		
+
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt1 = conn.prepareStatement(query1);
-		) {
+				) {
 
 			pstmt1.setString(1, member_id);
-			
+
 			try (
 					ResultSet rs1 = pstmt1.executeQuery();
-			) {
-				String query2 = "UPDATE SEAT SET SEAT_STATE='비어있음' WHERE SEAT_ID=?";
+					) {
+				String query2 = "UPDATE SEAT SET SEAT_STATE='사용중', REMAIN_TIME=(SELECT REMAIN_TIME FROM SEAT WHERE SEAT_ID=?) WHERE SEAT_ID=?";
+				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음', REMAIN_TIME=0 WHERE SEAT_ID=?";
 
 				try (
 						PreparedStatement pstmt2 = conn.prepareStatement(query2);
+						PreparedStatement pstmt3 = conn.prepareStatement(query3);
 						) {
+
 					rs1.next();
-					pstmt2.setString(1, rs1.getString("seat_id"));
-					
-					String query3 = "UPDATE SEAT SET SEAT_STATE='사용중' WHERE SEAT_ID=?";
-					try (
-							PreparedStatement pstmt3 = conn.prepareStatement(query3);
-					) {
-						pstmt3.setString(1, seatNum);
-						
-						String query4 = "SELECT * FROM SEAT_RESERVATION INNER JOIN SEAT USING (SEAT_ID) WHERE SEAT_STATE='비어있음'";
-						try (
-								PreparedStatement pstmt4 = conn.prepareStatement(query4);
-								ResultSet rs2 = pstmt1.executeQuery();
-						) {
-							String query5 = "UPDATE SEAT_RESERVATION SET SEAT_ID=? WHERE SEAT_RESERVATION_ID=?";
-							try (
-									PreparedStatement pstmt5 = conn.prepareStatement(query5);
-							) {
-								
-								rs2.next();
-								pstmt5.setString(1, seatNum);
-								pstmt5.setString(2, rs2.getString("seat_reservation_id"));
-								
-								pstmt5.executeUpdate();
-							}
-						}
-						pstmt3.executeUpdate();
-					}
-					
+
+					pstmt2.setInt(1, rs1.getInt("seat_id"));
+					pstmt2.setInt(2, Integer.parseInt(seatNum));
+					pstmt3.setInt(1, rs1.getInt("seat_id"));
+
 					pstmt2.executeUpdate();
+					pstmt3.executeUpdate();
+
+					String query4 = "SELECT * FROM SEAT_RESERVATION INNER JOIN SEAT USING (SEAT_ID) WHERE SEAT_STATE='비어있음' AND SEAT_RESERVATION_END_TIME IS NULL";
+					try (
+							PreparedStatement pstmt4 = conn.prepareStatement(query4);
+							ResultSet rs2 = pstmt1.executeQuery();
+							) {
+						String query5 = "UPDATE SEAT_RESERVATION SET SEAT_ID=? WHERE SEAT_RESERVATION_ID=?";
+						try (
+								PreparedStatement pstmt5 = conn.prepareStatement(query5);
+								) {
+
+							rs2.next();
+							pstmt5.setInt(1, Integer.parseInt(seatNum));
+							pstmt5.setString(2, rs2.getString("seat_reservation_id"));
+
+							pstmt5.executeUpdate();
+						}
+					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/* 퇴실 처리 기능 */
 	public static void setCheckOut(String member_id) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
@@ -130,7 +129,7 @@ public class SeatDAO {
 					ResultSet rs = pstmt1.executeQuery();
 					) {
 				String query2 = "UPDATE SEAT_RESERVATION SET SEAT_RESERVATION_END_TIME=sysdate WHERE SEAT_RESERVATION_ID=?";
-				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음' WHERE SEAT_ID=?";
+				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음', REMAIN_TIME=0 WHERE SEAT_ID=?";
 				try (
 						PreparedStatement pstmt2 = conn.prepareStatement(query2);
 						PreparedStatement pstmt3 = conn.prepareStatement(query3);
@@ -138,7 +137,7 @@ public class SeatDAO {
 					rs.next();
 					pstmt2.setString(1, rs.getString("SEAT_RESERVATION_ID"));
 					pstmt3.setString(1, rs.getString("seat_id"));
-					
+
 					pstmt2.executeUpdate();
 					pstmt3.executeUpdate();
 				}
@@ -147,7 +146,7 @@ public class SeatDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/* 퇴실할때 퇴실 시간 찍어주고 좌석 비어있음으로 변경, 사용했던 minute을 반환하는 메서드 */
 	public static int setCheckOutAndGetUseTime(String member_id) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
@@ -161,7 +160,7 @@ public class SeatDAO {
 					ResultSet rs = pstmt1.executeQuery();
 					) {
 				String query2 = "UPDATE SEAT_RESERVATION SET SEAT_RESERVATION_END_TIME=sysdate WHERE SEAT_RESERVATION_ID=?";
-				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음' WHERE SEAT_ID=?";
+				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음', REMAIN_TIME=0 WHERE SEAT_ID=?";
 				String query4 = "SELECT ROUND((SEAT_RESERVATION_END_TIME-SEAT_RESERVATION_START_TIME)*24*60) AS MINUTE FROM SEAT_RESERVATION WHERE SEAT_RESERVATION_ID=?";
 				try (
 						PreparedStatement pstmt2 = conn.prepareStatement(query2);
@@ -171,56 +170,86 @@ public class SeatDAO {
 					rs.next();
 					pstmt2.setString(1, rs.getString("SEAT_RESERVATION_ID"));
 					pstmt3.setString(1, rs.getString("seat_id"));
-					
+
 					pstmt2.executeUpdate();
 					pstmt3.executeUpdate();
-					
-					pstmt4.setString(1, rs.getString("SEAT_RESERVATION_ID"));
 
-					try (
-							ResultSet rs2 = pstmt4.executeQuery();
-					) {
-						
-						rs2.next();
-						return rs2.getInt("MINUTE");
+					if (!rs.getString("use_ticket_category").equals("일회이용권")) {
+						pstmt4.setString(1, rs.getString("SEAT_RESERVATION_ID"));
+
+						try (
+								ResultSet rs2 = pstmt4.executeQuery();
+								) {
+							rs2.next();
+							return rs2.getInt("MINUTE");
+						}
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return 0;
 	}
-	
+
 	/* 입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
 	public static void setReservation(Seat_reservation seat_reservation) {
-		
+
 		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, ?, sysdate, NULL)";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt1 = conn.prepareStatement(query1);
 				) {
-			
+
 			pstmt1.setString(1, seat_reservation.getSeat_id().toString());
 			pstmt1.setString(2, seat_reservation.getMember_id());
 			pstmt1.setString(3, seat_reservation.getUse_ticket_category());
-			
+
 			pstmt1.executeUpdate();
-			
+
 			String query2 = "UPDATE SEAT SET SEAT_STATE='사용중' WHERE SEAT_ID=?";
 			try (
 					PreparedStatement pstmt2 = conn.prepareStatement(query2);
-			) {
+					) {
 				pstmt2.setString(1, seat_reservation.getSeat_id().toString());
-				
+
 				pstmt2.executeUpdate();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	/* (일회이용권 전용)입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
+	public static void setOneDayReservation(Seat_reservation seat_reservation, Integer ticket_useable) {
+
+		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, ?, sysdate, NULL)";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				) {
+
+			pstmt1.setString(1, seat_reservation.getSeat_id().toString());
+			pstmt1.setString(2, seat_reservation.getMember_id());
+			pstmt1.setString(3, seat_reservation.getUse_ticket_category());
+
+			pstmt1.executeUpdate();
+
+			String query2 = "UPDATE SEAT SET SEAT_STATE='사용중', REMAIN_TIME=? WHERE SEAT_ID=?";
+			try (
+					PreparedStatement pstmt2 = conn.prepareStatement(query2);
+					) {
+				pstmt2.setInt(1, ticket_useable);
+				pstmt2.setString(2, seat_reservation.getSeat_id().toString());
+
+				pstmt2.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	/** 좌석 버튼 색 변경하는 메서드 */
 	public static boolean isUse(int num) {
 
@@ -270,6 +299,23 @@ public class SeatDAO {
 		return 0;
 	}
 
+	/* (일회이용권 전용) 이용권 연장 시 seat의 remain_time 시간 추가하는 메서드 */
+	public static void plusOneDayTicket(Integer seat_id, Integer remain_time) {
+		String query = "UPDATE SEAT SET REMAIN_TIME=REMAIN_TIME+? WHERE SEAT_ID=?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+
+			pstmt.setInt(1, remain_time);
+			pstmt.setInt(2, seat_id);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static List<Integer> getSeatId() {
 		List<Integer> seatIds = new ArrayList<>();
 		String query = "SELECT seat_id FROM seat";
@@ -311,11 +357,11 @@ public class SeatDAO {
 
 		return remain;
 	}
-	
+
 	public static List<int[]> leaveSeat() {
 		LocalTime time = LocalTime.now();
 		List<int[]> remaintime = new ArrayList<>();
-		
+
 		String query = "SELECT \r\n"
 				+ "    res.seat_id, \r\n"
 				+ "    (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) AS remain\r\n"
