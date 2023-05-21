@@ -28,6 +28,7 @@ public class UsePlusButton extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.dispose();
+				UseTicketButton.useSeat = true;
 				JDialog selectSeatPopup = new SelectSeatDialog(seatNum , seat);
 			}
 		});
