@@ -4,13 +4,12 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
 import dto.Member;
+import dto.Seat_reservation;
 
 public class SeatDAO {
 
@@ -195,16 +194,17 @@ public class SeatDAO {
 	}
 	
 	/* 입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
-	public static void setReservation(String member_id, String seatNum) {
+	public static void setReservation(Seat_reservation seat_reservation) {
 		
-		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, sysdate, NULL)";
+		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, ?, sysdate, NULL)";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt1 = conn.prepareStatement(query1);
 				) {
-
-			pstmt1.setString(1, seatNum);
-			pstmt1.setString(2, member_id);
+			
+			pstmt1.setString(1, seat_reservation.getSeat_id().toString());
+			pstmt1.setString(2, seat_reservation.getMember_id());
+			pstmt1.setString(3, seat_reservation.getUse_ticket_category());
 			
 			pstmt1.executeUpdate();
 			
@@ -212,7 +212,7 @@ public class SeatDAO {
 			try (
 					PreparedStatement pstmt2 = conn.prepareStatement(query2);
 			) {
-				pstmt2.setString(1, seatNum);
+				pstmt2.setString(1, seat_reservation.getSeat_id().toString());
 				
 				pstmt2.executeUpdate();
 			}

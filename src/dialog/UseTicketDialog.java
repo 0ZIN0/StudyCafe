@@ -48,6 +48,7 @@ public class UseTicketDialog extends JDialog {
 	JButton useStartBtn = new JButton(new ImageIcon("ui/Remain_seat_popup//useStart_Button.png"));
 	
 	public UseTicketDialog(String seatNum, Seat seat) {
+		SeatReportPanel.seat_reservation.setSeat_id(Integer.parseInt(seatNum));
 		
 		/* 라벨 설정 */
 		String seatName = seatNum + "번 좌석";
@@ -64,6 +65,7 @@ public class UseTicketDialog extends JDialog {
 		remainDate.setBounds(238, 220, 130, 40);
 		
 		if (CheckInFrame.member.getRemain_date() != null) {
+			SeatReportPanel.seat_reservation.setUse_ticket_category("기간이용권");
 			remainDate.setVisible(true);
 			
 			Date remain = CheckInFrame.member.getRemain_date();
@@ -76,6 +78,7 @@ public class UseTicketDialog extends JDialog {
 			remainDateLabel.setVisible(true);
 			remainTimeLabel.setVisible(false);
 		} else {
+			SeatReportPanel.seat_reservation.setUse_ticket_category("시간충전권");
 			remainDate.setVisible(false);
 			remainTimeLabel.setText(SeatDAO.getRemainTime(CheckInFrame.member.getMember_id()) + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
 			remainTimeLabel.setBounds(408, 218, 100, 40);
@@ -107,7 +110,7 @@ public class UseTicketDialog extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 
-				SeatDAO.setReservation(CheckInFrame.member.getMember_id(), seatNum);
+				SeatDAO.setReservation(SeatReportPanel.seat_reservation);
 				
 				int seat = Integer.parseInt(seatNum);
 				

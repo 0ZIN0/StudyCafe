@@ -17,6 +17,7 @@ import button.SeatButton;
 import dao.SeatDAO;
 import dto.Member;
 import dto.Seat;
+import dto.Seat_reservation;
 import frame.CheckInFrame;
 import label.RemainSeatLabel;
 import label.SeatReportLabel;
@@ -42,8 +43,10 @@ public class SeatReportPanel extends JPanel {
 	
 	static List<Seat> seats = new ArrayList<>();
 	public static List<SeatButton> seatBtns = new ArrayList<>();
-
+	public static Seat_reservation seat_reservation = new Seat_reservation();
+	
 	public SeatReportPanel(Image seatImage, Member member) {
+		seat_reservation.setMember_id(CheckInFrame.member.getMember_id());
 		
 		for(int i = 0; i < 32; i++) {
 			Seat seat = new Seat();
