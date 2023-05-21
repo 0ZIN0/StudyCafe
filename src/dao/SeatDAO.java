@@ -118,8 +118,39 @@ public class SeatDAO {
 		}
 	}
 	
+	/* 퇴실 처리 기능 */
+	public static void setCheckOut(String member_id) {
+		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				) {
+
+			pstmt1.setString(1, member_id);
+			try (
+					ResultSet rs = pstmt1.executeQuery();
+					) {
+				String query2 = "UPDATE SEAT_RESERVATION SET SEAT_RESERVATION_END_TIME=sysdate WHERE SEAT_RESERVATION_ID=?";
+				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음' WHERE SEAT_ID=?";
+				try (
+						PreparedStatement pstmt2 = conn.prepareStatement(query2);
+						PreparedStatement pstmt3 = conn.prepareStatement(query3);
+						) {
+					rs.next();
+					pstmt2.setString(1, rs.getString("SEAT_RESERVATION_ID"));
+					pstmt3.setString(1, rs.getString("seat_id"));
+					
+					pstmt2.executeUpdate();
+					pstmt3.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/* 퇴실할때 퇴실 시간 찍어주고 좌석 비어있음으로 변경, 사용했던 minute을 반환하는 메서드 */
-	public static int setCheckOut(String member_id) {
+	public static int setCheckOutAndGetUseTime(String member_id) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
