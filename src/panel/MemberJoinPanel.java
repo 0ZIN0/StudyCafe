@@ -24,7 +24,7 @@ public class MemberJoinPanel extends JPanel  {
     JTextField phoneField;
     JPasswordField passwordField;
 	JPasswordField confirmPasswordField;
-    JButton submitButton;
+    JButton submitButton,beforeButton;
     JButton phonduplicationBtn;
     
     GridLayout grid = new GridLayout(10,2);
@@ -109,8 +109,9 @@ public class MemberJoinPanel extends JPanel  {
        	passwordField.setBorder(getBorder());
        	confirmPasswordField.setBorder(getBorder());
     	
-    	submitButton = new JButton("회원가입");
-    	phonduplicationBtn= new JButton("중복버튼");
+    	submitButton = new JButton(new ImageIcon("ui/main/Memberjoin/Next_Button.png"));
+    	beforeButton = new JButton(new ImageIcon("ui/main/Memberjoin/Before_Button.png"));
+    	phonduplicationBtn= new JButton(new ImageIcon("ui/main/Memberjoin/DuplicateCheck_Button.png"));
     	
     	
     	add(MemberJoinPanel);
@@ -150,7 +151,23 @@ public class MemberJoinPanel extends JPanel  {
 	    confirmPasswordField.setOpaque(false);
 	    confirmPasswordField.setEchoChar((char) 0);
 	    
-	    submitButton.setBounds(80, 650, 200, 50);
+	    beforeButton.setBounds(80, 590, 400, 148);
+	    beforeButton.setFocusPainted(false);
+	    beforeButton.setBorderPainted(false);
+	    beforeButton.setContentAreaFilled(false);
+	    
+	    
+	    submitButton.setBounds(510, 590, 400, 148);
+	    submitButton.setFocusPainted(false);
+	    submitButton.setBorderPainted(false);
+	    submitButton.setContentAreaFilled(false);
+	    
+	    
+	    phonduplicationBtn.setBounds(600, 0, 250, 110);
+	    phonduplicationBtn.setFocusPainted(false);
+	    phonduplicationBtn.setBorderPainted(false);
+	    phonduplicationBtn.setContentAreaFilled(false);
+	    
 	    
 	    
 	    //submitButton.addActionListener(this);
@@ -210,19 +227,7 @@ public class MemberJoinPanel extends JPanel  {
         	
 		});
         
-        // 생년월일 포커스 이벤트
-//        birthdayField.addFocusListener(new FocusAdapter() {
-//        	@Override
-//        	public void focusLost(FocusEvent e) {
-//        		numpad.setTextField(birthdayField);
-//        		numpad.setMax(8);
-//        	}
-//        	@Override
-//			public void focusGained(FocusEvent e) {
-//        		birthdayField.setText("");
-//				
-//			}
-//		});
+        
         
         
        
@@ -234,11 +239,54 @@ public class MemberJoinPanel extends JPanel  {
         
         MemberJoinPanel.add(submitButton);
         
-        MemberJoinPanel.add(phonduplicationBtn);
+        MemberJoinPanel.add(beforeButton);
         
-        //MemberJoinPanel.add(birthdayField);
         
-        //setBackground(new Color(73,67,68));
+        //MemberJoinPanel.add(phonduplicationBtn);
+        
+        
+        
+        
+        
+        beforeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				card.show(getParent(), "login");
+			}
+		});
+        
+        
+//        phonduplicationBtn.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				String phone = phoneField.getText();
+//	            String password = new String(passwordField.getPassword());
+//	            String confirmPassword = new String(confirmPasswordField.getPassword());
+//	            
+//	            memberjoin.setPhone(phone);
+//	            memberjoin.setPassword(password);
+//				
+//				
+//				try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
+//	            		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM member where phone_number = ?")) {
+//	                   	
+//	                   	stmt.setString(1, phone);
+//	                   	ResultSet rs = stmt.executeQuery();
+//	                   	if (rs.next()) {
+//	                	   //JOptionPane.showMessageDialog(MemberJoinPanel.this, "이미 저장된 번호입니다");
+//	                	   new setPopup("이미 저장된 번호입니다.").setVisible(true);
+//	                       return;
+//	                   }
+//	            } catch (SQLException e1) {
+//	               e1.printStackTrace();
+//	               new setPopup("사용 가능한 번호입니다.").setVisible(true);
+//	            }
+//				
+//				
+//			}
+//		});
+        
         
         
         
