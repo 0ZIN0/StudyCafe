@@ -40,7 +40,7 @@ public class MemberDAO {
 	}
 	
 	public static int usingSeat(String memId) {
-		String query = "SELECT seat_id FROM seat_reservation member WHERE member_id = ?";
+		String query = "SELECT seat_id FROM seat_reservation WHERE member_id = ?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
