@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dto.Member;
+import panel.MyPagePanel;
 
 public class SeatDAO {
 

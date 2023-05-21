@@ -39,7 +39,11 @@ public class MyPagePanel extends JPanel {
 			"사용중인 좌석 : ",
 			"사용중인 사물함 : "
 	};
+	
 	public static JLabel time;
+	public static JLabel period;
+	public static JLabel seat;
+	public static JLabel locker;
 	
 	public MyPagePanel(CardLayout card, Member member) {
 		this.member = member;
@@ -59,22 +63,37 @@ public class MyPagePanel extends JPanel {
 		phoneNum.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		phoneNum.setForeground(Color.WHITE);
 		
-		time = new JLabel(0 + "분");
+		time = new JLabel();
+		if(member.getRemain_time() == null) {
+			time.setText("");
+		} else {
+			time.setText(member.getRemain_time() + "분");
+		}
 		time.setBounds(1010, 440, 500, 100);
 		time.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		time.setForeground(Color.WHITE);
 		
-		JLabel period = new JLabel(0 + "까지");
+		period = new JLabel();
+		if(member.getRemain_date() == null) {
+			period.setText("");
+		} else {
+			period.setText(member.getRemain_date() + "까지");
+		}
 		period.setBounds(1010, 560, 500, 100);
 		period.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		period.setForeground(Color.WHITE);
 		
-		JLabel seat = new JLabel(Integer.toString(MemberDAO.usingSeat(member.getMember_id())) + "번");
+		seat = new JLabel(Integer.toString(MemberDAO.usingSeat(member.getMember_id())) + "번");
 		seat.setBounds(1010, 680, 500, 100);
 		seat.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		seat.setForeground(Color.WHITE);
 		
 		JLabel locker = new JLabel(member.getLocker_number() + "번");
+		if(member.getLocker_number() == null) {
+			locker.setText("사용중인 사물함이 없습니다");
+		} else {
+			locker.setText(member.getLocker_number() + "번");
+		}
 		locker.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		locker.setBounds(1010, 800, 500, 100);
 		locker.setForeground(Color.WHITE);

@@ -19,6 +19,7 @@ import button.SeatButton;
 import dao.SeatDAO;
 import dto.Seat;
 import frame.CheckInFrame;
+import panel.MyPagePanel;
 import panel.SeatReportPanel;
 
 public class ChangeSeatDialog extends JDialog {
@@ -101,6 +102,7 @@ public class ChangeSeatDialog extends JDialog {
 				SeatReportPanel.mySeat = Integer.parseInt(seatNum);
 				
 				JDialog changeCompletionPopup = new ChangeCompletionDialog(seatNum);
+				MyPagePanel.seat.setText(seatNum + "번");
 			}
 		});
 		
