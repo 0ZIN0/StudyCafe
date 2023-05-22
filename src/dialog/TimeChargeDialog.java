@@ -36,7 +36,7 @@ public class TimeChargeDialog extends JDialog {
 	
 	TimeChargePanel ticketPanel = new TimeChargePanel(whatName, nameIs, howHours, hours, howPrice, priceIs);
 
-	public TimeChargeDialog() {
+	public TimeChargeDialog(String lockerNum) {
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/시간충전권_팝업/시간충전권_팝업.png");
 		Image bgImage = imageIcon.getImage();
@@ -68,7 +68,7 @@ public class TimeChargeDialog extends JDialog {
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				PaymentInformationDialog paymentInformationDialog = new PaymentInformationDialog();
+				PaymentInformationDialog paymentInformationDialog = new PaymentInformationDialog(lockerNum);
 			}
 		});
 

@@ -20,7 +20,7 @@ import panel.TimeChargePanel;
 
 public class TimeOrPeriodChargeDialog extends JDialog {
 	
-	public TimeOrPeriodChargeDialog(Member member) {
+	public TimeOrPeriodChargeDialog(Member member, String lockerNum) {
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/상품충전_팝업/상품충전_BG.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -48,7 +48,7 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 		TimeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				TimeChargeDialog timeCharge = new TimeChargeDialog();
+				TimeChargeDialog timeCharge = new TimeChargeDialog(lockerNum);
 			}
 		});
 

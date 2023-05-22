@@ -39,7 +39,7 @@ public class PaymentInformationDialog extends JDialog {
 	
 	private ImageIcon check;
 
-	public PaymentInformationDialog() {
+	public PaymentInformationDialog(String lockerNum) {
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_1/SeatUse_Pay_info_default_1.png");
 		Image bgImage = imageIcon.getImage();
@@ -188,7 +188,7 @@ public class PaymentInformationDialog extends JDialog {
 			add(priceIs);
 
 			if(onePassChargeItem == 99) {
-				hours.setText("종일권(2시까지)"); //변하는 값
+				hours.setText("종일권"); //변하는 값
 				hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 				hours.setForeground(new Color(35, 35, 35));
 				hours.setBounds(382, 278, 200, 35);
@@ -245,7 +245,7 @@ public class PaymentInformationDialog extends JDialog {
 			
 			
 		} else if (lockerChargePrice != 0) {
-			nameIs.setText("사물함 이용권"); 
+			nameIs.setText("사물함[" + lockerNum + "]"); 
 			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			nameIs.setForeground(new Color(35, 35, 35));
 			nameIs.setBounds(382, 225, 200, 35);

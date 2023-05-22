@@ -117,7 +117,7 @@ public class LockerPayDialog extends JDialog {
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				PaymentInformationDialog payInfo = new PaymentInformationDialog();
+				PaymentInformationDialog payInfo = new PaymentInformationDialog(lockerNum);
 			}
 		});
 		

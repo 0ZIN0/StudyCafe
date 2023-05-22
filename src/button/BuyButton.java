@@ -13,7 +13,7 @@ public class BuyButton extends JButton implements ActionListener{
 	
 	Member member;
 
-	public BuyButton(ImageIcon buyImageIcon) {
+	public BuyButton(ImageIcon buyImageIcon, String lockerNum) {
 
 		setContentAreaFilled(false);
 		setBorderPainted(false);
@@ -23,6 +23,6 @@ public class BuyButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(member);
+		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(member, lockerNum);
 	}
 }
