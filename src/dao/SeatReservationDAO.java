@@ -27,7 +27,7 @@ public class SeatReservationDAO {
 				+ "WHERE \r\n"
 				+ "    res.seat_id = seat.seat_id \r\n"
 				+ "AND \r\n"
-				+ "    res.ticket_category = '일회이용권'";
+				+ "    res.use_ticket_category = '일회이용권'";
 		
 		String query2 = "SELECT \r\n"
 				+ "    res.seat_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) as remain \r\n"
@@ -36,7 +36,7 @@ public class SeatReservationDAO {
 				+ "WHERE \r\n"
 				+ "    res.member_id = mem.member_id \r\n"
 				+ "AND \r\n"
-				+ "    res.ticket_category = '시간충전권'";
+				+ "    res.use_ticket_category = '시간충전권'";
 		
 		String query3 = "SELECT \r\n"
 				+ "    res.seat_id, (ROUND((remain_date - sysdate) * 24 * 60)) as remain \r\n"
@@ -45,7 +45,7 @@ public class SeatReservationDAO {
 				+ "WHERE \r\n"
 				+ "    res.member_id = mem.member_id \r\n"
 				+ "AND \r\n"
-				+ "    res.ticket_category = '기간이용권'";
+				+ "    res.use_ticket_category = '기간이용권'";
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();

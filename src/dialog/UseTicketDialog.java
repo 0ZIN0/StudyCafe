@@ -21,6 +21,7 @@ import dao.SeatDAO;
 import dto.Seat;
 import frame.CheckInFrame;
 import label.RemainSeatLabel;
+import panel.MyPagePanel;
 import panel.SeatReportPanel;
 
 public class UseTicketDialog extends JDialog {
@@ -121,6 +122,7 @@ public class UseTicketDialog extends JDialog {
 				SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
 				
 				UseLastDialog useLastPopup = new UseLastDialog();
+				MyPagePanel.seat.setText(seatNum + "번");
 			}
 		});
 		
