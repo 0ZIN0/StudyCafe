@@ -43,7 +43,7 @@ public class LoginPanel extends JPanel {
 	
 	private static String driverName = "oracle.jdbc.driver.OracleDriver";
 	private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static String user  = "teamproject";
+	private static String user  = "testuser";
 	private static String password = "1234";
 	
 	NumberKeypad numpad= new NumberKeypad();
@@ -77,7 +77,7 @@ public class LoginPanel extends JPanel {
 	};
 	
 	
-	public LoginPanel() {
+	public LoginPanel(JPanel parent) {
 		setLayout(null);
 		
 		JPanel loginPanel = new JPanel();
@@ -186,8 +186,8 @@ public class LoginPanel extends JPanel {
 						//JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
 		               System.out.println("로그인성공로그인성공로그인성공로그인성공");
 		               new setPopup("로그인 성공").setVisible(true);
-		               Member loginMember=MemberDAO.setMember(phon);
-		               CheckInFrame.card.show(getParent(), "main");
+		               CheckInFrame.member = MemberDAO.setMember(phon);
+		               CheckInFrame.card.show(parent.getParent(), "main");
 		               
 		            } else {
 		            	//JOptionPane.showMessageDialog(new LoginMainPanel().background,"@@로그인실패!!" );

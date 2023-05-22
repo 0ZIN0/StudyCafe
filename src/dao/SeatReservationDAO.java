@@ -27,7 +27,8 @@ public class SeatReservationDAO {
 				+ "WHERE \r\n"
 				+ "    res.seat_id = seat.seat_id \r\n"
 				+ "AND \r\n"
-				+ "    res.use_ticket_category = '일회이용권'";
+				+ "    res.use_ticket_category = '일회이용권'"
+				+ " AND res.seat_reservation_end_time IS NULL";
 		
 		String query2 = "SELECT \r\n"
 				+ "    res.seat_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) as remain \r\n"
@@ -36,7 +37,8 @@ public class SeatReservationDAO {
 				+ "WHERE \r\n"
 				+ "    res.member_id = mem.member_id \r\n"
 				+ "AND \r\n"
-				+ "    res.use_ticket_category = '시간충전권'";
+				+ "    res.use_ticket_category = '시간충전권'"
+				+ " AND res.seat_reservation_end_time IS NULL";
 		
 		String query3 = "SELECT \r\n"
 				+ "    res.seat_id, (ROUND((remain_date - sysdate) * 24 * 60)) as remain \r\n"
@@ -45,7 +47,8 @@ public class SeatReservationDAO {
 				+ "WHERE \r\n"
 				+ "    res.member_id = mem.member_id \r\n"
 				+ "AND \r\n"
-				+ "    res.use_ticket_category = '기간이용권'";
+				+ "    res.use_ticket_category = '기간이용권'"
+				+ " AND res.seat_reservation_end_time IS NULL";
 		
 		try (
 				Connection conn = OjdbcConnection.getConnection();
@@ -78,7 +81,7 @@ public class SeatReservationDAO {
 	public static void UsingSeats() {
 		String query = "SELECT seat.seat_id, NVL(res.member_id, '없음') AS member_id, seat.seat_state\r\n"
 				+ "FROM seat_reservation res, seat seat "
-				+ "WHERE seat.seat_id = res.seat_id (+) AND seat_reservation_end_time IS NULL;";
+				+ "WHERE seat.seat_id = res.seat_id (+) AND seat_reservation_end_time IS NULL";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);

@@ -39,7 +39,7 @@ public class MyPagePanel extends JPanel {
 			"사용중인 좌석 : ",
 			"사용중인 사물함 : "
 	};
-	
+	public static JLabel phoneNum;
 	public static JLabel time;
 	public static JLabel period;
 	public static JLabel seat;
@@ -58,7 +58,7 @@ public class MyPagePanel extends JPanel {
 			add(label);
 		}
 		
-		JLabel phoneNum = new JLabel(member.getPhone_number());
+		phoneNum = new JLabel(member.getPhone_number());
 		phoneNum.setBounds(1010, 320, 500, 100);
 		phoneNum.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		phoneNum.setForeground(Color.WHITE);

@@ -42,7 +42,7 @@ public class LoginMainPanel extends JPanel{
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
 	JButton exitBtn = new JButton();
 	NumberKeypad numpad= new NumberKeypad();
-	LoginPanel loginpanel = new LoginPanel();
+	LoginPanel loginpanel = new LoginPanel(this);
 	//TermsofUsePanel termsofUsePanel = new TermsofUsePanel();
 	
 	MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
