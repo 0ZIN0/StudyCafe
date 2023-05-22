@@ -10,7 +10,7 @@ import java.util.List;
 import color.MyColor;
 import dto.Seat_reservation;
 import dto.UsingSeat;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.SeatReportPanel;
 
@@ -94,7 +94,7 @@ public class SeatReservationDAO {
 					int seatNum = rs.getInt("seat_id") - 1;
 					String memId = rs.getString("member_id");
 					String state = rs.getString("seat_state");
-					if(memId.equals(CheckInFrame.member.getMember_id())) {
+					if(memId.equals(MainFrame.member.getMember_id())) {
 						SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.ORANGE);
 					} else {
 						if(state.equals("사용중")) {

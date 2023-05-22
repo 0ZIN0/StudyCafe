@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import button.SeatButton;
 import dao.SeatDAO;
 import dto.Seat;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
@@ -65,11 +65,11 @@ public class UseTicketDialog extends JDialog {
 		remainDate.setBackground(Color.WHITE);
 		remainDate.setBounds(238, 220, 130, 40);
 		
-		if (CheckInFrame.member.getRemain_date() != null) {
+		if (MainFrame.member.getRemain_date() != null) {
 			SeatReportPanel.seat_reservation.setUse_ticket_category("기간이용권");
 			remainDate.setVisible(true);
 			
-			Date remain = CheckInFrame.member.getRemain_date();
+			Date remain = MainFrame.member.getRemain_date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm 종료");
 			String remainDateStr = sdf.format(remain);
 			remainDateLabel.setText(remainDateStr);
@@ -81,8 +81,18 @@ public class UseTicketDialog extends JDialog {
 		} else {
 			SeatReportPanel.seat_reservation.setUse_ticket_category("시간충전권");
 			remainDate.setVisible(false);
-			remainTimeLabel.setText(SeatDAO.getRemainTime(CheckInFrame.member.getMember_id()) + "분"); // 추후에 DAO 이용해서 잔여시간 가져올 것임
-			remainTimeLabel.setBounds(408, 218, 100, 40);
+			
+			int newRemainTime = SeatDAO.getRemainTime(MainFrame.member.getMember_id());
+			String remain = newRemainTime + "분";	
+			
+			if (newRemainTime >= 60 ) {
+				int hour = newRemainTime / 60;
+				int minute = newRemainTime % 60;
+				remain = hour + "시간 " + minute + "분";
+			}
+			
+			remainTimeLabel.setText(remain); // 추후에 DAO 이용해서 잔여시간 가져올 것임
+			remainTimeLabel.setBounds(408, 218, 450, 40);
 			remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 			remainTimeLabel.setForeground(new Color(0x232323));
 			remainTimeLabel.setVisible(true);
@@ -110,7 +120,7 @@ public class UseTicketDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				SeatReportPanel.seat_reservation.setMember_id(CheckInFrame.member.getMember_id());
+				SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
 				SeatDAO.setReservation(SeatReportPanel.seat_reservation);
 				
 				int seat = Integer.parseInt(seatNum);

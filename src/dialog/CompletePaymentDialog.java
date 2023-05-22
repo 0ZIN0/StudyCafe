@@ -25,7 +25,7 @@ import dao.temDAO;
 import dto.Ticket;
 import dto.Ticket_order;
 import dto.temDTO;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
@@ -101,7 +101,7 @@ public class CompletePaymentDialog extends JDialog {
 				}
 				/* 여기까지 절대 건들지 마시오 (로아) */
 
-				TimeOrPeriodChargeDialog.ticket_order.setMember_id(CheckInFrame.member.getMember_id());
+				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 
 				dispose();

@@ -10,6 +10,7 @@ public class Member {
 	private Date remain_date;
 	private String locker_number;
 	private Integer locker_password;
+	private Date locker_remain_date;
 	
 	public String getMember_id() {
 		return member_id;
@@ -52,5 +53,11 @@ public class Member {
 	}
 	public void setLocker_password(Integer locker_password) {
 		this.locker_password = locker_password;
+	}
+	public Date getLocker_remain_date() {
+		return locker_remain_date;
+	}
+	public void setLocker_remain_date(Date locker_remain_date) {
+		this.locker_remain_date = locker_remain_date;
 	}
 }

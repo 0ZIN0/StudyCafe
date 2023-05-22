@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.CloseButton;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
 

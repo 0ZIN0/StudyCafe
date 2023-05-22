@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 import button.CloseButton;
 import dao.SeatDAO;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.MyPagePanel;
 
 public class ExitDialog extends JDialog {
@@ -36,24 +36,22 @@ public class ExitDialog extends JDialog {
 	/* 버튼 */
 	CloseButton closeBtn = new CloseButton(this);
 	
-	int useMinute;
 	/* 라벨 */
 	JLabel remainTime = new JLabel("잔여시간");
 	JLabel remainTimeLabel = new JLabel();
 	JLabel remainDate = new JLabel("만료일");
 	JLabel remainDateLabel = new JLabel();
 	
-	public ExitDialog(int useMinute) {
-		this.useMinute = useMinute;
+	public ExitDialog() {
 		
 		/* 라벨 */ 
-		if (CheckInFrame.member.getRemain_date() != null) {
+		if (MainFrame.member.getRemain_date() != null) {
 			// date
 			remainDate.setForeground(new Color(0x232323));
 			remainDate.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 25));
 			remainDate.setBounds(238, 220, 130, 40);
 			
-			Date remain = CheckInFrame.member.getRemain_date();
+			Date remain = MainFrame.member.getRemain_date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm 종료");
 			String remainDateStr = sdf.format(remain);
 			remainDateLabel.setText(remainDateStr);
@@ -70,7 +68,8 @@ public class ExitDialog extends JDialog {
 			remainTime.setForeground(new Color(0x232323));
 			remainTime.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 			
-			int newRemainTime = SeatDAO.getRemainTime(CheckInFrame.member.getMember_id()) - this.useMinute;
+			int newRemainTime = SeatDAO.getRemainTime(MainFrame.member.getMember_id());
+			
 			String remain = newRemainTime + "분";	
 			
 			if (newRemainTime >= 60 ) {
@@ -80,7 +79,7 @@ public class ExitDialog extends JDialog {
 			}
 				
 			remainTimeLabel.setText(remain);
-			remainTimeLabel.setBounds(408, 218, 100, 40);
+			remainTimeLabel.setBounds(408, 218, 450, 40);
 			remainTimeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 			remainTimeLabel.setForeground(new Color(0x232323));
 			

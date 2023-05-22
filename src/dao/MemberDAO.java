@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import dto.Member;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.MyPagePanel;
 
 public class MemberDAO {
@@ -83,7 +83,7 @@ public class MemberDAO {
 				pstmt2.setString(2, memId);
 				if(pstmt2.executeUpdate() > 0) {
 					System.out.println("update complete");
-					CheckInFrame.member.setRemain_time(rs.getInt("remain"));
+					MainFrame.member.setRemain_time(rs.getInt("remain"));
 					MyPagePanel.time.setText(String.format("%d분",rs.getInt("remain")));
 					conn.commit();	
 				} else {
