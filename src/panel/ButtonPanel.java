@@ -19,6 +19,7 @@ import button.LockerTicketButton;
 import dialog.LockerPayDialog;
 import dialog.PaymentDialog;
 import dialog.TimeOrPeriodChargeDialog;
+import frame.CheckInFrame;
 
 public class ButtonPanel extends JPanel implements ActionListener{
    
@@ -99,24 +100,24 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				ButtonPanel.lockerChargePrice = 0;
 				
 				if(btnNum == 0) {
+					CheckInFrame.ticket_order.setTicket_id("T-15");
 					lockerChargePrice = 6000;
 					lockerChargeItem = 2;
-					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-15");
 					
 				} else if (btnNum == 1) {
+					CheckInFrame.ticket_order.setTicket_id("T-16");
 					lockerChargePrice = 10000;
 					lockerChargeItem = 4;
-					LockerPayDialog.ticket_order_locker.setTicket_id("T-16");
 					
 				} else if (btnNum == 2) {
+					CheckInFrame.ticket_order.setTicket_id("T-17");
 					lockerChargePrice = 20000;
 					lockerChargeItem = 8;
-					LockerPayDialog.ticket_order_locker.setTicket_id("T-17");
 					
 				} else if (btnNum == 3) {
+					CheckInFrame.ticket_order.setTicket_id("T-18");
 					lockerChargePrice = 30000;
 					lockerChargeItem = 12;
-					LockerPayDialog.ticket_order_locker.setTicket_id("T-18");
 				}
 				
 			} else {
@@ -125,12 +126,21 @@ public class ButtonPanel extends JPanel implements ActionListener{
 		}
 	}
 	
+	
 	public static int getLockerChargePrice() {
 		return lockerChargePrice;
 	}
 	
+	public void setLockerChargePrice(int price) {
+		lockerChargePrice = price;
+	}
+	
 	public static int getLockerChargeItem() {
 		return lockerChargeItem;
+	}
+	
+	public void setLockerChargeItem(int item) {
+		lockerChargeItem = item;
 	}
 	
 }

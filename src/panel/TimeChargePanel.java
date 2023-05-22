@@ -18,6 +18,7 @@ import button.ChargeTimeButton;
 import dialog.PaymentDialog;
 import dialog.TimeOrPeriodChargeDialog;
 import dto.temDTO;
+import frame.CheckInFrame;
 
 public class TimeChargePanel extends JPanel {
 	
@@ -28,6 +29,7 @@ public class TimeChargePanel extends JPanel {
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
+	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
 
 	GridLayout grid = new GridLayout(2, 2, 20, 20);
 	List<ChargeTimeButton> chargeBtns = new ArrayList<>();
@@ -83,7 +85,7 @@ public class TimeChargePanel extends JPanel {
 
 							
 							if (i == 0) {
-								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-07");
+								CheckInFrame.ticket_order.setTicket_id("T-07");
 								timeChargePrice = 45000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -95,7 +97,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 1) {
-								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-08");
+								CheckInFrame.ticket_order.setTicket_id("T-08");
 								timeChargePrice = 70000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -107,7 +109,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 2) {
-								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-09");
+								CheckInFrame.ticket_order.setTicket_id("T-09");
 								timeChargePrice = 130000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -119,7 +121,7 @@ public class TimeChargePanel extends JPanel {
 								hours.setText(nf.format(timeChargeItem) + "시간");
 
 							} else if (i == 3) {
-								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-10");
+								CheckInFrame.ticket_order.setTicket_id("T-10");
 								timeChargePrice = 240000;
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
@@ -166,10 +168,7 @@ public class TimeChargePanel extends JPanel {
 		setVisible(true);
 	}
 
-	public static int getTimeChargeItem() {
-		return timeChargeItem;
-	}
-
+	
 	public static int getTimeChargePrice() {
 		return timeChargePrice;
 	}
@@ -182,6 +181,11 @@ public class TimeChargePanel extends JPanel {
 		timeChargeItem = item;
 
 	}
+	
+	public static int getTimeChargeItem() {
+		return timeChargeItem;
+	}
+
 
 }
 

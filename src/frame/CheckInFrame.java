@@ -32,6 +32,7 @@ import dao.SeatDAO;
 import dao.MemberDAO;
 import dto.Member;
 import dto.Seat;
+import dto.Ticket_order;
 import panel.LockerPanel;
 import panel.LoginMainPanel;
 import panel.MainPanel;
@@ -117,7 +118,10 @@ public class CheckInFrame extends JFrame {
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(timeLabel);
 	static UpdateInfo updateInfo = new UpdateInfo();
-
+	
+	// 결제 완료하면서 db에 넘길때 사용 
+	public static Ticket_order ticket_order = new Ticket_order();
+	
 	/**
 	 * Create the frame.
 	 */

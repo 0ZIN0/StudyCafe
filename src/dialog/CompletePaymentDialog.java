@@ -37,8 +37,9 @@ public class CompletePaymentDialog extends JDialog {
 	public CompletePaymentDialog() {
 		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
 		
-		TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(InsertCardDialog.amountPaid);
-
+		//TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(InsertCardDialog.amountPaid);
+		CheckInFrame.ticket_order.setOrder_total_price(InsertCardDialog.amountPaid);
+		
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -94,12 +95,13 @@ public class CompletePaymentDialog extends JDialog {
 //					}
 //				}
 //				/* 여기까지 절대 건들지 마시오 (로아) */
-
-				TimeOrPeriodChargeDialog.ticket_order.setMember_id(CheckInFrame.member.getMember_id());
-				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
+	
+				CheckInFrame.ticket_order.setMember_id(CheckInFrame.member.getMember_id());
+				TicketOrderDAO.saveOrder(CheckInFrame.ticket_order);
 				
-				LockerPayDialog.ticket_order_locker.setMember_id(CheckInFrame.member.getMember_id());
-				TicketOrderDAO.saveOrder(LockerPayDialog.ticket_order_locker);
+				
+//				LockerPayDialog.ticket_order_locker.setMember_id(CheckInFrame.member.getMember_id());
+//				TicketOrderDAO.saveOrder(LockerPayDialog.ticket_order_locker);
 				
 
 				dispose();
