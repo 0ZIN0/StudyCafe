@@ -8,8 +8,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import color.MyColor;
 import dto.Member;
 import panel.MyPagePanel;
+import panel.SeatReportPanel;
 import dto.Seat_reservation;
 
 
@@ -391,19 +393,9 @@ public class SeatDAO {
 
 		return remain;
 	}
-
-	/** 퇴실 예정인 좌석을 꺼내오는 메서드 */
-
-
-	public static List<int[]> leaveSeat() {
-		LocalTime time = LocalTime.now();
-		List<int[]> remaintime = new ArrayList<>();
-		
-		String query = "SELECT res.seat_id,(remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) AS remain\r\n"
-				+ "FROM seat_reservation res, seat seat\r\n"
-				+ "WHERE seat.seat_id = res.seat_id\r\n"
-				+ "AND seat_state = '사용중'\r\n"
-				+ "AND (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) BETWEEN 10 AND 0";
+	
+	public static void checkUse() {
+		String query = "SELECT seat_id, seat_state FROM seat";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
@@ -411,12 +403,55 @@ public class SeatDAO {
 				) {
 
 			while (rs.next()) {
-				remaintime.add(new int[]{rs.getInt("seat_id"),rs.getInt("remain")}); 
+				int seatNum = rs.getInt("seat_id") - 1;
+				if (rs.getString("seat_state").equals("비어있음")) {
+					SeatReportPanel.seatBtns.get(seatNum).use = false;
+					SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.LIGHTGRAY);
+				} else {
+					SeatReportPanel.seatBtns.get(rs.getInt("seat_id") - 1).use = true;
+					SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.GRAY);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
+	/** 퇴실 예정인 좌석을 꺼내오는 메서드 */
+	public static List<int[]> leaveSeat() {
+		LocalTime time = LocalTime.now();
+		List<int[]> remaintime = new ArrayList<>();
+		
+		String query = "SELECT res.seat_id,(remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) AS remain\r\n"
+				+ "FROM seat_reservation res, seat seat\r\n"
+				+ "WHERE seat.seat_id = res.seat_id\r\n"
+				+ "AND seat_reservation_end_time IS NULL\r\n"
+				+ "AND use_ticket_category = '일회이용권'\r\n"
+				+ "AND (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) < 10";
+		
+		String query2 = "SELECT res.seat_id,(mem.remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) AS remain\r\n"
+				+ "FROM seat_reservation res, member mem\r\n"
+				+ "WHERE res.member_id = mem.member_id\r\n"
+				+ "AND seat_reservation_end_time IS NULL\r\n"
+				+ "AND use_ticket_category = '시간충전권'\r\n"
+				+ "AND (mem.remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) < 10";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query);
+				PreparedStatement pstmt2 = conn.prepareStatement(query2);
+				ResultSet rs1 = pstmt1.executeQuery();
+				ResultSet rs2 = pstmt2.executeQuery();
+				) {
+
+			while (rs1.next()) {
+				remaintime.add(new int[]{rs1.getInt("seat_id"),rs1.getInt("remain")}); 
+			}
+			while (rs2.next()) {
+				remaintime.add(new int[]{rs2.getInt("seat_id"),rs2.getInt("remain")}); 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return remaintime;
 	}
 }

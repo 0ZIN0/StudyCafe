@@ -8,11 +8,13 @@ import dto.Seat_reservation;
 import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.MyPagePanel;
+import panel.SeatReportPanel;
 
 public class UpdateInfo implements Runnable {
 	
 	
 	SeatReservationDAO seat_res = new SeatReservationDAO();
+	SeatDAO seat = new SeatDAO();
 	@Override
 	public void run() {
 		while(true) {
@@ -20,7 +22,8 @@ public class UpdateInfo implements Runnable {
 				Thread.sleep(1000);
 				System.out.println("update start");
 				seat_res.autoLeaveSystem();
-				if(MainFrame.member != null) {
+				if(MainFrame.member != null && SeatReportPanel.seatBtns.size() == 32) {
+					seat.checkUse();
 					seat_res.UsingSeats();
 					setMyPage();
 					System.out.println("member update");

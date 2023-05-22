@@ -155,7 +155,7 @@ public class SeatReservationDAO {
 				if(remainTime.getusing_ticket().equals("일회이용권")) {
 					String query2 = "UPDATE seat SET remain_time = 0 WHERE seat_id = ?";
 					try (Connection conn = OjdbcConnection.getConnection();
-						PreparedStatement pstmt = conn.prepareStatement(query);
+						PreparedStatement pstmt = conn.prepareStatement(query2);
 					) {
 						pstmt.setInt(1, remainTime.getSeat_id());
 						pstmt.executeUpdate();
@@ -165,8 +165,9 @@ public class SeatReservationDAO {
 				} else if(remainTime.getusing_ticket().equals("시간충전권")) {
 					String query3 = "UPDATE member SET remain_time = 0 WHERE member_id = ?";
 					try (Connection conn = OjdbcConnection.getConnection();
-						PreparedStatement pstmt = conn.prepareStatement(query);
+						PreparedStatement pstmt = conn.prepareStatement(query3);
 					) {
+						System.out.println(remainTime.getMember_id());
 						pstmt.setString(1, remainTime.getMember_id());
 						pstmt.executeUpdate();
 					} catch (Exception e) {
@@ -175,7 +176,7 @@ public class SeatReservationDAO {
 				} else {
 					String query4 = "UPDATE member SET remain_date = null WHERE member_id = ?";
 					try (Connection conn = OjdbcConnection.getConnection();
-						PreparedStatement pstmt = conn.prepareStatement(query);
+						PreparedStatement pstmt = conn.prepareStatement(query4);
 					) {
 						pstmt.setString(1, remainTime.getMember_id());
 						pstmt.executeUpdate();
