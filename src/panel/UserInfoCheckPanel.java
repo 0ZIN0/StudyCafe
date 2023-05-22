@@ -37,7 +37,6 @@ public class UserInfoCheckPanel extends JPanel {
 		add(agreeChkFrame);
 		agreeChkFrame.setLocation(0, 0);
 		
-		
 //		메인화면으로 이동 버튼
 		JButton moveToMainBtn = new JButton(new ImageIcon("ui/UserAgree/MovetoMain_Button.png"));
 		agreeChkFrame.add(moveToMainBtn);

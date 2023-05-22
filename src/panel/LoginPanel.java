@@ -41,11 +41,6 @@ import label.SeatReportLabel;
 
 public class LoginPanel extends JPanel {
 	
-	private static String driverName = "oracle.jdbc.driver.OracleDriver";
-	private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static String user  = "testuser";
-	private static String password = "1234";
-	
 	NumberKeypad numpad= new NumberKeypad();
 	// 필드 테두리 제거
 	JTextField userPhonNumber = new JTextField() {
@@ -72,7 +67,6 @@ public class LoginPanel extends JPanel {
 		super.paintComponent(g);
 		g.drawImage(image, 0, 0, this);
 	};
-	
 	
 	public LoginPanel(CardLayout card, JFrame parent) {
 		

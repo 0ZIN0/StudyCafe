@@ -182,7 +182,6 @@ public class MemberJoinPanel extends JPanel  {
 	            
 	            memberjoin.setPhone(phoneNum);
 	            memberjoin.setPassword(password);
-	            System.out.println(memberjoin.getPhone());
 	            
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {           
 	            	new setPopup("올바른 휴대전화번호 양식이 아닙니다.","",1000,450).setVisible(true);
