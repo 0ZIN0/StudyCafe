@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import dao.LoginDAO;
 import dialog.setPopup;
 import dto.MemberJoin;
 
@@ -115,26 +116,14 @@ public class UserInfoCheckPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phone= memberjoin.getPhone();
+				String phoneNum = memberjoin.getPhone();
 				String password = memberjoin.getPassword();
+				
 				if(infoChkBox1.isSelected() && infoChkBox2.isSelected() && infoChkBox3.isSelected()) {
-					 try (
-			            		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
-			            ){
-			            	   String query = "INSERT INTO member (phone_number, member_password) VALUES (?, ?)";
-			            	   PreparedStatement stmt = conn.prepareStatement(query);
-			            	   stmt.setString(1, phone);
-			            	   stmt.setString(2, password);
-			            	   stmt.executeUpdate();
-			                
-			                //JOptionPane.showMessageDialog(UserInfoCheckPanel.this, "회원가입이 완료되었습니다.");
-			                new setPopup("회원가입이 완료되었습니다.").setVisible(true);
-			                
-			                card.show(getParent(), "login");
-			            } catch (SQLException e2) {
-			                e2.printStackTrace();
-			                JOptionPane.showMessageDialog(UserInfoCheckPanel.this, "오류");
-			            }
+					if(LoginDAO.register(phoneNum, password) > 0) {
+						new setPopup("회원가입이 완료되었습니다.").setVisible(true);
+					}    
+					card.show(getParent(), "login");
 				}
 	
 			}

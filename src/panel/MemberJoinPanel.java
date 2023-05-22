@@ -9,6 +9,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.MaskFormatter;
 import javax.swing.text.PlainDocument;
 
+import dao.LoginDAO;
 import dialog.setPopup;
 
 import java.awt.*;
@@ -55,9 +56,7 @@ public class MemberJoinPanel extends JPanel  {
     	
     	
     	phoneField = new JTextField();
-        
        	passwordField = new JPasswordField();
-       	
        	confirmPasswordField = new JPasswordField();
        	
        	phoneField.setBorder(getBorder());
@@ -71,9 +70,7 @@ public class MemberJoinPanel extends JPanel  {
     	add(numpad);
     	
 		numpad.setBounds(1080,50,550,690);
-    	setBounds(0,0,990,760);
-    	setOpaque(false);
-
+    	
 	    phoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    phoneField.setText("핸드폰 번호");
 	    phoneField.setOpaque(false);
@@ -157,9 +154,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
 			public void focusGained(FocusEvent e) {
         		confirmPasswordField.setText("");
-				
-			}
-        	
+        	}
 		});
         
         add(phoneField);
@@ -168,6 +163,7 @@ public class MemberJoinPanel extends JPanel  {
         add(submitButton);
         add(beforeButton);
         
+        // 이전버튼
         beforeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -175,56 +171,39 @@ public class MemberJoinPanel extends JPanel  {
 			}
 		});
         
+        // 회원가입 버튼
         submitButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phone = phoneField.getText();
+				String phoneNum = phoneField.getText();
 	            String password = new String(passwordField.getPassword());
 	            String confirmPassword = new String(confirmPasswordField.getPassword());
 	            
-	            memberjoin.setPhone(phone);
+	            memberjoin.setPhone(phoneNum);
 	            memberjoin.setPassword(password);
 	            System.out.println(memberjoin.getPhone());
 	            
-	            if(Pattern.matches(phonnumRegular, phone)) {
-	                System.out.println("올바른 휴대전화 형식입니다. ");
-	            } else {            
+	            if(!Pattern.matches(phonnumRegular, phoneNum)) {           
 	            	new setPopup("올바른 휴대전화번호 양식이 아닙니다.","",1000,450).setVisible(true);
-	                return;
-	            }
-	            
-	            if(password.length() == 6) {
-	            	System.out.println("비밀번호 6자리 확인.");
-	            } else {
-	            	new setPopup("비밀번호 6자리를 입력해주세요").setVisible(true);
-	            	return;
-				}
-	            
-	            if(password.equals(confirmPassword)) {
-	            	System.out.println("비밀번호 일치 확인.");
-	            } else {
-	            	new setPopup("비밀번호 불일치").setVisible(true);
-	            	return;
-				}
-	            
-	            try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
-	            		PreparedStatement stmt = conn.prepareStatement("SELECT * FROM member where phone_number = ?")) {
-	                   	
-	                   	stmt.setString(1, phone);
-	                   	ResultSet rs = stmt.executeQuery();
-	                   	if (rs.next()) {
-	                	   new setPopup("이미 저장된 번호입니다.").setVisible(true);
-	                       return;
-	                   }
-	            } catch (SQLException e1) {
-	               e1.printStackTrace();
 	            }
 
-	            card.show(getParent(), "userInfoCheck");      
+	            if(password.length() != 6) {
+	            	new setPopup("비밀번호 6자리를 입력해주세요").setVisible(true);
+				}
+	            
+	            if(!password.equals(confirmPassword)) {
+	            	new setPopup("비밀번호 불일치").setVisible(true);
+				}
+	            if(LoginDAO.checkDup(phoneNum)) {	            	
+	            	card.show(getParent(), "userInfoCheck");      
+	            }
 			}  
 		});
-  
+        
+        // 패널 설정
+        setBounds(0,0,990,760);
+    	setOpaque(false);
         setLayout(null);
     } 
 }

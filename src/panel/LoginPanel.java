@@ -31,6 +31,7 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import dao.LoginDAO;
 import dao.MemberDAO;
 import dao.SeatDAO;
 import dialog.setPopup;
@@ -63,7 +64,6 @@ public class LoginPanel extends JPanel {
 	
 	JButton loginButton = new JButton(new ImageIcon("ui/main/button/main_Login_Button.png"));
 	JButton memberJoinBtn=new JButton(new ImageIcon("ui/main/button/main_MemeberShip_Button.png"));
-	
 	
 	ImageIcon im =new ImageIcon("ui/main/Login/Main_Left_Frame.jpg");
 	Image image=im.getImage();
@@ -110,14 +110,12 @@ public class LoginPanel extends JPanel {
 		});
 		 
 		// 비밀 번호 입력 TextField 
-		
 		userPassField.setText(" 비밀번호 (6자리)");
 		userPassField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		userPassField.setEchoChar((char) 0); // 텍스트가 가려지지 않도록 EchoChar를 0으로 설정
 		userPassField.setOpaque(false);
 		userPassField.setBounds(90, 430, 800, 110);
 		userPassField.setSelectionColor(new Color(0, 0, 0, 0));
-		//add(userPassField);
 		
 		userPassField.addFocusListener(new FocusListener() {
 			
@@ -135,17 +133,16 @@ public class LoginPanel extends JPanel {
 			}
 		});
 		
-		// loginpanel의 회원가입버튼 이벤트
+		// 회원가입버튼 이벤트
 		memberJoinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card.show(getParent(), "memberjoin");
 			}
 		});
-		
+
 		/*
 		  Bottom 회원가입 / 로그인 버튼
 		 */
-		
 		memberJoinBtn.setContentAreaFilled(false);
 		memberJoinBtn.setBorderPainted(false);
 		memberJoinBtn.setFocusPainted(false);
@@ -156,35 +153,16 @@ public class LoginPanel extends JPanel {
 		loginButton.setFocusPainted(false);
 		loginButton.setBounds(510,590,400,148);
 		
-		
 		// 로그인 버튼 이벤트
 		loginButton.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phon = userPhonNumber.getText();
-				String pass = new String(userPassField.getPassword());
+				String phoneNum = userPhonNumber.getText();
+				String password = new String(userPassField.getPassword());
 				
-				try {
-					Connection conn = DriverManager.getConnection(url, user, password);
-					PreparedStatement stmt = conn.prepareStatement("SELECT * FROM member WHERE phone_number=? AND member_password=?");
-		            stmt.setString(1, phon);
-		            stmt.setString(2, pass);
-		            ResultSet rs = stmt.executeQuery();	
-		            
-					if (rs.next()) {
-		               new setPopup("로그인 성공").setVisible(true);
-		               CheckInFrame.member = MemberDAO.setMember(phon);
-		               new CheckInFrame(MemberDAO.setMember(phon));
-		               parent.dispose();
-		            } else {
-		                System.out.println("로그인 실패");
-		                new setPopup("로그인 실패","(핸드폰번호와 비밀번호를 확인하세요)").setVisible(true);
-		            }
-		            rs.close();
-		            stmt.close();
-				} catch (SQLException  e2) {
-					e2.printStackTrace();
+				if(LoginDAO.checkPhoneNum(phoneNum, password)) {
+					parent.dispose();
 				}
 			}
 		});
