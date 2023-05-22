@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.swing.ImageIcon;
@@ -60,7 +61,10 @@ public class CompletePaymentDialog extends JDialog {
 				
 				/* 건들지 마시오 (로아) */
 				String ticket_id = TimeOrPeriodChargeDialog.ticket_order.getTicket_id();
-				String[] num = ticket_id.split("-0");
+				String[] num = ticket_id.split("-");
+				
+				System.out.println("ticket_order" + num[1]);
+				
 				if (Integer.parseInt(num[1]) >= 1 && Integer.parseInt(num[1]) <= 6) {
 					int ticket_value = 0;
 					if (ticket_id.equals("T-01")) {
@@ -76,7 +80,7 @@ public class CompletePaymentDialog extends JDialog {
 					} else if (ticket_id.equals("T-06")) {
 						ticket_value = 1440;
 					}
-
+					
 					if (SeatReportPanel.mySeat == 0 ) {
 						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
 						
