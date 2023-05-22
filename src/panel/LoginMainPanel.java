@@ -34,7 +34,7 @@ import javax.swing.event.AncestorListener;
 
 import dto.MemberJoin;
 
-public class LoginMainPanel extends JPanel{
+public class LoginMainPanel extends JFrame{
 	
 	MemberJoin memberjoin = new MemberJoin();
 	
@@ -42,23 +42,18 @@ public class LoginMainPanel extends JPanel{
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
 	JButton exitBtn = new JButton();
 	NumberKeypad numpad= new NumberKeypad();
-	LoginPanel loginpanel = new LoginPanel(this);
-	//TermsofUsePanel termsofUsePanel = new TermsofUsePanel();
+	LoginPanel loginPanel = new LoginPanel(card, this);
 	
 	MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
 	UserInfoCheckPanel userInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
 	
 	JPanel cardPanel = new JPanel();
 	
-	
-	
 	public LoginMainPanel( ) {
 		
 		setLayout(null);
-		
 		background.setLayout(null);
 		add(background);
-		
 		
 		background.add(exitBtn);
 		
@@ -68,69 +63,14 @@ public class LoginMainPanel extends JPanel{
 		cardPanel.setLayout(card);
 		background.add(cardPanel);
 		cardPanel.setBounds(130,260,1650,760);
-		//cardPanel.setBorder(new TitledBorder(new LineBorder(Color.red,1)));
 		
-		cardPanel.add(loginpanel,"login");
+		cardPanel.add(loginPanel,"login");
 		cardPanel.add(memberJoinPanel,"memberjoin");
-		//cardPanel.add(termsofUsePanel,"termsofUse");
 		
 		cardPanel.add(userInfoCheckPanel, "userInfoCheck");
 		
 		
 		setBounds(0,0,1920,1080);
-		
-		// loginpanel의 회원가입버튼 이벤트
-		loginpanel.memberJoinBtn.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        card.show(cardPanel, "memberjoin");
-		    }
-		});
-		
-		
-//		// userInfoCheckPanel의 약관동의 이전버튼 이벤트
-//		userInfoCheckPanel.beforeBtn.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				card.show(cardPanel, "memberjoin");
-//			}
-//		});
-		
-		
-		
-//		userInfoCheckPanel.nextBtn.addActionListener(new ActionListener() {
-//			String phone = memberJoinPanel.phoneField.getText();
-//            String password = new String(memberJoinPanel.passwordField.getPassword());
-//            String confirmPassword = new String(memberJoinPanel.confirmPasswordField.getPassword());
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if(userInfoCheckPanel.infoChkBox1.isSelected() && userInfoCheckPanel.infoChkBox2.isSelected() && userInfoCheckPanel.infoChkBox3.isSelected()) {
-//					 try (
-//			            		Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "teamproject", "1234");
-//			            ){
-//			            	   String query = "INSERT INTO member (phone_number, member_password) VALUES (?, ?)";
-//			            	   PreparedStatement stmt = conn.prepareStatement(query);
-//			            	   stmt.setString(1, phone);
-//			            	   stmt.setString(2, password);
-//			            	   stmt.executeUpdate();
-//			                
-//			                JOptionPane.showMessageDialog(userInfoCheckPanel, "회원가입이 완료되었습니다.");
-//			            } catch (SQLException e2) {
-//			                e2.printStackTrace();
-//			                JOptionPane.showMessageDialog(userInfoCheckPanel, "오류");
-//			            }
-//				}
-//				
-//				
-//				
-//				
-//			}
-//		});
-		
-		
-		
-		
 		
 		
 		
@@ -144,7 +84,15 @@ public class LoginMainPanel extends JPanel{
 			}
 		});
 		
-
+		setLayout(null);
+		setUndecorated(true);
+		setBounds(0, 0, 1920, 1080);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		
+	}
+	public static void main(String[] args) {
+		new LoginMainPanel();
 	}
 }
 

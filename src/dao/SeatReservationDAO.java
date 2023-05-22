@@ -96,6 +96,7 @@ public class SeatReservationDAO {
 					String state = rs.getString("seat_state");
 					if(memId.equals(CheckInFrame.member.getMember_id())) {
 						SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.ORANGE);
+						SeatReportPanel.seatInfoLabel.setText(state);
 					} else {
 						if(state.equals("사용중")) {
 							SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.GRAY);

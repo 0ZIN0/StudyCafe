@@ -299,7 +299,6 @@ public class SeatDAO {
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
 				) {
-
 			pstmt.setString(1, member_id);
 			try (
 					ResultSet rs = pstmt.executeQuery();

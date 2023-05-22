@@ -1,5 +1,6 @@
 package panel;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -31,15 +32,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import dao.MemberDAO;
+import dao.SeatDAO;
 import dialog.setPopup;
 import dto.Member;
 import frame.CheckInFrame;
-
-//import panel.LoginMainPanel2.PasswordFieldFocusListener;
-//import panel.LoginMainPanel2.PhoneNumberFieldFocusListener;
+import label.SeatReportLabel;
 
 public class LoginPanel extends JPanel {
-	
 	
 	private static String driverName = "oracle.jdbc.driver.OracleDriver";
 	private static String url = "jdbc:oracle:thin:@localhost:1521:XE";
@@ -47,8 +46,6 @@ public class LoginPanel extends JPanel {
 	private static String password = "1234";
 	
 	NumberKeypad numpad= new NumberKeypad();
-	
-	
 	// 필드 테두리 제거
 	JTextField userPhonNumber = new JTextField() {
 		@Override
@@ -77,7 +74,7 @@ public class LoginPanel extends JPanel {
 	};
 	
 	
-	public LoginPanel(JPanel parent) {
+	public LoginPanel(CardLayout card, JFrame parent) {
 		setLayout(null);
 		
 		JPanel loginPanel = new JPanel();
@@ -94,9 +91,6 @@ public class LoginPanel extends JPanel {
 		loginPanel.add(userPassField);
 		loginPanel.add(loginButton);
 		loginPanel.add(memberJoinBtn);
-		
-		
-		
 		
 		// 핸드폰 번호 입력 TextField 
 		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
@@ -120,7 +114,6 @@ public class LoginPanel extends JPanel {
 				
 			}
 		});
-		
 		 
 		// 비밀 번호 입력 TextField 
 		
@@ -148,7 +141,12 @@ public class LoginPanel extends JPanel {
 			}
 		});
 		
-		
+		// loginpanel의 회원가입버튼 이벤트
+		memberJoinBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				card.show(getParent(), "memberjoin");
+			}
+		});
 		
 		/*
 		  Bottom 회원가입 / 로그인 버튼
@@ -181,29 +179,19 @@ public class LoginPanel extends JPanel {
 		            ResultSet rs = stmt.executeQuery();	
 		            
 					if (rs.next()) {
-//						ImageIcon imageIcon = new ImageIcon("");
-//			            JLabel imageLabel = new JLabel(imageIcon);
-						//JOptionPane.showMessageDialog(new LoginMainPanel().background, "@@로그인성공@@");
-		               System.out.println("로그인성공로그인성공로그인성공로그인성공");
 		               new setPopup("로그인 성공").setVisible(true);
 		               CheckInFrame.member = MemberDAO.setMember(phon);
-		               CheckInFrame.card.show(parent.getParent(), "main");
-		               
+		               new CheckInFrame(MemberDAO.setMember(phon));
+		               parent.dispose();
 		            } else {
-		            	//JOptionPane.showMessageDialog(new LoginMainPanel().background,"@@로그인실패!!" );
 		                System.out.println("로그인 실패");
 		                new setPopup("로그인 실패","(핸드폰번호와 비밀번호를 확인하세요)").setVisible(true);
-		                
-		                
 		            }
-
 		            rs.close();
 		            stmt.close();
-					
 				} catch (SQLException  e2) {
 					e2.printStackTrace();
 				}
-				
 			}
 		});
 	}

@@ -24,7 +24,9 @@ import label.SeatReportLabel;
 
 public class SeatReportPanel extends JPanel {
 	
-	Image seatImage;
+	ImageIcon seatReportPanelImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/seatReport_Frame.png");
+	Image seatReportImage = seatReportPanelImageIcon.getImage(); 
+	
 	
 	/* 스터디룸, 사물함 버튼 */
 	JButton studyRoom1Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/StudyRoom_1.png"));
@@ -34,20 +36,28 @@ public class SeatReportPanel extends JPanel {
 	JButton Locker2Btn = new JButton(new ImageIcon("ui/Select_Seat_Parts_img/storage_box2.png"));
 	
 	/* 잔여좌석을 알려주는 라벨 */
-	JLabel remainSeatPanel = new JLabel(new ImageIcon("ui/Select_Seat_Parts_img/Seat_list_box.png"));
-	public static JLabel remainSeatLabel = new RemainSeatLabel();
+	JLabel remainSeatPanel;
+	public static JLabel remainSeatLabel;
 	
 	/* 사용자가 이용하고 있는 좌석 안내 라벨 */
-	public static Integer mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
-	public static JLabel seatInfoLabel = new SeatReportLabel();
+	public static Integer mySeat;
+	public static SeatReportLabel seatInfoLabel;
 	
-	static List<Seat> seats = new ArrayList<>();
-	public static List<SeatButton> seatBtns = new ArrayList<>();
-	public static Seat_reservation seat_reservation = new Seat_reservation();
+	static List<Seat> seats;
+	public static List<SeatButton> seatBtns;
+	public static Seat_reservation seat_reservation;
 	
-	public SeatReportPanel(Image seatImage, Member member) {
-		seat_reservation.setMember_id(CheckInFrame.member.getMember_id());
+	public SeatReportPanel(Member member) {
 		
+		remainSeatPanel = new JLabel(new ImageIcon("ui/Select_Seat_Parts_img/Seat_list_box.png"));
+		mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
+		remainSeatLabel = new RemainSeatLabel();
+		seatInfoLabel = new SeatReportLabel(mySeat);
+		
+		seats = new ArrayList<>();
+		seatBtns = new ArrayList<>();
+		
+		seat_reservation = new Seat_reservation();
 		for(int i = 0; i < 32; i++) {
 			Seat seat = new Seat();
 			seats.add(seat);
@@ -57,7 +67,6 @@ public class SeatReportPanel extends JPanel {
 			SeatButton seatBtn = new SeatButton(Integer.toString(i + 1));
 			seatBtns.add(seatBtn);
 		}
-		this.seatImage = seatImage;
 		
 		/* 잔여 좌석 라벨 설정 */
 		remainSeatPanel.setBounds(114, 22, 130, 54);
@@ -130,13 +139,18 @@ public class SeatReportPanel extends JPanel {
 		/* 좌석 이용 유무 라벨 설정 */
 		
 		add(seatInfoLabel);
+		
+		// 패널 설정
+		setBounds(633, 381, 1177, 617);
+		setBackground(new Color(0x494344));
+		setLayout(null);
 	}
 
 	/** 좌석현황 패널 이미지 적용하는 메서드 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(seatImage, 0, 0, getWidth(), getHeight(), this);
+		g.drawImage(seatReportImage, 0, 0, getWidth(), getHeight(), this);
 	}
 	
 	public static List<Seat> getSeats() {

@@ -110,7 +110,7 @@ public class UseTicketDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-
+				SeatReportPanel.seat_reservation.setMember_id(CheckInFrame.member.getMember_id());
 				SeatDAO.setReservation(SeatReportPanel.seat_reservation);
 				
 				int seat = Integer.parseInt(seatNum);

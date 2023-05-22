@@ -11,16 +11,16 @@ import panel.SeatReportPanel;
 
 public class SeatReportLabel extends JLabel {
 	
-	public SeatReportLabel() {
+	public SeatReportLabel(Integer mySeat) {
 
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		setForeground(Color.WHITE);
-		
-		if (SeatReportPanel.mySeat == 0) {
+		System.out.println(mySeat);
+		if (mySeat == 0) {
 			setText("사용중인 좌석이 없습니다.");
 			setBounds(507, 28, 550, 50);
 		} else {
-			setText(SeatReportPanel.mySeat + "번 좌석을 사용중입니다.");
+			setText(mySeat + "번 좌석을 사용중입니다.");
 			setBounds(507, 28, 550, 50);
 		}
 	}

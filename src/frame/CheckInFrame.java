@@ -34,6 +34,7 @@ import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
 import panel.LoginMainPanel;
+import panel.LoginPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
@@ -58,8 +59,7 @@ public class CheckInFrame extends JFrame {
 	Image backgroundImage = backgroundImageIcon.getImage(); 
 
 	// 개인석 패널 이미지
-	public static ImageIcon seatReportPanelImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/seatReport_Frame.png");
-	public static Image seatReportImage = seatReportPanelImageIcon.getImage(); 
+	
 
 	// 개인석 이미지
 	ImageIcon seatReportImageIcon = new ImageIcon("ui/seatReportToggleButton.png");
@@ -82,11 +82,10 @@ public class CheckInFrame extends JFrame {
 	/* 패널 */
 	JPanel mainPanel = new MainPanel(backgroundImage); // 백그라운드 패널
 	JPanel subPanel = new JPanel(); // seat, study, locker 패널들의 부모가 될 서브 패널
-	public JPanel seatReportPanel; // 좌석현황 패널
+	public static SeatReportPanel seatReportPanel; // 좌석현황 패널
 	JPanel studyRoomPanel; // 스터디룸 예약 패널
 	JPanel lockerPanel; // 사물함 구매 패널
 	MyPagePanel myPagePanel; // 마이페이지 패널
-	LoginMainPanel loginMainPanel;
 
 	List<Seat> seats = SeatReportPanel.getSeats();
 
@@ -112,7 +111,7 @@ public class CheckInFrame extends JFrame {
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = new Member();
+	public static Member member;
 
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(timeLabel);
@@ -121,14 +120,16 @@ public class CheckInFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CheckInFrame() {
+	public CheckInFrame(Member member) {
+		this.member = member;
 		/* 패널 */
-		seatReportPanel  = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
+		seatReportPanel  = new SeatReportPanel(member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
 		myPagePanel = new MyPagePanel(card, member); // 마이페이지 패널
-		loginMainPanel = new LoginMainPanel(); // 로그인 패널
-
+		
+		studyRoomPanel.setVisible(false);
+		
 		timeLabel.setBounds(100, 0, 500, 100);
 		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
 		timeLabel.setForeground(Color.white);
@@ -224,7 +225,7 @@ public class CheckInFrame extends JFrame {
 		subPanel.setLayout(card);
 
 		/* 서브 패널의 하위 패널 레이아웃 설정 */
-		seatReportPanel.setLayout(null);
+		
 		studyRoomPanel.setLayout(null);
 		lockerPanel.setLayout(null);
 
@@ -234,7 +235,6 @@ public class CheckInFrame extends JFrame {
 		lockerPanel.setBounds(633, 381, 1177, 617);
 
 		/* 서브 패널의 하위 패널 배경 지정 */
-		seatReportPanel.setBackground(new Color(0x494344));
 		studyRoomPanel.setBackground(new Color(0x494344));
 		lockerPanel.setBackground(new Color(0x494344));
 
@@ -262,7 +262,6 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-		getContentPane().add(loginMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
@@ -295,7 +294,7 @@ public class CheckInFrame extends JFrame {
 				System.exit(0);
 			}
 		});
-		//원래값 xBtn.setBounds(1600, 10, 50, 50); 
+
 		xBtn.setBounds(1850, 10, 50, 50); 
 		mainPanel.add(xBtn);
 
@@ -306,17 +305,4 @@ public class CheckInFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-
-	public static void main(String[] args) {
-//		try {
-//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-//            ((Throwable) e).printStackTrace();
-//        }
-		new CheckInFrame();
-		Thread thread1 = new Thread(timeRun);
-		Thread thread2 = new Thread(updateInfo);
-		thread1.start();
-		thread2.start();
-	}	
 }

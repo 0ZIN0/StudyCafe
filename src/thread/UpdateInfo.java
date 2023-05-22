@@ -11,14 +11,13 @@ import panel.MyPagePanel;
 
 public class UpdateInfo implements Runnable {
 	
-	Member mem;
+	
 	SeatReservationDAO seat_res = new SeatReservationDAO();
 	@Override
 	public void run() {
 		while(true) {
 			try {
 				Thread.sleep(1000);
-				mem = CheckInFrame.member;
 //				seat_res.autoLeaveSystem();
 				seat_res.UsingSeats();
 				setMyPage();
@@ -29,7 +28,9 @@ public class UpdateInfo implements Runnable {
 	}
 	
 	public void setMyPage() {
+		Member mem = CheckInFrame.member;
 		MyPagePanel.phoneNum.setText(mem.getPhone_number());
+		System.out.println(mem.getMember_id());
 		MyPagePanel.time.setText(mem.getRemain_time() + "분");
 		if(mem.getRemain_date() != null) {
 			MyPagePanel.period.setText(mem.getRemain_date() + "까지");
