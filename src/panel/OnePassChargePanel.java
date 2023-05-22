@@ -223,7 +223,7 @@ public class OnePassChargePanel extends JPanel {
 								onePassChargeItem = 99;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
-								hours.setText("종일권(02시까지)");
+								hours.setText("종일권");
 							} 
 						} else {
 							chargeBtns.get(i).setIcon(basicIcons[i]);

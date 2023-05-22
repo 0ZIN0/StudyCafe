@@ -107,7 +107,7 @@ public class MainFrame extends JFrame {
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member;
+	public static Member member = SeatDAO.setMember("010-1111-1111");
 	
 	
 	
@@ -115,7 +115,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame(Member member) {
-		this.member = member;
+//		this.member = member;
 		/* 패널 */
 		seatReportPanel  = new SeatReportPanel(member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
@@ -298,5 +298,9 @@ public class MainFrame extends JFrame {
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new MainFrame(member);
 	}
 }
