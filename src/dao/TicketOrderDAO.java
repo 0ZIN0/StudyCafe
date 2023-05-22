@@ -12,7 +12,7 @@ public class TicketOrderDAO {
 	public static void saveOrder(Ticket_order order) {
 
 
-		String query = "INSERT INTO ticket_order VALUES ('TO-'|| order_id_seq.nextval, ?, ?, sysdate, '결제완료')";
+		String query = "INSERT INTO ticket_order VALUES ('TO-'|| order_id_seq.nextval, ?, ?,  '결제완료', sysdate)";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);

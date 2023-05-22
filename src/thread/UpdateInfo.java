@@ -18,9 +18,13 @@ public class UpdateInfo implements Runnable {
 		while(true) {
 			try {
 				Thread.sleep(1000);
+				System.out.println("update start");
 //				seat_res.autoLeaveSystem();
-//				seat_res.UsingSeats();
-//				setMyPage();
+				if(CheckInFrame.member != null) {
+					seat_res.UsingSeats();
+					setMyPage();
+					System.out.println("member update");
+				}
 				System.out.println("update");
 			} catch (Exception e) {
 			}

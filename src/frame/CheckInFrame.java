@@ -108,7 +108,9 @@ public class CheckInFrame extends JFrame {
 
 	/* DTO */ 
 	public static Member member;
-
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -289,7 +291,7 @@ public class CheckInFrame extends JFrame {
 
 		xBtn.setBounds(1850, 10, 50, 50); 
 		mainPanel.add(xBtn);
-
+		
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
 		setUndecorated(true);

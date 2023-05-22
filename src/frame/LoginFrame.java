@@ -60,8 +60,6 @@ public class LoginFrame extends JFrame{
 	static TimeRun timeRun = new TimeRun(CheckInFrame.timeLabel);
 	static UpdateInfo updateInfo = new UpdateInfo();
 		
-	
-
 	public LoginFrame() {
 		
 		background.setLayout(null);
@@ -102,8 +100,8 @@ public class LoginFrame extends JFrame{
 		Thread time = new Thread(timeRun);
 		Thread update = new Thread(updateInfo);
 		new LoginFrame();
-		update.run();
-		time.run();
+		update.start();
+		time.start();
 	}
 }
 
