@@ -61,35 +61,38 @@ public class MemberDAO {
 	
 	public static int updateRemainTime(String memId) {
 		String query1 = "select\r\n"
-				+ "mem.member_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) \r\n"
+				+ "mem.member_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60))\r\n"
 				+ "AS remain \r\n"
 				+ "from \r\n"
 				+ "seat_reservation res, member mem\r\n"
 				+ "WHERE res.member_id = mem.member_id\r\n"
-				+ "AND mem.member_id = ?";
-		String query2 = "UPDATE member SET remain_time = ? WHERE member_id = ?";
+				+ "AND mem.member_id = ?\r\n"
+				+ "AND seat_reservation_end_time IS NULL";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt1 = conn.prepareStatement(query1);
-				PreparedStatement pstmt2 = conn.prepareStatement(query2);
 				) {
 			conn.setAutoCommit(false);
 			pstmt1.setString(1, memId);
 			try (
 					ResultSet rs = pstmt1.executeQuery();
 					){
-				rs.next();
-				pstmt2.setInt(1, rs.getInt("remain"));
-				pstmt2.setString(2, memId);
-				if(pstmt2.executeUpdate() > 0) {
-					System.out.println("update complete");
-					CheckInFrame.member.setRemain_time(rs.getInt("remain"));
-					MyPagePanel.time.setText(String.format("%d분",rs.getInt("remain")));
-					conn.commit();	
-				} else {
-					System.out.println("update fail");
-					conn.rollback();
+				if(rs.next()) {
+					int remain_time = rs.getInt("remain");
+					if(remain_time > 0) {
+						if(remain_time >= 60) {
+							int hour = remain_time / 60;
+							int minute = remain_time % 60;
+							MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+						} else {
+							MyPagePanel.time.setText(remain_time + "분");
+						}
+					} else {
+						MyPagePanel.time.setText("0분");
+					}					
 				}
+				
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

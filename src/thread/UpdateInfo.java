@@ -19,7 +19,7 @@ public class UpdateInfo implements Runnable {
 			try {
 				Thread.sleep(1000);
 				System.out.println("update start");
-//				seat_res.autoLeaveSystem();
+				seat_res.autoLeaveSystem();
 				if(CheckInFrame.member != null) {
 					seat_res.UsingSeats();
 					setMyPage();
@@ -34,8 +34,7 @@ public class UpdateInfo implements Runnable {
 	public void setMyPage() {
 		Member mem = CheckInFrame.member;
 		MyPagePanel.phoneNum.setText(mem.getPhone_number());
-		System.out.println(mem.getMember_id());
-		MyPagePanel.time.setText(mem.getRemain_time() + "분");
+		MemberDAO.updateRemainTime(mem.getMember_id());
 		if(mem.getRemain_date() != null) {
 			MyPagePanel.period.setText(mem.getRemain_date() + "까지");
 		}

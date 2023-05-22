@@ -66,10 +66,17 @@ public class MyPagePanel extends JPanel {
 		phoneNum.setForeground(Color.WHITE);
 		
 		time = new JLabel();
-		if(member.getRemain_time() == null) {
-			time.setText("");
+		Integer remain_time = member.getRemain_time();
+		if(remain_time == null) {
+			time.setText("없음");
 		} else {
-			time.setText(member.getRemain_time() + "분");
+			if(remain_time >= 60) {
+				int hour = remain_time / 60;
+				int minute = remain_time % 60;
+				time.setText(hour + "시간 " + minute + "분");
+			} else {
+				time.setText(remain_time + "분");				
+			}
 		}
 		time.setBounds(1010, 440, 500, 100);
 		time.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
