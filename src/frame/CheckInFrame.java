@@ -138,7 +138,7 @@ public class CheckInFrame extends JFrame {
 		seatReportPanel = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
-		myPagePanel = new MyPagePanel(card, member); // 마이페이지 패널
+		myPagePanel = new MyPagePanel(); // 마이페이지 패널
 		loginMainPanel = new LoginMainPanel(); // 로그인 패널
 		
 		timeLabel.setBounds(100, 0, 500, 100);
