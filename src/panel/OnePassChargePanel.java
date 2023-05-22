@@ -38,7 +38,7 @@ public class OnePassChargePanel extends JPanel {
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간_choice.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice.png")	
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_revision.png")	
 	};
 
 	ImageIcon[] selectedIcons = new ImageIcon[] { 
@@ -47,7 +47,7 @@ public class OnePassChargePanel extends JPanel {
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간_choice_line.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간_choice_line.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간_choice_line.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_line.png")
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_line_revision.png")
 	};
 
 
@@ -173,7 +173,7 @@ public class OnePassChargePanel extends JPanel {
 								onePassChargeItem = 99;
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
-								hours.setText("종일권(2시까지)");
+								hours.setText("종일권");
 							} 
 						} else {
 							chargeBtns.get(i).setIcon(basicIcons[i]);

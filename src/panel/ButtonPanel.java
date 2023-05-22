@@ -16,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import button.LockerTicketButton;
+import dialog.LockerPayDialog;
 import dialog.PaymentDialog;
+import dialog.TimeOrPeriodChargeDialog;
 
 public class ButtonPanel extends JPanel implements ActionListener{
    
@@ -99,18 +101,22 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				if(btnNum == 0) {
 					lockerChargePrice = 6000;
 					lockerChargeItem = 2;
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-15");
 					
 				} else if (btnNum == 1) {
 					lockerChargePrice = 10000;
 					lockerChargeItem = 4;
+					LockerPayDialog.ticket_order_locker.setTicket_id("T-16");
 					
 				} else if (btnNum == 2) {
 					lockerChargePrice = 20000;
 					lockerChargeItem = 8;
+					LockerPayDialog.ticket_order_locker.setTicket_id("T-17");
 					
 				} else if (btnNum == 3) {
 					lockerChargePrice = 30000;
 					lockerChargeItem = 12;
+					LockerPayDialog.ticket_order_locker.setTicket_id("T-18");
 				}
 				
 			} else {

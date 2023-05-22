@@ -22,12 +22,15 @@ import javax.swing.border.EmptyBorder;
 import button.CloseButton;
 import button.LockerTicketButton;
 import button.NextButton;
+import dto.Ticket_order;
 import panel.ButtonPanel;
 
 import javax.swing.JLabel;
 
 public class LockerPayDialog extends JDialog {
 
+	public static Ticket_order ticket_order_locker = new Ticket_order();
+	
 	private final JPanel contentPanel = new JPanel();
 	ImageIcon icon = new ImageIcon("ui/Locker_PopUp/Locker_PopUp_Background.png");
 	Image image = icon.getImage();

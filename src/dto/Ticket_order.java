@@ -37,19 +37,12 @@ public class Ticket_order {
 	public void setPay_id(String pay_id) {
 		this.pay_id = pay_id;
 	}
-//	public Integer getOrder_total_price() {
-//		return order_total_price;
-//	}
-	
-//	public Integer getOrder_total_price() {
-//	    if (order_total_price == null) {
-//	        return 0; // 기본 값으로 0을 반환하거나 원하는 값을 반환합니다.
-//	    }
-//	    return order_total_price;
-//	}
-//	public void setOrder_total_price(Integer order_total_price) {
-//		this.order_total_price = order_total_price;
-//	}
+	public Integer getOrder_total_price() {
+		return order_total_price;
+	}
+	public void setOrder_total_price(Integer order_total_price) {
+		this.order_total_price = order_total_price;
+	}
 	public Date getOrder_date() {
 		return order_date;
 	}
