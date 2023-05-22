@@ -75,22 +75,20 @@ public class LoginPanel extends JPanel {
 	
 	
 	public LoginPanel(CardLayout card, JFrame parent) {
+		
 		setLayout(null);
 		
-		JPanel loginPanel = new JPanel();
-		
-		loginPanel.setLayout(null);
+		setLayout(null);
 		
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
-		add(loginPanel);
-		loginPanel.setBounds(0,0,990,760);
-		loginPanel.setOpaque(false);
+		setBounds(0,0,990,760);
+		setOpaque(false);
 		
-		loginPanel.add(userPhonNumber);
-		loginPanel.add(userPassField);
-		loginPanel.add(loginButton);
-		loginPanel.add(memberJoinBtn);
+		add(userPhonNumber);
+		add(userPassField);
+		add(loginButton);
+		add(memberJoinBtn);
 		
 		// 핸드폰 번호 입력 TextField 
 		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));

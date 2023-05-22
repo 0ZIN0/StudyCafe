@@ -33,7 +33,6 @@ import dao.MemberDAO;
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
-import panel.LoginMainPanel;
 import panel.LoginPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
@@ -57,9 +56,6 @@ public class CheckInFrame extends JFrame {
 	// 백그라운드 이미지
 	ImageIcon backgroundImageIcon = new ImageIcon("ui/background/Select_Seat_last_1.png");
 	Image backgroundImage = backgroundImageIcon.getImage(); 
-
-	// 개인석 패널 이미지
-	
 
 	// 개인석 이미지
 	ImageIcon seatReportImageIcon = new ImageIcon("ui/seatReportToggleButton.png");
