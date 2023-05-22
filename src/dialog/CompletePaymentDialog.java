@@ -21,7 +21,6 @@ import color.MyColor;
 import dao.LockerDAO;
 import dao.SeatDAO;
 import dao.TicketOrderDAO;
-import dao.temDAO;
 import dto.Ticket;
 import dto.Ticket_order;
 import dto.temDTO;

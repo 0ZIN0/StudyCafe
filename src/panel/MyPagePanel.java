@@ -19,7 +19,6 @@ import javax.swing.JSeparator;
 
 import dao.MemberDAO;
 import dto.Member;
-import oracle.sql.DATE;
 
 public class MyPagePanel extends JPanel {
 	

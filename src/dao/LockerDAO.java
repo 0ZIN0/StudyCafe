@@ -33,14 +33,15 @@ public class LockerDAO {
 	
 	// 사물함 결제 완료 시 member 테이블에 결제한 사물함 번호를 넣어주는 메서드
 	public static void locNumToMem(Member member) {
-		String query = "UPDATE member SET locker_number = ? WHERE member_id = ?";
+		String query = "UPDATE member SET locker_number = ?, locker_remain = sysdate + ?, WHERE member_id = ?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
 
 				) {
 			pstmt.setString(1, member.getLocker_number());
-			pstmt.setString(2, member.getMember_id());
+			//pstmt.setDate(2, member.getLocker_remain());
+			pstmt.setString(3, member.getMember_id());
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {

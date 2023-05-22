@@ -101,6 +101,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				
 				if(btnNum == 0) {
 					CheckInFrame.ticket_order.setTicket_id("T-15");
+					//CheckInFrame.member_dto.setLocker_remain("14");
 					lockerChargePrice = 6000;
 					lockerChargeItem = 2;
 					
