@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import dto.Member;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.MyPagePanel;
 
 public class MemberDAO {
@@ -91,8 +91,6 @@ public class MemberDAO {
 						MyPagePanel.time.setText("0분");
 					}					
 				}
-				
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

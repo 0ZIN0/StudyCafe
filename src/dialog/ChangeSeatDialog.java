@@ -18,7 +18,7 @@ import button.OkButton;
 import button.SeatButton;
 import dao.SeatDAO;
 import dto.Seat;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 
@@ -91,7 +91,7 @@ public class ChangeSeatDialog extends JDialog {
 				Integer beforeNum = SeatReportPanel.mySeat;
 				Integer afterNum = Integer.parseInt(seatNum);
 				
-				SeatDAO.setChangeSeat(CheckInFrame.member.getMember_id(), seatNum);
+				SeatDAO.setChangeSeat(MainFrame.member.getMember_id(), seatNum);
 				SeatReportPanel.seatInfoLabel.setText(seatNum + "번 좌석을 사용중입니다.");
 				SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 				SeatReportPanel.seatBtns.get(beforeNum - 1).setBackground(new Color(0xD9D9D9));

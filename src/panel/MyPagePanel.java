@@ -20,7 +20,7 @@ import javax.swing.JSeparator;
 import dao.MemberDAO;
 import dao.SeatDAO;
 import dto.Member;
-import frame.CheckInFrame;
+import frame.MainFrame;
 
 public class MyPagePanel extends JPanel {
 	
@@ -92,7 +92,7 @@ public class MyPagePanel extends JPanel {
 		period.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		period.setForeground(Color.WHITE);
 		
-		seat = new JLabel(SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id()) + "번");
+		seat = new JLabel(SeatDAO.isUsingMySeat(MainFrame.member.getMember_id()) + "번");
 		seat.setBounds(1010, 680, 500, 100);
 		seat.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		seat.setForeground(Color.WHITE);

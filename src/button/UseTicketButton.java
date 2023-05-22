@@ -12,11 +12,11 @@ import dialog.NotUseTicketDialog;
 import dialog.SelectSeatDialog;
 import dialog.UseTicketDialog;
 import dto.Seat;
-import frame.CheckInFrame;
+import frame.MainFrame;
 
 public class UseTicketButton extends JButton {
 	
-	boolean remainTicket = TicketDAO.isUsingTicket(CheckInFrame.member.getMember_id());
+	boolean remainTicket = TicketDAO.isUsingTicket(MainFrame.member.getMember_id());
 	public static boolean useSeat;
 	
 	public UseTicketButton(SelectSeatDialog selectSeatPopup, String seatNum, Seat seat) {

@@ -13,7 +13,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.ButtonPanel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
@@ -144,7 +144,7 @@ public class PaymentInformationDialog extends JDialog {
 		whatNum.setBounds(236, 172, 200, 35);
 		add(whatNum);
 
-		String[] userNum = CheckInFrame.member.getPhone_number().split("-");
+		String[] userNum = MainFrame.member.getPhone_number().split("-");
 		numIs.setText(userNum[2]);
 		numIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 		numIs.setForeground(new Color(35, 35, 35));

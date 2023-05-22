@@ -57,7 +57,7 @@ public class LoginFrame extends JFrame{
 	
 	JPanel cardPanel = new JPanel();
 	// 쓰레드 클래스
-	static TimeRun timeRun = new TimeRun(CheckInFrame.timeLabel);
+	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
 	static UpdateInfo updateInfo = new UpdateInfo();
 		
 	public LoginFrame() {
@@ -92,11 +92,6 @@ public class LoginFrame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-			((Throwable) e).printStackTrace();
-		}
 		Thread time = new Thread(timeRun);
 		Thread update = new Thread(updateInfo);
 		new LoginFrame();

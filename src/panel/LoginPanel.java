@@ -36,7 +36,7 @@ import dao.MemberDAO;
 import dao.SeatDAO;
 import dialog.setPopup;
 import dto.Member;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.SeatReportLabel;
 
 public class LoginPanel extends JPanel {

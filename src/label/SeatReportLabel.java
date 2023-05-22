@@ -6,7 +6,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 
 import dao.SeatDAO;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.SeatReportPanel;
 
 public class SeatReportLabel extends JLabel {

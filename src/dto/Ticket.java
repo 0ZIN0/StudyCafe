@@ -6,7 +6,6 @@ public class Ticket {
 	private String ticket_name;
 	private Integer ticket_price;
 	private Integer ticket_value;
-	private Integer ticket_usable_time;
 	
 	public String getTicket_id() {
 		return ticket_id;
@@ -37,11 +36,5 @@ public class Ticket {
 	}
 	public void setTicket_value(Integer ticket_value) {
 		this.ticket_value = ticket_value;
-	}
-	public Integer getTicket_usable_time() {
-		return ticket_usable_time;
-	}
-	public void setTicket_usable_time(Integer ticket_usable_time) {
-		this.ticket_usable_time = ticket_usable_time;
 	}
 }

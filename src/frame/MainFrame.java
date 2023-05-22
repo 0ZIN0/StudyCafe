@@ -47,7 +47,7 @@ import toggle.StudyRoomToggle;
 /*
  * 이 프레임이 메인 프레임입니다.
  *  */
-public class CheckInFrame extends JFrame {
+public class MainFrame extends JFrame {
 
 	/* 레이아웃 */
 	public static CardLayout card = new CardLayout();
@@ -114,7 +114,7 @@ public class CheckInFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CheckInFrame(Member member) {
+	public MainFrame(Member member) {
 		this.member = member;
 		/* 패널 */
 		seatReportPanel  = new SeatReportPanel(member); // 좌석현황 패널

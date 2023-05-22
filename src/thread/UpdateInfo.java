@@ -5,7 +5,7 @@ import dao.SeatDAO;
 import dao.SeatReservationDAO;
 import dto.Member;
 import dto.Seat_reservation;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.MyPagePanel;
 
@@ -20,7 +20,7 @@ public class UpdateInfo implements Runnable {
 				Thread.sleep(1000);
 				System.out.println("update start");
 				seat_res.autoLeaveSystem();
-				if(CheckInFrame.member != null) {
+				if(MainFrame.member != null) {
 					seat_res.UsingSeats();
 					setMyPage();
 					System.out.println("member update");
@@ -32,7 +32,7 @@ public class UpdateInfo implements Runnable {
 	}
 	
 	public void setMyPage() {
-		Member mem = CheckInFrame.member;
+		Member mem = MainFrame.member;
 		MyPagePanel.phoneNum.setText(mem.getPhone_number());
 		MemberDAO.updateRemainTime(mem.getMember_id());
 		if(mem.getRemain_date() != null) {

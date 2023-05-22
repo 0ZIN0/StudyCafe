@@ -17,7 +17,7 @@ import button.OkButton;
 import color.MyColor;
 import dao.SeatDAO;
 import dto.Seat;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.SeatReportPanel;
 
@@ -63,11 +63,11 @@ public class CheckOutDialog extends JDialog {
 				SeatReportPanel.seatBtns.get(SeatReportPanel.mySeat - 1).use = false;
 				SeatReportPanel.mySeat = 0;
 				
-				int useMinute = SeatDAO.setCheckOutAndGetUseTime(CheckInFrame.member.getMember_id());
+				SeatDAO.setCheckOut(MainFrame.member.getMember_id());
 				RemainSeatLabel.remain = SeatDAO.isRemain();
 				SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
 				
-				JDialog exitPopup = new ExitDialog(useMinute);
+				JDialog exitPopup = new ExitDialog();
 			}
 		});
 		

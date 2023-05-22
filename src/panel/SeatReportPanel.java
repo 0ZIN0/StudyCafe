@@ -18,7 +18,7 @@ import dao.SeatDAO;
 import dto.Member;
 import dto.Seat;
 import dto.Seat_reservation;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import label.RemainSeatLabel;
 import label.SeatReportLabel;
 
@@ -50,7 +50,7 @@ public class SeatReportPanel extends JPanel {
 	public SeatReportPanel(Member member) {
 		
 		remainSeatPanel = new JLabel(new ImageIcon("ui/Select_Seat_Parts_img/Seat_list_box.png"));
-		mySeat = SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id());
+		mySeat = SeatDAO.isUsingMySeat(MainFrame.member.getMember_id());
 		remainSeatLabel = new RemainSeatLabel();
 		seatInfoLabel = new SeatReportLabel(mySeat);
 		

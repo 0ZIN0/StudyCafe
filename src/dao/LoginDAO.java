@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 
 import dialog.setPopup;
-import frame.CheckInFrame;
+import frame.MainFrame;
 
 public class LoginDAO {
 	
@@ -25,8 +25,8 @@ public class LoginDAO {
 					ResultSet rs = pstmt.executeQuery();
 					) {
 				if (rs.next()) {
-					CheckInFrame.member = MemberDAO.setMember(phoneNum);
-					new CheckInFrame(MemberDAO.setMember(phoneNum));
+					MainFrame.member = MemberDAO.setMember(phoneNum);
+					new MainFrame(MemberDAO.setMember(phoneNum));
 					return true;
 				} else {
 					new setPopup("로그인 실패", "(핸드폰번호와 비밀번호를 확인하세요)").setVisible(true);
