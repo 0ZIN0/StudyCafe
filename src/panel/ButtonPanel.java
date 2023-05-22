@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import button.LockerTicketButton;
 import dao.TicketDAO;
 import dialog.PaymentDialog;
+import dialog.TimeOrPeriodChargeDialog;
 import dto.Ticket;
 
 public class ButtonPanel extends JPanel implements ActionListener{
@@ -80,7 +81,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
             add(ticketButton);
         }
         
-        btns.get(0).setSelected(true);
+        btns.get(0).doClick();
+        TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-19").getTicket_price());
 	}
 
 	@Override
@@ -102,20 +104,25 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				ButtonPanel.lockerChargePrice = 0;
 				
 				if(btnNum == 0) {
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-19");
 					lockerChargePrice = TicketDAO.getTicket("T-19").getTicket_price();
 					lockerChargeItem = 2;
-					
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-19").getTicket_price());
 				} else if (btnNum == 1) {
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-20");
 					lockerChargePrice = TicketDAO.getTicket("T-20").getTicket_price();
 					lockerChargeItem = 4;
-					
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-20").getTicket_price());
 				} else if (btnNum == 2) {
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-21");
 					lockerChargePrice = TicketDAO.getTicket("T-21").getTicket_price();
 					lockerChargeItem = 8;
-					
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-21").getTicket_price());
 				} else if (btnNum == 3) {
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-22");
 					lockerChargePrice = TicketDAO.getTicket("T-22").getTicket_price();
 					lockerChargeItem = 12;
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-22").getTicket_price());
 				}
 				
 			} else {

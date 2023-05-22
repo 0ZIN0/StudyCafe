@@ -135,7 +135,7 @@ public class OnePassChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-01");
 
 								onePassChargePrice = ticket.getTicket_price();
-								
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(onePassChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(onePassChargePrice) + "원");
@@ -149,9 +149,9 @@ public class OnePassChargePanel extends JPanel {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-02");
 								
 								ticket = TicketDAO.getTicket("T-02");
-
-								onePassChargePrice = ticket.getTicket_price();
 								
+								onePassChargePrice = ticket.getTicket_price();
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(onePassChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(onePassChargePrice) + "원");
@@ -167,7 +167,7 @@ public class OnePassChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-03");
 
 								onePassChargePrice = ticket.getTicket_price();
-								
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(onePassChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(onePassChargePrice) + "원");
@@ -183,7 +183,7 @@ public class OnePassChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-04");
 
 								onePassChargePrice = ticket.getTicket_price();
-								
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(onePassChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(onePassChargePrice) + "원");
@@ -200,6 +200,7 @@ public class OnePassChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-05");
 
 								onePassChargePrice = ticket.getTicket_price();
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(onePassChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(onePassChargePrice) + "원");
@@ -215,7 +216,7 @@ public class OnePassChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-06");
 
 								onePassChargePrice = ticket.getTicket_price();	
-								
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(onePassChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(onePassChargePrice) + "원");

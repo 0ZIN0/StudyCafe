@@ -106,6 +106,7 @@ public class PeriodChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-11");
 
 								periodChargePrice = ticket.getTicket_price();
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(periodChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
@@ -121,7 +122,7 @@ public class PeriodChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-12");
 
 								periodChargePrice = ticket.getTicket_price();
-								
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(periodChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
@@ -137,6 +138,7 @@ public class PeriodChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-13");
 
 								periodChargePrice = ticket.getTicket_price();
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(periodChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
@@ -152,6 +154,7 @@ public class PeriodChargePanel extends JPanel {
 								ticket = TicketDAO.getTicket("T-14");
 
 								periodChargePrice = ticket.getTicket_price();
+								TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(periodChargePrice);
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
