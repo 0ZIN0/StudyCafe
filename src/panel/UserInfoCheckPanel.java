@@ -21,7 +21,6 @@ import dialog.setPopup;
 import dto.MemberJoin;
 
 public class UserInfoCheckPanel extends JPanel {
-	//MemberJoin memberjoin = new MemberJoin();
 	
 	JButton beforeBtn = new JButton(new ImageIcon("ui/UserAgree/Before_Button.png"));
 	JButton nextBtn = new JButton(new ImageIcon("ui/UserAgree/Next_Button.png"));
@@ -29,35 +28,17 @@ public class UserInfoCheckPanel extends JPanel {
 	JCheckBox infoChkBox2 = new JCheckBox();
 	JCheckBox infoChkBox3 = new JCheckBox();
 	
-	
-	//MemberJoinPanel memberJoinPanel;
-	
-	
-	//MemberJoinPanel memberJoinPanel = new MemberJoinPanel();
-
-
 	public UserInfoCheckPanel(MemberJoin memberjoin, CardLayout card){
-		
-		//this.memberJoinPanel = memberJoinPanel;
-//		배경
-//		BackgroundPanel agreeChkBg = new BackgroundPanel(new ImageIcon("ui/background/Main_Default_BG.jpg"));
-//		add(agreeChkBg);
-//		agreeChkBg.setLocation(0, 0);
+	
 		setLayout(null);
-		
-		
 //		안쪽 프레임
 		BackgroundPanel agreeChkFrame = new BackgroundPanel(new ImageIcon("ui/UserAgree/Main_UserInfoCheck_Frame.jpg"));
-		//agreeChkBg.add(agreeChkFrame);
 		add(agreeChkFrame);
-	//	agreeChkFrame.setLocation(135, 230);
-
 		agreeChkFrame.setLocation(0, 0);
 		
 		
 //		메인화면으로 이동 버튼
 		JButton moveToMainBtn = new JButton(new ImageIcon("ui/UserAgree/MovetoMain_Button.png"));
-		//agreeChkBg.add(moveToMainBtn);
 		agreeChkFrame.add(moveToMainBtn);
 		moveToMainBtn.setBounds(1672, 114, 120, 44);
 		moveToMainBtn.setOpaque(false);
@@ -65,26 +46,22 @@ public class UserInfoCheckPanel extends JPanel {
 		moveToMainBtn.setFocusPainted(false);
 		moveToMainBtn.setBorderPainted(false);
 		
-		
 //      체크박스의 이미지 아이콘 설정
 		ImageIcon uncheckedIcon = new ImageIcon("ui/UserAgree/checkBox_off.png");
 		ImageIcon checkedIcon = new ImageIcon("ui/UserAgree/checkBox_on.png");
 
 //		체크박스 설정
-        
         agreeChkFrame.add(infoChkBox1);
         infoChkBox1.setBounds(410, 138, 50, 50); // 위치 설정
         infoChkBox1.setIcon(uncheckedIcon); // 체크박스 선택 안됬을때(Default Image)
         infoChkBox1.setSelectedIcon(checkedIcon);// 체크박스 선택 됐을때
         infoChkBox1.setOpaque(false); // 체크박스 투명하게
-        
-        
+          
         agreeChkFrame.add(infoChkBox2);
         infoChkBox2.setBounds(410, 222, 50, 50);
         infoChkBox2.setIcon(uncheckedIcon);
         infoChkBox2.setSelectedIcon(checkedIcon);	
         infoChkBox2.setOpaque(false);
-        
         
         agreeChkFrame.add(infoChkBox3);
         infoChkBox3.setBounds(410, 306, 50, 50);
@@ -110,7 +87,6 @@ public class UserInfoCheckPanel extends JPanel {
         viewCont2.setFocusPainted(false);
         
 //		Before 버튼
-		
 		agreeChkFrame.add(beforeBtn);
 		beforeBtn.setBounds(410, 590, 400, 150);
 		beforeBtn.setOpaque(false);
@@ -119,7 +95,6 @@ public class UserInfoCheckPanel extends JPanel {
 		beforeBtn.setBorderPainted(false);
 		
 //		Next 버튼
-		
 		agreeChkFrame.add(nextBtn);
 		nextBtn.setBounds(840, 590, 400, 150);
 		nextBtn.setOpaque(false);
@@ -161,17 +136,8 @@ public class UserInfoCheckPanel extends JPanel {
 			                JOptionPane.showMessageDialog(UserInfoCheckPanel.this, "오류");
 			            }
 				}
-				
-				
-				
-				
+	
 			}
 		});
-		
-		
-		
-		
-		
-		
 	}
 } 

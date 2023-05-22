@@ -77,13 +77,9 @@ public class LoginPanel extends JPanel {
 	public LoginPanel(CardLayout card, JFrame parent) {
 		
 		setLayout(null);
-		
-		setLayout(null);
-		
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
 		setBounds(0,0,990,760);
-		setOpaque(false);
 		
 		add(userPhonNumber);
 		add(userPassField);

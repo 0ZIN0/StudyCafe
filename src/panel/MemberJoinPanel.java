@@ -53,8 +53,6 @@ public class MemberJoinPanel extends JPanel  {
     	
     	UserInfoCheckPanel UserInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
     	
-    	setLayout(null);
-    	JPanel MemberJoinPanel = new JPanel();
     	
     	phoneField = new JTextField();
         
@@ -70,16 +68,11 @@ public class MemberJoinPanel extends JPanel  {
     	beforeButton = new JButton(new ImageIcon("ui/main/Memberjoin/Before_Button.png"));
     	phonduplicationBtn= new JButton(new ImageIcon("ui/main/Memberjoin/DuplicateCheck_Button.png"));
     	
-    	
-    	add(MemberJoinPanel);
     	add(numpad);
     	
 		numpad.setBounds(1080,50,550,690);
-    	MemberJoinPanel.setBounds(0,0,990,760);
-    	MemberJoinPanel.setOpaque(false);
-    	
-    	
-    	MemberJoinPanel.setLayout(null);
+    	setBounds(0,0,990,760);
+    	setOpaque(false);
 
 	    phoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    phoneField.setText("핸드폰 번호");
@@ -94,7 +87,6 @@ public class MemberJoinPanel extends JPanel  {
 	    passwordField.setBounds(80, 288, 900, 110);
 	    passwordField.setOpaque(false);
 	    
-
 	    confirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    confirmPasswordField.setText("비밀번호 확인 (6자리)");
 	    confirmPasswordField.setOpaque(false);
@@ -170,11 +162,11 @@ public class MemberJoinPanel extends JPanel  {
         	
 		});
         
-        MemberJoinPanel.add(phoneField);
-        MemberJoinPanel.add(passwordField);
-        MemberJoinPanel.add(confirmPasswordField);
-        MemberJoinPanel.add(submitButton);
-        MemberJoinPanel.add(beforeButton);
+        add(phoneField);
+        add(passwordField);
+        add(confirmPasswordField);
+        add(submitButton);
+        add(beforeButton);
         
         beforeButton.addActionListener(new ActionListener() {
 			@Override
@@ -222,7 +214,6 @@ public class MemberJoinPanel extends JPanel  {
 	                   	stmt.setString(1, phone);
 	                   	ResultSet rs = stmt.executeQuery();
 	                   	if (rs.next()) {
-	                	   //JOptionPane.showMessageDialog(MemberJoinPanel.this, "이미 저장된 번호입니다");
 	                	   new setPopup("이미 저장된 번호입니다.").setVisible(true);
 	                       return;
 	                   }
@@ -234,5 +225,6 @@ public class MemberJoinPanel extends JPanel  {
 			}  
 		});
   
+        setLayout(null);
     } 
 }

@@ -56,15 +56,14 @@ public class LoginFrame extends JFrame{
 	
 	public LoginFrame() {
 		
-		subPanel.setOpaque(true);
-		subPanel.setBounds(100,200,1700,800);
-		
+		subPanel.setOpaque(false);
+		subPanel.setBounds(130,260,1650,760);
 		subPanel.add(loginPanel, "login");
 		subPanel.add(memberJoinPanel, "memberjoin");
 		subPanel.add(userInfoCheckPanel, "userInfoCheck");
-		
 		subPanel.setLayout(card);
-		background.add(subPanel);
+		add(subPanel);
+		
 		// 종료버튼 이벤트
 		exitBtn.addActionListener(new ActionListener() {
 			
@@ -77,7 +76,6 @@ public class LoginFrame extends JFrame{
 		exitBtn.setBounds(1700,80,100,100);
 		background.add(exitBtn);
 		add(background);
-		background.setOpaque(false);
 
 		setLayout(null);
 		setUndecorated(true);
