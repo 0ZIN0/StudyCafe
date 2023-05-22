@@ -88,6 +88,9 @@ public class OnePassChargePanel extends JPanel {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					
+					SeatReportPanel.seat_reservation.setUse_ticket_category("일회이용권");
+					
 					for(int i = 0; i < chargeBtns.size(); i++) {
 						if(chargeBtns.indexOf(e.getSource()) == i) {
 							chargeBtns.get(i).setIcon(selectedIcons[i]);

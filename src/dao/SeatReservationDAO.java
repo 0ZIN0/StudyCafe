@@ -76,9 +76,9 @@ public class SeatReservationDAO {
 	
 	/** 좌석의 상태를 불러오는 메서드*/
 	public static void UsingSeats() {
-		String query = "SELECT seat.seat_id, NVL(res.member_id, '없음') AS member_id, seat.seat_state \r\n"
-				+ "FROM seat_reservation res, seat seat \r\n"
-				+ "WHERE seat.seat_id = res.seat_id (+)";
+		String query = "SELECT seat.seat_id, NVL(res.member_id, '없음') AS member_id, seat.seat_state\r\n"
+				+ "FROM seat_reservation res, seat seat "
+				+ "WHERE seat.seat_id = res.seat_id (+) AND seat_reservation_end_time IS NULL;";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);

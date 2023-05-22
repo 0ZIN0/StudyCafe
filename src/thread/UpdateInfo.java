@@ -18,8 +18,8 @@ public class UpdateInfo implements Runnable {
 		while(true) {
 			try {
 				Thread.sleep(1000);
-				seat_res.autoLeaveSystem();
-				seat_res.UsingSeats();
+//				seat_res.autoLeaveSystem();
+//				seat_res.UsingSeats();
 				setMyPage();
 				System.out.println("update");
 			} catch (Exception e) {
