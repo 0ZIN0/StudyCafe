@@ -188,7 +188,7 @@ public class PaymentInformationDialog extends JDialog {
 			add(priceIs);
 
 			if(onePassChargeItem == 99) {
-				hours.setText("종일권(2시까지)"); //변하는 값
+				hours.setText("종일권(02시까지)"); //변하는 값
 				hours.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 				hours.setForeground(new Color(35, 35, 35));
 				hours.setBounds(382, 278, 200, 35);

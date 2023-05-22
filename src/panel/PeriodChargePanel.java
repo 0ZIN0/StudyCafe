@@ -15,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
+import dao.TicketDAO;
 import dialog.TimeOrPeriodChargeDialog;
+import dto.Ticket;
 
 public class PeriodChargePanel extends JPanel {
 
@@ -38,7 +40,9 @@ public class PeriodChargePanel extends JPanel {
 			new ImageIcon("ui/결제 팝업/기간이용권_팝업/Button_12Weeks_choice_line.png")
 	};
 
-
+	Ticket ticket;
+	NumberFormat nf = NumberFormat.getNumberInstance();
+	
 	public PeriodChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
 
 		
@@ -48,13 +52,29 @@ public class PeriodChargePanel extends JPanel {
 
 			String labelText = "";
 			if (i == 0) {
-				labelText = "90,000원";
+				ticket = TicketDAO.getTicket("T-11");
+
+				periodChargePrice = ticket.getTicket_price();
+				
+				labelText = nf.format(periodChargePrice) + "원";
 			} else if (i == 1) {
-				labelText = "160,000원";
+				ticket = TicketDAO.getTicket("T-12");
+
+				periodChargePrice = ticket.getTicket_price();
+				
+				labelText = nf.format(periodChargePrice) + "원";
 			} else if (i == 2) {
-				labelText = "300,000원";
+				ticket = TicketDAO.getTicket("T-13");
+
+				periodChargePrice = ticket.getTicket_price();
+				
+				labelText = nf.format(periodChargePrice) + "원";
 			} else if (i == 3) {
-				labelText = "420,000원";
+				ticket = TicketDAO.getTicket("T-14");
+
+				periodChargePrice = ticket.getTicket_price();
+				
+				labelText = nf.format(periodChargePrice) + "원";
 			}
 			JLabel label = new JLabel(labelText);
 			label.setHorizontalAlignment(JLabel.CENTER);
@@ -77,15 +97,15 @@ public class PeriodChargePanel extends JPanel {
 
 							chargeBtns.get(i).setIcon(selectedIcons[i]);
 
-							NumberFormat nf = NumberFormat.getNumberInstance();
-
 							periodChargeItem = 0;
 							periodChargePrice = 0;
 
 
 							if (i == 0) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-11");
-								periodChargePrice = 90000;
+								ticket = TicketDAO.getTicket("T-11");
+
+								periodChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
@@ -97,7 +117,11 @@ public class PeriodChargePanel extends JPanel {
 
 							} else if (i == 1) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-12");
-								periodChargePrice = 160000;
+								
+								ticket = TicketDAO.getTicket("T-12");
+
+								periodChargePrice = ticket.getTicket_price();
+								
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
@@ -109,7 +133,10 @@ public class PeriodChargePanel extends JPanel {
 
 							} else if (i == 2) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-13");
-								periodChargePrice = 300000;
+								
+								ticket = TicketDAO.getTicket("T-13");
+
+								periodChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");
@@ -121,7 +148,10 @@ public class PeriodChargePanel extends JPanel {
 
 							} else if (i == 3) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-14");
-								periodChargePrice = 420000;
+
+								ticket = TicketDAO.getTicket("T-14");
+
+								periodChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(periodChargePrice) + "원");

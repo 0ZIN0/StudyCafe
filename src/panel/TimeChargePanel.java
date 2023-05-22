@@ -15,20 +15,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.ChargeTimeButton;
+import dao.TicketDAO;
 import dialog.PaymentDialog;
 import dialog.TimeOrPeriodChargeDialog;
-import dto.temDTO;
+import dto.Ticket;
 
 public class TimeChargePanel extends JPanel {
-	
+
 
 	public static int timeChargeItem; 
 	public static int timeChargePrice;
 
+	public Ticket ticket;
+
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
-
+	
 	GridLayout grid = new GridLayout(2, 2, 20, 20);
 	List<ChargeTimeButton> chargeBtns = new ArrayList<>();
 	ImageIcon[] basicIcons = new ImageIcon[] {
@@ -45,19 +48,33 @@ public class TimeChargePanel extends JPanel {
 			new ImageIcon("ui/결제 팝업/시간충전권_팝업/Button_200시간_choice_line.png")
 	};
 
+	NumberFormat nf = NumberFormat.getNumberInstance();
+	
 	public TimeChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
 
 		for(int i = 0; i < basicIcons.length; i++) {
 			ChargeTimeButton chargeBtn = new ChargeTimeButton(basicIcons[i]);
 			String labelText = "";
 			if (i == 0) {
-				labelText = "45,000원";
+				ticket = TicketDAO.getTicket("T-07");
+
+				timeChargePrice = ticket.getTicket_price();
+				labelText = nf.format(timeChargePrice) + "원";
 			} else if (i == 1) {
-				labelText = "70,000원";
+				ticket = TicketDAO.getTicket("T-08");
+
+				timeChargePrice = ticket.getTicket_price();
+				labelText = nf.format(timeChargePrice) + "원";
 			} else if (i == 2) {
-				labelText = "130,000원";
+				ticket = TicketDAO.getTicket("T-09");
+
+				timeChargePrice = ticket.getTicket_price();
+				labelText = nf.format(timeChargePrice) + "원";
 			} else if (i == 3) {
-				labelText = "240,000원";
+				ticket = TicketDAO.getTicket("T-10");
+
+				timeChargePrice = ticket.getTicket_price();
+				labelText = nf.format(timeChargePrice) + "원";
 			} 
 			JLabel label = new JLabel(labelText);
 			label.setHorizontalAlignment(JLabel.CENTER);
@@ -73,7 +90,6 @@ public class TimeChargePanel extends JPanel {
 					for(int i = 0; i < chargeBtns.size(); i++) {
 						if(chargeBtns.indexOf(e.getSource()) == i) {
 							chargeBtns.get(i).setIcon(selectedIcons[i]);
-							NumberFormat nf = NumberFormat.getNumberInstance();
 
 							OnePassChargePanel.onePassChargePrice = 0;
 							TimeChargePanel.timeChargePrice  = 0; 
@@ -81,10 +97,14 @@ public class TimeChargePanel extends JPanel {
 							PaymentDialog.studyRoomChargePrice = 0;
 							ButtonPanel.lockerChargePrice = 0;
 
-							
+
+
 							if (i == 0) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-07");
-								timeChargePrice = 45000;
+
+								ticket = TicketDAO.getTicket("T-07");
+
+								timeChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(timeChargePrice) + "원");
@@ -96,7 +116,10 @@ public class TimeChargePanel extends JPanel {
 
 							} else if (i == 1) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-08");
-								timeChargePrice = 70000;
+
+								ticket = TicketDAO.getTicket("T-08");
+
+								timeChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(timeChargePrice) + "원");
@@ -108,7 +131,10 @@ public class TimeChargePanel extends JPanel {
 
 							} else if (i == 2) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-09");
-								timeChargePrice = 130000;
+								
+								ticket = TicketDAO.getTicket("T-09");
+
+								timeChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(timeChargePrice) + "원");
@@ -120,7 +146,10 @@ public class TimeChargePanel extends JPanel {
 
 							} else if (i == 3) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-10");
-								timeChargePrice = 240000;
+								
+								ticket = TicketDAO.getTicket("T-10");
+
+								timeChargePrice = ticket.getTicket_price();
 								Font font = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								priceIs.setFont(font);
 								priceIs.setText(nf.format(timeChargePrice) + "원");
@@ -129,7 +158,7 @@ public class TimeChargePanel extends JPanel {
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
 								hours.setText(nf.format(timeChargeItem) + "시간");
-
+								
 							} 
 
 						} else {
