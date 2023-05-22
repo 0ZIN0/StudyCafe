@@ -121,6 +121,7 @@ public class CheckInFrame extends JFrame {
 	
 	// 결제 완료하면서 db에 넘길때 사용 
 	public static Ticket_order ticket_order = new Ticket_order();
+	public static Member member_dto = new Member();
 	
 	/**
 	 * Create the frame.

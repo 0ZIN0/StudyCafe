@@ -36,7 +36,7 @@ public class LockerPayDialog extends JDialog {
 	Image image = icon.getImage();
 	
 	
-	
+	static String lockerNum;
 	
 	/* 패널 */
 	JPanel background = new JPanel() {
@@ -50,6 +50,7 @@ public class LockerPayDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public LockerPayDialog(String lockerNum) {
+		this.lockerNum = lockerNum;
 		CloseButton close = new CloseButton(this);
 		NextButton next = new NextButton(this);
 		
@@ -117,7 +118,7 @@ public class LockerPayDialog extends JDialog {
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				PaymentInformationDialog payInfo = new PaymentInformationDialog(lockerNum);
+				PaymentInformationDialog payInfo = new PaymentInformationDialog();
 			}
 		});
 		

@@ -39,7 +39,7 @@ public class PaymentInformationDialog extends JDialog {
 	
 	private ImageIcon check;
 
-	public PaymentInformationDialog(String lockerNum) {
+	public PaymentInformationDialog() {
 
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_1/SeatUse_Pay_info_default_1.png");
 		Image bgImage = imageIcon.getImage();
@@ -245,11 +245,13 @@ public class PaymentInformationDialog extends JDialog {
 			
 			
 		} else if (lockerChargePrice != 0) {
-			nameIs.setText("사물함[" + lockerNum + "]"); 
+			nameIs.setText("사물함[" + LockerPayDialog.lockerNum + "]"); 
 			nameIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));
 			nameIs.setForeground(new Color(35, 35, 35));
 			nameIs.setBounds(382, 225, 200, 35);
 			add(nameIs);
+			
+			CheckInFrame.member_dto.setLocker_number("L-" + LockerPayDialog.lockerNum);
 
 			priceIs.setText(String.format("%,d원", lockerChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 28));

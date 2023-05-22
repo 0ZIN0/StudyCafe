@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 import button.SeatButton;
 import color.MyColor;
+import dao.LockerDAO;
 import dao.SeatDAO;
 import dao.TicketOrderDAO;
 import dao.temDAO;
@@ -30,12 +31,15 @@ import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
 import panel.SeatReportPanel;
 import panel.TimeChargePanel;
+import panel.ButtonPanel;
 import panel.MainPanel;
 
 public class CompletePaymentDialog extends JDialog {
-
+	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
+	
 	public CompletePaymentDialog() {
 		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
+		System.out.println("사물함 금액: " + lockerChargePrice);
 		
 		//TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(InsertCardDialog.amountPaid);
 		CheckInFrame.ticket_order.setOrder_total_price(InsertCardDialog.amountPaid);
@@ -100,8 +104,16 @@ public class CompletePaymentDialog extends JDialog {
 				TicketOrderDAO.saveOrder(CheckInFrame.ticket_order);
 				
 				
-//				LockerPayDialog.ticket_order_locker.setMember_id(CheckInFrame.member.getMember_id());
-//				TicketOrderDAO.saveOrder(LockerPayDialog.ticket_order_locker);
+				if (lockerChargePrice != 0) {
+					CheckInFrame.member_dto.setMember_id(CheckInFrame.member.getMember_id());
+					LockerDAO.locNumToMem(CheckInFrame.member_dto);
+					
+				} else {
+					
+				}
+				
+				
+				
 				
 
 				dispose();
