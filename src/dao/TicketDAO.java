@@ -26,7 +26,7 @@ public class TicketDAO {
 				Date remain_date = rs.getDate("remain_date");
 				rs.getInt("remain_time");
 				
-				if (rs.getInt("remain_time") == 0 && remain_date.equals(null)) {
+				if (rs.getInt("remain_time") == 0 && remain_date == null) {
 					return false;
 				}
 			}

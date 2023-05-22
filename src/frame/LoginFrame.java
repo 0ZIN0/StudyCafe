@@ -40,6 +40,8 @@ import panel.LoginPanel;
 import panel.MemberJoinPanel;
 import panel.NumberKeypad;
 import panel.UserInfoCheckPanel;
+import thread.TimeRun;
+import thread.UpdateInfo;
 
 public class LoginFrame extends JFrame{
 	
@@ -54,7 +56,12 @@ public class LoginFrame extends JFrame{
 	UserInfoCheckPanel userInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
 	
 	JPanel cardPanel = new JPanel();
+	// 쓰레드 클래스
+	static TimeRun timeRun = new TimeRun(CheckInFrame.timeLabel);
+	static UpdateInfo updateInfo = new UpdateInfo();
+		
 	
+
 	public LoginFrame() {
 		
 		background.setLayout(null);
@@ -92,7 +99,11 @@ public class LoginFrame extends JFrame{
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 			((Throwable) e).printStackTrace();
 		}
+		Thread time = new Thread(timeRun);
+		Thread update = new Thread(updateInfo);
 		new LoginFrame();
+		update.run();
+		time.run();
 	}
 }
 

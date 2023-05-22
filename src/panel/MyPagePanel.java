@@ -18,7 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import dao.MemberDAO;
+import dao.SeatDAO;
 import dto.Member;
+import frame.CheckInFrame;
 
 public class MyPagePanel extends JPanel {
 	
@@ -27,7 +29,7 @@ public class MyPagePanel extends JPanel {
 	JButton logoutBtn = new JButton("로그아웃");
 	JButton mainBtn = new JButton("좌석보기");
 	
-	Member member = new Member();
+	Member member;
 	
 	DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 	List<JLabel> labels = new ArrayList<>();
@@ -83,7 +85,7 @@ public class MyPagePanel extends JPanel {
 		period.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		period.setForeground(Color.WHITE);
 		
-		seat = new JLabel(Integer.toString(MemberDAO.usingSeat(member.getMember_id())) + "번");
+		seat = new JLabel(SeatDAO.isUsingMySeat(CheckInFrame.member.getMember_id()) + "번");
 		seat.setBounds(1010, 680, 500, 100);
 		seat.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		seat.setForeground(Color.WHITE);

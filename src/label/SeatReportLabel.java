@@ -15,7 +15,6 @@ public class SeatReportLabel extends JLabel {
 
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		setForeground(Color.WHITE);
-		System.out.println(mySeat);
 		if (mySeat == 0) {
 			setText("사용중인 좌석이 없습니다.");
 			setBounds(507, 28, 550, 50);

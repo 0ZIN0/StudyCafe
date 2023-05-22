@@ -109,10 +109,6 @@ public class CheckInFrame extends JFrame {
 	/* DTO */ 
 	public static Member member;
 
-	// 쓰레드 클래스
-	static TimeRun timeRun = new TimeRun(timeLabel);
-	static UpdateInfo updateInfo = new UpdateInfo();
-
 	/**
 	 * Create the frame.
 	 */
