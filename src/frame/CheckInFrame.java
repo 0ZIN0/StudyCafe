@@ -112,7 +112,7 @@ public class CheckInFrame extends JFrame {
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = SeatDAO.setMember("010-1111-1111");
+	public static Member member = new Member();
 
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(timeLabel);
@@ -262,7 +262,7 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-//		getContentPane().add(loginMainPanel, "login");
+		getContentPane().add(loginMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
