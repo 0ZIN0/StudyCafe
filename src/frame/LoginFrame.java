@@ -56,8 +56,9 @@ public class LoginFrame extends JFrame{
 	
 	public LoginFrame() {
 		
+		subPanel.setOpaque(true);
+		subPanel.setBounds(100,200,1700,800);
 		
-		subPanel.setBounds(633, 381, 1177, 617);
 		subPanel.add(loginPanel, "login");
 		subPanel.add(memberJoinPanel, "memberjoin");
 		subPanel.add(userInfoCheckPanel, "userInfoCheck");
@@ -76,7 +77,8 @@ public class LoginFrame extends JFrame{
 		exitBtn.setBounds(1700,80,100,100);
 		background.add(exitBtn);
 		add(background);
-		
+		background.setOpaque(false);
+
 		setLayout(null);
 		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
