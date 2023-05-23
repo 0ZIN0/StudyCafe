@@ -43,12 +43,11 @@ public class StudyRoomPanel extends JPanel {
 	JLabel isTodayLabel = new JLabel("TODAY");
 	DateLabel dateLabel = new DateLabel();
 	StartTimeLabel startTimeLabel = new StartTimeLabel(myStudyRoom_Reservation);
-	JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
+	public static JLabel whatTimeLabel = new JLabel("1"); // 1 or 2
 	
 	JButton paymentBtn = new PaymentButton(myStudyRoom_Reservation, whatTimeLabel);
 
 	List<StudyRoom_Reservation> studyRoom_AllReservation;
-	
 	
 	/* 패널 */
 	GridPanel gridPanel;

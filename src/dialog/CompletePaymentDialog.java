@@ -6,12 +6,17 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import button.TimeSelectButton;
 import color.MyColor;
 import dao.SeatDAO;
 import dao.StudyRoomDAO;
@@ -19,11 +24,14 @@ import dao.TicketOrderDAO;
 import dto.StudyRoom_Reservation;
 import frame.MainFrame;
 import label.RemainSeatLabel;
+import panel.GridPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
 
 public class CompletePaymentDialog extends JDialog {
+
+	List<TimeSelectButton> btns = GridPanel.btns;
 
 	public CompletePaymentDialog() {
 		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
@@ -48,11 +56,11 @@ public class CompletePaymentDialog extends JDialog {
 				//				temDTO dto = new temDTO("2시", description);
 				//				temDAO dao = new temDAO();
 				//				dao.addTem(dto);
-				
+
 				/* 건들지 마시오 (로아) */
 				String ticket_id = TimeOrPeriodChargeDialog.ticket_order.getTicket_id();
 				String[] num = ticket_id.split("-");
-				
+
 				if (Integer.parseInt(num[1]) >= 1 && Integer.parseInt(num[1]) <= 6) { // 일회이용권
 					int ticket_value = 0;
 					if (ticket_id.equals("T-01")) {
@@ -68,21 +76,21 @@ public class CompletePaymentDialog extends JDialog {
 					} else if (ticket_id.equals("T-06")) {
 						ticket_value = 1440;
 					}
-					
+
 					if (SeatReportPanel.mySeat == 0 ) {
-						
+
 						SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
 						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
-						
+
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();
-						
+
 						MyPagePanel.seat.setText(seat + "번");
 						SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
 						SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 						SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);
 						SeatReportPanel.seatBtns.get(seat - 1).use = true;
 						SeatReportPanel.mySeat = seat;
-						
+
 						RemainSeatLabel.remain = SeatDAO.isRemain();
 						SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
 					} else {
@@ -94,17 +102,22 @@ public class CompletePaymentDialog extends JDialog {
 					String date = formatter.format(StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_reservation_date());
 					String start = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time().replace(":", "").strip();
 					String end = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_end_time().replace(":", "").strip();
-					
+
 					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(date+start);
 					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(date+end);
-					
+
 					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
-					
+					if (StudyRoomPanel.whatTimeLabel.getText().equals("1")) {
+						getReservationInfo(4);
+					} else {
+						getReservationInfo(8);
+					}
+
 				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
-					
+
 				}
 				/* 여기까지 절대 건들지 마시오 (로아) */
-//					
+				//					
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 
@@ -124,5 +137,40 @@ public class CompletePaymentDialog extends JDialog {
 		setResizable(false);
 		setBounds(585, 315, 750, 450);
 		setVisible(true);
+	}
+
+	public void getReservationInfo(int btnNum) {
+		LocalDate labelDate = GridPanel.dateLabel.getSelectDay();
+		System.out.println(labelDate);
+		String studyroom_id = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_id(); 
+		List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(labelDate, studyroom_id);
+
+		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
+			for(TimeSelectButton timeSelectBtn : btns) {
+				LocalTime selectTime = timeSelectBtn.getTime();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+				LocalTime start = LocalTime.parse(studyRoom_reserv.getStudyRoom_start_time(), formatter);
+				LocalTime end = LocalTime.parse(studyRoom_reserv.getStudyRoom_end_time(), formatter);
+
+				if (start.compareTo(selectTime) <= 0 && 
+						end.compareTo(selectTime) > 0) {
+					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) && btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
+						btns.get(i).setEnabled(false);
+					}
+					if (selectTime.compareTo(GridPanel.startTimeLabel.getTime()) <= 0 &&
+							labelDate.equals(LocalDate.now())) {
+						timeSelectBtn.setBackground(MyColor.GRAY);
+					} else {
+						if (StudyRoomPanel.myStudyRoom_Reservation.getMember_id().equals(studyRoom_reserv.getMember_id())) {
+								timeSelectBtn.setBackground(MyColor.LEMON);
+						} else {
+							timeSelectBtn.setBackground(MyColor.GRAY);
+						}
+					}
+					timeSelectBtn.setEnabled(false);
+					GridPanel.reserved[btns.indexOf(timeSelectBtn)] = true;
+				}            
+			}
+		}
 	}
 }
