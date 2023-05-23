@@ -95,7 +95,7 @@ public class MainFrame extends JFrame {
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = SeatDAO.setMember("010-1111-1111");
+	public static Member member;
 	
 	
 	
@@ -105,7 +105,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame(Member member) {
-//		this.member = member;
+		this.member = member;
 		/* 패널 */
 		seatReportPanel  = new SeatReportPanel(member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
@@ -267,23 +267,20 @@ public class MainFrame extends JFrame {
 				card.show(getContentPane(), "myPage");
 			}
 		});
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				
+			}
+		});
 
 		mainPanel.add(openDoorBtn);
 		mainPanel.add(leaveBtn);
 		mainPanel.add(buyBtn);
 
-		/* 스윙 창 끄기(임시 버튼. 추후에 관리자 모드에서 만들 거임) */
-		xBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-
-		xBtn.setBounds(1850, 10, 50, 50); 
-		mainPanel.add(xBtn);
-		
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
 		setUndecorated(true);
