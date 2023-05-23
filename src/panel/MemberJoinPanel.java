@@ -37,7 +37,7 @@ public class MemberJoinPanel extends JPanel  {
     }
     
 	//핸드폰 정규표현식
-    static String phonnumRegular = "^(01\\d{1}|02|0505|0502|0506|0\\d{1,2})-?(\\d{3,4})-?(\\d{4})";
+    static String phonnumRegular = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$";
     
     // 생년월일 정규표현식
     static String dayRegular = "(19|20)\\d{2}\\-((11|12)|(0?(\\d)))\\-(30|31|((0|1|2)?\\d))";
