@@ -14,8 +14,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 
 	JTextField textField;// 입력값을 보여줄 텍스트 필드
 	int max;
-	StringBuilder sb;
-	boolean phoneSelect;
+	boolean phoneSelect; // 폰필드 스위치
 	
 
 	public  NumberKeypad() {
