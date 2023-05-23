@@ -31,7 +31,7 @@ public class StudyRoomPanel extends JPanel {
 	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/Study_Room_Frame.png"), new Color(0x494344));
 	
 	/* 버튼 */
-	JButton topLeftBtn = new JButton(new ImageIcon("ui/study_room/Main_Arrow_01.png"));
+	public static JButton topLeftBtn = new JButton(new ImageIcon("ui/study_room/Main_Arrow_01.png"));
 	JButton topRightBtn = new JButton(new ImageIcon("ui/study_room/Main_Arrow_03.png"));
 	JButton bottomLeftBtn = new JButton(new ImageIcon("ui/study_room/Sub_Arrow_01.png"));
 	JButton bottomRightBtn = new JButton(new ImageIcon("ui/study_room/Sub_Arrow_03.png"));

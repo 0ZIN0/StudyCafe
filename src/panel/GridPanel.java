@@ -18,7 +18,9 @@ import javax.swing.JPanel;
 import button.TimeSelectButton;
 import dao.StudyRoomDAO;
 import dto.Member;
+import dto.StudyRoomButtonList;
 import dto.StudyRoom_Reservation;
+import frame.MainFrame;
 import label.DateLabel;
 import label.StartTimeLabel;
 
@@ -30,21 +32,21 @@ public class GridPanel extends JPanel {
 	final static Color LEMON = new Color(0xffdc74);
 
 	public static DateLabel dateLabel; // 라벨의 날짜
-
+	public static StudyRoomButtonList selectBtns;
 	/* dto */
 	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
 	Member member = new Member();
 
 	/* 날짜, 시간 */
-	public static StartTimeLabel startTimeLabel;
 	LocalDate nowDate = LocalDate.now();
 	LocalTime time = LocalTime.of(0, 0); // timeSelectBtn에 넣을 시간의 default값
-	public static List<TimeSelectButton> btns = new ArrayList<>();
+	List<TimeSelectButton> btns = new ArrayList<>();
 	int btnQty = 4; // 초기 버튼 선택 갯수
 
 	boolean[] reserved = new boolean[96]; 
 	boolean[] selected = new boolean[96]; 
 	boolean disable = false;
+	public static StartTimeLabel startTimeLabel;
 
 	public GridPanel(JButton upBtn, JButton downBtn, 
 			JButton topLeftBtn, JButton topRightBtn,
@@ -110,6 +112,9 @@ public class GridPanel extends JPanel {
 				}
 			});
 		}
+		
+		MainFrame.btns.setBtns(btns);
+		
 		// 예약된 정보들 가져오기
 		getReservationInfo(btnQty);
 
@@ -223,7 +228,6 @@ public class GridPanel extends JPanel {
 	/** 비활성화 리셋 */
 	public void btnReset() {
 		for(TimeSelectButton btn : btns) {
-			System.out.println(btns.indexOf(btn));
 			reserved[btns.indexOf(btn)] = false;
 			if(btn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
 				btn.setBackground(GRAY);

@@ -21,8 +21,8 @@ import color.MyColor;
 import dao.SeatDAO;
 import dao.StudyRoomDAO;
 import dao.TicketOrderDAO;
+import dto.Member;
 import dto.StudyRoom_Reservation;
-import dto.Ticket_order;
 import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.GridPanel;
@@ -33,11 +33,9 @@ import panel.StudyRoomPanel;
 
 public class CompletePaymentDialog extends JDialog {
 
-	List<TimeSelectButton> btns = GridPanel.btns;
-
+	List<TimeSelectButton> btns = MainFrame.btns.getBtns();
+	
 	public CompletePaymentDialog() {
-		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
-
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -111,12 +109,13 @@ public class CompletePaymentDialog extends JDialog {
 					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(date+start);
 					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(date+end);
 
-//					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
-//					if (StudyRoomPanel.whatTimeLabel.getText().equals("1")) {
-//						getReservationInfo(4);
-//					} else {
-//						getReservationInfo(8);
-//					}
+					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
+					if (StudyRoomPanel.whatTimeLabel.getText().equals("1")) {
+						getReservationInfo(4);
+					} else {
+						getReservationInfo(8);
+					}
+					StudyRoomPanel.topLeftBtn.doClick();
 				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
 					TicketOrderDAO.setLockerinMember(TimeOrPeriodChargeDialog.ticket_order, LockerPanel.lockerNum);
 				}

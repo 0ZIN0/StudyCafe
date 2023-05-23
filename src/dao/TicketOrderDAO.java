@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import dto.Ticket_order;
 
 public class TicketOrderDAO {
@@ -20,39 +22,30 @@ public class TicketOrderDAO {
 			pstmt.setString(1, order.getMember_id());
 			pstmt.setString(2, order.getTicket_id());
 			pstmt.setInt(3, order.getOrder_total_price());
-			
+
 			pstmt.executeUpdate();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void setLockerinMember(Ticket_order order, String lockerNum) {
-		String query1 = "SELECT * FROM TICKET_ORDER INNER JOIN TICKET USING(TICKET_ID) WHERE ORDER_ID=?";
-		String query2 = "UPDATE MEMBER SET LOCKER_NUMBER=?, LOCKER_REMAIN_DATE=sysdate+? WHERE MEMBER_ID=?";
-			
+		String query = "UPDATE MEMBER SET LOCKER_REMAIN_DATE= CASE\r\n"
+				+ "    WHEN LOCKER_REMAIN_DATE IS NULL THEN SYSDATE + (SELECT TICKET_VALUE FROM TICKET WHERE TICKET_ID = ?)\r\n"
+				+ "    ELSE LOCKER_REMAIN_DATE + (SELECT TICKET_VALUE FROM TICKET WHERE TICKET_ID = ?)\r\n"
+				+ "END, LOCKER_NUMBER=?\r\n"
+				+ "WHERE MEMBER_ID=?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt1 = conn.prepareStatement(query1);
-				PreparedStatement pstmt2 = conn.prepareStatement(query2);
+				PreparedStatement pstmt = conn.prepareStatement(query);
 				) {
-			pstmt1.setString(1, order.getOrder_id());
+			pstmt.setString(1, order.getTicket_id());
+			pstmt.setString(2, order.getTicket_id());
+			pstmt.setString(3, "L-" + lockerNum);
+			pstmt.setString(4, order.getMember_id());
 
-			try (
-				ResultSet rs = pstmt1.executeQuery();	
-			) {
-				
-				rs.next();
-				
-				
-				pstmt2.setString(1, lockerNum);
-				
-				pstmt2.setInt(2, rs.getInt("ticket_value"));
-				pstmt2.setString(3, order.getMember_id());
-				
-				pstmt2.executeUpdate();
-			}
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
