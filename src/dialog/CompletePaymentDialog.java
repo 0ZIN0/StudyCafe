@@ -5,33 +5,23 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
-import button.SeatButton;
 import color.MyColor;
 import dao.SeatDAO;
+import dao.StudyRoomDAO;
 import dao.TicketOrderDAO;
-import dao.temDAO;
-import dto.Ticket;
-import dto.Ticket_order;
-import dto.temDTO;
+import dto.StudyRoom_Reservation;
 import frame.MainFrame;
 import label.RemainSeatLabel;
-import panel.OnePassChargePanel;
-import panel.PeriodChargePanel;
+import panel.MyPagePanel;
 import panel.SeatReportPanel;
-import panel.TimeChargePanel;
-import panel.MainPanel;
+import panel.StudyRoomPanel;
 
 public class CompletePaymentDialog extends JDialog {
 
@@ -86,6 +76,7 @@ public class CompletePaymentDialog extends JDialog {
 						
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();
 						
+						MyPagePanel.seat.setText(seat + "번");
 						SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
 						SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 						SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);
@@ -99,12 +90,21 @@ public class CompletePaymentDialog extends JDialog {
 						SeatDAO.plusOneDayTicket(seat, ticket_value);
 					}
 				} else if (Integer.parseInt(num[1]) >= 15 && Integer.parseInt(num[1]) <= 18) { // 스터디룸
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+					String date = formatter.format(StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_reservation_date());
+					String start = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time().replace(":", "").strip();
+					String end = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_end_time().replace(":", "").strip();
+					
+					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(date+start);
+					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(date+end);
+					
+					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
 					
 				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
 					
 				}
 				/* 여기까지 절대 건들지 마시오 (로아) */
-					
+//					
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 
