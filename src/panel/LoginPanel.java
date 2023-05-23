@@ -95,7 +95,7 @@ public class LoginPanel extends JPanel {
 		
 		// 핸드폰 번호 입력 TextField 
 		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-		userPhonNumber.setText("일일");
+		userPhonNumber.setText(" 핸드폰번호");
 		userPhonNumber.setOpaque(false);
 		userPhonNumber.setBounds(90, 318, 800, 110);
 		userPhonNumber.setSelectionColor(new Color(0, 0, 0, 0));
