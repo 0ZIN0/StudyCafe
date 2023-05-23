@@ -15,6 +15,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dao.TicketDAO;
+import dao.TicketOrderDAO;
 import panel.ButtonPanel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
@@ -87,7 +89,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		else if (studyRoomChargePrice == 7000) {
+		else if (studyRoomChargePrice == TicketDAO.getTicket("T-15").getTicket_price()) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));
@@ -97,7 +99,7 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-		else if (studyRoomChargePrice == 14000) {
+		else if (studyRoomChargePrice == TicketDAO.getTicket("T-16").getTicket_price()) {
 			JLabel priceIs = new JLabel();
 			priceIs.setText(String.format("%,d원", studyRoomChargePrice));
 			priceIs.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 35));

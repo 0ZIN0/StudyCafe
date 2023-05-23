@@ -1,22 +1,22 @@
 package panel;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import button.LockerTicketButton;
+import dao.TicketDAO;
 import dialog.PaymentDialog;
+import dialog.TimeOrPeriodChargeDialog;
+import dto.Ticket;
 
 public class ButtonPanel extends JPanel implements ActionListener{
    
@@ -27,6 +27,9 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
+	
+	Ticket ticket;
+	NumberFormat nf = NumberFormat.getNumberInstance();
 	
 	ImageIcon[] images = new ImageIcon[] {
 			new ImageIcon("ui/Locker_PopUp/Button_2.png"),
@@ -51,7 +54,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
 	};
 	
 	String[] fees = new String[] {
-			"6,000원", "10,000원", "20,000원", "30,000원"
+			nf.format(TicketDAO.getTicket("T-19").getTicket_price()) + "원", 
+			nf.format(TicketDAO.getTicket("T-20").getTicket_price()) + "원", 
+			nf.format(TicketDAO.getTicket("T-21").getTicket_price()) + "원", 
+			nf.format(TicketDAO.getTicket("T-22").getTicket_price()) + "원"
 	};
 		
 	JLabel periodLabel;
@@ -75,7 +81,8 @@ public class ButtonPanel extends JPanel implements ActionListener{
             add(ticketButton);
         }
         
-        btns.get(0).setSelected(true);
+        btns.get(0).doClick();
+        TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-19").getTicket_price());
 	}
 
 	@Override
@@ -97,20 +104,25 @@ public class ButtonPanel extends JPanel implements ActionListener{
 				ButtonPanel.lockerChargePrice = 0;
 				
 				if(btnNum == 0) {
-					lockerChargePrice = 6000;
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-19");
+					lockerChargePrice = TicketDAO.getTicket("T-19").getTicket_price();
 					lockerChargeItem = 2;
-					
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-19").getTicket_price());
 				} else if (btnNum == 1) {
-					lockerChargePrice = 10000;
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-20");
+					lockerChargePrice = TicketDAO.getTicket("T-20").getTicket_price();
 					lockerChargeItem = 4;
-					
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-20").getTicket_price());
 				} else if (btnNum == 2) {
-					lockerChargePrice = 20000;
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-21");
+					lockerChargePrice = TicketDAO.getTicket("T-21").getTicket_price();
 					lockerChargeItem = 8;
-					
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-21").getTicket_price());
 				} else if (btnNum == 3) {
-					lockerChargePrice = 30000;
+					TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-22");
+					lockerChargePrice = TicketDAO.getTicket("T-22").getTicket_price();
 					lockerChargeItem = 12;
+					TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(TicketDAO.getTicket("T-22").getTicket_price());
 				}
 				
 			} else {
