@@ -25,7 +25,7 @@ import label.StartTimeLabel;
 public class StudyRoomPanel extends JPanel {
 	
 	/* DTO */
-	StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
+	public static StudyRoom_Reservation myStudyRoom_Reservation = new StudyRoom_Reservation();
 	
 	/* 배경 */
 	BackgroundPanel image = new BackgroundPanel(new ImageIcon("ui/study_room/Study_Room_Frame.png"), new Color(0x494344));

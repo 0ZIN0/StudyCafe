@@ -37,26 +37,23 @@ public class StudyRoomDAO {
 	}
 	
 	/* 유저가 선택한 정보들로 예약하기 */
-	public static boolean setReservation(StudyRoom_Reservation studyRoom_Reservation) {
+	public static void setReservation(StudyRoom_Reservation studyRoom_Reservation) {
 		
-		String query = "INSERT INTO STUDYROOM_RESERVATION VALUSE(('SR-'|| studyroom_reservation_id_seq.nextval), ?, ?, TO_DATE(?, 'yyyy.mm.dd'), ?, ?)";
+		String query = "INSERT INTO studyroom_reservation VALUES(studyroom_reservation_id_seq.nextval, ?, ?, TO_DATE(?, 'YYYYMMDDHH24MI'), TO_DATE(?, 'YYYYMMDDHH24MI'))";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
 				) {
 			pstmt.setString(1, studyRoom_Reservation.getStudyRoom_id());	
 			pstmt.setString(2, studyRoom_Reservation.getMember_id());	
-			pstmt.setString(3, studyRoom_Reservation.getStudyRoom_reservation_date().toString());	
-			pstmt.setString(4, studyRoom_Reservation.getStudyRoom_start_time());	
-			pstmt.setString(5, studyRoom_Reservation.getStudyRoom_end_time());	
+			pstmt.setString(3, studyRoom_Reservation.getStudyRoom_start_time());	
+			pstmt.setString(4, studyRoom_Reservation.getStudyRoom_end_time());	
 				
 			pstmt.executeUpdate();
 			
-			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
 	}
 	
 	/* 유저가 예약한 것들을 알려주는 메서드 */
