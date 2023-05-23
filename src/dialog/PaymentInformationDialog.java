@@ -39,8 +39,10 @@ public class PaymentInformationDialog extends JDialog {
 	
 	private ImageIcon check;
 
-	public PaymentInformationDialog() {
 
+	public PaymentInformationDialog() {
+		
+		
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_1/SeatUse_Pay_info_default_1.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {

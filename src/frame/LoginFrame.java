@@ -92,11 +92,11 @@ public class LoginFrame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-//		try {
-//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-//            ((Throwable) e).printStackTrace();
-//        }
+		try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            ((Throwable) e).printStackTrace();
+        }
 		Thread time = new Thread(timeRun);
 		Thread update = new Thread(updateInfo);
 		new LoginFrame();

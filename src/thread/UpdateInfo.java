@@ -36,14 +36,17 @@ public class UpdateInfo implements Runnable {
 	}
 	
 	public void setMyPage() {
-		Member mem = MainFrame.member;
-		MyPagePanel.phoneNum.setText(mem.getPhone_number());
-		MemberDAO.updateRemainTime(mem.getMember_id());
-		if(mem.getRemain_date() != null) {
-			MyPagePanel.period.setText(mem.getRemain_date() + "까지");
+		System.out.println("마이페이지 업데이트 시작");
+		MemberDAO.updateRemainTime(MainFrame.member.getMember_id());
+		System.out.println("시간 업데이트");
+		if(MainFrame.member.getRemain_date() != null) {
+			MyPagePanel.period.setText(MainFrame.member.getRemain_date() + "까지");
+			System.out.println("기간 업데이트");
 		}
-		if(mem.getLocker_number() != null) {
-			MyPagePanel.locker.setText(mem.getLocker_number() + "번");
+		if(MainFrame.member.getLocker_number() != null) {
+			System.out.println("사물함 번호 : " + MainFrame.member.getLocker_number());
+			MyPagePanel.locker.setText("L-" + MainFrame.member.getLocker_number() + "번");
+			System.out.println("사물함 업데이트");
 		}
 	}
 }

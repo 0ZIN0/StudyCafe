@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
+import color.MyColor;
 import dto.Ticket_order;
+import frame.MainFrame;
+import panel.LockerPanel;
 
 public class TicketOrderDAO {
 
@@ -46,6 +49,9 @@ public class TicketOrderDAO {
 			pstmt.setString(4, order.getMember_id());
 
 			pstmt.executeUpdate();
+			LockerPanel.lockerBtns.get(Integer.parseInt(lockerNum) - 1).setBackground(MyColor.ORANGE);
+			LockerPanel.lockerBtns.get(Integer.parseInt(lockerNum) - 1).setEnabled(false);
+			MainFrame.member.setLocker_number(lockerNum);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

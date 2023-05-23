@@ -4,11 +4,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 
+import color.MyColor;
 import dao.LockerDAO;
 import dialog.LockerPayDialog;
+import frame.MainFrame;
 
 public class LockerButton extends JButton implements ActionListener {
 	
@@ -16,18 +19,24 @@ public class LockerButton extends JButton implements ActionListener {
 	
 	public LockerButton(int lockerNum) {
 		
-		usingLocker = LockerDAO.isUse().indexOf(lockerNum);
+		List<String[]> usingLocker = LockerDAO.isUse();
+		
 		setText(Integer.toString(lockerNum));
 		setSize(100, 100);
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
 		setBorderPainted(false);
 		addActionListener(this);
 		
-		if(usingLocker >= 0) {
-			setBackground(new Color(0x8D8787));
-			setEnabled(false);
+		if(usingLocker.get(lockerNum - 1)[1] != null) {
+			if(usingLocker.get(lockerNum - 1)[0].equals(MainFrame.member.getMember_id())) {
+				setBackground(MyColor.ORANGE);
+				setEnabled(false);
+			} else {
+				setBackground(MyColor.GRAY);
+				setEnabled(false);
+			}
 		} else {
-			setBackground(new Color(217, 217, 217));
+			setBackground(MyColor.LIGHTGRAY);
 		}
 	}
 

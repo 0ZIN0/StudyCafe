@@ -25,7 +25,7 @@ public class LockerPanel extends JPanel {
 	
 	public static String lockerNum;
 	private BufferedImage image;
-	List<LockerButton> lockerBtns = new ArrayList<>();
+	public static List<LockerButton> lockerBtns = new ArrayList<>();
 	int btnCtn = 1;
 	LockerDAO lockerDao = new LockerDAO();
 	int usable = 20 - lockerDao.isUse().size();
@@ -39,7 +39,6 @@ public class LockerPanel extends JPanel {
         } catch (IOException e) {
         	e.printStackTrace();
         }
-		
 		
 		for (int i = 0; i < 4; i++) {
 			for(int j = 0; j < 5; j++) {
@@ -77,5 +76,10 @@ public class LockerPanel extends JPanel {
 	 protected void paintComponent(Graphics g) {
 		 super.paintComponent(g);
 		 g.drawImage(image, 0, 0, this);
+	 }
+	 
+	 public static String getLockerNum() {
+
+		 return lockerNum;
 	 }
 }

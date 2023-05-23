@@ -19,10 +19,7 @@ public class LockerDAO {
 					ResultSet rs = pstmt.executeQuery();
 					) {
 				while(rs.next()) {
-					if(rs.getString("lockerNum") != null) {
-						lockerNums.add(new String[] {rs.getString("member_id") ,rs.getString("lockerNum")});
-						
-					}	
+					lockerNums.add(new String[] {rs.getString("member_id") ,rs.getString("lockerNum")});		
 				}
 			}
 		} catch (Exception e) {

@@ -154,20 +154,18 @@ public class MemberDAO {
 				PreparedStatement pstmt1 = conn.prepareStatement(query1);
 				PreparedStatement pstmt2 = conn.prepareStatement(query2);
 				) {
-				pstmt1.setString(1, ticket_id);
-				pstmt1.setString(2, ticket_id);
-				pstmt1.setString(3, MainFrame.member.getMember_id());
-				pstmt1.executeUpdate();
-				pstmt2.setString(1, MainFrame.member.getMember_id());
-				try(
-						ResultSet rs = pstmt2.executeQuery();
-						) {
-					if(rs.next()) {
-						MainFrame.member.setRemain_date(rs.getDate("remain_date"));
-					}
+			pstmt1.setString(1, ticket_id);
+			pstmt1.setString(2, ticket_id);
+			pstmt1.setString(3, MainFrame.member.getMember_id());
+			pstmt1.executeUpdate();
+			pstmt2.setString(1, MainFrame.member.getMember_id());
+			try(
+					ResultSet rs = pstmt2.executeQuery();
+					) {
+				if(rs.next()) {
+					MainFrame.member.setRemain_date(rs.getDate("remain_date"));
 				}
-				
-				
+			}		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

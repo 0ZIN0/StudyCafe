@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import button.LockerButton;
 import button.TimeSelectButton;
 import color.MyColor;
 import dao.MemberDAO;
@@ -123,24 +124,19 @@ public class CompletePaymentDialog extends JDialog {
 					}
 					StudyRoomPanel.topLeftBtn.doClick();
 					
-				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
-					
 				} else if (Integer.parseInt(num[1]) >= 7 && Integer.parseInt(num[1]) <= 10) { // 시간충전권
-					System.out.println(SeatReportPanel.mySeat);
-					System.out.println(btnId);
 					MemberDAO.chargeTime(ticket_id);
 					if (SeatReportPanel.mySeat == 0 && btnId == 0) {
 						setSeatReportPanel();
 					}
 				} else if (Integer.parseInt(num[1]) >= 11 && Integer.parseInt(num[1]) <= 14) { // 기간이용권
-					System.out.println(SeatReportPanel.mySeat);
-					System.out.println(btnId);
 					MemberDAO.chargeDate(ticket_id);
 					if (SeatReportPanel.mySeat == 0 && btnId == 0) {
 						setSeatReportPanel();
 					}
+				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
 					TicketOrderDAO.setLockerinMember(TimeOrPeriodChargeDialog.ticket_order, LockerPanel.lockerNum);
-				}
+				} 
 				/* 여기까지 절대 건들지 마시오 (로아) */
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
