@@ -24,15 +24,12 @@ import panel.TimeChargePanel;
 
 public class InsertCardDialog extends JDialog {
 	
-
 	int timeChargePrice = TimeChargePanel.getTimeChargePrice();
 	int onePassChargePrice = OnePassChargePanel.getOnePassChargePrice();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
 	int studyRoomChargePrice = PaymentDialog.getStudyRoomchargePrice();
 	int lockerChargePrice = ButtonPanel.getLockerChargePrice();
 	static int amountPaid; 
-
-	
 	
 	public InsertCardDialog() {
 
@@ -44,8 +41,6 @@ public class InsertCardDialog extends JDialog {
 				g.drawImage(bgImage, 0, 0, this);
 			};
 		};
-
-
 
 		ImageIcon buttonIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/closeButton.png");
 		JButton closeButton = new JButton(buttonIcon);

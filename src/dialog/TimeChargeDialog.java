@@ -23,9 +23,6 @@ import panel.TimeChargePanel;
 
 public class TimeChargeDialog extends JDialog {
 
-
-	
-	
 	JLabel whatName = new JLabel();
 	JLabel nameIs = new JLabel();
 	JLabel howHours = new JLabel();

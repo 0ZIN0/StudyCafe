@@ -99,6 +99,23 @@ public class MemberDAO {
 		}
 		return 0;
 	}
+	
+	public static void chargeTime(String ticket_id) {
+		String query = "update member "
+				+ "set remain_time = remain_time + (select ticket_value from ticket WHERE ticket_id = ?) "
+				+ "WHERE member_id = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+				pstmt.setString(1, ticket_id);
+				pstmt.setString(2, MainFrame.member.getMember_id());
+				pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
 
 

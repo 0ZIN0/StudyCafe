@@ -13,9 +13,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import color.MyColor;
+import dao.MemberDAO;
 import dao.SeatDAO;
 import dao.StudyRoomDAO;
 import dao.TicketOrderDAO;
+import dto.Member;
 import dto.StudyRoom_Reservation;
 import frame.MainFrame;
 import label.RemainSeatLabel;
@@ -28,10 +30,13 @@ import panel.StudyRoomPanel;
 
 
 public class CompletePaymentDialog extends JDialog {
-
+	
+	
 	public CompletePaymentDialog() {
 		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
-
+		
+		int btnId = MainFrame.btn.getBtnId();
+		
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -73,7 +78,7 @@ public class CompletePaymentDialog extends JDialog {
 						ticket_value = 1440;
 					}
 					
-					if (SeatReportPanel.mySeat == 0 ) {
+					if (SeatReportPanel.mySeat == 0) {
 						
 						SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
 						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
@@ -106,6 +111,23 @@ public class CompletePaymentDialog extends JDialog {
 					
 				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
 					
+				} else if (Integer.parseInt(num[1]) >= 7 && Integer.parseInt(num[1]) <= 10) { // 시간충전권
+					MemberDAO.chargeTime(ticket_id);
+					if (SeatReportPanel.mySeat == 0) {
+						SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
+						int seat = SeatReportPanel.seat_reservation.getSeat_id();
+
+						MyPagePanel.seat.setText(seat + "번");
+						SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
+						SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
+						SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);
+						SeatReportPanel.seatBtns.get(seat - 1).use = true;
+						SeatReportPanel.mySeat = seat;
+
+						RemainSeatLabel.remain = SeatDAO.isRemain();
+						SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
+
+					}
 				}
 				/* 여기까지 절대 건들지 마시오 (로아) */
 //					

@@ -30,6 +30,7 @@ import button.LeaveButton;
 import button.OpenDoorButton;
 import dao.SeatDAO;
 import dao.MemberDAO;
+import dto.Button;
 import dto.Member;
 import dto.Seat;
 import panel.LockerPanel;
@@ -109,7 +110,7 @@ public class MainFrame extends JFrame {
 	/* DTO */ 
 	public static Member member = SeatDAO.setMember("010-1111-1111");
 	
-	
+	public static Button btn = new Button();
 	
 	/**
 	 * Create the frame.

@@ -12,7 +12,9 @@ import dao.SeatDAO;
 import dialog.ChangeSeatDialog;
 import dialog.MySeatDialog;
 import dialog.SelectSeatDialog;
+import dto.Button;
 import dto.Seat;
+import frame.MainFrame;
 import panel.SeatReportPanel;
 
 public class SeatButton extends JButton {
@@ -20,7 +22,8 @@ public class SeatButton extends JButton {
 	Seat seat = new Seat();
 	public boolean use;
 	public String seatNum;
-	
+	private static int btnId = 0;
+	Button btn;
 	public SeatButton(String seatNum) {
 		seat.setSeat_id(seatNum);
 		this.seatNum = seatNum;
@@ -62,6 +65,7 @@ public class SeatButton extends JButton {
 					} else {
 						// 사용중이지 않은 좌석을 눌렀을때 나오는 팝업
 						JDialog selectSeatPopup = new SelectSeatDialog(seatNum, seat);
+						MainFrame.btn.setBtnId(btnId);
 					}
 				}
 			}
