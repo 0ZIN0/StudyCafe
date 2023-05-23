@@ -286,7 +286,33 @@ public class SeatDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void setUseTicketReservation(Seat_reservation seat_reservation) {
 
+		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, ?, sysdate, NULL)";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				) {
+
+			pstmt1.setString(1, seat_reservation.getSeat_id().toString());
+			pstmt1.setString(2, seat_reservation.getMember_id());
+			pstmt1.setString(3, seat_reservation.getUse_ticket_category());
+
+			pstmt1.executeUpdate();
+
+			String query2 = "UPDATE SEAT SET SEAT_STATE='사용중' WHERE SEAT_ID = ?";
+			try (
+					PreparedStatement pstmt2 = conn.prepareStatement(query2);
+					) {
+				pstmt2.setString(1, seat_reservation.getSeat_id().toString());
+				pstmt2.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/** 좌석 버튼 색 변경하는 메서드 */
 	public static boolean isUse(int num) {
 

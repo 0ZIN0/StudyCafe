@@ -47,69 +47,69 @@ public class GridPanel extends JPanel {
    boolean disable = false;
 
    public GridPanel(JButton upBtn, JButton downBtn, 
-         JButton topLeftBtn, JButton topRightBtn,
-         JButton BottomLeftBtn, JButton BottomRightBtn,
-         StartTimeLabel startTimeLabel, 
-         JLabel whatTimeLabel,StudyRoom_Reservation myStudyRoom_Reservation, 
-         JButton paymentBtn, DateLabel dateLabel, Member member) {
+		   JButton topLeftBtn, JButton topRightBtn,
+		   JButton BottomLeftBtn, JButton BottomRightBtn,
+		   StartTimeLabel startTimeLabel, 
+		   JLabel whatTimeLabel,StudyRoom_Reservation myStudyRoom_Reservation, 
+		   JButton paymentBtn, DateLabel dateLabel, Member member) {
 
-      this.myStudyRoom_Reservation = myStudyRoom_Reservation;
-      this.dateLabel = dateLabel;
-      this.startTimeLabel = startTimeLabel;
-      this.member = member;
-      GridLayout grid = new GridLayout(12, 8);
+	   this.myStudyRoom_Reservation = myStudyRoom_Reservation;
+	   this.dateLabel = dateLabel;
+	   this.startTimeLabel = startTimeLabel;
+	   this.member = member;
+	   GridLayout grid = new GridLayout(12, 8);
 
-      myStudyRoom_Reservation.setStudyRoom_id("SI-1");
+	   myStudyRoom_Reservation.setStudyRoom_id("SI-1");
 
-      grid.setHgap(3);
-      grid.setVgap(3);
-      paymentBtn.setEnabled(false);
+	   grid.setHgap(3);
+	   grid.setVgap(3);
+	   paymentBtn.setEnabled(false);
 
-      for (int i = 0; i < 96; ++i) {
+	   for (int i = 0; i < 96; ++i) {
 
-         TimeSelectButton timeSelectBtn = 
-               new TimeSelectButton(upBtn, downBtn, startTimeLabel, whatTimeLabel, myStudyRoom_Reservation);
-         btns.add(timeSelectBtn);
-         timeSelectBtn.setTime(time.plusMinutes(i * 15));
-         add(timeSelectBtn);
+		   TimeSelectButton timeSelectBtn = 
+				   new TimeSelectButton(upBtn, downBtn, startTimeLabel, whatTimeLabel, myStudyRoom_Reservation);
+		   btns.add(timeSelectBtn);
+		   timeSelectBtn.setTime(time.plusMinutes(i * 15));
+		   add(timeSelectBtn);
 
-         btnReset();
+		   btnReset();
 
-         // 타임테이블 버튼을 눌렀을 때
-         timeSelectBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               paymentBtn.setEnabled(true);
-               int btnNum = btns.indexOf(e.getSource());
+		   // 타임테이블 버튼을 눌렀을 때
+		   timeSelectBtn.addActionListener(new ActionListener() {
+			   @Override
+			   public void actionPerformed(ActionEvent e) {
+				   paymentBtn.setEnabled(true);
+				   int btnNum = btns.indexOf(e.getSource());
 
-               for (int i = 0; i < btns.size(); ++i) {
+				   for (int i = 0; i < btns.size(); ++i) {
 
-                  TimeSelectButton selectBtn = btns.get(i);
-                  if (!reserved[i]) {
-                     if (selectBtn.getTime().compareTo(LocalTime.now()) <= 0 && dateLabel.getSelectDay().equals(nowDate) 
-                           || selectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
-                        selectBtn.setBackground(GRAY);
-                        selectBtn.setEnabled(false);
-                     } else {
-                        selectBtn.setBackground(LIGHTGRAY);
-                     }
-                     
-                     if (i > btnNum && i <= btnNum + 3) {
-                        selectBtn.setBackground(ORANGE);
-                     } else if (whatTimeLabel.getText().equals("2") && 
-                           i > btnNum && i <= btnNum + 7) {
-                        selectBtn.setBackground(ORANGE);
-                     } else if (btnNum != i) {
-                        if (selectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
-                           selectBtn.setEnabled(false);
-                           selectBtn.setBackground(GRAY);
-                        }
-                     }
-                  }
-               }
-            }
-         });
-      }
+					   TimeSelectButton selectBtn = btns.get(i);
+					   if (!reserved[i]) {
+						   if (selectBtn.getTime().compareTo(LocalTime.now()) <= 0 && dateLabel.getSelectDay().equals(nowDate) 
+								   || selectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
+							   selectBtn.setBackground(GRAY);
+							   selectBtn.setEnabled(false);
+						   } else {
+							   selectBtn.setBackground(LIGHTGRAY);
+						   }
+
+						   if (i > btnNum && i <= btnNum + 3) {
+							   selectBtn.setBackground(ORANGE);
+						   } else if (whatTimeLabel.getText().equals("2") && 
+								   i > btnNum && i <= btnNum + 7) {
+							   selectBtn.setBackground(ORANGE);
+						   } else if (btnNum != i) {
+							   if (selectBtn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
+								   selectBtn.setEnabled(false);
+								   selectBtn.setBackground(GRAY);
+							   }
+						   }
+					   }
+				   }
+			   }
+		   });
+	   }
       // 예약된 정보들 가져오기
       getReservationInfo(btnQty);
       

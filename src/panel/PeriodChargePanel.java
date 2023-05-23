@@ -87,9 +87,10 @@ public class PeriodChargePanel extends JPanel {
 
 
 
-
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					SeatReportPanel.seat_reservation.setUse_ticket_category("기간이용권");
 					for(int i = 0; i < chargeBtns.size(); i++) {
 
 

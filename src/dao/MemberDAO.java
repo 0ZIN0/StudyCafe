@@ -101,20 +101,76 @@ public class MemberDAO {
 	}
 	
 	public static void chargeTime(String ticket_id) {
-		String query = "update member "
+		String query1 = "update member "
 				+ "set remain_time = remain_time + (select ticket_value from ticket WHERE ticket_id = ?) "
 				+ "WHERE member_id = ?";
+		String query2 = "SELECT remain_time FROM member WHERE member_id = ?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(query);
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				PreparedStatement pstmt2 = conn.prepareStatement(query2);
 				) {
-				pstmt.setString(1, ticket_id);
-				pstmt.setString(2, MainFrame.member.getMember_id());
-				pstmt.executeUpdate();
+				pstmt1.setString(1, ticket_id);
+				pstmt1.setString(2, MainFrame.member.getMember_id());
+				pstmt1.executeUpdate();
+				pstmt2.setString(1, MainFrame.member.getMember_id());
+				try (
+						ResultSet rs = pstmt2.executeQuery();
+						) {
+					if(rs.next()) {
+						int remain_time = rs.getInt("remain_time");
+						if(remain_time > 0) {
+							if(remain_time >= 60) {
+								int hour = remain_time / 60;
+								int minute = remain_time % 60;
+								MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+							} else {
+								MyPagePanel.time.setText(remain_time + "분");
+							}
+						} else {
+							MyPagePanel.time.setText("0분");
+						}
+					}
+				}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public static void chargeDate(String ticket_id) {
+		String query1 = "UPDATE \r\n"
+				+ "    member \r\n"
+				+ "SET \r\n"
+				+ "    remain_date = CASE \r\n"
+				+ "WHEN remain_date IS NULL \r\n"
+				+ "    THEN sysdate + (select ticket_value from ticket WHERE ticket_id = ?)\r\n"
+				+ "WHEN remain_date IS NOT NULL\r\n"
+				+ "    THEN remain_date + (select ticket_value from ticket WHERE ticket_id = ?)\r\n"
+				+ "END\r\n"
+				+ "WHERE member_id = ?";
+		String query2 = "SELECT remain_date FROM member WHERE member_id = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				PreparedStatement pstmt2 = conn.prepareStatement(query2);
+				) {
+				pstmt1.setString(1, ticket_id);
+				pstmt1.setString(2, ticket_id);
+				pstmt1.setString(3, MainFrame.member.getMember_id());
+				pstmt1.executeUpdate();
+				pstmt2.setString(1, MainFrame.member.getMember_id());
+				try(
+						ResultSet rs = pstmt2.executeQuery();
+						) {
+					if(rs.next()) {
+						MainFrame.member.setRemain_date(rs.getDate("remain_date"));
+					}
+				}
+				
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

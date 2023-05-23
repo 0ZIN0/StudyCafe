@@ -29,7 +29,7 @@ public class UpdateInfo implements Runnable {
 					setMyPage();
 					System.out.println("update MyInfo");
 				}
-				System.out.println("update complete");
+//				System.out.println("update complete");
 			} catch (Exception e) {
 			}
 		}	

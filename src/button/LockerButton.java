@@ -34,7 +34,6 @@ public class LockerButton extends JButton implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		LockerPayDialog lockerPayDialog = new LockerPayDialog(getLockerNum());
 	}
 	public String getLockerNum() {

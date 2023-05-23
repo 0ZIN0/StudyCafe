@@ -87,6 +87,8 @@ public class TimeChargePanel extends JPanel {
 			chargeBtn.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					
+					SeatReportPanel.seat_reservation.setUse_ticket_category("시간충전권");
 					for(int i = 0; i < chargeBtns.size(); i++) {
 						if(chargeBtns.indexOf(e.getSource()) == i) {
 							chargeBtns.get(i).setIcon(selectedIcons[i]);

@@ -111,7 +111,6 @@ public class MainFrame extends JFrame {
 	public static Member member = SeatDAO.setMember("010-1111-1111");
 	
 	public static Button btn = new Button();
-	
 	/**
 	 * Create the frame.
 	 */
@@ -292,7 +291,6 @@ public class MainFrame extends JFrame {
 
 		xBtn.setBounds(1850, 10, 50, 50); 
 		mainPanel.add(xBtn);
-		
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
 		setUndecorated(true);

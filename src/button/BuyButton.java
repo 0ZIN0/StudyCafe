@@ -25,7 +25,8 @@ public class BuyButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(member);
 		MainFrame.btn.setBtnId(btnId);
+		System.out.println(btnId);
+		TimeOrPeriodChargeDialog chageDialog = new TimeOrPeriodChargeDialog(member);
 	}
 }

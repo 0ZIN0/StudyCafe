@@ -23,7 +23,7 @@ public class SeatButton extends JButton {
 	public boolean use;
 	public String seatNum;
 	private static int btnId = 0;
-	Button btn;
+	
 	public SeatButton(String seatNum) {
 		seat.setSeat_id(seatNum);
 		this.seatNum = seatNum;
@@ -45,7 +45,7 @@ public class SeatButton extends JButton {
 		addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				System.out.println(btnId);
 				System.out.println("seatNum" + seatNum);
 				System.out.println("myseat" + SeatReportPanel.mySeat);
 
@@ -64,8 +64,8 @@ public class SeatButton extends JButton {
 							SeatReportPanel.seatInfoLabel.getText().length()).equals("번 좌석을 사용중입니다.")) {
 					} else {
 						// 사용중이지 않은 좌석을 눌렀을때 나오는 팝업
-						JDialog selectSeatPopup = new SelectSeatDialog(seatNum, seat);
 						MainFrame.btn.setBtnId(btnId);
+						JDialog selectSeatPopup = new SelectSeatDialog(seatNum, seat);
 					}
 				}
 			}
