@@ -32,6 +32,7 @@ import panel.PeriodChargePanel;
 import panel.SeatReportPanel;
 import panel.TimeChargePanel;
 import panel.MainPanel;
+import panel.MyPagePanel;
 
 public class CompletePaymentDialog extends JDialog {
 
@@ -107,7 +108,7 @@ public class CompletePaymentDialog extends JDialog {
 					
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
-
+				
 				dispose();
 			}
 		});
