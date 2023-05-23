@@ -62,7 +62,7 @@ public class MemberDAO {
 	public static int updateRemainTime(String memId) {
 		String query1 = "select\r\n"
 				+ "mem.member_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60))\r\n"
-				+ "AS remain \r\n"
+				+ "AS remain, use_ticket_category \r\n"
 				+ "from \r\n"
 				+ "seat_reservation res, member mem\r\n"
 				+ "WHERE res.member_id = mem.member_id\r\n"
@@ -78,18 +78,20 @@ public class MemberDAO {
 					ResultSet rs = pstmt1.executeQuery();
 					){
 				if(rs.next()) {
-					int remain_time = rs.getInt("remain");
-					if(remain_time > 0) {
-						if(remain_time >= 60) {
-							int hour = remain_time / 60;
-							int minute = remain_time % 60;
-							MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+					if(rs.getString("use_ticket_category").equals("시간충전권")) {	
+						int remain_time = rs.getInt("remain");
+						if(remain_time > 0) {
+							if(remain_time >= 60) {
+								int hour = remain_time / 60;
+								int minute = remain_time % 60;
+								MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+							} else {
+								MyPagePanel.time.setText(remain_time + "분");
+							}
 						} else {
-							MyPagePanel.time.setText(remain_time + "분");
-						}
-					} else {
-						MyPagePanel.time.setText("0분");
-					}					
+							MyPagePanel.time.setText("0분");
+						}					
+					}
 				}
 			}
 		} catch (Exception e) {

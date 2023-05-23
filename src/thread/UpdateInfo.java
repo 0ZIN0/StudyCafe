@@ -21,14 +21,15 @@ public class UpdateInfo implements Runnable {
 			try {
 				Thread.sleep(1000);
 				System.out.println("update start");
-				seat_res.autoLeaveSystem();
 				if(MainFrame.member != null && SeatReportPanel.seatBtns.size() == 32) {
+					seat_res.autoLeaveSystem();
 					seat.checkUse();
 					seat_res.UsingSeats();
+					System.out.println("update seat");
 					setMyPage();
-					System.out.println("member update");
+					System.out.println("update MyInfo");
 				}
-				System.out.println("update");
+				System.out.println("update complete");
 			} catch (Exception e) {
 			}
 		}	

@@ -98,11 +98,17 @@ public class SeatReservationDAO {
 		return remainTimes;
 	}
 	
-	/** 좌석의 상태를 불러오는 메서드*/
+	/** 좌석이 현재 상태와 사용중이라면 사용중인 멤버의 id를 조회해주는 메서드*/
 	public static void UsingSeats() {
-		String query = "SELECT seat.seat_id, NVL(res.member_id, '없음') AS member_id, seat.seat_state\r\n"
-				+ "FROM seat_reservation res, seat seat "
-				+ "WHERE seat.seat_id = res.seat_id (+) AND seat_reservation_end_time IS NULL";
+		String query = "SELECT \r\n"
+				+ "    seat.seat_id, \r\n"
+				+ "    NVL(res.member_id, '없음') AS member_id, \r\n"
+				+ "    seat.seat_state\r\n"
+				+ "FROM \r\n"
+				+ "    seat LEFT JOIN seat_reservation res \r\n"
+				+ "ON \r\n"
+				+ "    seat.seat_id = res.seat_id \r\n"
+				+ "    AND seat_reservation_end_time IS NULL";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);

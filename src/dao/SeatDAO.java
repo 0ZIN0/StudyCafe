@@ -394,6 +394,7 @@ public class SeatDAO {
 		return remain;
 	}
 	
+	/*좌석의 상태를 확인하여 seatButton의 use를 바꿔주는 메서드*/
 	public static void checkUse() {
 		String query = "SELECT seat_id, seat_state FROM seat";
 		try (
@@ -406,10 +407,8 @@ public class SeatDAO {
 				int seatNum = rs.getInt("seat_id") - 1;
 				if (rs.getString("seat_state").equals("비어있음")) {
 					SeatReportPanel.seatBtns.get(seatNum).use = false;
-					SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.LIGHTGRAY);
 				} else {
 					SeatReportPanel.seatBtns.get(rs.getInt("seat_id") - 1).use = true;
-					SeatReportPanel.seatBtns.get(seatNum).setBackground(MyColor.GRAY);
 				}
 			}
 		} catch (Exception e) {
