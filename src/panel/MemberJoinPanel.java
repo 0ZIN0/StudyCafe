@@ -111,7 +111,8 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
         	public void focusLost(FocusEvent e) {
         		numpad.setTextField(phoneField);
-        		numpad.setMax(10);
+        		numpad.setMax(12);
+        		numpad.phoneSelect = true;
         	}
         	
         	@Override
@@ -136,6 +137,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
 			public void focusGained(FocusEvent e) {
         		passwordField.setText("");
+        		numpad.phoneSelect = false;
 				
 			}
 		});
@@ -145,7 +147,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
         	public void focusLost(FocusEvent e) {
         		numpad.setTextField(confirmPasswordField);
-        		numpad.setMax(6);
+        		numpad.setMax(5);
         		char[] confirmpassword = confirmPasswordField.getPassword();
     	        String confirmPasswordString = new String(confirmpassword);
     	        confirmPasswordField.setText("");
@@ -154,6 +156,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
 			public void focusGained(FocusEvent e) {
         		confirmPasswordField.setText("");
+        		numpad.phoneSelect = false;
         	}
 		});
         
@@ -183,19 +186,27 @@ public class MemberJoinPanel extends JPanel  {
 	            memberjoin.setPhone(phoneNum);
 	            memberjoin.setPassword(password);
 	            
+	            //휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {           
-	            	new setPopup("올바른 휴대전화번호 양식이 아닙니다.","",1000,450).setVisible(true);
+	            	
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png")).setVisible(true);
+	            	return;
 	            }
-
+	            // 비밀번호 6자리 확인
 	            if(password.length() != 6) {
-	            	new setPopup("비밀번호 6자리를 입력해주세요").setVisible(true);
+	            	
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/Password_6.png")).setVisible(true);
+	            	return;
 				}
-	            
+	            // 비밀번호 불일치
 	            if(!password.equals(confirmPassword)) {
-	            	new setPopup("비밀번호 불일치").setVisible(true);
+	            	
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorpass.png")).setVisible(true);
+	            	return;
 				}
 	            if(LoginDAO.checkDup(phoneNum)) {	            	
 	            	card.show(getParent(), "userInfoCheck");      
+	            	
 	            }
 			}  
 		});

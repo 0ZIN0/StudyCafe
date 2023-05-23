@@ -41,6 +41,7 @@ import label.SeatReportLabel;
 
 public class LoginPanel extends JPanel {
 	
+	
 	NumberKeypad numpad= new NumberKeypad();
 	// 필드 테두리 제거
 	JTextField userPhonNumber = new JTextField() {
@@ -68,7 +69,14 @@ public class LoginPanel extends JPanel {
 		g.drawImage(image, 0, 0, this);
 	};
 	
+	
+	
+	
+	
+	
 	public LoginPanel(CardLayout card, JFrame parent) {
+	
+		
 		
 		setLayout(null);
 		add(numpad);
@@ -80,18 +88,28 @@ public class LoginPanel extends JPanel {
 		add(loginButton);
 		add(memberJoinBtn);
 		
+		
+		
+		
+		
+		
 		// 핸드폰 번호 입력 TextField 
 		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-		userPhonNumber.setText(" 핸드폰 번호");
+		userPhonNumber.setText("일일");
 		userPhonNumber.setOpaque(false);
 		userPhonNumber.setBounds(90, 318, 800, 110);
 		userPhonNumber.setSelectionColor(new Color(0, 0, 0, 0));
 		//add(userPhonNumber);
 		
+		
+		StringBuilder sb= new StringBuilder();
+		
+		
+		
 		userPhonNumber.addFocusListener(new FocusListener() {
-			
 			@Override
 			public void focusLost(FocusEvent e) {
+				numpad.phoneSelect = true;
 				numpad.setTextField(userPhonNumber);
 				numpad.setMax(12);
 			}
@@ -99,6 +117,7 @@ public class LoginPanel extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				userPhonNumber.setText("");
+				numpad.phoneSelect = false;
 				
 			}
 		});
@@ -117,6 +136,7 @@ public class LoginPanel extends JPanel {
 			public void focusLost(FocusEvent e) {
 				numpad.setTextField(userPassField);
 				numpad.setMax(5);
+				numpad.phoneSelect = false;
 				
 			}
 			

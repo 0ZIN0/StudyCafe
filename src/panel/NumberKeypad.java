@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,6 +14,9 @@ public class NumberKeypad extends JPanel implements ActionListener {
 
 	JTextField textField;// 입력값을 보여줄 텍스트 필드
 	int max;
+	StringBuilder sb;
+	boolean phoneSelect;
+	
 
 	public  NumberKeypad() {
 		setLayout(new GridLayout(4, 3, 5, 5));  // 4행 3열의 그리드 레이아웃
@@ -57,13 +61,27 @@ public class NumberKeypad extends JPanel implements ActionListener {
 	// 버튼 클릭 시 호출되는 메서드
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
+		
 		if (command.equals("지우기")) {  // Clear 버튼 클릭 시 텍스트필드 초기화
 			textField.setText("");
-		} else {  // 숫자 버튼 클릭 시 해당 숫자를 텍스트 필드에 추가
+			return;
+		} 
+		
+		if(phoneSelect) {
+			if(textField.getText().length()<=max) {
+				textField.setText(textField.getText() + command);
+				if(textField.getText().length()==3) {
+					textField.setText(textField.getText()+"-");
+				}
+				if(textField.getText().length()==8) {
+					textField.setText(textField.getText()+"-");
+				}
+			}
+		} else {
+			// 숫자 버튼 클릭 시 해당 숫자를 텍스트 필드에 추가
 			if(textField.getText().length()<=max) {
 				textField.setText(textField.getText() + command);
 			}
-
 		}
 	}
 
@@ -75,6 +93,13 @@ public class NumberKeypad extends JPanel implements ActionListener {
 	public void setMax(int num) {
 		this.max =num;
 	}
+	
+	
+//	public void setString(Strin) {
+//		this.sd =sd;
+//	}
+//	
+	
 
 
 }
