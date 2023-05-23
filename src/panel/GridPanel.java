@@ -42,7 +42,7 @@ public class GridPanel extends JPanel {
 	public static List<TimeSelectButton> btns = new ArrayList<>();
 	int btnQty = 4; // 초기 버튼 선택 갯수
 
-	public static boolean[] reserved = new boolean[96]; 
+	boolean[] reserved = new boolean[96]; 
 	boolean[] selected = new boolean[96]; 
 	boolean disable = false;
 
@@ -223,6 +223,7 @@ public class GridPanel extends JPanel {
 	/** 비활성화 리셋 */
 	public void btnReset() {
 		for(TimeSelectButton btn : btns) {
+			System.out.println(btns.indexOf(btn));
 			reserved[btns.indexOf(btn)] = false;
 			if(btn.getTime().compareTo(LocalTime.of(22, 00)) > 0) {
 				btn.setBackground(GRAY);

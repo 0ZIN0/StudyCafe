@@ -22,9 +22,11 @@ import dao.SeatDAO;
 import dao.StudyRoomDAO;
 import dao.TicketOrderDAO;
 import dto.StudyRoom_Reservation;
+import dto.Ticket_order;
 import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.GridPanel;
+import panel.LockerPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
@@ -56,6 +58,9 @@ public class CompletePaymentDialog extends JDialog {
 				//				temDTO dto = new temDTO("2시", description);
 				//				temDAO dao = new temDAO();
 				//				dao.addTem(dto);
+
+				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
+				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 
 				/* 건들지 마시오 (로아) */
 				String ticket_id = TimeOrPeriodChargeDialog.ticket_order.getTicket_id();
@@ -106,21 +111,17 @@ public class CompletePaymentDialog extends JDialog {
 					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(date+start);
 					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(date+end);
 
-					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
-					if (StudyRoomPanel.whatTimeLabel.getText().equals("1")) {
-						getReservationInfo(4);
-					} else {
-						getReservationInfo(8);
-					}
-
+//					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
+//					if (StudyRoomPanel.whatTimeLabel.getText().equals("1")) {
+//						getReservationInfo(4);
+//					} else {
+//						getReservationInfo(8);
+//					}
 				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
-
+					TicketOrderDAO.setLockerinMember(TimeOrPeriodChargeDialog.ticket_order, LockerPanel.lockerNum);
 				}
 				/* 여기까지 절대 건들지 마시오 (로아) */
-				//					
-				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
-				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
-
+				
 				dispose();
 			}
 		});
@@ -141,10 +142,10 @@ public class CompletePaymentDialog extends JDialog {
 
 	public void getReservationInfo(int btnNum) {
 		LocalDate labelDate = GridPanel.dateLabel.getSelectDay();
-		System.out.println(labelDate);
 		String studyroom_id = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_id(); 
 		List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(labelDate, studyroom_id);
-
+		boolean[] reserved = new boolean[96];
+		
 		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
 			for(TimeSelectButton timeSelectBtn : btns) {
 				LocalTime selectTime = timeSelectBtn.getTime();
@@ -168,7 +169,7 @@ public class CompletePaymentDialog extends JDialog {
 						}
 					}
 					timeSelectBtn.setEnabled(false);
-					GridPanel.reserved[btns.indexOf(timeSelectBtn)] = true;
+					reserved[btns.indexOf(timeSelectBtn)] = true;
 				}            
 			}
 		}
