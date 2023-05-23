@@ -63,9 +63,7 @@ public class CompletePaymentDialog extends JDialog {
 				String ticket_id = TimeOrPeriodChargeDialog.ticket_order.getTicket_id();
 				String[] num = ticket_id.split("-");
 				
-				System.out.println("ticket_order" + num[1]);
-				
-				if (Integer.parseInt(num[1]) >= 1 && Integer.parseInt(num[1]) <= 6) {
+				if (Integer.parseInt(num[1]) >= 1 && Integer.parseInt(num[1]) <= 6) { // 일회이용권
 					int ticket_value = 0;
 					if (ticket_id.equals("T-01")) {
 						ticket_value = 120;
@@ -82,6 +80,8 @@ public class CompletePaymentDialog extends JDialog {
 					}
 					
 					if (SeatReportPanel.mySeat == 0 ) {
+						
+						SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
 						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
 						
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();
@@ -98,9 +98,13 @@ public class CompletePaymentDialog extends JDialog {
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();
 						SeatDAO.plusOneDayTicket(seat, ticket_value);
 					}
+				} else if (Integer.parseInt(num[1]) >= 15 && Integer.parseInt(num[1]) <= 18) { // 스터디룸
+					
+				} else if (Integer.parseInt(num[1]) >= 19 && Integer.parseInt(num[1]) <= 22) { // 사물함
+					
 				}
 				/* 여기까지 절대 건들지 마시오 (로아) */
-
+					
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 

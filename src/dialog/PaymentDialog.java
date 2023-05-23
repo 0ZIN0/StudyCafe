@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,7 +16,10 @@ import javax.swing.JPanel;
 
 import button.CloseButton;
 import button.NextButton;
+import button.TimeTicketButton;
+import dao.TicketDAO;
 import dto.StudyRoom_Reservation;
+import dto.Ticket;
 import panel.ButtonPanel;
 import panel.OnePassChargePanel;
 import panel.PeriodChargePanel;
@@ -56,7 +60,10 @@ public class PaymentDialog extends JDialog {
 	JLabel studyRoom_numLabel = new JLabel();
 	JLabel useTimeLabel = new JLabel();
 	JLabel payInfoLabel = new JLabel();
-
+	
+	Ticket ticket;
+	NumberFormat nf = NumberFormat.getNumberInstance();
+	
 	public PaymentDialog(StudyRoom_Reservation myStudyRoom_Reservation, JLabel whatTimeLabel) {
 
 
@@ -95,12 +102,30 @@ public class PaymentDialog extends JDialog {
 
 		String pay;
 		if (whatTimeLabel.getText().equals("1")) {
-			pay = "7,000원";
-			studyRoomChargePrice = 7000;
+			ticket = TicketDAO.getTicket("T-15");
+			pay = nf.format(ticket.getTicket_price()) + "원";
+			studyRoomChargePrice = ticket.getTicket_price();
+			TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(studyRoomChargePrice);
+			
+			if (myStudyRoom_Reservation.getStudyRoom_id().equals("SI-1")) {
+				TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-15");
+			} else {
+				TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-17");
+			}
+			
 			studyRoomChargeItem = 1;
 		} else {
-			pay = "14,000원";
-			studyRoomChargePrice = 14000;
+			ticket = TicketDAO.getTicket("T-16");
+			pay = nf.format(ticket.getTicket_price()) + "원";
+			studyRoomChargePrice = ticket.getTicket_price();
+			TimeOrPeriodChargeDialog.ticket_order.setOrder_total_price(studyRoomChargePrice);
+			
+			if (myStudyRoom_Reservation.getStudyRoom_id().equals("SI-1")) {
+				TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-16");
+			} else {
+				TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-18");
+			}
+			
 			studyRoomChargeItem = 2;
 		}
 		payInfoLabel.setText(pay);

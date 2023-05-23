@@ -1,30 +1,24 @@
 package dialog;
 
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.NumberFormat;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import button.CloseButton;
-import button.LockerTicketButton;
 import button.NextButton;
+import dao.TicketDAO;
+import dto.Ticket;
 import panel.ButtonPanel;
-
-import javax.swing.JLabel;
 
 public class LockerPayDialog extends JDialog {
 
@@ -32,8 +26,8 @@ public class LockerPayDialog extends JDialog {
 	ImageIcon icon = new ImageIcon("ui/Locker_PopUp/Locker_PopUp_Background.png");
 	Image image = icon.getImage();
 	
-	
-	
+	Ticket ticket;
+	NumberFormat nf = NumberFormat.getNumberInstance();
 	
 	/* 패널 */
 	JPanel background = new JPanel() {
@@ -90,7 +84,10 @@ public class LockerPayDialog extends JDialog {
 		label6.setForeground(new Color(13, 13, 13));
 		add(label6);
 		
-		JLabel fee = new JLabel("6,000원");
+		ticket = TicketDAO.getTicket("T-19");
+		String price = nf.format(ticket.getTicket_price()) + "원";
+		
+		JLabel fee = new JLabel(price);
 		fee.setBounds(387, 277, 200, 50);
 		fee.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 		fee.setForeground(new Color(13, 13, 13));
