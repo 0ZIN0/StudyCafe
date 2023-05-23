@@ -23,6 +23,7 @@ import java.awt.Font;
 
 public class LockerPanel extends JPanel {
 	
+	public static String lockerNum;
 	private BufferedImage image;
 	List<LockerButton> lockerBtns = new ArrayList<>();
 	int btnCtn = 1;

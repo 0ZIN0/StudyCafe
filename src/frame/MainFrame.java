@@ -1,18 +1,11 @@
 package frame;
 
 import java.awt.CardLayout;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -22,8 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import button.BuyButton;
 import button.LeaveButton;
@@ -33,14 +24,12 @@ import dao.MemberDAO;
 import dto.Button;
 import dto.Member;
 import dto.Seat;
+import dto.StudyRoomButtonList;
 import panel.LockerPanel;
-import panel.LoginPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
-import thread.TimeRun;
-import thread.UpdateInfo;
 import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
@@ -52,7 +41,7 @@ public class MainFrame extends JFrame {
 
 	/* 레이아웃 */
 	public static CardLayout card = new CardLayout();
-
+	
 	/* 이미지들 */
 	// 백그라운드 이미지
 	ImageIcon backgroundImageIcon = new ImageIcon("ui/background/Select_Seat_last_1.png");
@@ -109,8 +98,9 @@ public class MainFrame extends JFrame {
 
 	/* DTO */ 
 	public static Member member = SeatDAO.setMember("010-1111-1111");
-	
 	public static Button btn = new Button();
+	public static StudyRoomButtonList btns = new StudyRoomButtonList();
+
 	/**
 	 * Create the frame.
 	 */
@@ -150,7 +140,7 @@ public class MainFrame extends JFrame {
 
 				studyRoomTog.setIcon(null);
 				lockerTog.setIcon(null);
-
+				
 				studyRoomPanel.removeAll();
 
 				JPanel studyRoomPanel = new StudyRoomPanel(member);
@@ -160,6 +150,7 @@ public class MainFrame extends JFrame {
 				studyRoomPanel.setBounds(633, 381, 1177, 617);
 
 				subPanel.add(studyRoomPanel, "study");
+				studyRoomPanel.repaint();
 
 			}
 		});
@@ -194,6 +185,7 @@ public class MainFrame extends JFrame {
 				studyRoomPanel.setBounds(633, 381, 1177, 617);
 
 				subPanel.add(studyRoomPanel, "study");
+				
 			}
 		});
 		mypageBtn.addActionListener(new ActionListener() {

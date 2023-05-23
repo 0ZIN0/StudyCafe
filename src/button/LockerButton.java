@@ -28,7 +28,6 @@ public class LockerButton extends JButton implements ActionListener {
 			setEnabled(false);
 		} else {
 			setBackground(new Color(217, 217, 217));
-			
 		}
 	}
 

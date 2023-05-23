@@ -19,6 +19,7 @@ import button.NextButton;
 import dao.TicketDAO;
 import dto.Ticket;
 import panel.ButtonPanel;
+import panel.LockerPanel;
 
 public class LockerPayDialog extends JDialog {
 
@@ -36,11 +37,12 @@ public class LockerPayDialog extends JDialog {
 			g.drawImage(image, 0, 0, this);
 		};
 	};
-
+	
 	/**
 	 * Create the dialog.
 	 */
 	public LockerPayDialog(String lockerNum) {
+		LockerPanel.lockerNum = lockerNum;
 		CloseButton close = new CloseButton(this);
 		NextButton next = new NextButton(this);
 		
