@@ -4,40 +4,24 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import dao.LoginDAO;
-import dao.MemberDAO;
-import dao.SeatDAO;
-import dialog.setPopup;
-import dto.Member;
-import frame.MainFrame;
-import label.SeatReportLabel;
+import label.RemainSeatLabel;
+import label.RemainStudyRoomLabel;
 
 public class LoginPanel extends JPanel {
 	
@@ -69,14 +53,17 @@ public class LoginPanel extends JPanel {
 		g.drawImage(image, 0, 0, this);
 	};
 	
-	
-	
-	
-	
+	// 좌석 현황 라벨들
+	JLabel remainSeatLabel = new RemainSeatLabel();
+	JLabel remainStudyRoomLabel = new RemainStudyRoomLabel();
 	
 	public LoginPanel(CardLayout card, JFrame parent) {
 	
-		
+		// 좌석 현황 라벨 설정
+		remainSeatLabel.setBounds(149, 220, 200, 54);
+		remainSeatLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		add(remainSeatLabel);
+		add(remainStudyRoomLabel);
 		
 		setLayout(null);
 		add(numpad);
