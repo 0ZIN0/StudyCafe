@@ -26,7 +26,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		for (int i = 1; i <= 9; i++) {
 			JButton button = new JButton(Integer.toString(i));
 			button.setBackground(new Color(35,35,35));
-			button.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
+			button.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 70));
 			button.setForeground(Color.white);
 			button.addActionListener(this);
 			add(button);
@@ -36,7 +36,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		// Clear 버튼 추가
 		JButton clearButton = new JButton("지우기");
 		clearButton.setBackground(new Color(35,35,35));
-		clearButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
+		clearButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		clearButton.setForeground(Color.white);
 		clearButton.addActionListener(this);
 		add(clearButton);
@@ -44,14 +44,14 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		// 0 버튼 추가
 		JButton zeroButton = new JButton("0");
 		zeroButton.setBackground(new Color(35,35,35));
-		zeroButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
+		zeroButton.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 70));
 		zeroButton.setForeground(Color.white);
 		zeroButton.addActionListener(this);
 		add(zeroButton);
 
 		JButton confirmButton = new JButton("확인");
 		confirmButton.setBackground(new Color(35,35,35));
-		confirmButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 20));
+		confirmButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		confirmButton.setForeground(Color.white);
 		clearButton.addActionListener(this);
 		add(confirmButton);

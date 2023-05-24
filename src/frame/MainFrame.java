@@ -88,9 +88,6 @@ public class MainFrame extends JFrame {
 	JButton logoutBtn = new JButton("로그아웃");
 	JButton mypageBtn = new JButton("마이페이지");
 
-	/* x버튼 */
-	JButton xBtn = new JButton("X");
-
 	// 시간 라벨
 	public static JLabel timeLabel = new JLabel();
 
@@ -267,23 +264,20 @@ public class MainFrame extends JFrame {
 				card.show(getContentPane(), "myPage");
 			}
 		});
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new LoginFrame();
+			}
+		});
 
 		mainPanel.add(openDoorBtn);
 		mainPanel.add(leaveBtn);
 		mainPanel.add(buyBtn);
 
-		/* 스윙 창 끄기(임시 버튼. 추후에 관리자 모드에서 만들 거임) */
-		xBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-
-		xBtn.setBounds(1850, 10, 50, 50); 
-		mainPanel.add(xBtn);
-		
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
 		setUndecorated(true);

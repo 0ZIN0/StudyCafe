@@ -74,20 +74,20 @@ public class MemberJoinPanel extends JPanel  {
 	    phoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    phoneField.setText("핸드폰 번호");
 	    phoneField.setOpaque(false);
-	    phoneField.setBounds(80, 117, 900, 110);
+	    phoneField.setBounds(90, 117, 900, 110);
 	    phoneField.setOpaque(false);
 	    
 	    passwordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    passwordField.setText("비밀번호 (6자리)");
 	    passwordField.setEchoChar((char) 0);
 	    passwordField.setOpaque(false);
-	    passwordField.setBounds(80, 288, 900, 110);
+	    passwordField.setBounds(90, 288, 900, 110);
 	    passwordField.setOpaque(false);
 	    
 	    confirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    confirmPasswordField.setText("비밀번호 확인 (6자리)");
 	    confirmPasswordField.setOpaque(false);
-	    confirmPasswordField.setBounds(80, 456, 900, 110);
+	    confirmPasswordField.setBounds(90, 456, 900, 110);
 	    confirmPasswordField.setOpaque(false);
 	    confirmPasswordField.setEchoChar((char) 0);
 	    
