@@ -33,7 +33,7 @@ public class LockerPanel extends JPanel {
 	private List<String[]> isUse = LockerDAO.isUse();
 	
 	public static RemainLockerLabel remainLockerLabel = new RemainLockerLabel();
-	
+	public static JLabel myLockerLabel = new JLabel();
 	LockerDAO lockerDao = new LockerDAO();
 	int remain = lockerDao.remainLocker();
 	
@@ -57,16 +57,19 @@ public class LockerPanel extends JPanel {
 			}
 		}
 		
-		JLabel myLockerLabel = new JLabel();
-		for(String[] use : isUse) {
-			if(use[0].equals(MainFrame.member.getLocker_number())) {
-				myLockerLabel.setText("");
-			}
-		}
 		myLockerLabel.setForeground(new Color(255, 255, 255));
 		myLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 50));
 		myLockerLabel.setBounds(240, 13, 800, 72);
 		add(myLockerLabel);
+		
+		for(String[] use : isUse) {
+			if(use[1] == (MainFrame.member.getLocker_number()) && use[0] != null) {
+				myLockerLabel.setText(String.format("%s번 사물함을 사용중입니다", use[0]));
+				myLockerLabel.setBounds(280, 13, 800, 72);
+			} else {
+				myLockerLabel.setText("이용하실 사물함을 선택해주세요");
+			}
+		}
 		
 		
 		remainLockerLabel.setBounds(26, 3, 200, 100);

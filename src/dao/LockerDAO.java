@@ -69,21 +69,4 @@ public class LockerDAO {
 		}
 		return 0;
 	}
-	
-//	public static boolean myLocker() {
-//		String query = "SELECT locker_number FROM member WHERE member_id = ?";
-//		try (
-//				Connection conn = OjdbcConnection.getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(query);
-//				) {
-//			pstmt.setString(1, MainFrame.member.getMember_id());
-//			try(
-//					ResultSet rs = pstmt.executeQuery();
-//					) {
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return 0;
-//	}
 }

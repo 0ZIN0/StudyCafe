@@ -30,7 +30,11 @@ public class MemberDAO {
 				member.setMember_id(rs.getString("member_id"));
 				member.setPhone_number(rs.getString("phone_number"));
 				member.setRemain_time(rs.getInt("remain_time"));
-				member.setLocker_number(rs.getString("locker_number"));
+				if(rs.getString("locker_number") != null) {
+					member.setLocker_number(rs.getString("locker_number"));					
+				} else {
+					member.setLocker_number(rs.getString("locker_number"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

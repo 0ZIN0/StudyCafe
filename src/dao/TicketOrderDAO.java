@@ -51,7 +51,7 @@ public class TicketOrderDAO {
 			pstmt.executeUpdate();
 			LockerPanel.lockerBtns.get(Integer.parseInt(lockerNum) - 1).setBackground(MyColor.ORANGE);
 			LockerPanel.lockerBtns.get(Integer.parseInt(lockerNum) - 1).setEnabled(false);
-			MainFrame.member.setLocker_number(lockerNum);			
+			MainFrame.member.setLocker_number("L-" + lockerNum);			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

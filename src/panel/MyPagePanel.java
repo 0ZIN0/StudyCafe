@@ -101,7 +101,7 @@ public class MyPagePanel extends JPanel {
 		if(member.getLocker_number() == null) {
 			locker.setText("사용중인 사물함이 없습니다");
 		} else {
-			locker.setText(member.getLocker_number() + "번");
+			locker.setText(MainFrame.member.getLocker_number() + "번");
 		}
 		locker.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		locker.setBounds(1010, 800, 500, 100);

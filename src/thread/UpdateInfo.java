@@ -56,19 +56,24 @@ public class UpdateInfo implements Runnable {
 		if(MainFrame.member.getLocker_number() == null) {
 			MyPagePanel.locker.setText("이용중인 사물함이 없습니다");
 		} else {
-			MyPagePanel.locker.setText("L-" + MainFrame.member.getLocker_number() + "번");
+			MyPagePanel.locker.setText(MainFrame.member.getLocker_number() + "번");
 		}
 	}
 	
 	public static void setLocker() {
 		int remain = LockerDAO.remainLocker();
 		LockerPanel.remainLockerLabel.setText(String.format("%02d / %02d", remain, 20));
-		
 		List<String[]> isUse = LockerDAO.isUse();
+		
+		if(MainFrame.member.getLocker_number() == null) {
+			LockerPanel.myLockerLabel.setText("이용하실 사물함을 선택해주세요");
+		}
 		for(int i = 0; i < LockerPanel.lockerBtns.size(); i++) {
 			if(isUse.get(i)[1] != null) {
 				if(isUse.get(i)[1].equals(MainFrame.member.getMember_id())) {
 					LockerPanel.lockerBtns.get(i).setBackground(MyColor.ORANGE);
+					LockerPanel.myLockerLabel.setText(isUse.get(i)[0] + "번 사물함을 사용중입니다");
+					LockerPanel.myLockerLabel.setBounds(290, 13, 800, 72);
 					LockerPanel.lockerBtns.get(i).setEnabled(false);
 				} else {
 					LockerPanel.lockerBtns.get(i).setBackground(MyColor.GRAY);
