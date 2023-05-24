@@ -3,6 +3,9 @@ package dialog;
 import javax.swing.JDialog;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
+
+import button.CloseButton;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -10,6 +13,7 @@ import java.awt.event.MouseListener;
 
 public class setPopup extends JDialog{
 	
+	CloseButton close = new CloseButton(this);
 	public setPopup(String text) {
 		setLayout(null);
         setUndecorated(true); // 윈도우 장식 비활성화
@@ -175,6 +179,8 @@ public class setPopup extends JDialog{
         add(imageLabel);
         imageLabel.add(textLabel);
         imageLabel.add(textLabel2);
+        close.setLocation(350, 300);;
+        add(close);
         
         // 다이얼로그 크기 설정
         setSize(width, height); 

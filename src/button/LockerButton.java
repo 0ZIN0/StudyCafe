@@ -17,9 +17,7 @@ public class LockerButton extends JButton implements ActionListener {
 	
 	int usingLocker;
 	
-	public LockerButton(int lockerNum) {
-		
-		List<String[]> usingLocker = LockerDAO.isUse();
+	public LockerButton(int lockerNum, List<String[]> isUse) {
 		
 		setText(Integer.toString(lockerNum));
 		setSize(100, 100);
@@ -27,8 +25,8 @@ public class LockerButton extends JButton implements ActionListener {
 		setBorderPainted(false);
 		addActionListener(this);
 		
-		if(usingLocker.get(lockerNum - 1)[1] != null) {
-			if(usingLocker.get(lockerNum - 1)[0].equals(MainFrame.member.getMember_id())) {
+		if(isUse.get(lockerNum - 1)[1] != null) {
+			if(isUse.get(lockerNum - 1)[1].equals(MainFrame.member.getMember_id())) {
 				setBackground(MyColor.ORANGE);
 				setEnabled(false);
 			} else {
@@ -37,6 +35,9 @@ public class LockerButton extends JButton implements ActionListener {
 			}
 		} else {
 			setBackground(MyColor.LIGHTGRAY);
+			if(MainFrame.member.getLocker_number() != null) {
+				setEnabled(false);
+			}
 		}
 	}
 

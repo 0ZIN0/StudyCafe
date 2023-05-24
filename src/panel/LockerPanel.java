@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 
 import button.LockerButton;
 import dao.LockerDAO;
+import frame.MainFrame;
+import label.RemainLockerLabel;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -25,10 +27,16 @@ public class LockerPanel extends JPanel {
 	
 	public static String lockerNum;
 	private BufferedImage image;
-	public static List<LockerButton> lockerBtns = new ArrayList<>();
+	
 	int btnCtn = 1;
+	public static List<LockerButton> lockerBtns = new ArrayList<>();
+	private List<String[]> isUse = LockerDAO.isUse();
+	
+	public static RemainLockerLabel remainLockerLabel = new RemainLockerLabel();
+	
 	LockerDAO lockerDao = new LockerDAO();
-	int usable = 20 - lockerDao.isUse().size();
+	int remain = lockerDao.remainLocker();
+	
 	/**
 	 * Create the panel.
 	 */
@@ -42,25 +50,27 @@ public class LockerPanel extends JPanel {
 		
 		for (int i = 0; i < 4; i++) {
 			for(int j = 0; j < 5; j++) {
-				LockerButton lockerBtn = new LockerButton(btnCtn++);
+				LockerButton lockerBtn = new LockerButton(btnCtn++, isUse);
 				add(lockerBtn);
 				lockerBtns.add(lockerBtn);
 				lockerBtn.setLocation(310 + (110 * j), 110 + (110 * i));
 			}
 		}
 		
-		JLabel myLockerLabel = new JLabel("이용하실 사물함을 선택해주세요");
+		JLabel myLockerLabel = new JLabel();
+		for(String[] use : isUse) {
+			if(use[0].equals(MainFrame.member.getLocker_number())) {
+				myLockerLabel.setText("");
+			}
+		}
 		myLockerLabel.setForeground(new Color(255, 255, 255));
 		myLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 50));
 		myLockerLabel.setBounds(240, 13, 800, 72);
 		add(myLockerLabel);
 		
-		JLabel inUseLockerLabel = new JLabel();
-		inUseLockerLabel.setBounds(26, 3, 200, 100);
-		inUseLockerLabel.setForeground(new Color(255, 255, 255));
-		inUseLockerLabel.setText(String.format("%02d / %02d", usable, 20));
-		inUseLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		add(inUseLockerLabel);
+		
+		remainLockerLabel.setBounds(26, 3, 200, 100);
+		add(remainLockerLabel);
 		
 		JLabel inUseLockerBg = new JLabel();
 		inUseLockerBg.setBounds(23, 5, 150, 100);

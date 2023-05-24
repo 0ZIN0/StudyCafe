@@ -97,11 +97,11 @@ public class MyPagePanel extends JPanel {
 		seat.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		seat.setForeground(Color.WHITE);
 		
-		JLabel locker = new JLabel(member.getLocker_number() + "번");
+		locker = new JLabel(member.getLocker_number() + "번");
 		if(member.getLocker_number() == null) {
 			locker.setText("사용중인 사물함이 없습니다");
 		} else {
-			locker.setText("L-" + member.getLocker_number() + "번");
+			locker.setText(member.getLocker_number() + "번");
 		}
 		locker.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		locker.setBounds(1010, 800, 500, 100);
