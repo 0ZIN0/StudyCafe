@@ -18,7 +18,6 @@ import panel.SeatReportPanel;
 
 public class UpdateInfo implements Runnable {
 	
-	
 	SeatReservationDAO seat_res = new SeatReservationDAO();
 	SeatDAO seat = new SeatDAO();
 	@Override

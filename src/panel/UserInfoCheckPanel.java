@@ -120,10 +120,13 @@ public class UserInfoCheckPanel extends JPanel {
 				
 				if(infoChkBox1.isSelected() && infoChkBox2.isSelected() && infoChkBox3.isSelected()) {
 					if(LoginDAO.register(phoneNum, password) > 0) {
-						new setPopup("회원가입이 완료되었습니다.").setVisible(true);
-					}    
+						new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/sucessMemberjoin.png")).setVisible(true);
+					}
 					card.show(getParent(), "login");
-				}
+				} else {
+					new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/notAgree.png")).setVisible(true);
+					return;
+				} 
 	
 			}
 		});

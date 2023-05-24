@@ -1,7 +1,6 @@
 package dialog;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,10 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import button.CloseButton;
+import frame.LoginFrame;
 
 public class OpenDoorDialog extends JDialog {
 	
@@ -33,7 +33,7 @@ public class OpenDoorDialog extends JDialog {
 	/* 버튼 */
 	JButton closeBtn = new CloseButton(this);
 	
-	public OpenDoorDialog() {
+	public OpenDoorDialog(JFrame parent) {
 
 		/* 버튼 설정 */
 		closeBtn.setLocation(300, 340);
@@ -41,8 +41,8 @@ public class OpenDoorDialog extends JDialog {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				// 추가적으로 로그인 화면으로 이동하는 기능을 구현 할 것임.
+				parent.dispose();
+				new LoginFrame();
 			}
 		});
 		popupPanel.add(closeBtn);

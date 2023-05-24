@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.TimeSelectButton;
+import color.MyColor;
 import dao.StudyRoomDAO;
 import dto.Member;
 import dto.StudyRoomButtonList;
@@ -192,30 +194,31 @@ public class GridPanel extends JPanel {
 
 	// 예약된 정보들을 가져와 버튼에 색을 지정하는 메서드
 	public void getReservationInfo(int btnNum) {
-		LocalDate labelDate = dateLabel.getSelectDay();
-		String studyroom_id = myStudyRoom_Reservation.getStudyRoom_id(); 
+		LocalDate labelDate = GridPanel.dateLabel.getSelectDay();
+		String studyroom_id = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_id(); 
 		List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(labelDate, studyroom_id);
 
 		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
 			for(TimeSelectButton timeSelectBtn : btns) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+				
+				LocalDateTime selectDateTime = LocalDateTime.of(labelDate, timeSelectBtn.getTime());
 				LocalTime selectTime = timeSelectBtn.getTime();
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-				LocalTime start = LocalTime.parse(studyRoom_reserv.getStudyRoom_start_time(), formatter);
-				LocalTime end = LocalTime.parse(studyRoom_reserv.getStudyRoom_end_time(), formatter);
-
-				if (start.compareTo(selectTime) <= 0 && 
-						end.compareTo(selectTime) > 0) {
+				LocalDateTime start = LocalDateTime.parse(studyRoom_reserv.getStudyRoom_start_dateTime(), formatter);
+				LocalDateTime end = LocalDateTime.parse(studyRoom_reserv.getStudyRoom_end_dateTime(), formatter);
+				if (start.compareTo(selectDateTime) <= 0 && 
+						end.compareTo(selectDateTime) > 0) {
 					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) && btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
 						btns.get(i).setEnabled(false);
 					}
-					if (selectTime.compareTo(startTimeLabel.getTime()) <= 0 &&
-							labelDate.equals(nowDate)) {
-						timeSelectBtn.setBackground(GRAY);
+					if (selectTime.compareTo(GridPanel.startTimeLabel.getTime()) <= 0 &&
+							labelDate.equals(LocalDate.now())) {
+						timeSelectBtn.setBackground(MyColor.GRAY);
 					} else {
-						if (myStudyRoom_Reservation.getMember_id().equals(studyRoom_reserv.getMember_id())) {
-							timeSelectBtn.setBackground(LEMON);
+						if (StudyRoomPanel.myStudyRoom_Reservation.getMember_id().equals(studyRoom_reserv.getMember_id())) {
+							timeSelectBtn.setBackground(MyColor.LEMON);
 						} else {
-							timeSelectBtn.setBackground(GRAY);
+							timeSelectBtn.setBackground(MyColor.GRAY);
 						}
 					}
 					timeSelectBtn.setEnabled(false);

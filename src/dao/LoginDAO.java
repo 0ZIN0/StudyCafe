@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 import dialog.setPopup;
@@ -29,7 +30,7 @@ public class LoginDAO {
 					new MainFrame(MemberDAO.setMember(phoneNum));
 					return true;
 				} else {
-					new setPopup("로그인 실패", "(핸드폰번호와 비밀번호를 확인하세요)").setVisible(true);
+					new setPopup(new ImageIcon("ui/main/loginPopup/passnot.png")).setVisible(true);
 					return false;
 				}
 			}
@@ -50,7 +51,7 @@ public class LoginDAO {
 					ResultSet rs = pstmt.executeQuery();
 					) {
 				if (rs.next()) {
-             	   new setPopup("이미 저장된 번호입니다.").setVisible(true);
+             	   new setPopup(new ImageIcon("ui/main/memberjoinPopup/alreadyphonnum.png")).setVisible(true);
                    return false;
                 }
 			}
@@ -61,7 +62,7 @@ public class LoginDAO {
 	}
 	
 	public static int register(String phoneNum, String password) {
-		String query = "INSERT INTO member VALUES ('M-' || member_id_seq.nextval,?, ?, 0 , null, null, null)";
+		String query = "INSERT INTO member VALUES ('M-' || member_id_seq.nextval,?, ?, 0 , null, null, null, null)";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
