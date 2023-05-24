@@ -45,6 +45,7 @@ import thread.UpdateInfo;
 
 public class LoginFrame extends JFrame{
 	
+	
 	MemberJoin memberjoin = new MemberJoin();
 	
 	CardLayout card = new CardLayout();
@@ -55,15 +56,28 @@ public class LoginFrame extends JFrame{
 	MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
 	UserInfoCheckPanel userInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
 	
+	//관리자 버튼
+	JButton masterBtn = new JButton(new ImageIcon("ui/main/Master_Icon.png"));
+	
+	
+	
+	
 	JPanel cardPanel = new JPanel();
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
 	static UpdateInfo updateInfo = new UpdateInfo();
+	
+	
 		
 	public LoginFrame() {
 		
 		background.setLayout(null);
 		add(background);
+		
+		background.add(masterBtn);
+		masterBtn.setBounds(1811,978,60,48);
+		masterBtn.setBackground(new Color(73,67,68));
+		masterBtn.setBorderPainted(false);
 
 		cardPanel.setLayout(card);
 		background.add(cardPanel);

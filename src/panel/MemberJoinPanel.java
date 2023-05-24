@@ -67,6 +67,8 @@ public class MemberJoinPanel extends JPanel  {
     	beforeButton = new JButton(new ImageIcon("ui/main/Memberjoin/Before_Button.png"));
     	phonduplicationBtn= new JButton(new ImageIcon("ui/main/Memberjoin/DuplicateCheck_Button.png"));
     	
+    	phoneField.add(phonduplicationBtn);
+    	
     	add(numpad);
     	
 		numpad.setBounds(1080,50,550,690);
@@ -76,6 +78,7 @@ public class MemberJoinPanel extends JPanel  {
 	    phoneField.setOpaque(false);
 	    phoneField.setBounds(90, 117, 900, 110);
 	    phoneField.setOpaque(false);
+	    phoneField.setForeground(new Color(141,135,135));
 	    
 	    passwordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    passwordField.setText("비밀번호 (6자리)");
@@ -83,6 +86,7 @@ public class MemberJoinPanel extends JPanel  {
 	    passwordField.setOpaque(false);
 	    passwordField.setBounds(90, 288, 900, 110);
 	    passwordField.setOpaque(false);
+	    passwordField.setForeground(new Color(141,135,135));
 	    
 	    confirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    confirmPasswordField.setText("비밀번호 확인 (6자리)");
@@ -90,6 +94,7 @@ public class MemberJoinPanel extends JPanel  {
 	    confirmPasswordField.setBounds(90, 456, 900, 110);
 	    confirmPasswordField.setOpaque(false);
 	    confirmPasswordField.setEchoChar((char) 0);
+	    confirmPasswordField.setForeground(new Color(141,135,135));
 	    
 	    beforeButton.setBounds(80, 590, 400, 148);
 	    beforeButton.setFocusPainted(false);
@@ -101,10 +106,39 @@ public class MemberJoinPanel extends JPanel  {
 	    submitButton.setBorderPainted(false);
 	    submitButton.setContentAreaFilled(false);
 	    
-	    phonduplicationBtn.setBounds(600, 0, 250, 110);
+	    
+	    add(phonduplicationBtn);
+	    phonduplicationBtn.setBounds(663, 115, 250, 110);
 	    phonduplicationBtn.setFocusPainted(false);
 	    phonduplicationBtn.setBorderPainted(false);
 	    phonduplicationBtn.setContentAreaFilled(false);
+	    
+	    
+	    // 중복체크버튼 이벤트
+	    phonduplicationBtn.addActionListener(new ActionListener() {
+	    	
+	    	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String phoneNum = phoneField.getText();
+	            String password = new String(passwordField.getPassword());
+	            String confirmPassword = new String(confirmPasswordField.getPassword());
+	            memberjoin.setPhone(phoneNum);
+	            memberjoin.setPassword(password);
+	            
+	            // 휴대번호 양식 확인
+	            if(!Pattern.matches(phonnumRegular, phoneNum)) {  
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png")).setVisible(true);
+	            	return;
+	            }
+	            
+	            // 이미 저장된 휴대번호인지 확인
+				if((LoginDAO.checkDup(phoneNum))) {	   
+					new setPopup(new ImageIcon("ui/main/memberjoinPopup/possiblePhon.png"),230).setVisible(true);
+	            } 
+			}
+		});
+	    
 	    
 	    // 폰번호 포커스 이벤트
 	    phoneField.addFocusListener(new FocusAdapter() {
