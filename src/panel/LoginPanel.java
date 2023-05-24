@@ -121,6 +121,10 @@ public class LoginPanel extends JPanel {
 				numpad.setTextField(userPassField);
 				numpad.setMax(5);
 				numpad.phoneSelect = false;
+				char[] password = userPassField.getPassword();
+    	        String passwordString = new String(password);
+    	        userPassField.setText("");
+    	        userPassField.setEchoChar('●');  
 				
 			}
 			

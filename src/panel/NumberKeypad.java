@@ -29,6 +29,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 			button.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 70));
 			button.setForeground(Color.white);
 			button.addActionListener(this);
+			button.setBorderPainted(false);
 			add(button);
 		}
 
@@ -39,6 +40,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		clearButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		clearButton.setForeground(Color.white);
 		clearButton.addActionListener(this);
+		clearButton.setBorderPainted(false);
 		add(clearButton);
 
 		// 0 버튼 추가
@@ -47,6 +49,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		zeroButton.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 70));
 		zeroButton.setForeground(Color.white);
 		zeroButton.addActionListener(this);
+		zeroButton.setBorderPainted(false);
 		add(zeroButton);
 
 		JButton confirmButton = new JButton("확인");
@@ -54,6 +57,7 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		confirmButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		confirmButton.setForeground(Color.white);
 		clearButton.addActionListener(this);
+		confirmButton.setBorderPainted(false);
 		add(confirmButton);
 	}
 
