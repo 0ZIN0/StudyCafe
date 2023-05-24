@@ -83,7 +83,7 @@ public class MemberDAO {
 				if(pstmt2.executeUpdate() > 0) {
 					System.out.println("update complete");
 					CheckInFrame.member.setRemain_time(rs.getInt("remain"));
-					MyPagePanel.time.setText(String.format("%d분",rs.getInt("remain")));
+//					MyPagePanel.time.setText(String.format("%d분",rs.getInt("remain")));
 					conn.commit();	
 				} else {
 					System.out.println("update fail");

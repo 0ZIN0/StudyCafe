@@ -16,7 +16,7 @@ public class UpdateInfo implements Runnable {
 				System.out.println("member update");
 				int minute = member.getRemain_time() - 1;
 				member.setRemain_time(minute);
-				MyPagePanel.time.setText(String.format("%d분", minute));
+//				MyPagePanel.time.setText(String.format("%d분", minute));
 			} catch (Exception e) {
 			}
 		}	
