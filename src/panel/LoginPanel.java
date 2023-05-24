@@ -80,7 +80,7 @@ public class LoginPanel extends JPanel {
 		userPhonNumber.setText(" 핸드폰번호");
 		userPhonNumber.setOpaque(false);
 		userPhonNumber.setBounds(90, 318, 800, 110);
-		userPhonNumber.setSelectionColor(new Color(0, 0, 0, 0));
+		userPhonNumber.setForeground(new Color(141,135,135));
 		
 		
 		userPhonNumber.addFocusListener(new FocusListener() {
@@ -95,7 +95,6 @@ public class LoginPanel extends JPanel {
 			public void focusGained(FocusEvent e) {
 				userPhonNumber.setText("");
 				numpad.phoneSelect = false;
-				
 			}
 		});
 		 
@@ -105,7 +104,7 @@ public class LoginPanel extends JPanel {
 		userPassField.setEchoChar((char) 0); // 텍스트가 가려지지 않도록 EchoChar를 0으로 설정
 		userPassField.setOpaque(false);
 		userPassField.setBounds(90, 430, 800, 110);
-		userPassField.setSelectionColor(new Color(0, 0, 0, 0));
+		userPassField.setForeground(new Color(141,135,135));
 		
 		userPassField.addFocusListener(new FocusListener() {
 			
@@ -114,6 +113,10 @@ public class LoginPanel extends JPanel {
 				numpad.setTextField(userPassField);
 				numpad.setMax(5);
 				numpad.phoneSelect = false;
+				char[] password = userPassField.getPassword();
+    	        String passwordString = new String(password);
+    	        userPassField.setText("");
+    	        userPassField.setEchoChar('●');  
 				
 			}
 			
