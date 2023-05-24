@@ -146,7 +146,6 @@ public class CompletePaymentDialog extends JDialog {
 				} 
 				/* 여기까지 절대 건들지 마시오 (로아) */
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
-				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
 				dispose();
 			}
 		});
