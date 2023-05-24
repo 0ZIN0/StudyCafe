@@ -1,6 +1,5 @@
 package dialog;
 
-import javax.swing.JDialog;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
@@ -219,6 +218,60 @@ public class setPopup extends JDialog{
 			}
 		});
 	}
+	
+	// 이미지 팝업
+		public setPopup(ImageIcon imageIcon) {
+			setLayout(new BorderLayout());
+	        setUndecorated(true); // 윈도우 장식 비활성화
+	        setBackground(new Color(0,0,0,0));
+	        
+	        
+	        JLabel imageLabel = new JLabel(imageIcon);
+	        
+	        
+	        // 컴포넌트 추가 중앙 정렬
+	        add(imageLabel,BorderLayout.CENTER);
+	        
+	        // 다이얼로그 크기 설정
+	        setSize(1000, 1000);
+	        //setSize(peak);
+	       
+	        setLocationRelativeTo(null);
+	        
+	        
+	        imageLabel.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					 dispose(); 
+				}
+			});
+		}
+	
 	
 	
 }

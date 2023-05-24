@@ -4,42 +4,27 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import dao.LoginDAO;
-import dao.MemberDAO;
-import dao.SeatDAO;
-import dialog.setPopup;
-import dto.Member;
-import frame.MainFrame;
-import label.SeatReportLabel;
+import label.RemainSeatLabel;
+import label.RemainStudyRoomLabel;
 
 public class LoginPanel extends JPanel {
+	
 	
 	NumberKeypad numpad= new NumberKeypad();
 	// 필드 테두리 제거
@@ -68,7 +53,17 @@ public class LoginPanel extends JPanel {
 		g.drawImage(image, 0, 0, this);
 	};
 	
+	// 좌석 현황 라벨들
+	JLabel remainSeatLabel = new RemainSeatLabel();
+	JLabel remainStudyRoomLabel = new RemainStudyRoomLabel();
+	
 	public LoginPanel(CardLayout card, JFrame parent) {
+	
+		// 좌석 현황 라벨 설정
+		remainSeatLabel.setBounds(149, 220, 200, 54);
+		remainSeatLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		add(remainSeatLabel);
+		add(remainStudyRoomLabel);
 		
 		setLayout(null);
 		add(numpad);
@@ -82,16 +77,16 @@ public class LoginPanel extends JPanel {
 		
 		// 핸드폰 번호 입력 TextField 
 		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-		userPhonNumber.setText(" 핸드폰 번호");
+		userPhonNumber.setText(" 핸드폰번호");
 		userPhonNumber.setOpaque(false);
 		userPhonNumber.setBounds(90, 318, 800, 110);
 		userPhonNumber.setSelectionColor(new Color(0, 0, 0, 0));
-		//add(userPhonNumber);
+		
 		
 		userPhonNumber.addFocusListener(new FocusListener() {
-			
 			@Override
 			public void focusLost(FocusEvent e) {
+				numpad.phoneSelect = true;
 				numpad.setTextField(userPhonNumber);
 				numpad.setMax(12);
 			}
@@ -99,6 +94,7 @@ public class LoginPanel extends JPanel {
 			@Override
 			public void focusGained(FocusEvent e) {
 				userPhonNumber.setText("");
+				numpad.phoneSelect = false;
 				
 			}
 		});
@@ -117,6 +113,7 @@ public class LoginPanel extends JPanel {
 			public void focusLost(FocusEvent e) {
 				numpad.setTextField(userPassField);
 				numpad.setMax(5);
+				numpad.phoneSelect = false;
 				
 			}
 			

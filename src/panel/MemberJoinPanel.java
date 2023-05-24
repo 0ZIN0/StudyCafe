@@ -37,7 +37,7 @@ public class MemberJoinPanel extends JPanel  {
     }
     
 	//핸드폰 정규표현식
-    static String phonnumRegular = "^(01\\d{1}|02|0505|0502|0506|0\\d{1,2})-?(\\d{3,4})-?(\\d{4})";
+    static String phonnumRegular = "^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$";
     
     // 생년월일 정규표현식
     static String dayRegular = "(19|20)\\d{2}\\-((11|12)|(0?(\\d)))\\-(30|31|((0|1|2)?\\d))";
@@ -74,20 +74,20 @@ public class MemberJoinPanel extends JPanel  {
 	    phoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    phoneField.setText("핸드폰 번호");
 	    phoneField.setOpaque(false);
-	    phoneField.setBounds(80, 117, 900, 110);
+	    phoneField.setBounds(90, 117, 900, 110);
 	    phoneField.setOpaque(false);
 	    
 	    passwordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    passwordField.setText("비밀번호 (6자리)");
 	    passwordField.setEchoChar((char) 0);
 	    passwordField.setOpaque(false);
-	    passwordField.setBounds(80, 288, 900, 110);
+	    passwordField.setBounds(90, 288, 900, 110);
 	    passwordField.setOpaque(false);
 	    
 	    confirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 	    confirmPasswordField.setText("비밀번호 확인 (6자리)");
 	    confirmPasswordField.setOpaque(false);
-	    confirmPasswordField.setBounds(80, 456, 900, 110);
+	    confirmPasswordField.setBounds(90, 456, 900, 110);
 	    confirmPasswordField.setOpaque(false);
 	    confirmPasswordField.setEchoChar((char) 0);
 	    
@@ -111,7 +111,8 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
         	public void focusLost(FocusEvent e) {
         		numpad.setTextField(phoneField);
-        		numpad.setMax(10);
+        		numpad.setMax(12);
+        		numpad.phoneSelect = true;
         	}
         	
         	@Override
@@ -136,6 +137,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
 			public void focusGained(FocusEvent e) {
         		passwordField.setText("");
+        		numpad.phoneSelect = false;
 				
 			}
 		});
@@ -145,7 +147,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
         	public void focusLost(FocusEvent e) {
         		numpad.setTextField(confirmPasswordField);
-        		numpad.setMax(6);
+        		numpad.setMax(5);
         		char[] confirmpassword = confirmPasswordField.getPassword();
     	        String confirmPasswordString = new String(confirmpassword);
     	        confirmPasswordField.setText("");
@@ -154,6 +156,7 @@ public class MemberJoinPanel extends JPanel  {
         	@Override
 			public void focusGained(FocusEvent e) {
         		confirmPasswordField.setText("");
+        		numpad.phoneSelect = false;
         	}
 		});
         
@@ -183,19 +186,27 @@ public class MemberJoinPanel extends JPanel  {
 	            memberjoin.setPhone(phoneNum);
 	            memberjoin.setPassword(password);
 	            
+	            //휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {           
-	            	new setPopup("올바른 휴대전화번호 양식이 아닙니다.","",1000,450).setVisible(true);
+	            	
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png")).setVisible(true);
+	            	return;
 	            }
-
+	            // 비밀번호 6자리 확인
 	            if(password.length() != 6) {
-	            	new setPopup("비밀번호 6자리를 입력해주세요").setVisible(true);
+	            	
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/Password_6.png")).setVisible(true);
+	            	return;
 				}
-	            
+	            // 비밀번호 불일치
 	            if(!password.equals(confirmPassword)) {
-	            	new setPopup("비밀번호 불일치").setVisible(true);
+	            	
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorpass.png")).setVisible(true);
+	            	return;
 				}
 	            if(LoginDAO.checkDup(phoneNum)) {	            	
 	            	card.show(getParent(), "userInfoCheck");      
+	            	
 	            }
 			}  
 		});

@@ -46,8 +46,8 @@ public class StudyRoomDAO {
 				) {
 			pstmt.setString(1, studyRoom_Reservation.getStudyRoom_id());	
 			pstmt.setString(2, studyRoom_Reservation.getMember_id());	
-			pstmt.setString(3, studyRoom_Reservation.getStudyRoom_start_time());	
-			pstmt.setString(4, studyRoom_Reservation.getStudyRoom_end_time());	
+			pstmt.setString(3, studyRoom_Reservation.getStudyRoom_start_dateTime());	
+			pstmt.setString(4, studyRoom_Reservation.getStudyRoom_end_dateTime());	
 				
 			pstmt.executeUpdate();
 			
@@ -139,11 +139,11 @@ public class StudyRoomDAO {
 		List<StudyRoom_Reservation> reservations = new ArrayList<>();
 		
 		
-		String query = "SELECT STUDYROOM_RESERVATION_ID, STUDYROOM_ID, MEMBER_ID, \r\n"
-				+ "TRUNC(STUDYROOM_START_TIME) AS RESERVATION_DATE, TO_CHAR(STUDYROOM_START_TIME, 'HH24:MI') AS START_TIME, \r\n"
-				+ "TO_CHAR(STUDYROOM_END_TIME, 'HH24:MI') AS END_TIME\r\n"
-				+ "FROM STUDYROOM_RESERVATION\r\n"
-				+ "WHERE TRUNC(STUDYROOM_START_TIME)=TO_DATE(?, 'YY/MM/DD') AND STUDYROOM_ID=?";
+		String query = "SELECT STUDYROOM_RESERVATION_ID, STUDYROOM_ID, MEMBER_ID,\r\n"
+				+ "				TRUNC(STUDYROOM_START_TIME) AS RESERVATION_DATE,\r\n"
+				+ "                to_char(studyroom_start_time, 'yyyyMMddHH24mi') as start_time,  to_char(studyroom_end_time, 'yyyyMMddHH24mi') as end_time\r\n"
+				+ "				FROM STUDYROOM_RESERVATION\r\n"
+				+ "				WHERE TRUNC(STUDYROOM_START_TIME)=TO_DATE(?, 'YY/MM/DD') AND STUDYROOM_ID=?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
@@ -153,7 +153,7 @@ public class StudyRoomDAO {
 			
 			try (
 					ResultSet rs = pstmt.executeQuery();
-					) {
+			) {
 				
 				while (rs.next()) {
 					
@@ -163,8 +163,8 @@ public class StudyRoomDAO {
 					rv.setStudyRoom_reservation_id(rs.getString("studyroom_reservation_id"));
 					rv.setStudyRoom_id(rs.getString("studyroom_id"));
 					rv.setMember_id(rs.getString("member_id"));
-					rv.setStudyRoom_start_time(rs.getString("START_TIME"));
-					rv.setStudyRoom_end_time(rs.getString("END_TIME"));
+					rv.setStudyRoom_start_dateTime(rs.getString("start_time"));
+					rv.setStudyRoom_end_dateTime(rs.getString("end_time"));
 					
 					reservations.add(rv);
 				}

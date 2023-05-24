@@ -11,4 +11,5 @@ public class MyColor {
 	public final static Color LEMON = new Color(0xffdc74);
 	public final static Color CLEAR = new Color(0, 0, 0, 0);
 	public final static Color BACKGROUND = new Color(0x494344);
+	public final static Color BLACK = new Color(0x232323);
 }

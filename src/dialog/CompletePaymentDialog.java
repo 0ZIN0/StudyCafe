@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -23,7 +24,6 @@ import dao.MemberDAO;
 import dao.SeatDAO;
 import dao.StudyRoomDAO;
 import dao.TicketOrderDAO;
-import dto.Member;
 import dto.StudyRoom_Reservation;
 import frame.MainFrame;
 import label.RemainSeatLabel;
@@ -42,10 +42,8 @@ public class CompletePaymentDialog extends JDialog {
 	List<TimeSelectButton> btns = MainFrame.btns.getBtns();
 
 	public CompletePaymentDialog() {
-		System.out.println("결제완료금액:  " + InsertCardDialog.amountPaid); 
 		
 		int btnId = MainFrame.btn.getBtnId();
-
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/Payment_Complete.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {
@@ -113,10 +111,19 @@ public class CompletePaymentDialog extends JDialog {
 					String start = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_start_time().replace(":", "").strip();
 					String end = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_end_time().replace(":", "").strip();
 
-					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_time(date+start);
-					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_time(date+end);
+					StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_start_dateTime(date+start);
+					if (end.equals("0000")) {
+						DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+						LocalDate endDate = LocalDate.parse(date, formatter2);
+						date = endDate.plusDays(1).format(formatter2);
+
+						StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_dateTime(date+end);
+					} else {
+						StudyRoomPanel.myStudyRoom_Reservation.setStudyRoom_end_dateTime(date+end);
+					}
 					StudyRoomDAO.setReservation(StudyRoomPanel.myStudyRoom_Reservation);
-					
+
 					if (StudyRoomPanel.whatTimeLabel.getText().equals("1")) {
 						getReservationInfo(4);
 					} else {
@@ -140,7 +147,6 @@ public class CompletePaymentDialog extends JDialog {
 				/* 여기까지 절대 건들지 마시오 (로아) */
 				TimeOrPeriodChargeDialog.ticket_order.setMember_id(MainFrame.member.getMember_id());
 				TicketOrderDAO.saveOrder(TimeOrPeriodChargeDialog.ticket_order);
-		
 				dispose();
 			}
 		});
@@ -178,20 +184,22 @@ public class CompletePaymentDialog extends JDialog {
 	}
 	
 	public void getReservationInfo(int btnNum) {
+		boolean[] reserved = new boolean[96];
+
 		LocalDate labelDate = GridPanel.dateLabel.getSelectDay();
 		String studyroom_id = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_id(); 
 		List<StudyRoom_Reservation> studyRoom_AllReservation = StudyRoomDAO.getAllReservations(labelDate, studyroom_id);
-		boolean[] reserved = new boolean[96];
-		
+
 		for (StudyRoom_Reservation studyRoom_reserv : studyRoom_AllReservation) {
 			for(TimeSelectButton timeSelectBtn : btns) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmm");
+				
+				LocalDateTime selectDateTime = LocalDateTime.of(labelDate, timeSelectBtn.getTime());
 				LocalTime selectTime = timeSelectBtn.getTime();
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-				LocalTime start = LocalTime.parse(studyRoom_reserv.getStudyRoom_start_time(), formatter);
-				LocalTime end = LocalTime.parse(studyRoom_reserv.getStudyRoom_end_time(), formatter);
-
-				if (start.compareTo(selectTime) <= 0 && 
-						end.compareTo(selectTime) > 0) {
+				LocalDateTime start = LocalDateTime.parse(studyRoom_reserv.getStudyRoom_start_dateTime(), formatter);
+				LocalDateTime end = LocalDateTime.parse(studyRoom_reserv.getStudyRoom_end_dateTime(), formatter);
+				if (start.compareTo(selectDateTime) <= 0 && 
+						end.compareTo(selectDateTime) > 0) {
 					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) && btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
 						btns.get(i).setEnabled(false);
 					}
@@ -200,7 +208,7 @@ public class CompletePaymentDialog extends JDialog {
 						timeSelectBtn.setBackground(MyColor.GRAY);
 					} else {
 						if (StudyRoomPanel.myStudyRoom_Reservation.getMember_id().equals(studyRoom_reserv.getMember_id())) {
-								timeSelectBtn.setBackground(MyColor.LEMON);
+							timeSelectBtn.setBackground(MyColor.LEMON);
 						} else {
 							timeSelectBtn.setBackground(MyColor.GRAY);
 						}

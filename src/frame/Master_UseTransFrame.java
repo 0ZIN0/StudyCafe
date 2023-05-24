@@ -20,8 +20,6 @@ import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
 import dao.SeatDAO;
-import dao.MemberDAO;
-import dto.Button;
 import dto.Member;
 import dto.Seat;
 import dto.StudyRoomButtonList;
@@ -34,10 +32,7 @@ import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
 
-/*
- * 이 프레임이 메인 프레임입니다.
- *  */
-public class MainFrame extends JFrame {
+public class Master_UseTransFrame extends JFrame {
 
 	/* 레이아웃 */
 	public static CardLayout card = new CardLayout();
@@ -56,15 +51,6 @@ public class MainFrame extends JFrame {
 	// 사물함 이미지
 	ImageIcon lockerImageIcon = new ImageIcon("ui/lockerToggleButton.png");
 
-	// 출입문열림 이미지
-	ImageIcon openDoorImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/Top_button_1.png");
-
-	// 퇴실예정좌석 이미지
-	ImageIcon leaveImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/Top_button_2.png");
-
-	// 상품충전 이미지
-	ImageIcon buyImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/Top_button_3.png");
-
 	/* 패널 */
 	JPanel mainPanel = new MainPanel(backgroundImage); // 백그라운드 패널
 	JPanel subPanel = new JPanel(); // seat, study, locker 패널들의 부모가 될 서브 패널
@@ -81,33 +67,24 @@ public class MainFrame extends JFrame {
 	JToggleButton lockerTog = new LockerToggle(lockerImageIcon, card, lockerPanel, subPanel);
 	ButtonGroup togGroup = new ButtonGroup(); // 토글버튼 그룹 지정
 
-	/* 탑 버튼 */
-	JButton openDoorBtn = new OpenDoorButton(openDoorImageIcon, this);
-	JButton leaveBtn = new LeaveButton(leaveImageIcon, seats);
-	JButton buyBtn = new BuyButton(buyImageIcon);
-
-	/* 마이페이지, 로그아웃 버튼 */
-	JButton logoutBtn = new JButton("로그아웃");
-	JButton mypageBtn = new JButton("마이페이지");
 
 	// 시간 라벨
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
 	public static Member member = SeatDAO.setMember("010-1111-1111");
-	public static Button btn = new Button();
+	
 	public static StudyRoomButtonList btns = new StudyRoomButtonList();
-
+	
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame(Member member) {
+	public Master_UseTransFrame() {
 //		this.member = member;
 		/* 패널 */
 		seatReportPanel  = new SeatReportPanel(member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
-		myPagePanel = new MyPagePanel(card, member); // 마이페이지 패널
 		
 		studyRoomPanel.setVisible(false);
 		
@@ -185,22 +162,6 @@ public class MainFrame extends JFrame {
 				
 			}
 		});
-		mypageBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				studyRoomPanel.removeAll();
-
-				JPanel studyRoomPanel = new StudyRoomPanel(member);
-
-				studyRoomPanel.setBackground(new Color(0x494344));
-				studyRoomPanel.setLayout(null);
-				studyRoomPanel.setBounds(633, 381, 1177, 617);
-
-				subPanel.add(studyRoomPanel, "study");
-
-			}
-		});
 		/******************************************************************************************************************/
 
 		/* 서브 패널 설정 */
@@ -226,57 +187,15 @@ public class MainFrame extends JFrame {
 		subPanel.add(studyRoomPanel, "study");
 		subPanel.add(lockerPanel, "locker");
 
-		/* 탑 버튼 설정 */
-		openDoorBtn.setBounds(841, 240, 240, 80);
-		leaveBtn.setBounds(1101, 240, 240, 80);
-		buyBtn.setBounds(1361, 240, 240, 80);
-
-		/* 로그아웃, 마이페이지 버튼 */
-		logoutBtn.setBounds(62, 114, 200, 40);
-		logoutBtn.setForeground(new Color(0xFF5C00));
-		logoutBtn.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
-		logoutBtn.setContentAreaFilled(false);
-		logoutBtn.setBorderPainted(false);
-
-		mypageBtn.setBounds(1592, 114, 300, 40);
-		mypageBtn.setForeground(new Color(0xFF5C00));
-		mypageBtn.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
-		mypageBtn.setContentAreaFilled(false);
-		mypageBtn.setBorderPainted(false);
-
 		// 프레임(getContentPane())에 메인 패널 붙이기
 		getContentPane().add(mainPanel, "main");
-		getContentPane().add(myPagePanel, "myPage");
 
 		// 메인 패널에 잡것들 붙이기
 		mainPanel.add(subPanel);
 		mainPanel.add(seatReportTog);
 		mainPanel.add(studyRoomTog);
 		mainPanel.add(lockerTog);
-		mainPanel.add(logoutBtn);
-		mainPanel.add(mypageBtn);
 		mainPanel.add(timeLabel);
-
-		mypageBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				card.show(getContentPane(), "myPage");
-			}
-		});
-		
-		logoutBtn.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new LoginFrame();
-			}
-		});
-
-		mainPanel.add(openDoorBtn);
-		mainPanel.add(leaveBtn);
-		mainPanel.add(buyBtn);
 
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
@@ -284,5 +203,9 @@ public class MainFrame extends JFrame {
 		setBounds(0, 0, 1920, 1080);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+		new Master_UseTransFrame();
 	}
 }
