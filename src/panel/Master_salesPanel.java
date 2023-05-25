@@ -156,6 +156,11 @@ public class Master_salesPanel extends JPanel{
 		table.getTableHeader().setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		table.setRowHeight(50);
 		table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
+		table.setBackground(new Color(0xEEEEEE));
+		table.setCellSelectionEnabled(false);
+		table.getTableHeader().setReorderingAllowed(false);
+		table.setDragEnabled(false);
+		table.setEnabled(false);
 		/*******************************************************************************/
 		
 		// scrollPane settings
