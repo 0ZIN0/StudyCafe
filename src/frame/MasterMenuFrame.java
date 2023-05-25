@@ -40,6 +40,7 @@ import panel.BackgroundPanel;
 import panel.LoginPanel;
 import panel.MasterLoginPanel;
 import panel.MasterMenuPanel;
+import panel.MasterUsersearch;
 import panel.MemberJoinPanel;
 import panel.NumberKeypad;
 import panel.TestPanel;
@@ -55,8 +56,12 @@ public class MasterMenuFrame extends JFrame{
 	CardLayout card = new CardLayout();
 	JPanel cardPanel = new JPanel();
 	
-	MasterMenuPanel masterMenuPanel = new MasterMenuPanel();
-	TestPanel TestPanel = new TestPanel(); 
+	
+	
+	MasterMenuPanel masterMenuPanel = new MasterMenuPanel(card);
+//	TestPanel TestPanel = new TestPanel(); 
+	
+	MasterUsersearch masterUsersearch = new MasterUsersearch();
 	
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/master/masterMenu/Select_Seat_Main_Background.jpg"));
 	JButton exitBtn = new JButton();
@@ -86,6 +91,7 @@ public class MasterMenuFrame extends JFrame{
 		
 	public MasterMenuFrame() {
 		
+		
 		background.setLayout(null);
 		add(background);
 		background.add(backBtn);
@@ -98,8 +104,7 @@ public class MasterMenuFrame extends JFrame{
 		cardPanel.setBorder(new LineBorder(Color.red,1));
 		
 		
-		
-		cardPanel.add(TestPanel,"test");
+		cardPanel.add(masterUsersearch,"Usersearch");
 		cardPanel.add(masterMenuPanel,"menu");
 		
 		
