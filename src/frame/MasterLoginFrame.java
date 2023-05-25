@@ -45,7 +45,7 @@ import panel.UserInfoCheckPanel;
 import thread.TimeRun;
 import thread.UpdateInfo;
 
-public class MasterLogin extends JFrame{
+public class MasterLoginFrame extends JFrame{
 	
 	
 	//MemberJoin memberjoin = new MemberJoin();
@@ -53,12 +53,12 @@ public class MasterLogin extends JFrame{
 	//CardLayout card = new CardLayout();
 	
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
-	JButton exitBtn = new JButton();
+	JButton exitBtn = new JButton(new ImageIcon("ui/master/masterLogin/MainPage_move_btn.png"));
 	NumberKeypad numpad= new NumberKeypad();
 	//JPanel MasterLoginpanel = new JPanel();
 	//MasterLoginPanel masterloginpanel = new MasterLoginPanel();
 	
-	MasterLoginPanel masterLoginPanel = new MasterLoginPanel();
+	MasterLoginPanel masterLoginPanel = new MasterLoginPanel(this);
 	
 	//LoginPanel loginpanel = new LoginPanel(card, this);
 	//MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
@@ -70,17 +70,17 @@ public class MasterLogin extends JFrame{
 	
 	//JPanel cardPanel = new JPanel();
 	// 쓰레드 클래스
-	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
-	static UpdateInfo updateInfo = new UpdateInfo();
+//	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
+//	static UpdateInfo updateInfo = new UpdateInfo();
 	
 	
 		
-	public MasterLogin() {
+	public MasterLoginFrame() {
 		
 		background.setLayout(null);
 		add(background);
 		background.add(masterLoginPanel);
-		masterLoginPanel.setBounds(130,260,1650,760);
+		masterLoginPanel.setBounds(110,240,1700,760);
 		
 //		background.add(masterBtn);
 //		masterBtn.setBounds(1811,978,60,48);
@@ -100,10 +100,16 @@ public class MasterLogin extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				new LoginFrame();
+				dispose();
 			}
 		});
-		exitBtn.setBounds(1700,80,100,100);
+		exitBtn.setBounds(1690,113,112,35);
+		exitBtn.setBorderPainted(false);
+		exitBtn.setContentAreaFilled(false);
+		exitBtn.setFocusPainted(false);
+		
+		
 		background.add(exitBtn);
 
 		setLayout(null);
@@ -112,19 +118,10 @@ public class MasterLogin extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
+//	public static void main(String[] args) {
+//		new MasterLoginFrame();
+//	}
 	
-	public static void main(String[] args) {
-		try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            ((Throwable) e).printStackTrace();
-        }
-		Thread time = new Thread(timeRun);
-		Thread update = new Thread(updateInfo);
-		new MasterLogin();
-		update.start();
-		time.start();
-	}
 }
 
 
