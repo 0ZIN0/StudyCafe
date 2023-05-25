@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,6 +28,9 @@ public class Master_salesPanel extends JPanel{
 	
 	public static LocalDate date = LocalDate.now();
 	
+	public static NumberFormat numberFormat = NumberFormat.getInstance();
+
+	
 	public static DefaultTableModel model = TicketOrderDAO.salesTableModel();
 	public static JTable table = new JTable(model);
 	JScrollPane scrollPane = new JScrollPane(table);
@@ -41,11 +45,21 @@ public class Master_salesPanel extends JPanel{
 	public static JLabel yearDigitLabel = new JLabel(Integer.toString(date.getYear()));
 	public static JLabel monthDigitLabel = new JLabel(String.format("%02d", date.getMonthValue()));
 	public static JLabel dayDigitLabel = new JLabel(Integer.toString(date.getDayOfMonth()));
+	public static JLabel isTodayLabel = new JLabel("TODAY");
 	
 	JLabel yearLabel = new JLabel("년");
 	JLabel monthLabel = new JLabel("월");
 	JLabel dayLabel = new JLabel("일");
-	public static JLabel isTodayLabel = new JLabel("TODAY");
+	
+	JLabel yearSales = new JLabel("연매출 : ");
+	JLabel monthSales = new JLabel("월매출 : ");
+	JLabel daySales = new JLabel("일매출 : ");
+	
+	public static JLabel yearAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_year()) + "원");
+	public static JLabel monthAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_month()) + "원");
+	public static JLabel dayAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_day()) + "원");
+	
+	
 	
 	public Master_salesPanel() {
 		
@@ -78,6 +92,30 @@ public class Master_salesPanel extends JPanel{
 		isTodayLabel.setBounds(1550, 60, 80, 28);
 		isTodayLabel.setForeground(new Color(0xFF5C00));
 		
+		daySales.setBounds(100, 700, 150, 50);
+		daySales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		daySales.setForeground(new Color(0xFF5C00));
+		
+		dayAmount.setBounds(250, 700, 300, 50);
+		dayAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		dayAmount.setForeground(new Color(0xFF5C00));
+		
+		monthSales.setBounds(630, 700, 150, 50);
+		monthSales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		monthSales.setForeground(new Color(0xFF5C00));
+		
+		monthAmount.setBounds(780, 700, 300, 50);
+		monthAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		monthAmount.setForeground(new Color(0xFF5C00));
+		
+		yearSales.setBounds(1180, 700, 150, 50);
+		yearSales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		yearSales.setForeground(new Color(0xFF5C00));
+		
+		yearAmount.setBounds(1330, 700, 300, 50);
+		yearAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		yearAmount.setForeground(new Color(0xFF5C00));
+		
 		add(isTodayLabel);
 		add(yearDigitLabel);
 		add(yearLabel);
@@ -85,6 +123,13 @@ public class Master_salesPanel extends JPanel{
 		add(monthLabel);
 		add(dayDigitLabel);
 		add(dayLabel);
+		
+		add(yearSales);
+		add(yearAmount);
+		add(monthSales);
+		add(monthAmount);
+		add(daySales);
+		add(dayAmount);
 		/*******************************************************************************/
 		
 		//buttons

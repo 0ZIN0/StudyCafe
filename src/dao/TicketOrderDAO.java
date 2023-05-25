@@ -84,11 +84,10 @@ public class TicketOrderDAO {
 			// 데이터 모델 생성
 			Date sqlDate = Date.valueOf(Master_salesPanel.date);
 			pstmt.setDate(1, sqlDate);
-
+			
 			try(
 					ResultSet rs = pstmt.executeQuery();
 					) {
-				System.out.println(sqlDate);
 				ResultSetMetaData metaData = rs.getMetaData();
 
 				int columnCount = metaData.getColumnCount();
@@ -110,18 +109,80 @@ public class TicketOrderDAO {
 		return null;
 	}
 	
-	public static void sales_year() {
-		String query = "SELECT order_id, member_id, ticket_id, order_total_price, pay_state, order_date\r\n"
+	public static long sales_year() {
+		String query = "SELECT SUM(order_total_price) as total\r\n"
 				+ "FROM ticket_order\r\n"
 				+ "WHERE EXTRACT(YEAR FROM order_date) = ?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
 				) {
+			pstmt.setString(1, Integer.toString(Master_salesPanel.date.getYear()));
+			try(
+					ResultSet rs = pstmt.executeQuery()
+					){
+				if(rs.next()) {
+					return rs.getLong("total");					
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return 0;
 	}
+	
+	public static long sales_month() {
+		String query = "SELECT SUM(order_total_price) as total\r\n"
+				+ "FROM ticket_order\r\n"
+				+ "WHERE EXTRACT(YEAR FROM order_date) = ?\r\n"
+				+ "      AND EXTRACT(MONTH FROM order_date) = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+			pstmt.setString(1, Integer.toString(Master_salesPanel.date.getYear()));
+			pstmt.setString(2, Integer.toString(Master_salesPanel.date.getMonthValue()));
+			try(
+					ResultSet rs = pstmt.executeQuery()
+					){
+				if(rs.next()) {
+					return rs.getLong("total");					
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public static long sales_day() {
+		String query = "SELECT SUM(order_total_price) as total\r\n"
+				+ "FROM ticket_order\r\n"
+				+ "WHERE EXTRACT(YEAR FROM order_date) = ?\r\n"
+				+ "      AND EXTRACT(MONTH FROM order_date) = ? "
+				+ "AND EXTRACT(DAY FROM order_date) = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+			pstmt.setString(1, Integer.toString(Master_salesPanel.date.getYear()));
+			pstmt.setString(2, Integer.toString(Master_salesPanel.date.getMonthValue()));
+			pstmt.setString(3, Integer.toString(Master_salesPanel.date.getDayOfMonth()));
+			
+			try(
+					ResultSet rs = pstmt.executeQuery()
+					){
+				if(rs.next()) {
+					return rs.getLong("total");					
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	
 }
 
 

@@ -3,6 +3,7 @@ package button;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
@@ -55,5 +56,10 @@ public class Downbutton extends JButton implements ActionListener{
 		}
 		
 		Master_salesPanel.table.setModel(TicketOrderDAO.salesTableModel());
+		
+		NumberFormat numberFormat = NumberFormat.getInstance();
+		Master_salesPanel.yearAmount.setText(numberFormat.format(TicketOrderDAO.sales_year()) + "원");
+		Master_salesPanel.monthAmount.setText(numberFormat.format(TicketOrderDAO.sales_month()) + "원");
+		Master_salesPanel.dayAmount.setText(numberFormat.format(TicketOrderDAO.sales_day()) + "원");
 	}
 }
