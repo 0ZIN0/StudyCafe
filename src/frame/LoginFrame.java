@@ -96,7 +96,6 @@ public class LoginFrame extends JFrame{
 		cardPanel.setLayout(card);
 		background.add(cardPanel);
 		cardPanel.setBounds(130,260,1650,760);
-		cardPanel.setBorder(new LineBorder(Color.red,1));
 
 		cardPanel.add(loginpanel,"login");
 		cardPanel.add(memberJoinPanel,"memberjoin");
