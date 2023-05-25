@@ -1,15 +1,21 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
+import javax.swing.table.DefaultTableModel;
 
 import color.MyColor;
 import dto.Ticket_order;
 import frame.MainFrame;
 import panel.LockerPanel;
+import panel.Master_salesPanel;
 
 public class TicketOrderDAO {
 
@@ -52,6 +58,66 @@ public class TicketOrderDAO {
 			LockerPanel.lockerBtns.get(Integer.parseInt(lockerNum) - 1).setBackground(MyColor.ORANGE);
 			LockerPanel.lockerBtns.get(Integer.parseInt(lockerNum) - 1).setEnabled(false);
 			MainFrame.member.setLocker_number("L-" + lockerNum);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static DefaultTableModel salesTableModel() {
+		DefaultTableModel model = new DefaultTableModel();
+		
+		String[] header = new String[] {
+	    		"주문번호", "회원번호", "이용권번호", "결제 금액", "결제 상태", "결제 날짜"
+	    		};
+		
+		String query = "SELECT "
+				+ "order_id, member_id, ticket_id, order_total_price, pay_state, "
+				+ "TO_CHAR(order_date, 'YYYY\"년 \"MM\"월 \"DD\"일\" HH24:mi:ss') "
+				+ "FROM ticket_order "
+				+ "WHERE to_date(order_date) = ? "
+				+ "ORDER BY order_date DESC";
+		
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+			// 데이터 모델 생성
+			Date sqlDate = Date.valueOf(Master_salesPanel.date);
+			pstmt.setDate(1, sqlDate);
+
+			try(
+					ResultSet rs = pstmt.executeQuery();
+					) {
+				System.out.println(sqlDate);
+				ResultSetMetaData metaData = rs.getMetaData();
+
+				int columnCount = metaData.getColumnCount();
+				for (int i = 0; i < header.length; i++) {
+					model.addColumn(header[i]);
+				}
+				while (rs.next()) {
+					Object[] rowData = new Object[columnCount];
+					for (int i = 1; i <= columnCount; i++) {
+						rowData[i - 1] = " " + rs.getObject(i);
+					}
+					model.addRow(rowData);
+				}
+				return model;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static void sales_year() {
+		String query = "SELECT order_id, member_id, ticket_id, order_total_price, pay_state, order_date\r\n"
+				+ "FROM ticket_order\r\n"
+				+ "WHERE EXTRACT(YEAR FROM order_date) = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

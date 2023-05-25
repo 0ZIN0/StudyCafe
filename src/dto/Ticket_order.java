@@ -9,8 +9,8 @@ public class Ticket_order {
 	private String order_id;
 	private String member_id;
 	private String ticket_id;
-	private String pay_id;
 	private Integer order_total_price;
+	private String pay_state;
 	private Date order_date;
 	
 	public String getOrder_id() {
@@ -31,17 +31,17 @@ public class Ticket_order {
 	public void setTicket_id(String ticket_id) {
 		this.ticket_id = ticket_id;
 	}
-	public String getPay_id() {
-		return pay_id;
-	}
-	public void setPay_id(String pay_id) {
-		this.pay_id = pay_id;
-	}
 	public Integer getOrder_total_price() {
 	    if (order_total_price == null) {
 	        return 0; // 기본 값으로 0을 반환하거나 원하는 값을 반환합니다.
 	    }
 	    return order_total_price;
+	}
+	public void setPay_state(String pay_state) {
+		this.pay_state = pay_state;
+	}
+	public String getPay_state() {
+		return pay_state;
 	}
 	public void setOrder_total_price(Integer order_total_price) {
 		this.order_total_price = order_total_price;
