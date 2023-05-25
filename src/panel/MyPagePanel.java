@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -20,6 +21,7 @@ import javax.swing.JSeparator;
 import dao.MemberDAO;
 import dao.SeatDAO;
 import dto.Member;
+import frame.LoginFrame;
 import frame.MainFrame;
 
 public class MyPagePanel extends JPanel {
@@ -47,7 +49,7 @@ public class MyPagePanel extends JPanel {
 	public static JLabel seat;
 	public static JLabel locker;
 	
-	public MyPagePanel(CardLayout card, Member member) {
+	public MyPagePanel(CardLayout card, Member member, JFrame parent) {
 		this.member = member;
 		
 		for(int i = 0; i < labelText.length; i++) {
@@ -112,6 +114,15 @@ public class MyPagePanel extends JPanel {
 		logoutBtn.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
 		logoutBtn.setContentAreaFilled(false);
 		logoutBtn.setBorderPainted(false);
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.dispose();
+				new LoginFrame();
+			}
+		});
 		
 		mainBtn.setBounds(1592, 114, 300, 40);
 		mainBtn.setForeground(new Color(0xFF5C00));

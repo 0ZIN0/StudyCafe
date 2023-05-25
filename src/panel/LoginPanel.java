@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import dao.LoginDAO;
+import label.RemainLockerLabel;
 import label.RemainSeatLabel;
 import label.RemainStudyRoomLabel;
 
@@ -56,14 +57,19 @@ public class LoginPanel extends JPanel {
 	// 좌석 현황 라벨들
 	JLabel remainSeatLabel = new RemainSeatLabel();
 	JLabel remainStudyRoomLabel = new RemainStudyRoomLabel();
+	JLabel remainLockerLabel = new RemainLockerLabel();
 	
 	public LoginPanel(CardLayout card, JFrame parent) {
 	
 		// 좌석 현황 라벨 설정
 		remainSeatLabel.setBounds(149, 220, 200, 54);
 		remainSeatLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		remainLockerLabel.setBounds(709, 220, 200, 54);
+		remainLockerLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		
 		add(remainSeatLabel);
 		add(remainStudyRoomLabel);
+		add(remainLockerLabel);
 		
 		setLayout(null);
 		add(numpad);
