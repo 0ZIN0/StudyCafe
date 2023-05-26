@@ -16,9 +16,10 @@ public class VacatedMiniPanel extends JPanel {
 	
 	JLabel seatLabel = new JLabel();
 	JLabel remainTimeLabel = new JLabel();
+	JPanel backPanel = new JPanel();
 	
 	public VacatedMiniPanel(List<int[]> remainTime, int i) {
-		JPanel backPanel = new JPanel();
+		
 		backPanel.setBackground(Color.WHITE);
 		backPanel.setBounds(3, 3, 620, 90);
 		backPanel.setVisible(true);
