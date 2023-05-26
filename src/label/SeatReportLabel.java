@@ -5,22 +5,22 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 
+import dao.SeatDAO;
+import frame.MainFrame;
+import panel.SeatReportPanel;
+
 public class SeatReportLabel extends JLabel {
 	
-	boolean mySeat;
-	
-	public SeatReportLabel() {
+	public SeatReportLabel(Integer mySeat) {
 
 		setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		setForeground(Color.WHITE);
-		setBounds(457, 28, 550, 50);
-		
-		if (!mySeat) {
-			setText("사용 중인 좌석이 없습니다.");
+		if (mySeat == 0) {
+			setText("사용중인 좌석이 없습니다.");
+			setBounds(507, 28, 550, 50);
 		} else {
-			// 사용자가 사용 중인 좌석이 존재할때 적용할 곳 
-			// DB에서 사용자가 이용하고 있는 좌석 가져옴
+			setText(mySeat + "번 좌석을 사용중입니다.");
+			setBounds(507, 28, 550, 50);
 		}
-		
 	}
 }

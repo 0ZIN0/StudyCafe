@@ -10,6 +10,8 @@ public class StudyRoom_Reservation {
 	private Date studyRoom_reservation_date;
 	private String studyRoom_start_time;
 	private String studyRoom_end_time;
+	private String studyRoom_start_dateTime;
+	private String studyRoom_end_dateTime;
 	
 	public String getStudyRoom_reservation_id() {
 		return studyRoom_reservation_id;
@@ -47,4 +49,17 @@ public class StudyRoom_Reservation {
 	public void setStudyRoom_end_time(String studyRoom_end_time) {
 		this.studyRoom_end_time = studyRoom_end_time;
 	}
+	public String getStudyRoom_start_dateTime() {
+		return studyRoom_start_dateTime;
+	}
+	public void setStudyRoom_start_dateTime(String studyRoom_start_dateTime) {
+		this.studyRoom_start_dateTime = studyRoom_start_dateTime;
+	}
+	public String getStudyRoom_end_dateTime() {
+		return studyRoom_end_dateTime;
+	}
+	public void setStudyRoom_end_dateTime(String studyRoom_end_dateTime) {
+		this.studyRoom_end_dateTime = studyRoom_end_dateTime;
+	}
+	
 }

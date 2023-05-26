@@ -7,7 +7,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import dto.Member;
-import frame.CheckInFrame;
+import frame.MainFrame;
 import panel.MyPagePanel;
 
 public class MemberDAO {
@@ -30,7 +30,11 @@ public class MemberDAO {
 				member.setMember_id(rs.getString("member_id"));
 				member.setPhone_number(rs.getString("phone_number"));
 				member.setRemain_time(rs.getInt("remain_time"));
-				member.setLocker_number(rs.getString("locker_number"));
+				if(rs.getString("locker_number") != null) {
+					member.setLocker_number(rs.getString("locker_number"));					
+				} else {
+					member.setLocker_number(rs.getString("locker_number"));
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -40,7 +44,7 @@ public class MemberDAO {
 	}
 	
 	public static int usingSeat(String memId) {
-		String query = "SELECT seat_id FROM seat_reservation member WHERE member_id = ?";
+		String query = "SELECT seat_id FROM seat_reservation WHERE member_id = ?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
@@ -49,8 +53,9 @@ public class MemberDAO {
 			try (
 					ResultSet rs = pstmt.executeQuery();
 					) {
-				rs.next();
-				return rs.getInt("seat_id");
+				if(rs.next()) {
+					return rs.getInt("seat_id");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,22 +65,22 @@ public class MemberDAO {
 	
 	public static int updateRemainTime(String memId) {
 		String query1 = "select\r\n"
-				+ "mem.member_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) \r\n"
-				+ "AS remain \r\n"
+				+ "mem.member_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60))\r\n"
+				+ "AS remain, use_ticket_category \r\n"
 				+ "from \r\n"
 				+ "seat_reservation res, member mem\r\n"
 				+ "WHERE res.member_id = mem.member_id\r\n"
-				+ "AND mem.member_id = ?";
-		String query2 = "UPDATE member SET remain_time = ? WHERE member_id = ?";
+				+ "AND mem.member_id = ?\r\n"
+				+ "AND seat_reservation_end_time IS NULL";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt1 = conn.prepareStatement(query1);
-				PreparedStatement pstmt2 = conn.prepareStatement(query2);
 				) {
 			conn.setAutoCommit(false);
 			pstmt1.setString(1, memId);
 			try (
 					ResultSet rs = pstmt1.executeQuery();
+<<<<<<< HEAD
 					){
 				rs.next();
 				pstmt2.setInt(1, rs.getInt("remain"));
@@ -88,6 +93,24 @@ public class MemberDAO {
 				} else {
 					System.out.println("update fail");
 					conn.rollback();
+=======
+					){
+				if(rs.next()) {
+					if(rs.getString("use_ticket_category").equals("시간충전권")) {	
+						int remain_time = rs.getInt("remain");
+						if(remain_time > 0) {
+							if(remain_time >= 60) {
+								int hour = remain_time / 60;
+								int minute = remain_time % 60;
+								MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+							} else {
+								MyPagePanel.time.setText(remain_time + "분");
+							}
+						} else {
+							MyPagePanel.time.setText("0분");
+						}					
+					}
+>>>>>>> refs/heads/main
 				}
 			}
 		} catch (Exception e) {
@@ -95,5 +118,77 @@ public class MemberDAO {
 		}
 		return 0;
 	}
+	
+	public static void chargeTime(String ticket_id) {
+		String query1 = "update member "
+				+ "set remain_time = remain_time + (select ticket_value from ticket WHERE ticket_id = ?) "
+				+ "WHERE member_id = ?";
+		String query2 = "SELECT remain_time FROM member WHERE member_id = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				PreparedStatement pstmt2 = conn.prepareStatement(query2);
+				) {
+				pstmt1.setString(1, ticket_id);
+				pstmt1.setString(2, MainFrame.member.getMember_id());
+				pstmt1.executeUpdate();
+				pstmt2.setString(1, MainFrame.member.getMember_id());
+				try (
+						ResultSet rs = pstmt2.executeQuery();
+						) {
+					if(rs.next()) {
+						int remain_time = rs.getInt("remain_time");
+						if(remain_time > 0) {
+							if(remain_time >= 60) {
+								int hour = remain_time / 60;
+								int minute = remain_time % 60;
+								MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+							} else {
+								MyPagePanel.time.setText(remain_time + "분");
+							}
+						} else {
+							MyPagePanel.time.setText("0분");
+						}
+					}
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void chargeDate(String ticket_id) {
+		String query1 = "UPDATE \r\n"
+				+ "    member \r\n"
+				+ "SET \r\n"
+				+ "    remain_date = CASE \r\n"
+				+ "WHEN remain_date IS NULL \r\n"
+				+ "    THEN sysdate + (select ticket_value from ticket WHERE ticket_id = ?)\r\n"
+				+ "WHEN remain_date IS NOT NULL\r\n"
+				+ "    THEN remain_date + (select ticket_value from ticket WHERE ticket_id = ?)\r\n"
+				+ "END\r\n"
+				+ "WHERE member_id = ?";
+		String query2 = "SELECT remain_date FROM member WHERE member_id = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt1 = conn.prepareStatement(query1);
+				PreparedStatement pstmt2 = conn.prepareStatement(query2);
+				) {
+			pstmt1.setString(1, ticket_id);
+			pstmt1.setString(2, ticket_id);
+			pstmt1.setString(3, MainFrame.member.getMember_id());
+			pstmt1.executeUpdate();
+			pstmt2.setString(1, MainFrame.member.getMember_id());
+			try(
+					ResultSet rs = pstmt2.executeQuery();
+					) {
+				if(rs.next()) {
+					MainFrame.member.setRemain_date(rs.getDate("remain_date"));
+				}
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
+
 

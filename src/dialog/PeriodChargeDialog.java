@@ -31,7 +31,7 @@ public class PeriodChargeDialog extends JDialog {
 	JLabel howPrice = new JLabel();
 	JLabel priceIs = new JLabel();
 
-	
+
 	PeriodChargePanel ticketPanel = new PeriodChargePanel(whatName, nameIs, howHours, hours, howPrice, priceIs);
 
 	public PeriodChargeDialog() {
@@ -49,21 +49,19 @@ public class PeriodChargeDialog extends JDialog {
 		ticketPanel.setLocation(160, 400);
 		add(ticketPanel);
 
-		ChargeTimeButton closeButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/기간이용권_팝업/CloseButton.png"));
-		closeButton.setBounds(210, 842, 150, 80);
+		ChargeTimeButton closeButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/버튼_수정/CloseButton.png"));
+		closeButton.setBounds(210, 842, 150, 100);
 		add(closeButton);
 		closeButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ticketPanel.setPeriodChargePrice(0);
-				ticketPanel.setPeriodChargeItem(0);
 				dispose();
 			}
 		});
 
-		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/기간이용권_팝업/NextButton.png"));  // 다음버튼, (결제버튼)
+		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/버튼_수정/NextButton.png"));  // 다음버튼, (결제버튼)
 		nextButton.setBorderPainted(false);
 		nextButton.setContentAreaFilled(false);
-		nextButton.setBounds(380, 842, 150, 80);
+		nextButton.setBounds(380, 842, 150, 100);
 		add(nextButton);	
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,9 +115,5 @@ public class PeriodChargeDialog extends JDialog {
 		setBounds(585, 60, 750, 960);
 		setVisible(true);
 	}
-
-
-
-
 }
 

@@ -17,6 +17,7 @@ import button.TermTicketButton;
 import button.TimeTicketButton;
 import button.UseTicketButton;
 import dto.Seat;
+import dto.Ticket_order;
 
 public class SelectSeatDialog extends JDialog {
 	
@@ -42,16 +43,22 @@ public class SelectSeatDialog extends JDialog {
 	public SelectSeatDialog(String seatNum, Seat seat) {
 		this.seat = seat;
 		
+		
 		/* 구매 버튼 */
 		JButton dayTicketBtn = new DayTicketButton(seat, this);
 		JButton timeTicketBtn = new TimeTicketButton(this);
 		JButton termTicketBtn = new TermTicketButton(this);
 		JButton useTicketBtn = new UseTicketButton(this, seatNum, seat);
 		JButton close = new CloseButton(this);
-
+		
+		if (UseTicketButton.useSeat) {
+			useTicketBtn.setEnabled(false);
+		}
+		
+		
 		/* 닫기 버튼 설정 */
 		close.setLocation(300, 640);
-
+		
 		/* 이용권 버튼들 크기 설정 */
 		dayTicketBtn.setBounds(165, 165, 200, 200);
 		timeTicketBtn.setBounds(385, 165, 200, 200);
@@ -62,7 +69,7 @@ public class SelectSeatDialog extends JDialog {
 		String seatName = seatNum + "번 좌석";
 		seatNumlabel = new JLabel(seatName);
 		seatNumlabel.setBounds(287, 55, 200, 50);
-		seatNumlabel.setForeground(new Color(0x131313));
+		seatNumlabel.setForeground(new Color(0x232323));
 		seatNumlabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 45));
 		
 		/* 패널에 잡것들 붙이기 */

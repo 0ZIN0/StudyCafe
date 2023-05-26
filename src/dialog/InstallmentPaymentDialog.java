@@ -32,8 +32,9 @@ public class InstallmentPaymentDialog extends JDialog {
 	
 	int periodChargeItem = PeriodChargePanel.getPeriodChargeItem();
 	int periodChargePrice = PeriodChargePanel.getPeriodChargePrice();
-
+	
 	public InstallmentPaymentDialog() {
+
 		ImageIcon imageIcon = new ImageIcon("ui/결제 팝업/PayInfo_Default_2/Pay_PopUp2_revision.png");
 		Image bgImage = imageIcon.getImage();
 		JPanel background = new JPanel() {

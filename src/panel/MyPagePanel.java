@@ -12,9 +12,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
-import dto.Member;
+
+import dao.MemberDAO;
+import dao.SeatDAO;
+
 import toggle.UseTicketToggle;
 import toggle.UserInfoToggle;
+
+
 
 public class MyPagePanel extends JPanel {
 
@@ -48,8 +53,6 @@ public class MyPagePanel extends JPanel {
     
 	ButtonGroup myPageTogGroup = new ButtonGroup(); // 토글버튼 그룹 지정
 
-	
-	
     public MyPagePanel() {
     	
 //    	this.member = member;

@@ -1,18 +1,11 @@
 package frame;
 
 import java.awt.CardLayout;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -26,17 +19,17 @@ import javax.swing.JToggleButton;
 import button.BuyButton;
 import button.LeaveButton;
 import button.OpenDoorButton;
+import dao.SeatDAO;
 import dao.MemberDAO;
+import dto.Button;
 import dto.Member;
 import dto.Seat;
+import dto.StudyRoomButtonList;
 import panel.LockerPanel;
-import panel.LoginMainPanel;
 import panel.MainPanel;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
 import panel.StudyRoomPanel;
-import thread.TimeRun;
-import thread.UpdateInfo;
 import toggle.LockerToggle;
 import toggle.SeatReportToggle;
 import toggle.StudyRoomToggle;
@@ -44,18 +37,15 @@ import toggle.StudyRoomToggle;
 /*
  * 이 프레임이 메인 프레임입니다.
  *  */
-public class CheckInFrame extends JFrame {
+public class MainFrame extends JFrame {
+
 	/* 레이아웃 */
 	public static CardLayout card = new CardLayout();
-
+	
 	/* 이미지들 */
 	// 백그라운드 이미지
 	ImageIcon backgroundImageIcon = new ImageIcon("ui/background/Select_Seat_last_1.png");
 	Image backgroundImage = backgroundImageIcon.getImage(); 
-
-	// 개인석 패널 이미지
-	ImageIcon seatReportPanelImageIcon = new ImageIcon("ui/Select_Seat_Parts_img/seatReport_Frame.png");
-	Image seatReportImage = seatReportPanelImageIcon.getImage(); 
 
 	// 개인석 이미지
 	ImageIcon seatReportImageIcon = new ImageIcon("ui/seatReportToggleButton.png");
@@ -78,12 +68,11 @@ public class CheckInFrame extends JFrame {
 	/* 패널 */
 	JPanel mainPanel = new MainPanel(backgroundImage); // 백그라운드 패널
 	JPanel subPanel = new JPanel(); // seat, study, locker 패널들의 부모가 될 서브 패널
-	JPanel seatReportPanel; // 좌석현황 패널
+	public static SeatReportPanel seatReportPanel; // 좌석현황 패널
 	JPanel studyRoomPanel; // 스터디룸 예약 패널
 	JPanel lockerPanel; // 사물함 구매 패널
 	MyPagePanel myPagePanel; // 마이페이지 패널
-	LoginMainPanel loginMainPanel;
-	
+
 	List<Seat> seats = SeatReportPanel.getSeats();
 
 	/* 메인 토글버튼 */
@@ -101,45 +90,26 @@ public class CheckInFrame extends JFrame {
 	JButton logoutBtn = new JButton("로그아웃");
 	JButton mypageBtn = new JButton("마이페이지");
 
-	/* x버튼 */
-	JButton xBtn = new JButton("X");
-
 	// 시간 라벨
 	public static JLabel timeLabel = new JLabel();
 
 	/* DTO */ 
-	public static Member member = new Member();
-	
-	// 쓰레드 클래스
-	static TimeRun timeRun = new TimeRun(timeLabel);
-	static UpdateInfo updateInfo = new UpdateInfo();
+	public static Member member = SeatDAO.setMember("010-1111-1111");
+	public static Button btn = new Button();
+	public static StudyRoomButtonList btns = new StudyRoomButtonList();
+
 	/**
 	 * Create the frame.
 	 */
-	public CheckInFrame() {
-		
-		/*temp dto set */
-		member.setMember_id("M-1");
-		member.setPhone_number("010-2222-2222");
-		member.setRemain_time(60);
-		member.setLocker_number("1");
-		
-		DateFormat formatter = new SimpleDateFormat("yy/MM/dd");
-		Date date;
-		try {
-			date = formatter.parse("23/05/18");
-			member.setRemain_date(date);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public MainFrame(Member member) {
+//		this.member = member;
 		/* 패널 */
-		seatReportPanel = new SeatReportPanel(seatReportImage, member); // 좌석현황 패널
+		seatReportPanel  = new SeatReportPanel(member); // 좌석현황 패널
 		studyRoomPanel = new StudyRoomPanel(member); // 스터디룸 예약 패널
 		lockerPanel = new LockerPanel(); // 사물함 구매 패널
 		myPagePanel = new MyPagePanel(); // 마이페이지 패널
-		loginMainPanel = new LoginMainPanel(); // 로그인 패널
+		
+		studyRoomPanel.setVisible(false);
 		
 		timeLabel.setBounds(100, 0, 500, 100);
 		timeLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
@@ -167,7 +137,7 @@ public class CheckInFrame extends JFrame {
 
 				studyRoomTog.setIcon(null);
 				lockerTog.setIcon(null);
-
+				
 				studyRoomPanel.removeAll();
 
 				JPanel studyRoomPanel = new StudyRoomPanel(member);
@@ -177,6 +147,7 @@ public class CheckInFrame extends JFrame {
 				studyRoomPanel.setBounds(633, 381, 1177, 617);
 
 				subPanel.add(studyRoomPanel, "study");
+				studyRoomPanel.repaint();
 
 			}
 		});
@@ -211,6 +182,7 @@ public class CheckInFrame extends JFrame {
 				studyRoomPanel.setBounds(633, 381, 1177, 617);
 
 				subPanel.add(studyRoomPanel, "study");
+				
 			}
 		});
 		mypageBtn.addActionListener(new ActionListener() {
@@ -236,7 +208,7 @@ public class CheckInFrame extends JFrame {
 		subPanel.setLayout(card);
 
 		/* 서브 패널의 하위 패널 레이아웃 설정 */
-		seatReportPanel.setLayout(null);
+		
 		studyRoomPanel.setLayout(null);
 		lockerPanel.setLayout(null);
 
@@ -246,7 +218,6 @@ public class CheckInFrame extends JFrame {
 		lockerPanel.setBounds(633, 381, 1177, 617);
 
 		/* 서브 패널의 하위 패널 배경 지정 */
-		seatReportPanel.setBackground(new Color(0x494344));
 		studyRoomPanel.setBackground(new Color(0x494344));
 		lockerPanel.setBackground(new Color(0x494344));
 
@@ -274,7 +245,6 @@ public class CheckInFrame extends JFrame {
 		mypageBtn.setBorderPainted(false);
 
 		// 프레임(getContentPane())에 메인 패널 붙이기
-//		getContentPane().add(loginMainPanel, "login");
 		getContentPane().add(mainPanel, "main");
 		getContentPane().add(myPagePanel, "myPage");
 
@@ -294,22 +264,19 @@ public class CheckInFrame extends JFrame {
 				card.show(getContentPane(), "myPage");
 			}
 		});
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new LoginFrame();
+			}
+		});
 
 		mainPanel.add(openDoorBtn);
 		mainPanel.add(leaveBtn);
 		mainPanel.add(buyBtn);
-
-		/* 스윙 창 끄기(임시 버튼. 추후에 관리자 모드에서 만들 거임) */
-		xBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		//원래값 xBtn.setBounds(1600, 10, 50, 50); 
-		xBtn.setBounds(1850, 10, 50, 50); 
-		mainPanel.add(xBtn);
 
 		/* 기본 설정 */
 		mainPanel.setLayout(null);
@@ -318,10 +285,4 @@ public class CheckInFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-
-	public static void main(String[] args) {	
-		new CheckInFrame();
-		Thread thread = new Thread(timeRun);
-		thread.start();
-	}	
 }

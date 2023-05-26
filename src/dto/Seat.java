@@ -11,7 +11,7 @@ public class Seat {
 	String seat_category;
 	String seat_state;
 	String seat_usable;
-	int remain_time = 0;
+	Integer remain_time = 0;
 	
 	public String getSeat_id() {
 		return seat_id;
@@ -37,10 +37,10 @@ public class Seat {
 	public void setSeat_usable(String seat_usable) {
 		this.seat_usable = seat_usable;
 	}
-	public int getRemain_time() {
+	public Integer getRemain_time() {
 		return remain_time;
 	}
-	public void setRemain_time(int remain_time) {
+	public void setRemain_time(Integer remain_time) {
 		this.remain_time = remain_time;
 	}
 	
