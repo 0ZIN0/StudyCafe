@@ -52,23 +52,37 @@ public class NumberKeypad extends JPanel implements ActionListener {
 		zeroButton.setBorderPainted(false);
 		add(zeroButton);
 
-		JButton confirmButton = new JButton("확인");
+		JButton confirmButton = new JButton("전체삭제");
 		confirmButton.setBackground(new Color(35,35,35));
-		confirmButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		confirmButton.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 35));
 		confirmButton.setForeground(Color.white);
-		clearButton.addActionListener(this);
+		confirmButton.addActionListener(this);
 		confirmButton.setBorderPainted(false);
 		add(confirmButton);
 	}
-
+	
+	
 	// 버튼 클릭 시 호출되는 메서드
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		
-		if (command.equals("지우기")) {  // Clear 버튼 클릭 시 텍스트필드 초기화
+		
+		if (command.equals("지우기")) {  // Clear 버튼 클릭 시 텍스트필드 1개씩 삭제
+			String a1= textField.getText();
+			if(a1.length()==0) {
+				return;
+			}
+			String b1 = a1.substring(0, a1.length() - 1);
+			textField.setText(b1);
+			return;
+		} 
+		
+		if (command.equals("전체삭제")) {  // 전체삭제 버튼 클릭 시 텍스트필드 초기화
 			textField.setText("");
 			return;
 		} 
+		
+		
 		
 		if(phoneSelect) {
 			if(textField.getText().length()<=max) {

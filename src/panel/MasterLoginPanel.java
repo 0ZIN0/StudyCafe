@@ -76,7 +76,7 @@ public class MasterLoginPanel extends JPanel{
 		userPhonNumber.setText(" 핸드폰번호");
 		userPhonNumber.setOpaque(false);
 		userPhonNumber.setBounds(90, 120, 800, 110);
-		userPhonNumber.setForeground(new Color(141,135,135));
+		userPhonNumber.setForeground(new Color(217,217,217));
 		
 		userPhonNumber.addFocusListener(new FocusListener() {
 			@Override
@@ -101,7 +101,7 @@ public class MasterLoginPanel extends JPanel{
 		userPassField.setEchoChar((char) 0); // 텍스트가 가려지지 않도록 EchoChar를 0으로 설정
 		userPassField.setOpaque(false);
 		userPassField.setBounds(90, 221, 800, 110);
-		userPassField.setForeground(new Color(141,135,135));
+		userPassField.setForeground(new Color(217,217,217));
 		
 		userPassField.addFocusListener(new FocusListener() {
 			

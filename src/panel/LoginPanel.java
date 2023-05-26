@@ -36,17 +36,20 @@ import dao.MemberDAO;
 import dao.SeatDAO;
 import dialog.setPopup;
 import dto.Member;
+import dto.MemberJoin;
+import frame.LoginFrame;
 import frame.MainFrame;
 import frame.MasterLoginFrame;
 import label.SeatReportLabel;
 
 public class LoginPanel extends JPanel {
 	
-	MasterLoginFrame masterFrame;
-	
+
 	NumberKeypad numpad= new NumberKeypad();
+	
+	
 	// 필드 테두리 제거
-	JTextField userPhonNumber = new JTextField() {
+	JTextField userPhoneNumber = new JTextField() {
 		@Override
 		public void setBorder(Border border) {
 		}
@@ -54,7 +57,7 @@ public class LoginPanel extends JPanel {
 	};
 	
 	// 필드 테두리 제거
-	JPasswordField userPassField = new JPasswordField(){
+	JPasswordField userPass = new JPasswordField(){
 		@Override
 		public void setBorder(Border border) {
 		}
@@ -73,66 +76,67 @@ public class LoginPanel extends JPanel {
 	
 	
 	
-	public LoginPanel(CardLayout card, JFrame parent) {
+	public LoginPanel(JFrame parent) {
+		
 	
 		setLayout(null);
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
 		//setBounds(0,0,990,760);
 		
-		add(userPhonNumber);
-		add(userPassField);
+		add(userPhoneNumber);
+		add(userPass);
 		add(loginButton);
 		add(memberJoinBtn);
 		
 		// 핸드폰 번호 입력 TextField 
-		userPhonNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-		userPhonNumber.setText(" 핸드폰번호");
-		userPhonNumber.setOpaque(false);
-		userPhonNumber.setBounds(90, 318, 800, 110);
-		userPhonNumber.setForeground(new Color(141,135,135));
+		userPhoneNumber.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		userPhoneNumber.setText(" 핸드폰번호");
+		userPhoneNumber.setOpaque(false);
+		userPhoneNumber.setBounds(90, 318, 800, 110);
+		userPhoneNumber.setForeground(new Color(217,217,217));
 		
 		
-		userPhonNumber.addFocusListener(new FocusListener() {
+		userPhoneNumber.addFocusListener(new FocusListener() {
 			@Override
 			public void focusLost(FocusEvent e) {
+				numpad.setTextField(userPhoneNumber);
 				numpad.phoneSelect = true;
-				numpad.setTextField(userPhonNumber);
 				numpad.setMax(12);
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				userPhonNumber.setText("");
+				userPhoneNumber.setText("");
 				numpad.phoneSelect = false;
 			}
 		});
 		 
 		// 비밀 번호 입력 TextField 
-		userPassField.setText(" 비밀번호 (6자리)");
-		userPassField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-		userPassField.setEchoChar((char) 0); // 텍스트가 가려지지 않도록 EchoChar를 0으로 설정
-		userPassField.setOpaque(false);
-		userPassField.setBounds(90, 430, 800, 110);
-		userPassField.setForeground(new Color(141,135,135));
+		userPass.setText(" 비밀번호 (6자리)");
+		userPass.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		userPass.setEchoChar((char) 0); // 텍스트가 가려지지 않도록 EchoChar를 0으로 설정
+		userPass.setOpaque(false);
+		userPass.setBounds(90, 430, 800, 110);
+		userPass.setForeground(new Color(217,217,217));
 		
-		userPassField.addFocusListener(new FocusListener() {
+		userPass.addFocusListener(new FocusListener() {
 			
 			@Override
 			public void focusLost(FocusEvent e) {
-				numpad.setTextField(userPassField);
+				numpad.setTextField(userPass);
 				numpad.setMax(5);
 				numpad.phoneSelect = false;
-				char[] password = userPassField.getPassword();
+				char[] password = userPass.getPassword();
     	        String passwordString = new String(password);
-    	        userPassField.setText("");
-    	        userPassField.setEchoChar('●');  
+    	        userPass.setText("");
+    	        userPass.setEchoChar('●');  
 				
 			}
 			
 			@Override
 			public void focusGained(FocusEvent e) {
-				userPassField.setText("");
+				userPass.setText("");
 				
 			}
 		});
@@ -140,7 +144,15 @@ public class LoginPanel extends JPanel {
 		// 회원가입버튼 이벤트
 		memberJoinBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				card.show(getParent(), "memberjoin");
+				LoginFrame.card.show(getParent(), "memberjoin");
+				LoginFrame.masterBtn.setVisible(false);
+				
+				
+				userPhoneNumber.setText(" 핸드폰번호");
+				
+				userPass.setText(" 비밀번호 (6자리)");
+				userPass.setEchoChar((char) 0);
+				
 			}
 		});
 
@@ -165,8 +177,8 @@ public class LoginPanel extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phoneNum = userPhonNumber.getText();
-				String password = new String(userPassField.getPassword());
+				String phoneNum = userPhoneNumber.getText();
+				String password = new String(userPass.getPassword());
 				
 				if(LoginDAO.checkPhoneNum(phoneNum, password)) {
 					parent.dispose();
