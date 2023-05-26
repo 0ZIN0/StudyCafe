@@ -25,20 +25,14 @@ public class UpdateInfo implements Runnable {
 		while(true) {
 			try {
 				Thread.sleep(1000);
-				System.out.println("update start");
 				if(MainFrame.member != null && SeatReportPanel.seatBtns.size() == 32) {
 					seat_res.autoLeaveSystem();
 					seat.checkUse();
 					seat_res.UsingSeats();
-					System.out.println("update seat");
 					LockerDAO.updateLockerInfo();
-					System.out.println("update lockerInfo");
 					setMyPage();
-					System.out.println("update MyInfo");
 					setLocker();
-					System.out.println("update locker");
 				}
-				System.out.println("update complete");
 			} catch (Exception e) {
 			}
 		}	
