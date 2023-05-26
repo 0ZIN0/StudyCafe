@@ -81,6 +81,7 @@ public class LoginDAO {
 		return 0;
 	}
 	
+	// 관리자계정 확인
 	public static boolean masterCheckPhoneNum(String phoneNum, String password) {
 		
 		String query = "SELECT * FROM master WHERE phone_number=? AND member_password=?";
