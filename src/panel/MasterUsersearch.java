@@ -80,7 +80,7 @@ public class MasterUsersearch extends JPanel{
 //            header.setFont(headerFont);
             
             
-            table.getTableHeader().setPreferredSize(new Dimension(100 ,50));
+            table.getTableHeader().setPreferredSize(new Dimension(100 ,80));
             table.getTableHeader().setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
             table.setRowHeight(50);
             table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
@@ -91,14 +91,16 @@ public class MasterUsersearch extends JPanel{
             table.setEnabled(false);
             
             
+            //table.getColumn();
+            
+            
             
             JScrollPane scrollPane = new JScrollPane(table);
             scrollPane.setBackground(Color.black);
-            scrollPane.setBounds(50, 182, 1600, 540);
+            scrollPane.setBounds(50, 60, 1600, 740);
             add(scrollPane);
             scrollPane.setBorder(new LineBorder(Color.red,1));
             
-            //setBounds(0, 0, 1600, 540);
             scrollPane.getViewport().setBackground(new Color(0xD8D8D8));
             setLayout(null);
             setVisible(true);
