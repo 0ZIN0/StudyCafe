@@ -2,6 +2,7 @@ package panel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -74,12 +75,20 @@ public class MasterUsersearch extends JPanel{
             // JTable 생성 및 표시
             JTable table = new JTable(tableModel);
             
-            JTableHeader header = table.getTableHeader();
-            Font headerFont = new Font("Arial", Font.BOLD, 12);
-            header.setFont(headerFont);
+//            JTableHeader header = table.getTableHeader();
+//            Font headerFont = new Font("Arial", Font.BOLD, 12);
+//            header.setFont(headerFont);
             
             
-            table.getTableHeader().setFont(getFont());
+            table.getTableHeader().setPreferredSize(new Dimension(100 ,50));
+            table.getTableHeader().setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+            table.setRowHeight(50);
+            table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
+            table.getTableHeader().setBackground(new Color(0xB8CFE5));
+            table.setCellSelectionEnabled(false);
+            table.getTableHeader().setReorderingAllowed(false);
+            table.setDragEnabled(false);
+            table.setEnabled(false);
             
             
             
