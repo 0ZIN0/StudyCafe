@@ -2,9 +2,12 @@ package thread;
 
 import java.util.List;
 
+import javax.swing.JLabel;
+
 import color.MyColor;
 import dao.LockerDAO;
 import dao.MemberDAO;
+import dao.MypageDAO;
 import dao.SeatDAO;
 import dao.SeatReservationDAO;
 import frame.MainFrame;
@@ -12,6 +15,7 @@ import panel.LockerPanel;
 import panel.SeatReportPanel;
 import panel.UseTicketPanel;
 import panel.UserInfoPanel;
+import toggle.UserInfoToggle;
 
 public class UpdateInfo implements Runnable {
 	
@@ -48,6 +52,16 @@ public class UpdateInfo implements Runnable {
 			UserInfoPanel.locker.setText("이용중인 사물함이 없습니다");
 		} else {
 			UserInfoPanel.locker.setText(MainFrame.member.getLocker_number() + "번");
+		}
+    	if(MypageDAO.checkInTime() == null) {
+    		UserInfoPanel.checkInTime.setText("");
+    	} else {
+    		UserInfoPanel.checkInTime.setText(MypageDAO.checkInTime());
+    	}
+    	if (MypageDAO.isUseTicket() == null) {
+			UseTicketPanel.ticketName.setText("사용중인 상품이 없습니다.");
+		} else {
+			UseTicketPanel.ticketName.setText(MypageDAO.isUseTicket());
 		}
 	}
 	

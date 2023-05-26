@@ -1,6 +1,8 @@
 package panel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +17,8 @@ import javax.swing.JToggleButton;
 
 import dao.MemberDAO;
 import dao.SeatDAO;
-
+import frame.LoginFrame;
+import frame.MainFrame;
 import toggle.UseTicketToggle;
 import toggle.UserInfoToggle;
 
@@ -27,7 +30,7 @@ public class MyPagePanel extends JPanel {
 	public static CardLayout myPageCard = new CardLayout();
 	
     JButton logoutBtn = new JButton("로그아웃");
-    JButton mainBtn = new JButton("좌석보기");
+    JButton mainBtn = new JButton("메인화면");
     
     // 마이페이지  배경 이미지
     ImageIcon myPageBg = new ImageIcon("ui/background/MyPage_BG.jpg"); 
@@ -53,17 +56,15 @@ public class MyPagePanel extends JPanel {
     
 	ButtonGroup myPageTogGroup = new ButtonGroup(); // 토글버튼 그룹 지정
 
-    public MyPagePanel() {
+    public MyPagePanel(JFrame parent) {
     	
-//    	this.member = member;
-//    	
-//    	phoneNum = new JLabel(member.getPhone_number());
-//    	phoneNum.setBounds(getVisibleRect());
-//    	
-    	
+
     	add(myPagebg);
     	setLayout(null);
-
+    	
+    	myPagebg.add(logoutBtn);
+    	myPagebg.add(mainBtn);
+    	
         // MyPage 배경 설정
     	myPagebg.add(mpMainCont);
     	mpMainCont.setLayout(null);
@@ -113,7 +114,37 @@ public class MyPagePanel extends JPanel {
         myPageTogGroup.add(userInfoTogBtn);
         myPageTogGroup.add(useTicketTogBtn);
         
+		/* 로그아웃, 마이페이지 버튼 */
+		logoutBtn.setBounds(62, 114, 200, 40);
+		logoutBtn.setForeground(new Color(0xFF5C00));
+		logoutBtn.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		logoutBtn.setContentAreaFilled(false);
+		logoutBtn.setBorderPainted(false);
+
+		mainBtn.setBounds(1592, 114, 300, 40);
+		mainBtn.setForeground(new Color(0xFF5C00));
+		mainBtn.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		mainBtn.setContentAreaFilled(false);
+		mainBtn.setBorderPainted(false);
         
+		mainBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				MainFrame.card.show(getParent(), "main");
+				
+			}
+		});
+		
+		logoutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				parent.dispose();
+				new LoginFrame();
+			}
+		});
         
     } // end of constructor 
 
