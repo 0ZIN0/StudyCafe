@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 import javax.swing.table.DefaultTableModel;
 
+import dbConnection.OjdbcConnection;
+
 public class KickDAO {
 	
 	/** 좌석 이용현황 테이블 생성 메서드 */

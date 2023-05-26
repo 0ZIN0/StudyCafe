@@ -60,8 +60,6 @@ public class LoginFrame extends JFrame{
 	JButton masterBtn = new JButton(new ImageIcon("ui/main/Master_Icon.png"));
 	
 	
-	
-	
 	JPanel cardPanel = new JPanel();
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
@@ -89,8 +87,6 @@ public class LoginFrame extends JFrame{
 				dispose();
 			}
 		});
-		
-		
 		
 
 		cardPanel.setLayout(card);
