@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import button.CloseButton;
 import button.NextButton;
+import color.MyColor;
 import dao.TicketDAO;
 import dto.Ticket;
 import panel.ButtonPanel;
@@ -23,7 +24,6 @@ import panel.LockerPanel;
 
 public class LockerPayDialog extends JDialog {
 
-	private final JPanel contentPanel = new JPanel();
 	ImageIcon icon = new ImageIcon("ui/Locker_PopUp/Locker_PopUp_Background.png");
 	Image image = icon.getImage();
 	
@@ -45,10 +45,6 @@ public class LockerPayDialog extends JDialog {
 		LockerPanel.lockerNum = lockerNum;
 		CloseButton close = new CloseButton(this);
 		NextButton next = new NextButton(this);
-		
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel);
-		contentPanel.setLayout(null);
 		
 		JLabel label1 = new JLabel("결제상품");
 		label1.setBounds(235, 170, 200, 50);
@@ -121,11 +117,10 @@ public class LockerPayDialog extends JDialog {
 		background.setSize(750, 1000);
 		add(background);
 		
-		contentPanel.setBackground(new Color(0, 0, 0, 0));
 		setModal(true);
 		setLayout(null);
 		setUndecorated(true);
-
+		setBackground(MyColor.CLEAR);
 		setResizable(false);
 		setBounds(585, 40, 750, 1000);
 		setVisible(true);
