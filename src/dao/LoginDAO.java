@@ -9,10 +9,14 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import dbConnection.OjdbcConnection;
 import dialog.setPopup;
 import frame.MainFrame;
+import frame.MasterMenuFrame;
 
 public class LoginDAO {
+	
+	MasterMenuFrame masterMenuFrame;
 	
 	public static boolean checkPhoneNum(String phoneNum, String password) {
 		String query = "SELECT * FROM member WHERE phone_number=? AND member_password=?";
@@ -77,4 +81,34 @@ public class LoginDAO {
 		}
 		return 0;
 	}
+	
+	// 관리자계정 확인
+	public static boolean masterCheckPhoneNum(String phoneNum, String password) {
+		
+		String query = "SELECT * FROM master WHERE phone_number=? AND member_password=?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				){
+			pstmt.setString(1, phoneNum);
+			pstmt.setString(2, password);
+			try(
+					ResultSet rs = pstmt.executeQuery();
+					) {
+				if (rs.next()) {
+					//MainFrame.member = MemberDAO.setMember(phoneNum);
+					new MasterMenuFrame();
+					return true;
+				} else {
+					new setPopup(new ImageIcon("ui/main/loginPopup/passnot.png")).setVisible(true);
+					return false;
+				}
+			}
+		} catch (SQLException  e2) {
+			e2.printStackTrace();
+		}
+		return false;
+	}
+	
+	
 }

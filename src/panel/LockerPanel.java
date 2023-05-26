@@ -37,9 +37,6 @@ public class LockerPanel extends JPanel {
 	LockerDAO lockerDao = new LockerDAO();
 	int remain = lockerDao.remainLocker();
 	
-	/**
-	 * Create the panel.
-	 */
 	public LockerPanel() {
 		
 		try {

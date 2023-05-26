@@ -39,26 +39,40 @@ import dto.MemberJoin;
 import panel.BackgroundPanel;
 import panel.LoginPanel;
 import panel.MasterLoginPanel;
+import panel.MasterMenuPanel;
+import panel.MasterUsersearch;
 import panel.MemberJoinPanel;
 import panel.NumberKeypad;
+import panel.TestPanel;
 import panel.UserInfoCheckPanel;
 import thread.TimeRun;
 import thread.UpdateInfo;
 
-public class MasterLogin extends JFrame{
+public class MasterMenuFrame extends JFrame{
 	
 	
 	//MemberJoin memberjoin = new MemberJoin();
 	
-	//CardLayout card = new CardLayout();
+	CardLayout card = new CardLayout();
+	JPanel cardPanel = new JPanel();
 	
-	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
+	
+	
+	MasterMenuPanel masterMenuPanel = new MasterMenuPanel(card);
+//	TestPanel TestPanel = new TestPanel(); 
+	
+	MasterUsersearch masterUsersearch = new MasterUsersearch();
+	
+	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/master/masterMenu/Select_Seat_Main_Background.jpg"));
 	JButton exitBtn = new JButton();
+	JButton backBtn = new JButton(new ImageIcon("ui/master/masterMenu/Back.png"));
+	JButton logoutBtn = new JButton(new ImageIcon("ui/master/masterMenu/Logout.png"));
+	
 	NumberKeypad numpad= new NumberKeypad();
 	//JPanel MasterLoginpanel = new JPanel();
 	//MasterLoginPanel masterloginpanel = new MasterLoginPanel();
 	
-	MasterLoginPanel masterLoginPanel = new MasterLoginPanel();
+	//MasterLoginPanel masterLoginPanel = new MasterLoginPanel();
 	
 	//LoginPanel loginpanel = new LoginPanel(card, this);
 	//MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
@@ -70,30 +84,55 @@ public class MasterLogin extends JFrame{
 	
 	//JPanel cardPanel = new JPanel();
 	// 쓰레드 클래스
-	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
-	static UpdateInfo updateInfo = new UpdateInfo();
+//	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
+//	static UpdateInfo updateInfo = new UpdateInfo();
 	
 	
 		
-	public MasterLogin() {
+	public MasterMenuFrame() {
+		
 		
 		background.setLayout(null);
 		add(background);
-		background.add(masterLoginPanel);
-		masterLoginPanel.setBounds(130,260,1650,760);
+		background.add(backBtn);
+		background.add(logoutBtn);
 		
-//		background.add(masterBtn);
-//		masterBtn.setBounds(1811,978,60,48);
-//		masterBtn.setBackground(new Color(73,67,68));
-//		masterBtn.setBorderPainted(false);
-
-		//cardPanel.setLayout(card);
-		//background.add(cardPanel);
-		//cardPanel.setBounds(130,260,1650,760);
-
-		//cardPanel.add(loginpanel,"login");
-		//cardPanel.add(memberJoinPanel,"memberjoin");
-		//cardPanel.add(userInfoCheckPanel, "userInfoCheck");
+		
+		cardPanel.setLayout(card);
+		background.add(cardPanel);
+		cardPanel.setBounds(110,240,1700,760);
+		cardPanel.setBorder(new LineBorder(Color.red,1));
+		
+		
+		cardPanel.add(masterUsersearch,"Usersearch");
+		cardPanel.add(masterMenuPanel,"menu");
+		
+		
+		backBtn.setBounds(113,113,112,40);
+		backBtn.setBorderPainted(false);
+		backBtn.setContentAreaFilled(false);
+		backBtn.setFocusPainted(false);
+		
+		
+		logoutBtn.setBounds(1690,113,112,40);
+		logoutBtn.setBorderPainted(false);
+		logoutBtn.setContentAreaFilled(false);
+		logoutBtn.setFocusPainted(false);
+		
+		
+		// 백버튼 이벤트
+		backBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				card.show(cardPanel, "menu");
+			}
+		});
+		
+		
+		
+		
+		
 
 		// 종료버튼 이벤트
 		exitBtn.addActionListener(new ActionListener() {
@@ -103,8 +142,24 @@ public class MasterLogin extends JFrame{
 				System.exit(0);
 			}
 		});
-		exitBtn.setBounds(1700,80,100,100);
-		background.add(exitBtn);
+//		exitBtn.setBounds(1700,80,100,100);
+//		background.add(exitBtn);
+		
+		// 로그아웃버튼 이벤트
+		logoutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new LoginFrame();
+				dispose();
+				
+			}
+		});
+		
+		
+		
+		
+
 
 		setLayout(null);
 		setUndecorated(true);
@@ -113,18 +168,7 @@ public class MasterLogin extends JFrame{
 		setVisible(true);
 	}
 	
-	public static void main(String[] args) {
-		try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            ((Throwable) e).printStackTrace();
-        }
-		Thread time = new Thread(timeRun);
-		Thread update = new Thread(updateInfo);
-		new MasterLogin();
-		update.start();
-		time.start();
-	}
+	
 }
 
 

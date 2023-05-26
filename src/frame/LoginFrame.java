@@ -44,6 +44,7 @@ import thread.UpdateInfo;
 
 public class LoginFrame extends JFrame{
 	
+	//MasterLoginFrame masterFrame;
 	
 	MemberJoin memberjoin = new MemberJoin();
 	
@@ -77,10 +78,25 @@ public class LoginFrame extends JFrame{
 		masterBtn.setBounds(1811,978,60,48);
 		masterBtn.setBackground(new Color(73,67,68));
 		masterBtn.setBorderPainted(false);
+		masterBtn.setFocusable(true);
+		
+		// 마스터버튼 이벤트
+		masterBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new MasterLoginFrame();
+				dispose();
+			}
+		});
+		
+		
+		
 
 		cardPanel.setLayout(card);
 		background.add(cardPanel);
 		cardPanel.setBounds(130,260,1650,760);
+		cardPanel.setBorder(new LineBorder(Color.red,1));
 
 		cardPanel.add(loginpanel,"login");
 		cardPanel.add(memberJoinPanel,"memberjoin");
@@ -105,6 +121,13 @@ public class LoginFrame extends JFrame{
 	}
 	
 	public static void main(String[] args) {
+		
+		try {
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            ((Throwable) e).printStackTrace();
+        }
+		
 		Thread time = new Thread(timeRun);
 		Thread update = new Thread(updateInfo);
 		new LoginFrame();

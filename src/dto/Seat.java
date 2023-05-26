@@ -3,8 +3,6 @@ package dto;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import panel.VacatedMiniPanel;
-
 public class Seat {
 	
 	String seat_id = "0번";

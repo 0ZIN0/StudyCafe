@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import dbConnection.OjdbcConnection;
 import dto.Ticket;
 
 public class TicketDAO {

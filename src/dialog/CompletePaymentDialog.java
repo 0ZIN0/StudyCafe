@@ -81,22 +81,9 @@ public class CompletePaymentDialog extends JDialog {
 						ticket_value = 1440;
 					}
 
-					if (SeatReportPanel.mySeat == 0 ) {
+					if (SeatReportPanel.mySeat == 0) {
+						setSeatReportPanel();
 
-						SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
-						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
-
-						int seat = SeatReportPanel.seat_reservation.getSeat_id();
-
-						UserInfoPanel.seat.setText(seat + "번");
-						SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
-						SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
-						SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);
-						SeatReportPanel.seatBtns.get(seat - 1).use = true;
-						SeatReportPanel.mySeat = seat;
-
-						RemainSeatLabel.remain = SeatDAO.isRemain();
-						SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
 					} else {
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();
 						SeatDAO.plusOneDayTicket(seat, ticket_value);

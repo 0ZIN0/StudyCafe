@@ -50,7 +50,8 @@ public class TimeChargePanel extends JPanel {
 
 	NumberFormat nf = NumberFormat.getNumberInstance();
 	
-	public TimeChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, JLabel hours, JLabel howPrice, JLabel priceIs) {
+	public TimeChargePanel(JLabel whatName, JLabel NameIs, JLabel howHours, 
+			JLabel hours, JLabel howPrice, JLabel priceIs) {
 
 		for(int i = 0; i < basicIcons.length; i++) {
 			ChargeTimeButton chargeBtn = new ChargeTimeButton(basicIcons[i]);
@@ -76,6 +77,7 @@ public class TimeChargePanel extends JPanel {
 				timeChargePrice = ticket.getTicket_price();
 				labelText = nf.format(timeChargePrice) + "원";
 			} 
+			
 			JLabel label = new JLabel(labelText);
 			label.setHorizontalAlignment(JLabel.CENTER);
 			chargeBtn.setLayout(new BorderLayout());
@@ -98,8 +100,6 @@ public class TimeChargePanel extends JPanel {
 							PeriodChargePanel.periodChargePrice = 0;
 							PaymentDialog.studyRoomChargePrice = 0;
 							ButtonPanel.lockerChargePrice = 0;
-
-
 
 							if (i == 0) {
 								TimeOrPeriodChargeDialog.ticket_order.setTicket_id("T-07");
@@ -163,9 +163,7 @@ public class TimeChargePanel extends JPanel {
 								Font font1 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 								hours.setFont(font1);
 								hours.setText(nf.format(timeChargeItem) + "시간");
-								
 							} 
-
 						} else {
 							chargeBtns.get(i).setIcon(basicIcons[i]);
 						}
@@ -186,7 +184,6 @@ public class TimeChargePanel extends JPanel {
 					Font font3 = new Font("Noto Sans KR Medium", Font.PLAIN, 28);
 					howPrice.setFont(font3);
 					howPrice.setText("결제금액");
-
 				}
 			});
 			chargeBtns.add(chargeBtn);
@@ -216,6 +213,5 @@ public class TimeChargePanel extends JPanel {
 		timeChargeItem = item;
 
 	}
-
 }
 

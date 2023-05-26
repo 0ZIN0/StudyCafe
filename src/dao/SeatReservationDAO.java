@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import color.MyColor;
+import dbConnection.OjdbcConnection;
 import dto.CheckRemaintime;
 import dto.Seat_reservation;
 import frame.MainFrame;

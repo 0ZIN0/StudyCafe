@@ -20,12 +20,14 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import dao.LoginDAO;
+import frame.MasterLoginFrame;
 import label.RemainLockerLabel;
 import label.RemainSeatLabel;
 import label.RemainStudyRoomLabel;
 
 public class LoginPanel extends JPanel {
 	
+	MasterLoginFrame masterFrame;
 	
 	NumberKeypad numpad= new NumberKeypad();
 	// 필드 테두리 제거
@@ -74,7 +76,7 @@ public class LoginPanel extends JPanel {
 		setLayout(null);
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
-		setBounds(0,0,990,760);
+		//setBounds(0,0,990,760);
 		
 		add(userPhonNumber);
 		add(userPassField);
@@ -152,6 +154,9 @@ public class LoginPanel extends JPanel {
 		loginButton.setContentAreaFilled(false);
 		loginButton.setFocusPainted(false);
 		loginButton.setBounds(510,590,400,148);
+		
+		
+		
 		
 		// 로그인 버튼 이벤트
 		loginButton.addActionListener(new ActionListener() {

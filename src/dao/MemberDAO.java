@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 
+import dbConnection.OjdbcConnection;
 import dto.Member;
 import frame.MainFrame;
 import panel.UseTicketPanel;

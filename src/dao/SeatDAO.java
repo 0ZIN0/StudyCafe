@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import color.MyColor;
+import dbConnection.OjdbcConnection;
 import dto.Member;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
@@ -147,12 +148,11 @@ public class SeatDAO {
 					rs.next();
 					pstmt2.setString(1, rs.getString("SEAT_RESERVATION_ID"));
 					pstmt3.setString(1, rs.getString("seat_id"));
-					pstmt5.setString(2, member_id);
 					
 					pstmt2.executeUpdate();
 					pstmt3.executeUpdate();
 					
-					if (!rs.getString("use_ticket_category").equals("일회이용권")) {
+					if (!(rs.getString("use_ticket_category").equals("일회이용권") && rs.getString("use_ticket_category").equals("기간이용권"))) {
 						pstmt4.setString(1, rs.getString("SEAT_RESERVATION_ID"));
 						
 						try (
@@ -161,6 +161,7 @@ public class SeatDAO {
 							rs2.next();
 							
 							pstmt5.setInt(1, rs2.getInt("MINUTE"));
+							pstmt5.setString(2, member_id);
 						}
 					} else {
 						pstmt5.setInt(1, 0);
@@ -171,63 +172,6 @@ public class SeatDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	/* 퇴실할때 퇴실 시간 찍어주고 좌석 비어있음으로 변경, 사용했던 minute을 반환하는 메서드 */
-	public static int setCheckOutAndGetUseTime(String member_id) {
-		
-		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
-		try (
-				Connection conn = OjdbcConnection.getConnection();
-				PreparedStatement pstmt1 = conn.prepareStatement(query1);
-				) {
-
-			pstmt1.setString(1, member_id);
-			try (
-					ResultSet rs = pstmt1.executeQuery();
-					) {
-				String query2 = "UPDATE SEAT_RESERVATION SET SEAT_RESERVATION_END_TIME=sysdate WHERE SEAT_RESERVATION_ID=?";
-				String query3 = "UPDATE SEAT SET SEAT_STATE='비어있음', REMAIN_TIME=0 WHERE SEAT_ID=?";
-				String query4 = "SELECT ROUND((SEAT_RESERVATION_END_TIME-SEAT_RESERVATION_START_TIME)*24*60) AS MINUTE FROM SEAT_RESERVATION WHERE SEAT_RESERVATION_ID=?";
-				String query5 = "UPDATE MEMBER SET REMAIN_TIME=REMAIN_TIME-? WHERE MEMBER_ID=?";
-				try (
-						PreparedStatement pstmt2 = conn.prepareStatement(query2);
-						PreparedStatement pstmt3 = conn.prepareStatement(query3);
-						PreparedStatement pstmt4 = conn.prepareStatement(query4);
-						PreparedStatement pstmt5 = conn.prepareStatement(query5);
-						) {
-					rs.next();
-					pstmt2.setString(1, rs.getString("SEAT_RESERVATION_ID"));
-					pstmt3.setString(1, rs.getString("seat_id"));
-					pstmt5.setString(2, member_id);
-					
-					pstmt2.executeUpdate();
-					pstmt3.executeUpdate();
-					
-					int minute = 0;
-					if (!rs.getString("use_ticket_category").equals("일회이용권")) {
-						pstmt4.setString(1, rs.getString("SEAT_RESERVATION_ID"));
-						
-						try (
-								ResultSet rs2 = pstmt4.executeQuery();
-								) {
-							rs2.next();
-							
-							pstmt5.setInt(1, rs2.getInt("MINUTE"));
-							minute = rs2.getInt("MINUTE");
-						}
-					} else {
-						pstmt5.setInt(1, 0);
-					}
-					pstmt5.executeUpdate();
-					
-					return minute;
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return 0;
 	}
 
 	/* 입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
