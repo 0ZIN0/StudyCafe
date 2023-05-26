@@ -1,4 +1,4 @@
-package panel;
+package frame;
 
 import java.awt.CardLayout;
 import java.awt.Graphics;
@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import color.MyColor;
+import panel.Master_LockerKickPanel;
+import panel.Master_SeatKickPanel;
+import panel.Master_StudyRoomKickPanel;
 
 public class Master_kickFrame extends JFrame {
 
@@ -42,7 +45,7 @@ public class Master_kickFrame extends JFrame {
 	JPanel parentPanel = new JPanel(); // 부모패널
 	JPanel seatKickPanel = new Master_SeatKickPanel();
 	JPanel studyRoomKickPanel = new Master_StudyRoomKickPanel();
-	JPanel lockerKickPanel = new JPanel();
+	JPanel lockerKickPanel = new Master_LockerKickPanel();
 
 	ButtonGroup group = new ButtonGroup();
 	JButton seatBtn = new JButton(new ImageIcon("ui/master_seat_kick/Seat_Button_On.png"));
@@ -60,7 +63,9 @@ public class Master_kickFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				card.show(parentPanel, "seatKick");
-
+				
+				Master_StudyRoomKickPanel.table.clearSelection();
+				Master_LockerKickPanel.table.clearSelection();
 				seatBtn.setIcon(new ImageIcon("ui/master_seat_kick/Seat_Button_On.png"));
 				studyRoomBtn.setIcon(new ImageIcon("ui/master_seat_kick/StudyRoom_Button_Off.png"));
 				lockerBtn.setIcon(new ImageIcon("ui/master_seat_kick/Locker_Button_Off.png"));
@@ -72,7 +77,9 @@ public class Master_kickFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				card.show(parentPanel, "studyRoomKick");
-
+				
+				Master_SeatKickPanel.table.clearSelection();
+				Master_LockerKickPanel.table.clearSelection();
 				seatBtn.setIcon(new ImageIcon("ui/master_seat_kick/Seat_Button_Off.png"));
 				studyRoomBtn.setIcon(new ImageIcon("ui/master_seat_kick/StudyRoom_Button_On.png"));
 				lockerBtn.setIcon(new ImageIcon("ui/master_seat_kick/Locker_Button_Off.png"));
@@ -84,7 +91,9 @@ public class Master_kickFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				card.show(parentPanel, "lockerKick");
-
+				
+				Master_SeatKickPanel.table.clearSelection();
+				Master_StudyRoomKickPanel.table.clearSelection();
 				seatBtn.setIcon(new ImageIcon("ui/master_seat_kick/Seat_Button_Off.png"));
 				studyRoomBtn.setIcon(new ImageIcon("ui/master_seat_kick/StudyRoom_Button_Off.png"));
 				lockerBtn.setIcon(new ImageIcon("ui/master_seat_kick/Locker_Button_On.png"));

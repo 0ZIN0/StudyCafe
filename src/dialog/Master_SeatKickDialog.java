@@ -12,10 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.CloseButton;
-import button.OutButton;
+import button.Master_SeatOutButton;
 import color.MyColor;
 
-public class SeatKickDialog extends JDialog {
+public class Master_SeatKickDialog extends JDialog {
 	
 	ImageIcon icon = new ImageIcon("ui/master_seat_kick/seat/Master_UserDischarge_PopUp.png");
 	Image image = icon.getImage();
@@ -35,14 +35,14 @@ public class SeatKickDialog extends JDialog {
 	// 라벨
 	JLabel phoneNumLabel = new JLabel();
 	
-	public SeatKickDialog(Object[] userInfo, int row) {
+	public Master_SeatKickDialog(Object[] userInfo, int row) {
 		
 		phoneNumLabel.setText(userInfo[2].toString());
-		phoneNumLabel.setBounds(218, 156, 400, 50);
+		phoneNumLabel.setBounds(218, 136, 400, 50);
 		phoneNumLabel.setForeground(MyColor.BLACK);
 		phoneNumLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 42));
 		
-		outBtn = new OutButton(this, userInfo, row);
+		outBtn = new Master_SeatOutButton(this, userInfo, row);
 		outBtn.setBounds(376, 320, 158, 88);
 		closeBtn.setLocation(208, 320);
 		

@@ -18,16 +18,15 @@ import javax.swing.table.TableCellRenderer;
 
 import color.MyColor;
 import dao.KickDAO;
-import dialog.Master_StudyRoomKickDialog;
+import dialog.Master_LockerKickDialog;
 import renderer.MyTableCellRenderer;
 
-public class Master_StudyRoomKickPanel extends JPanel {
+public class Master_LockerKickPanel extends JPanel {
 	
-	public static DefaultTableModel model = KickDAO.setStudyTable();
+	public static DefaultTableModel model = KickDAO.setLockerTable();
 	public static JTable table = new JTable(model);
 	
-	public Master_StudyRoomKickPanel() {
-		
+	public Master_LockerKickPanel() {
 		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setResizingAllowed(false);
 		table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
@@ -42,14 +41,15 @@ public class Master_StudyRoomKickPanel extends JPanel {
 				int row = table.getSelectedRow();
 				int col = table.getSelectedColumn();
 				
-				// 예약 컬럼을 클릭했을때
-				if (col == 5) {
+				// 퇴실조치 컬럼을 클릭했을때
+				if (col == 4) {
 					Object[] objArr = new Object[table.getColumnCount()];
 					
 					for (int i = 0; i < table.getColumnCount(); i++) {
 						objArr[i] = table.getModel().getValueAt(row, i);
 					}
-					JDialog studyRoomKickPopup = new Master_StudyRoomKickDialog(objArr, row);
+					
+					JDialog lockerKickPopup = new Master_LockerKickDialog(objArr, row);
 				}
 			}
 		});
@@ -60,8 +60,8 @@ public class Master_StudyRoomKickPanel extends JPanel {
 		kick_renderer.setForeground(new Color(0x9C0006));
 		kick_renderer.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
 
-		table.getColumnModel().getColumn(5).setCellRenderer(kick_renderer);
-
+		table.getColumnModel().getColumn(4).setCellRenderer(kick_renderer);
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.getViewport().setBackground(new Color(0xD9D9D9));
 		scrollPane.setBounds(0, 0, 1600, 540);
@@ -73,7 +73,6 @@ public class Master_StudyRoomKickPanel extends JPanel {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 		setBounds(50, 210, 1600, 540);
 		setLayout(null);
 		setBackground(MyColor.BACKGROUND);

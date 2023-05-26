@@ -1,18 +1,15 @@
 package panel;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -21,7 +18,8 @@ import javax.swing.table.TableCellRenderer;
 
 import color.MyColor;
 import dao.KickDAO;
-import dialog.SeatKickDialog;
+import dialog.Master_SeatKickDialog;
+import renderer.MyTableCellRenderer;
 
 public class Master_SeatKickPanel extends JPanel {
 	
@@ -51,8 +49,7 @@ public class Master_SeatKickPanel extends JPanel {
 					for (int i = 0; i < table.getColumnCount(); i++) {
 						objArr[i] = table.getModel().getValueAt(row, i);
 					}
-					
-					JDialog seatKickPopup = new SeatKickDialog(objArr, row);
+					JDialog seatKickPopup = new Master_SeatKickDialog(objArr, row);
 				}
 			}
 		});
@@ -66,6 +63,7 @@ public class Master_SeatKickPanel extends JPanel {
 		table.getColumnModel().getColumn(5).setCellRenderer(kick_renderer);
 
 		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.getViewport().setBackground(new Color(0xD9D9D9));
 		scrollPane.setBounds(0, 0, 1600, 540);
 		add(scrollPane);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -79,23 +77,4 @@ public class Master_SeatKickPanel extends JPanel {
 		setLayout(null);
 		setBackground(MyColor.BACKGROUND);
 	}
-}
-
-class MyTableCellRenderer extends DefaultTableCellRenderer {
-
-	@Override
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean 
-
-			isSelected, boolean hasFocus, int row, int column) {
-
-		Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-		if (!isSelected) {
-			cell.setBackground(new Color(0xEEEEEE));
-		} else {
-			cell.setBackground(MyColor.LEMON);
-		}
-		return cell;
-	}
-
 }

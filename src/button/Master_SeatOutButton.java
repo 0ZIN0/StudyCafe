@@ -9,11 +9,13 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import dao.KickDAO;
+import dao.SeatDAO;
 import panel.Master_SeatKickPanel;
+import panel.Master_StudyRoomKickPanel;
 
-public class OutButton extends JButton {
+public class Master_SeatOutButton extends JButton {
 	
-	public OutButton(JDialog parent, Object[] userInfo, int row) {
+	public Master_SeatOutButton(JDialog parent, Object[] userInfo, int row) {
 		
 		setBorderPainted(false);
 		setContentAreaFilled(false);
@@ -22,10 +24,9 @@ public class OutButton extends JButton {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				parent.dispose();
-				KickDAO.setSeatUserOut(userInfo[0].toString());
+				KickDAO.setCheckOut(userInfo[0].toString().trim(), userInfo[2].toString().trim());
 				Master_SeatKickPanel.model.removeRow(row);
-				
+				parent.dispose();
 			}
 		});
 	}
