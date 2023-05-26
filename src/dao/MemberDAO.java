@@ -3,12 +3,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalTime;
 import java.util.Date;
 
 import dto.Member;
 import frame.MainFrame;
-import panel.MyPagePanel;
+import panel.UseTicketPanel;
+import panel.UserInfoPanel;
 
 public class MemberDAO {
 	
@@ -80,20 +80,6 @@ public class MemberDAO {
 			pstmt1.setString(1, memId);
 			try (
 					ResultSet rs = pstmt1.executeQuery();
-<<<<<<< HEAD
-					){
-				rs.next();
-				pstmt2.setInt(1, rs.getInt("remain"));
-				pstmt2.setString(2, memId);
-				if(pstmt2.executeUpdate() > 0) {
-					System.out.println("update complete");
-					CheckInFrame.member.setRemain_time(rs.getInt("remain"));
-//					MyPagePanel.time.setText(String.format("%d분",rs.getInt("remain")));
-					conn.commit();	
-				} else {
-					System.out.println("update fail");
-					conn.rollback();
-=======
 					){
 				if(rs.next()) {
 					if(rs.getString("use_ticket_category").equals("시간충전권")) {	
@@ -102,15 +88,14 @@ public class MemberDAO {
 							if(remain_time >= 60) {
 								int hour = remain_time / 60;
 								int minute = remain_time % 60;
-								MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+								UseTicketPanel.remainTime.setText(hour + "시간 " + minute + "분");
 							} else {
-								MyPagePanel.time.setText(remain_time + "분");
+								UseTicketPanel.remainTime.setText(remain_time + "분");
 							}
 						} else {
-							MyPagePanel.time.setText("0분");
+							UseTicketPanel.remainTime.setText("0분");
 						}					
 					}
->>>>>>> refs/heads/main
 				}
 			}
 		} catch (Exception e) {
@@ -142,12 +127,12 @@ public class MemberDAO {
 							if(remain_time >= 60) {
 								int hour = remain_time / 60;
 								int minute = remain_time % 60;
-								MyPagePanel.time.setText(hour + "시간 " + minute + "분");
+								UseTicketPanel.remainTime.setText(hour + "시간 " + minute + "분");
 							} else {
-								MyPagePanel.time.setText(remain_time + "분");
+								UseTicketPanel.remainTime.setText(remain_time + "분");
 							}
 						} else {
-							MyPagePanel.time.setText("0분");
+							UseTicketPanel.remainTime.setText("0분");
 						}
 					}
 				}

@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import button.CloseButton;
 import dao.SeatDAO;
 import frame.MainFrame;
-import panel.MyPagePanel;
+import panel.UserInfoPanel;
 
 public class ExitDialog extends JDialog {
 	
@@ -61,7 +61,7 @@ public class ExitDialog extends JDialog {
 			
 			exitPanel.add(remainDate);
 			exitPanel.add(remainDateLabel);
-			MyPagePanel.seat.setText("없음");
+			UserInfoPanel.seat.setText("없음");
 		} else {
 			// time
 			remainTime.setBounds(238, 220, 130, 40);
@@ -85,7 +85,7 @@ public class ExitDialog extends JDialog {
 			
 			exitPanel.add(remainTime);
 			exitPanel.add(remainTimeLabel);
-			MyPagePanel.seat.setText("없음");
+			UserInfoPanel.seat.setText("없음");
 		}
 		
 		/* 패널 */

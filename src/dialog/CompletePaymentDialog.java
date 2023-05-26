@@ -17,7 +17,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-import button.LockerButton;
 import button.TimeSelectButton;
 import color.MyColor;
 import dao.MemberDAO;
@@ -29,12 +28,9 @@ import frame.MainFrame;
 import label.RemainSeatLabel;
 import panel.GridPanel;
 import panel.LockerPanel;
-import panel.MyPagePanel;
 import panel.SeatReportPanel;
-import panel.TimeChargePanel;
-import panel.MainPanel;
-import panel.MyPagePanel;
 import panel.StudyRoomPanel;
+import panel.UserInfoPanel;
 
 
 public class CompletePaymentDialog extends JDialog {
@@ -92,7 +88,7 @@ public class CompletePaymentDialog extends JDialog {
 
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();
 
-						MyPagePanel.seat.setText(seat + "번");
+						UserInfoPanel.seat.setText(seat + "번");
 						SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
 						SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 						SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);
@@ -169,7 +165,7 @@ public class CompletePaymentDialog extends JDialog {
 		SeatDAO.setUseTicketReservation(SeatReportPanel.seat_reservation);
 		int seat = SeatReportPanel.seat_reservation.getSeat_id();
 
-		MyPagePanel.seat.setText(seat + "번");
+		UserInfoPanel.seat.setText(seat + "번");
 		SeatReportPanel.seatInfoLabel.setText(seat + "번 좌석을 사용중입니다.");
 		SeatReportPanel.seatInfoLabel.setBounds(507, 28, 550, 50);
 		SeatReportPanel.seatBtns.get(seat - 1).setBackground(MyColor.ORANGE);

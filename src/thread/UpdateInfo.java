@@ -10,6 +10,7 @@ import dao.SeatReservationDAO;
 import frame.MainFrame;
 import panel.LockerPanel;
 import panel.SeatReportPanel;
+import panel.UseTicketPanel;
 import panel.UserInfoPanel;
 
 public class UpdateInfo implements Runnable {
@@ -44,9 +45,9 @@ public class UpdateInfo implements Runnable {
 		
 		MemberDAO.updateRemainTime(MainFrame.member.getMember_id());
 		if(MainFrame.member.getRemain_date() == null) {
-			UserInfoPanel.period.setText("");
+			UseTicketPanel.period.setText("");
 		} else {	
-			UserInfoPanel.period.setText(MainFrame.member.getRemain_date() + "까지");
+			UseTicketPanel.period.setText(MainFrame.member.getRemain_date() + "까지");
 		}
 		if(MainFrame.member.getLocker_number() == null) {
 			UserInfoPanel.locker.setText("이용중인 사물함이 없습니다");

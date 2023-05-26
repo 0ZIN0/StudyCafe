@@ -10,17 +10,15 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import button.OkButton;
-import button.SeatButton;
 import dao.SeatDAO;
 import dto.Seat;
 import frame.MainFrame;
-import panel.MyPagePanel;
 import panel.SeatReportPanel;
+import panel.UserInfoPanel;
 
 public class ChangeSeatDialog extends JDialog {
 
@@ -102,7 +100,7 @@ public class ChangeSeatDialog extends JDialog {
 				SeatReportPanel.mySeat = Integer.parseInt(seatNum);
 				
 				JDialog changeCompletionPopup = new ChangeCompletionDialog(seatNum);
-				MyPagePanel.seat.setText(seatNum + "번");
+				UserInfoPanel.seat.setText(seatNum + "번");
 			}
 		});
 		

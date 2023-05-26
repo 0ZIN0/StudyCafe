@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,13 +15,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import button.SeatButton;
 import dao.SeatDAO;
 import dto.Seat;
 import frame.MainFrame;
 import label.RemainSeatLabel;
-import panel.MyPagePanel;
 import panel.SeatReportPanel;
+import panel.UserInfoPanel;
 
 public class UseTicketDialog extends JDialog {
 	
@@ -135,7 +133,7 @@ public class UseTicketDialog extends JDialog {
 				SeatReportPanel.remainSeatLabel.setText(String.format("%02d / %02d",RemainSeatLabel.remain[0],RemainSeatLabel.remain[1]));
 				
 				UseLastDialog useLastPopup = new UseLastDialog();
-				MyPagePanel.seat.setText(seatNum + "번");
+				UserInfoPanel.seat.setText(seatNum + "번");
 			}
 		});
 		
