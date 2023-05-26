@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import dbConnection.OjdbcConnection;
 import frame.MainFrame;
 
 public class MypageDAO {

@@ -9,7 +9,6 @@ import dbConnection.OjdbcConnection;
 import dto.Member;
 import frame.MainFrame;
 import panel.UseTicketPanel;
-import panel.UserInfoPanel;
 
 public class MemberDAO {
 	
