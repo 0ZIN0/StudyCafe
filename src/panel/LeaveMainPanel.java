@@ -12,12 +12,12 @@ import javax.swing.JPanel;
 import dao.SeatDAO;
 import dto.Seat;
 
-public class VacatedMainPanel extends JPanel {
+public class LeaveMainPanel extends JPanel {
 	
 	List<int[]> remainTime = SeatDAO.leaveSeat();
-	public VacatedMainPanel() {
+	public LeaveMainPanel() {
 		for(int i = 0; i < remainTime.size(); i++) {
-			VacatedMiniPanel miniPanel = new VacatedMiniPanel(remainTime, i);
+			LeaveMiniPanel miniPanel = new LeaveMiniPanel(remainTime, i);
 			add(miniPanel);
 		}
 		

@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import dbConnection.OjdbcConnection;
 import dto.temDTO;
 // 연습용 클래스. 나중에 지우기
 public class temDAO {

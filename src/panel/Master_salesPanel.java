@@ -1,5 +1,6 @@
 package panel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -21,25 +22,27 @@ import javax.swing.table.DefaultTableModel;
 
 import button.Downbutton;
 import button.Upbutton;
+import color.MyColor;
 import dao.TicketOrderDAO;
 import dto.Ticket_order;
+import java.awt.GridLayout;
+import javax.swing.border.LineBorder;
 
 public class Master_salesPanel extends JPanel{
 	
 	public static LocalDate date = LocalDate.now();
 	
 	public static NumberFormat numberFormat = NumberFormat.getInstance();
-
 	
 	public static DefaultTableModel model = TicketOrderDAO.salesTableModel();
 	public static JTable table = new JTable(model);
 	JScrollPane scrollPane = new JScrollPane(table);
 
 	public static JButton yearupBtn = new Upbutton("year");
-	JButton yeardownBtn = new Downbutton("year");	
 	public static JButton monthupBtn = new Upbutton("month");
-	JButton monthdownBtn = new Downbutton("month");
 	public static JButton dayupBtn = new Upbutton("day");
+	JButton yeardownBtn = new Downbutton("year");	
+	JButton monthdownBtn = new Downbutton("month");
 	JButton daydownBtn = new Downbutton("day");
 	
 	public static JLabel yearDigitLabel = new JLabel(Integer.toString(date.getYear()));
@@ -59,58 +62,42 @@ public class Master_salesPanel extends JPanel{
 	public static JLabel monthAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_month()) + "원");
 	public static JLabel dayAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_day()) + "원");
 	
-	
+	JPanel panel = new BackgroundPanel(new ImageIcon("ui/master/amount_panel.png"));
 	
 	public Master_salesPanel() {
+		panel.setBackground(new Color(23, 23, 23));
+		panel.setBounds(50, 160, 1600, 60);
+		add(panel);
+		panel.setLayout(new GridLayout(0, 6, 0, 0));
 		
 		// date label
 		yearDigitLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		yearDigitLabel.setBounds(960, 47, 110, 58);
+		yearDigitLabel.setBounds(1070, 48, 110, 58);
 		yearDigitLabel.setForeground(Color.white);
 		
 		yearLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		yearLabel.setBounds(1090, 25, 200, 100);
+		yearLabel.setBounds(1170, 25, 200, 100);
 		yearLabel.setForeground(Color.white);
 		
 		monthDigitLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		monthDigitLabel.setBounds(1190, 25, 200, 100);
+		monthDigitLabel.setBounds(1260, 28, 200, 100);
 		monthDigitLabel.setForeground(Color.white);
 		
 		monthLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		monthLabel.setBounds(1270, 25, 200, 100);
+		monthLabel.setBounds(1320, 25, 200, 100);
 		monthLabel.setForeground(Color.white);
 		
 		dayDigitLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		dayDigitLabel.setBounds(1370, 25, 200, 100);
+		dayDigitLabel.setBounds(1410, 28, 200, 100);
 		dayDigitLabel.setForeground(Color.white);
 		
 		dayLabel.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		dayLabel.setBounds(1470, 25, 200, 100);
 		dayLabel.setForeground(Color.white);
 		
-		isTodayLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 24));
-		isTodayLabel.setBounds(1550, 60, 80, 28);
+		isTodayLabel.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 30));
+		isTodayLabel.setBounds(1540, 60, 100, 28);
 		isTodayLabel.setForeground(new Color(0xFF5C00));
-		
-		daySales.setBounds(100, 700, 150, 50);
-		daySales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		daySales.setForeground(new Color(0xFF5C00));
-		
-		dayAmount.setBounds(250, 700, 300, 50);
-		dayAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		dayAmount.setForeground(new Color(0xFF5C00));
-		
-		monthSales.setBounds(630, 700, 150, 50);
-		monthSales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		monthSales.setForeground(new Color(0xFF5C00));
-		
-		monthAmount.setBounds(780, 700, 300, 50);
-		monthAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		monthAmount.setForeground(new Color(0xFF5C00));
-		
-		yearSales.setBounds(1180, 700, 150, 50);
-		yearSales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
-		yearSales.setForeground(new Color(0xFF5C00));
 		
 		yearAmount.setBounds(1330, 700, 300, 50);
 		yearAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
@@ -124,23 +111,47 @@ public class Master_salesPanel extends JPanel{
 		add(dayDigitLabel);
 		add(dayLabel);
 		
-		add(yearSales);
-		add(yearAmount);
-		add(monthSales);
-		add(monthAmount);
-		add(daySales);
-		add(dayAmount);
+		daySales.setHorizontalAlignment(SwingConstants.CENTER);
+		daySales.setBackground(Color.WHITE);
+		daySales.setBounds(100, 700, 150, 50);
+		daySales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		daySales.setForeground(new Color(23, 23, 23));
+		panel.add(daySales);
+		
+		dayAmount.setBounds(250, 700, 300, 50);
+		dayAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		dayAmount.setForeground(new Color(0xFF5C00));
+		panel.add(dayAmount);
+		
+		monthSales.setHorizontalAlignment(SwingConstants.CENTER);
+		monthSales.setBounds(630, 700, 150, 50);
+		monthSales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		monthSales.setForeground(new Color(23, 23, 23));
+		panel.add(monthSales);
+		
+		monthAmount.setBounds(780, 700, 300, 50);
+		monthAmount.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		monthAmount.setForeground(new Color(0xFF5C00));
+		panel.add(monthAmount);
+		
+		yearSales.setHorizontalAlignment(SwingConstants.CENTER);
+		yearSales.setBounds(1180, 700, 150, 50);
+		yearSales.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
+		yearSales.setForeground(new Color(23, 23, 23));
+		
+		panel.add(yearSales);
+		panel.add(yearAmount);
 		/*******************************************************************************/
 		
 		//buttons
-		yearupBtn.setBounds(988, 32, 34, 25);
-		yeardownBtn.setBounds(988, 105, 34, 25);
+		yearupBtn.setBounds(1100, 34, 34, 25);
+		yeardownBtn.setBounds(1100, 105, 34, 25);
 		
-		monthupBtn.setBounds(1194, 32, 34, 25);
-		monthdownBtn.setBounds(1194, 105, 34, 25);
+		monthupBtn.setBounds(1265, 34, 34, 25);
+		monthdownBtn.setBounds(1265, 105, 34, 25);
 		
-		dayupBtn.setBounds(1374, 32, 34, 25);
-		daydownBtn.setBounds(1374, 105, 34, 25);
+		dayupBtn.setBounds(1415, 34, 34, 25);
+		daydownBtn.setBounds(1415, 105, 34, 25);
 	
 		add(yearupBtn);
 		add(yeardownBtn);
@@ -156,7 +167,7 @@ public class Master_salesPanel extends JPanel{
 		table.getTableHeader().setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		table.setRowHeight(50);
 		table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
-		table.setBackground(new Color(0xEEEEEE));
+		table.getTableHeader().setBackground(new Color(0xB8CFE5));
 		table.setCellSelectionEnabled(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDragEnabled(false);
@@ -164,12 +175,15 @@ public class Master_salesPanel extends JPanel{
 		/*******************************************************************************/
 		
 		// scrollPane settings
-		scrollPane.setBounds(50,150, 1600, 540);
+		scrollPane.setBounds(50,250, 1600, 540);
+		scrollPane.getViewport().setBackground(new Color(0XD9D9D9));
 		add(scrollPane);
 		
-		// this Panel settings
+		// Panel settings
 		setLayout(null);
 		setOpaque(false);
-		setSize(1700,800);
+		setSize(1700,760);
+		
+		
 	}
 }

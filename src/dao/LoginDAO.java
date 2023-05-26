@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
+import dbConnection.OjdbcConnection;
 import dialog.setPopup;
 import frame.MainFrame;
 

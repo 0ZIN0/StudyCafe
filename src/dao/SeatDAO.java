@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import color.MyColor;
+import dbConnection.OjdbcConnection;
 import dto.Member;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;

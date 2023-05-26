@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 import button.CloseButton;
 import dto.Seat;
 import panel.BackgroundPanel;
-import panel.VacatedMainPanel;
+import panel.LeaveMainPanel;
 
 public class LeaveDialog extends JDialog {
 
@@ -27,7 +27,7 @@ public class LeaveDialog extends JDialog {
 	CloseButton close = new CloseButton(this);
 	
 	public LeaveDialog(List<Seat> seats) {
-		VacatedMainPanel main = new VacatedMainPanel();
+		LeaveMainPanel main = new LeaveMainPanel();
 		JScrollPane scroll = new JScrollPane(main);
 		close.setLocation(300, 800);
 		
@@ -35,7 +35,6 @@ public class LeaveDialog extends JDialog {
 		scroll.setBounds(57, 237, 636, 526);
 		add(scroll);
 		add(close);
-		
 		
 		add(bg);
 		setModal(true);
