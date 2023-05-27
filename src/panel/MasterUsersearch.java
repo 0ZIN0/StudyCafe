@@ -66,7 +66,7 @@ public class MasterUsersearch extends JPanel{
             // JTable에 데이터를 표시할 DefaultTableModel 생성
             DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
             
-            tableModel = new DefaultTableModel(0, columnCount) {
+            tableModel = new DefaultTableModel(columnNames, 0) {
     			@Override
     			public boolean isCellEditable(int row, int column) {
     				// TODO Auto-generated method stub
