@@ -65,6 +65,31 @@ public class LoginDAO {
 		return true;
 	}
 	
+	// 등록된 회원이 아닐 때
+	public static boolean checkmemberPhone(String phoneNum) {
+		String query = "SELECT * FROM member where phone_number = ?";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				){
+			pstmt.setString(1, phoneNum);
+			try(
+					ResultSet rs = pstmt.executeQuery();
+					) {
+				if (!rs.next()) {
+             	   new setPopup(new ImageIcon("ui/main/loginPopup/loginNotMemberPhone.png")).setVisible(true);
+                   return true;
+                }
+			}
+		} catch (SQLException  e2) {
+			e2.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+	
+	
 	public static int register(String phoneNum, String password) {
 		String query = "INSERT INTO member VALUES ('M-' || member_id_seq.nextval,?, ?, 0 , null, null, null, null)";
 		try (

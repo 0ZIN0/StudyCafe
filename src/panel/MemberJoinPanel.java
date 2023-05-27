@@ -72,6 +72,7 @@ public class MemberJoinPanel extends JPanel  {
     	add(numpad);
     	
 		numpad.setBounds(1080,50,550,690);
+		numpad.setTextField(joinphoneField);
     	
 		joinphoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
 		joinphoneField.setText("핸드폰번호");

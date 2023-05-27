@@ -82,6 +82,7 @@ public class LoginPanel extends JPanel {
 		setLayout(null);
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
+		numpad.setTextField(userPhoneNumber);
 		//setBounds(0,0,990,760);
 		
 		add(userPhoneNumber);
@@ -95,6 +96,7 @@ public class LoginPanel extends JPanel {
 		userPhoneNumber.setOpaque(false);
 		userPhoneNumber.setBounds(90, 318, 800, 110);
 		userPhoneNumber.setForeground(new Color(217,217,217));
+		
 		
 		
 		userPhoneNumber.addFocusListener(new FocusListener() {
@@ -179,6 +181,11 @@ public class LoginPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String phoneNum = userPhoneNumber.getText();
 				String password = new String(userPass.getPassword());
+				
+				
+				if(LoginDAO.checkmemberPhone(phoneNum)) {
+					return;
+				}
 				
 				if(LoginDAO.checkPhoneNum(phoneNum, password)) {
 					parent.dispose();
