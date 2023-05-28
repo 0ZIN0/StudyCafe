@@ -18,13 +18,14 @@ import java.sql.*;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 import dto.MemberJoin;
+import frame.LoginFrame;
 
 public class MemberJoinPanel extends JPanel  {
 	
 	JLabel phoneLabel, passwordLabel, confirmPasswordLabel, birthdayLabel;
-    JTextField phoneField;
-    JPasswordField passwordField;
-	JPasswordField confirmPasswordField;
+    JTextField joinphoneField;
+    JPasswordField joinpasswordField;
+	JPasswordField joinconfirmPasswordField;
     JButton submitButton,beforeButton;
     JButton phonduplicationBtn;
     
@@ -50,51 +51,50 @@ public class MemberJoinPanel extends JPanel  {
 		g.drawImage(image, 0, 0, this);
 	};
 	
-    public MemberJoinPanel(MemberJoin memberjoin, CardLayout card) {
+	
+	
+    public MemberJoinPanel(MemberJoin memberJoin) {
     	
-    	UserInfoCheckPanel UserInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
-    	
-    	
-    	phoneField = new JTextField();
-       	passwordField = new JPasswordField();
-       	confirmPasswordField = new JPasswordField();
+    	joinphoneField = new JTextField();
+    	joinpasswordField = new JPasswordField();
+    	joinconfirmPasswordField = new JPasswordField();
        	
-       	phoneField.setBorder(getBorder());
-       	passwordField.setBorder(getBorder());
-       	confirmPasswordField.setBorder(getBorder());
+    	joinphoneField.setBorder(getBorder());
+    	joinpasswordField.setBorder(getBorder());
+    	joinconfirmPasswordField.setBorder(getBorder());
     	
     	submitButton = new JButton(new ImageIcon("ui/main/Memberjoin/Next_Button.png"));
     	beforeButton = new JButton(new ImageIcon("ui/main/Memberjoin/Before_Button.png"));
     	phonduplicationBtn= new JButton(new ImageIcon("ui/main/Memberjoin/DuplicateCheck_Button.png"));
     	
-    	phoneField.add(phonduplicationBtn);
+    	joinphoneField.add(phonduplicationBtn);
     	
     	add(numpad);
     	
 		numpad.setBounds(1080,50,550,690);
+		numpad.setTextField(joinphoneField);
     	
-	    phoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-	    phoneField.setText("핸드폰 번호");
-	    phoneField.setOpaque(false);
-	    phoneField.setBounds(90, 117, 900, 110);
-	    phoneField.setOpaque(false);
-	    phoneField.setForeground(new Color(141,135,135));
+		joinphoneField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		joinphoneField.setText("핸드폰번호");
+		joinphoneField.setOpaque(false);
+		joinphoneField.setBounds(90, 117, 900, 110);
+		joinphoneField.setOpaque(false);
+		joinphoneField.setForeground(new Color(217,217,217));
 	    
-	    passwordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-	    passwordField.setText("비밀번호 (6자리)");
-	    passwordField.setEchoChar((char) 0);
-	    passwordField.setOpaque(false);
-	    passwordField.setBounds(90, 288, 900, 110);
-	    passwordField.setOpaque(false);
-	    passwordField.setForeground(new Color(141,135,135));
+		joinpasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		joinpasswordField.setText("비밀번호 (6자리)");
+		joinpasswordField.setEchoChar((char) 0);
+		joinpasswordField.setOpaque(false);
+		joinpasswordField.setBounds(90, 288, 900, 110);
+		joinpasswordField.setOpaque(false);
+		joinpasswordField.setForeground(new Color(217,217,217));
 	    
-	    confirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
-	    confirmPasswordField.setText("비밀번호 확인 (6자리)");
-	    confirmPasswordField.setOpaque(false);
-	    confirmPasswordField.setBounds(90, 456, 900, 110);
-	    confirmPasswordField.setOpaque(false);
-	    confirmPasswordField.setEchoChar((char) 0);
-	    confirmPasswordField.setForeground(new Color(141,135,135));
+		joinconfirmPasswordField.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 40));
+		joinconfirmPasswordField.setText("비밀번호 확인 (6자리)");
+		joinconfirmPasswordField.setOpaque(false);
+		joinconfirmPasswordField.setBounds(90, 456, 900, 110);
+		joinconfirmPasswordField.setEchoChar((char) 0);
+		joinconfirmPasswordField.setForeground(new Color(217,217,217));
 	    
 	    beforeButton.setBounds(80, 590, 400, 148);
 	    beforeButton.setFocusPainted(false);
@@ -120,11 +120,11 @@ public class MemberJoinPanel extends JPanel  {
 	    	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phoneNum = phoneField.getText();
-	            String password = new String(passwordField.getPassword());
-	            String confirmPassword = new String(confirmPasswordField.getPassword());
-	            memberjoin.setPhone(phoneNum);
-	            memberjoin.setPassword(password);
+				String phoneNum = joinphoneField.getText();
+	            String password = new String(joinpasswordField.getPassword());
+	            String confirmPassword = new String(joinconfirmPasswordField.getPassword());
+//	            userPhoneNumber.setPhone(phoneNum);
+//	            userPhoneNumber.setPassword(password);
 	            
 	            // 휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {  
@@ -141,62 +141,62 @@ public class MemberJoinPanel extends JPanel  {
 	    
 	    
 	    // 폰번호 포커스 이벤트
-	    phoneField.addFocusListener(new FocusAdapter() {
+	    joinphoneField.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusLost(FocusEvent e) {
-        		numpad.setTextField(phoneField);
+        		numpad.setTextField(joinphoneField);
         		numpad.setMax(12);
         		numpad.phoneSelect = true;
         	}
         	
         	@Override
 			public void focusGained(FocusEvent e) {
-        		phoneField.setText("");
+        		joinphoneField.setText("");
 				
 			}
 		});
 
 	    // 비밀번호 포커스 이벤트
-        passwordField.addFocusListener(new FocusAdapter() {
+	    joinpasswordField.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusLost(FocusEvent e) {
-        		numpad.setTextField(passwordField);
+        		numpad.setTextField(joinpasswordField);
         		numpad.setMax(5);
-        		char[] password = passwordField.getPassword();
+        		char[] password = joinpasswordField.getPassword();
     	        String passwordString = new String(password);
-    	        passwordField.setText("");
-    	        passwordField.setEchoChar('●');        		
+    	        joinpasswordField.setText("");
+    	        joinpasswordField.setEchoChar('●');        		
         	}
         	
         	@Override
 			public void focusGained(FocusEvent e) {
-        		passwordField.setText("");
+        		joinpasswordField.setText("");
         		numpad.phoneSelect = false;
 				
 			}
 		});
         
         // 비밀번호확인 포커스 이벤트
-        confirmPasswordField.addFocusListener(new FocusAdapter() {
+	    joinconfirmPasswordField.addFocusListener(new FocusAdapter() {
         	@Override
         	public void focusLost(FocusEvent e) {
-        		numpad.setTextField(confirmPasswordField);
+        		numpad.setTextField(joinconfirmPasswordField);
         		numpad.setMax(5);
-        		char[] confirmpassword = confirmPasswordField.getPassword();
+        		char[] confirmpassword = joinconfirmPasswordField.getPassword();
     	        String confirmPasswordString = new String(confirmpassword);
-    	        confirmPasswordField.setText("");
-    	        confirmPasswordField.setEchoChar('●');  
+    	        joinconfirmPasswordField.setText("");
+    	        joinconfirmPasswordField.setEchoChar('●');  
         	}
         	@Override
 			public void focusGained(FocusEvent e) {
-        		confirmPasswordField.setText("");
+        		joinconfirmPasswordField.setText("");
         		numpad.phoneSelect = false;
         	}
 		});
         
-        add(phoneField);
-        add(passwordField);
-        add(confirmPasswordField);
+        add(joinphoneField);
+        add(joinpasswordField);
+        add(joinconfirmPasswordField);
         add(submitButton);
         add(beforeButton);
         
@@ -204,7 +204,16 @@ public class MemberJoinPanel extends JPanel  {
         beforeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				card.show(getParent(), "login");
+				
+				LoginFrame.masterBtn.setVisible(true);
+				joinphoneField.setText(" 핸드폰번호");
+				joinpasswordField.setText(" 비밀번호 (6자리)");
+				joinpasswordField.setEchoChar((char) 0);
+				joinconfirmPasswordField.setText("비밀번호 확인 (6자리)");
+				joinconfirmPasswordField.setEchoChar((char) 0);
+				LoginFrame.card.show(getParent(), "login");
+				
+				
 			}
 		});
         
@@ -213,12 +222,12 @@ public class MemberJoinPanel extends JPanel  {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phoneNum = phoneField.getText();
-	            String password = new String(passwordField.getPassword());
-	            String confirmPassword = new String(confirmPasswordField.getPassword());
+				String phoneNum =joinphoneField.getText();
+	            String password = new String(joinpasswordField.getPassword());
+	            String confirmPassword = new String(joinconfirmPasswordField.getPassword());
 	            
-	            memberjoin.setPhone(phoneNum);
-	            memberjoin.setPassword(password);
+//	            joinuserPhonNumber.setPhone(phoneNum);
+//	            joinuserPhonNumber.setPassword(password);
 	            
 	            //휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {           
@@ -238,8 +247,23 @@ public class MemberJoinPanel extends JPanel  {
 	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorpass.png")).setVisible(true);
 	            	return;
 				}
-	            if(LoginDAO.checkDup(phoneNum)) {	            	
-	            	card.show(getParent(), "userInfoCheck");      
+	            if(LoginDAO.checkDup(phoneNum)) {
+	            	memberJoin.setPhone(phoneNum);
+	            	memberJoin.setPassword(password);
+	            	
+	            	
+	            	joinphoneField.setText(" 핸드폰번호");
+					
+	            	joinpasswordField.setText(" 비밀번호 (6자리)");
+	            	joinpasswordField.setEchoChar((char) 0);
+					
+	            	joinconfirmPasswordField.setText(" 비밀번호 (6자리)");
+	            	joinconfirmPasswordField.setEchoChar((char) 0);
+	            	
+	            	
+	            	LoginFrame.card.show(getParent(), "userInfoCheck");  
+	            	
+	            	
 	            	
 	            }
 			}  

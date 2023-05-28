@@ -48,19 +48,24 @@ public class LoginFrame extends JFrame{
 	
 	MemberJoin memberjoin = new MemberJoin();
 	
-	CardLayout card = new CardLayout();
+	
+	public static CardLayout card = new CardLayout();
+	
+	
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/background/background.png"));
 	JButton exitBtn = new JButton();
 	NumberKeypad numpad= new NumberKeypad();
-	LoginPanel loginpanel = new LoginPanel(card, this);
-	MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
-	UserInfoCheckPanel userInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
+	JPanel cardPanel = new JPanel();
+	
 	
 	//관리자 버튼
-	JButton masterBtn = new JButton(new ImageIcon("ui/main/Master_Icon.png"));
+	public static JButton masterBtn = new JButton(new ImageIcon("ui/main/Master_Icon.png"));
 	
 	
-	JPanel cardPanel = new JPanel();
+	LoginPanel loginpanel = new LoginPanel(this);
+	MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin);
+	UserInfoCheckPanel userInfoCheckPanel = new UserInfoCheckPanel(memberjoin);
+
 	// 쓰레드 클래스
 	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
 	static UpdateInfo updateInfo = new UpdateInfo();
@@ -74,9 +79,13 @@ public class LoginFrame extends JFrame{
 		
 		background.add(masterBtn);
 		masterBtn.setBounds(1811,978,60,48);
-		masterBtn.setBackground(new Color(73,67,68));
+		masterBtn.setOpaque(false);
 		masterBtn.setBorderPainted(false);
-		masterBtn.setFocusable(true);
+		//masterBtn.setFocusPainted(true);
+		masterBtn.setContentAreaFilled(false);
+		
+
+		
 		
 		// 마스터버튼 이벤트
 		masterBtn.addActionListener(new ActionListener() {
@@ -92,7 +101,6 @@ public class LoginFrame extends JFrame{
 		cardPanel.setLayout(card);
 		background.add(cardPanel);
 		cardPanel.setBounds(130,260,1650,760);
-		cardPanel.setBorder(new LineBorder(Color.red,1));
 
 		cardPanel.add(loginpanel,"login");
 		cardPanel.add(memberJoinPanel,"memberjoin");

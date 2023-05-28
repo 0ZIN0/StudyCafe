@@ -101,7 +101,7 @@ public class MasterMenuFrame extends JFrame{
 		cardPanel.setLayout(card);
 		background.add(cardPanel);
 		cardPanel.setBounds(110,240,1700,760);
-		cardPanel.setBorder(new LineBorder(Color.red,1));
+		//cardPanel.setBorder(new LineBorder(Color.red,1));
 		
 		
 		cardPanel.add(masterUsersearch,"Usersearch");
