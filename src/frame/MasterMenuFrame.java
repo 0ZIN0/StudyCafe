@@ -73,10 +73,14 @@ public class MasterMenuFrame extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				card.show(cardPanel, "menu");
 				
+				// KICK
 				Master_SeatKickPanel.table.clearSelection();
 				Master_StudyRoomKickPanel.table.clearSelection();
 				Master_LockerKickPanel.table.clearSelection();
 				Master_kickPanel.seatBtn.doClick();
+				
+				// USERSEARCH
+				MasterUsersearch.table.clearSelection();
 			}
 		});
 		// 종료버튼 이벤트

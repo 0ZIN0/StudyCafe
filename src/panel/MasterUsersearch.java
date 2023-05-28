@@ -39,7 +39,8 @@ public class MasterUsersearch extends JPanel{
 	
 	ImageIcon im =new ImageIcon("ui/master/masterUsersearch/Master_UserSearch_Main_Contents.jpg");
 	Image image=im.getImage();
-
+	public static JTable table;
+	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(image, 0, 0, this);
@@ -52,7 +53,7 @@ public class MasterUsersearch extends JPanel{
              Statement statement = connection.createStatement()) {
 
             // SQL 쿼리 실행
-            ResultSet resultSet = statement.executeQuery("SELECT MEMBER_ID,PHONE_NUMBER,REMAIN_TIME,REMAIN_DATE,LOCKER_NUMBER,LOCKER_REMAIN_DATE FROM member");
+            ResultSet resultSet = statement.executeQuery("SELECT MEMBER_ID,PHONE_NUMBER,REMAIN_TIME,TO_CHAR(REMAIN_DATE, 'YYYY\"년 \"MM\"월 \"DD\"일\" HH24:mi:ss'),LOCKER_NUMBER,TO_CHAR(LOCKER_REMAIN_DATE, 'YYYY\"년 \"MM\"월 \"DD\"일\" HH24:mi:ss') FROM member");
 
             // ResultSet의 메타데이터에서 열 정보 추출
             ResultSetMetaData metaData = resultSet.getMetaData();
@@ -91,7 +92,7 @@ public class MasterUsersearch extends JPanel{
             }
 
             // JTable 생성 및 표시
-            JTable table = new JTable(tableModel);
+            table = new JTable(tableModel);
             
             
             

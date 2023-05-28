@@ -123,7 +123,7 @@ public class MasterLoginPanel extends JPanel{
 		});
 
 
-		/*
+		/* 
 		   로그인 버튼
 		 */
 
