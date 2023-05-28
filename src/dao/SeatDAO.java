@@ -378,6 +378,7 @@ public class SeatDAO {
 				if (rs.getString("seat_state").equals("비어있음")) {
 					SeatReportPanel.seatBtns.get(seatNum).use = false;
 				} else {
+					System.out.println(rs.getInt("seat_id") - 1);
 					SeatReportPanel.seatBtns.get(rs.getInt("seat_id") - 1).use = true;
 				}
 			}
