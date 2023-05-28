@@ -31,6 +31,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import color.MyColor;
 import dao.OjdbcConnection;
 
 public class MasterUsersearch extends JPanel{
@@ -69,7 +70,6 @@ public class MasterUsersearch extends JPanel{
             tableModel = new DefaultTableModel(columnNames, 0) {
     			@Override
     			public boolean isCellEditable(int row, int column) {
-    				// TODO Auto-generated method stub
     				return false;
     			}
     		};
@@ -81,12 +81,13 @@ public class MasterUsersearch extends JPanel{
                 Object[] rowData = new Object[columnCount];
                 for (int i = 0; i < columnCount; i++) {
                    // rowData[i] = resultSet.getObject(i);
-                    rowData[i] = resultSet.getObject(i + 1);
-                    
-                    
+                	if (resultSet.getObject(i + 1) == null) {
+                		rowData[i] = " ";
+                	} else {
+                		rowData[i] = " " + resultSet.getObject(i + 1);
+                	}
                 }
                 tableModel.addRow(rowData);
-                
             }
 
             // JTable 생성 및 표시
@@ -94,25 +95,15 @@ public class MasterUsersearch extends JPanel{
             
             
             
-
-            
-            
-            
            
-            table.getTableHeader().setPreferredSize(new Dimension(100 ,80));
+            table.getTableHeader().setPreferredSize(new Dimension(100 ,70));
             table.getTableHeader().setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
             table.setRowHeight(50);
             table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
             table.getTableHeader().setBackground(new Color(0xB8CFE5));
-            
-            
-//            table.setCellSelectionEnabled(false);
-            
-            
             table.getTableHeader().setReorderingAllowed(false);
             table.setDragEnabled(false);
             table.setEnabled(true);
-            
             
          // TableCellRenderer를 사용하여 테이블의 특정 셀의 색상 변경
             DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
@@ -122,7 +113,7 @@ public class MasterUsersearch extends JPanel{
                     Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                     // 클릭된 행의 배경색 변경
                     if (isSelected) {
-                        component.setBackground(Color.red);
+                        component.setBackground(MyColor.LEMON);
                     } else {
                         component.setBackground(table.getBackground());
                     }
@@ -145,15 +136,12 @@ public class MasterUsersearch extends JPanel{
             });
             
             
-            
             table.setDefaultRenderer(Object.class, cellRenderer);
             JScrollPane scrollPane = new JScrollPane(table);
-            scrollPane.setBackground(Color.black);
-            scrollPane.setBounds(50, 60, 1600, 540);
+            scrollPane.setBounds(50, 68, 1600, 640);
             add(scrollPane);
-            //scrollPane.setBorder(new LineBorder(Color.blue,1));
             
-            scrollPane.getViewport().setBackground(new Color(0xD8D8D8));
+            scrollPane.getViewport().setBackground(new Color(0xD9D9D9));
             setLayout(null);
             setVisible(true);
             

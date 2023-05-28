@@ -72,26 +72,13 @@ public class MasterLoginFrame extends JFrame{
 		background.add(masterLoginPanel);
 		masterLoginPanel.setBounds(110,240,1700,760);
 		
-//		background.add(masterBtn);
-//		masterBtn.setBounds(1811,978,60,48);
-//		masterBtn.setBackground(new Color(73,67,68));
-//		masterBtn.setBorderPainted(false);
-
-		//cardPanel.setLayout(card);
-		//background.add(cardPanel);
-		//cardPanel.setBounds(130,260,1650,760);
-
-		//cardPanel.add(loginpanel,"login");
-		//cardPanel.add(memberJoinPanel,"memberjoin");
-		//cardPanel.add(userInfoCheckPanel, "userInfoCheck");
-
 		// 종료버튼 이벤트
 		exitBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new LoginFrame();
 				dispose();
+				new LoginFrame();
 			}
 		});
 		exitBtn.setBounds(1690,113,112,35);
@@ -108,10 +95,6 @@ public class MasterLoginFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}
-//	public static void main(String[] args) {
-//		new MasterLoginFrame();
-//	}
-	
 }
 
 

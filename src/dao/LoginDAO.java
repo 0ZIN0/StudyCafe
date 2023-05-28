@@ -111,7 +111,7 @@ public class LoginDAO {
 	// 관리자계정 확인
 	public static boolean masterCheckPhoneNum(String phoneNum, String password) {
 		
-		String query = "SELECT * FROM master WHERE phone_number=? AND member_password=?";
+		String query = "SELECT * FROM master WHERE phone_number=? AND master_password=?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);

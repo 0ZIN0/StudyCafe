@@ -1,4 +1,4 @@
-package frame;
+package panel;
 
 import java.awt.CardLayout;
 import java.awt.Graphics;
@@ -13,23 +13,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import color.MyColor;
-import panel.Master_LockerKickPanel;
-import panel.Master_SeatKickPanel;
-import panel.Master_StudyRoomKickPanel;
 
-public class Master_kickFrame extends JFrame {
+public class Master_kickPanel extends JPanel {
 
 	CardLayout card = new CardLayout();
-
-	ImageIcon kick_panel_icon = new ImageIcon("ui/background/main_background.png");
-	Image main_panel_image = kick_panel_icon.getImage();
-
-	JPanel kickPanel = new JPanel() {
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
-			g.drawImage(main_panel_image, 0, 0, this);
-		};
-	};
 
 	ImageIcon panel_icon = new ImageIcon("ui/master_seat_kick/Master_UserDischarge_ContentsArea.jpg");
 	Image panel_image = panel_icon.getImage();
@@ -48,11 +35,11 @@ public class Master_kickFrame extends JFrame {
 	JPanel lockerKickPanel = new Master_LockerKickPanel();
 
 	ButtonGroup group = new ButtonGroup();
-	JButton seatBtn = new JButton(new ImageIcon("ui/master_seat_kick/Seat_Button_On.png"));
+	public static JButton seatBtn = new JButton(new ImageIcon("ui/master_seat_kick/Seat_Button_On.png"));
 	JButton studyRoomBtn = new JButton(new ImageIcon("ui/master_seat_kick/StudyRoom_Button_Off.png"));
 	JButton lockerBtn = new JButton(new ImageIcon("ui/master_seat_kick/Locker_Button_Off.png"));
 
-	public Master_kickFrame() {
+	public Master_kickPanel() {
 
 		group.add(seatBtn);
 		group.add(studyRoomBtn);
@@ -117,11 +104,7 @@ public class Master_kickFrame extends JFrame {
 		studyRoomBtn.setBorderPainted(false);
 		lockerBtn.setBorderPainted(false);
 
-		kickPanel.setLayout(null);
-		kickPanel.setSize(1920, 1080);
-		kickPanel.setBackground(MyColor.CLEAR);
-
-		backgroundPanel.setBounds(110, 240, 1700, 760);
+		backgroundPanel.setSize(1700, 760);
 		backgroundPanel.setLayout(null);
 		backgroundPanel.setBackground(MyColor.CLEAR);
 
@@ -130,25 +113,16 @@ public class Master_kickFrame extends JFrame {
 		parentPanel.add(studyRoomKickPanel, "studyRoomKick");
 		parentPanel.add(lockerKickPanel, "lockerKick");
 		parentPanel.setBounds(50, 210, 1600, 540);
-
+		
 
 		backgroundPanel.add(seatBtn);
 		backgroundPanel.add(studyRoomBtn);
 		backgroundPanel.add(lockerBtn);
 		backgroundPanel.add(parentPanel);
-
-		kickPanel.setBounds(0, 0, 1920, 1080);
-		kickPanel.setLayout(null); // 추후에 카드로 변경
-		kickPanel.add(backgroundPanel);
-		add(kickPanel);
-
-		setUndecorated(true);
-		setSize(1920, 1080);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-	}
-
-	public static void main(String[] args) {
-		new Master_kickFrame();
+		
+		setOpaque(false);
+		add(backgroundPanel);
+		setSize(1700, 760);
+		setLayout(null);
 	}
 }
