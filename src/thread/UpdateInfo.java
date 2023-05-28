@@ -10,6 +10,7 @@ import dao.MemberDAO;
 import dao.MypageDAO;
 import dao.SeatDAO;
 import dao.SeatReservationDAO;
+import dto.Seat_reservation;
 import frame.MainFrame;
 import panel.LockerPanel;
 import panel.SeatReportPanel;
@@ -19,8 +20,6 @@ import toggle.UserInfoToggle;
 
 public class UpdateInfo implements Runnable {
 	
-	SeatReservationDAO seat_res = new SeatReservationDAO();
-	SeatDAO seat = new SeatDAO();
 	@Override
 	public void run() {
 		while(true) {
@@ -28,9 +27,7 @@ public class UpdateInfo implements Runnable {
 			try {
 				Thread.sleep(1000);
 				if(MainFrame.member != null && SeatReportPanel.seatBtns.size() == 32) {
-					seat_res.autoLeaveSystem();
-					seat.checkUse();
-					seat_res.UsingSeats();
+					setSeatReport();
 					LockerDAO.updateLockerInfo();
 					setMyPage();
 					setLocker();
@@ -93,5 +90,12 @@ public class UpdateInfo implements Runnable {
 				}
 			}			
 		}
+	}
+	
+	public void setSeatReport() {
+		SeatReservationDAO.autoLeaveSystem();
+		SeatReservationDAO.UsingSeats();
+		SeatDAO.checkUse();
+		SeatDAO.findMemberSeat();
 	}
 }

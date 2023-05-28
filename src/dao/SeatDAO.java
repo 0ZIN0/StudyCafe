@@ -13,7 +13,10 @@ import dbConnection.OjdbcConnection;
 import dto.Member;
 import panel.MyPagePanel;
 import panel.SeatReportPanel;
+import panel.UserInfoPanel;
 import dto.Seat_reservation;
+import frame.MainFrame;
+import label.SeatReportLabel;
 
 
 public class SeatDAO {
@@ -304,6 +307,30 @@ public class SeatDAO {
 		}
 		return 0;
 	}
+	
+	public static void findMemberSeat() {
+
+		String query = "SELECT * FROM SEAT_RESERVATION INNER JOIN MEMBER USING (MEMBER_ID) WHERE MEMBER_ID=? AND seat_reservation_end_time IS NULL";
+		try (
+				Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				) {
+			pstmt.setString(1, MainFrame.member.getMember_id());
+			try (
+					ResultSet rs = pstmt.executeQuery();
+					) {
+				if(rs.next()) {
+					UserInfoPanel.seat.setText(rs.getInt("seat_id") + "번");
+					SeatReportPanel.seatInfoLabel.setText(rs.getInt("seat_id") + "번 좌석을 사용중입니다.");
+				} else {
+					UserInfoPanel.seat.setText("사용중인 좌석이 없습니다");
+					SeatReportPanel.seatInfoLabel.setText("사용중인 좌석이 없습니다.");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/* (일회이용권 전용) 이용권 연장 시 seat의 remain_time 시간 추가하는 메서드 */
 	public static void plusOneDayTicket(Integer seat_id, Integer remain_time) {
@@ -378,7 +405,6 @@ public class SeatDAO {
 				if (rs.getString("seat_state").equals("비어있음")) {
 					SeatReportPanel.seatBtns.get(seatNum).use = false;
 				} else {
-					System.out.println();
 					SeatReportPanel.seatBtns.get(rs.getInt("seat_id") - 1).use = true;
 				}
 			}
