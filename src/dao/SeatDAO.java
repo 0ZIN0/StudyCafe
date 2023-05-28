@@ -226,8 +226,7 @@ public class SeatDAO {
 					) {
 				pstmt2.setInt(1, ticket_useable);
 				pstmt2.setString(2, seat_reservation.getSeat_id().toString());
-
-				pstmt2.executeUpdate();
+				System.out.println(pstmt2.executeUpdate());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
