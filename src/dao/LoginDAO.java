@@ -91,7 +91,7 @@ public class LoginDAO {
 	
 	
 	public static int register(String phoneNum, String password) {
-		String query = "INSERT INTO member VALUES ('M-' || member_id_seq.nextval,?, ?, 0 , null, null, null, null)";
+		String query = "INSERT INTO member VALUES ('M-' || member_id_seq.nextval,?, ?, 0 , null, null, null)";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
