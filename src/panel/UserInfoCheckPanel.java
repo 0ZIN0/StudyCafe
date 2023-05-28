@@ -162,10 +162,6 @@ public class UserInfoCheckPanel extends JPanel {
 			}
 		});
 		
-		
-		
-		
-	
 		nextBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -175,19 +171,12 @@ public class UserInfoCheckPanel extends JPanel {
 				
 				if(infoChkBox1.isSelected() && infoChkBox2.isSelected() && infoChkBox3.isSelected()) {
 					if(LoginDAO.register(phoneNum, password) > 0) {
-						new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/sucessMemberjoin.png")).setVisible(true);
+						new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/sucessMemberjoin.png"), 300).setVisible(true);
 					}
 					LoginFrame.masterBtn.setVisible(true);
-//					LoginPanel.userPhonNumber.setText(" 핸드폰번호");
-//					
-//					LoginPanel.userPass.setText(" 비밀번호 (6자리)");
-//					
-//					LoginPanel.userPass.setEchoChar((char) 0);
-					
-					
 					LoginFrame.card.show(getParent(), "login");
 				} else {
-					new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/notAgree.png")).setVisible(true);
+					new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/notAgree.png"), 300).setVisible(true);
 					return;
 				} 
 	

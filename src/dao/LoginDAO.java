@@ -35,7 +35,7 @@ public class LoginDAO {
 					new MainFrame(MemberDAO.setMember(phoneNum));
 					return true;
 				} else {
-					new setPopup(new ImageIcon("ui/main/loginPopup/passnot.png")).setVisible(true);
+					new setPopup(new ImageIcon("ui/main/loginPopup/passnot.png"), 300).setVisible(true);
 					return false;
 				}
 			}
@@ -56,7 +56,7 @@ public class LoginDAO {
 					ResultSet rs = pstmt.executeQuery();
 					) {
 				if (rs.next()) {
-             	   new setPopup(new ImageIcon("ui/main/memberjoinPopup/alreadyphonnum.png")).setVisible(true);
+             	   new setPopup(new ImageIcon("ui/main/memberjoinPopup/alreadyphonnum.png"), 300).setVisible(true);
                    return false;
                 }
 			}
@@ -78,7 +78,7 @@ public class LoginDAO {
 					ResultSet rs = pstmt.executeQuery();
 					) {
 				if (!rs.next()) {
-             	   new setPopup(new ImageIcon("ui/main/loginPopup/loginNotMemberPhone.png")).setVisible(true);
+             	   new setPopup(new ImageIcon("ui/main/loginPopup/loginNotMemberPhone.png"), 300).setVisible(true);
                    return true;
                 }
 			}
@@ -126,7 +126,7 @@ public class LoginDAO {
 					new MasterMenuFrame();
 					return true;
 				} else {
-					new setPopup(new ImageIcon("ui/main/loginPopup/passnot.png")).setVisible(true);
+					new setPopup(new ImageIcon("ui/main/loginPopup/passnot.png"), 300).setVisible(true);
 					return false;
 				}
 			}

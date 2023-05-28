@@ -126,7 +126,7 @@ public class MemberJoinPanel extends JPanel  {
 	            
 	            // 휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {  
-	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png")).setVisible(true);
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png"), 300).setVisible(true);
 	            	return;
 	            }
 	            
@@ -230,19 +230,19 @@ public class MemberJoinPanel extends JPanel  {
 	            //휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {           
 	            	
-	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png")).setVisible(true);
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorphoneformat.png"), 300).setVisible(true);
 	            	return;
 	            }
 	            // 비밀번호 6자리 확인
 	            if(password.length() != 6) {
 	            	
-	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/Password_6.png")).setVisible(true);
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/Password_6.png"), 300).setVisible(true);
 	            	return;
 				}
 	            // 비밀번호 불일치
 	            if(!password.equals(confirmPassword)) {
 	            	
-	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorpass.png")).setVisible(true);
+	            	new setPopup(new ImageIcon("ui/main/memberjoinPopup/errorpass.png"), 300).setVisible(true);
 	            	return;
 				}
 	            if(LoginDAO.checkDup(phoneNum)) {
