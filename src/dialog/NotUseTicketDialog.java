@@ -34,7 +34,7 @@ public class NotUseTicketDialog extends JDialog {
 	JLabel remainTimeLabel = new JLabel();
 	
 	/* 버튼 */
-	JButton beforeBtn = new JButton(new ImageIcon("ui/Remain_seat_popup/Before_Button.png"));
+	JButton beforeBtn = new JButton(new ImageIcon("ui/button/BeforeButton.png"));
 	
 	public NotUseTicketDialog(String seatNum, Seat seat) {
 		
@@ -51,7 +51,7 @@ public class NotUseTicketDialog extends JDialog {
 		remainTimeLabel.setForeground(new Color(0x232323));
 		
 		/* 버튼 설정 */
-		beforeBtn.setBounds(300, 340, 150, 80);
+		beforeBtn.setBounds(300, 340, 158, 88);
 		beforeBtn.setContentAreaFilled(false);
 		beforeBtn.setBorderPainted(false);
 		beforeBtn.addActionListener(new ActionListener() {

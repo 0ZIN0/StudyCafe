@@ -43,8 +43,8 @@ public class UseTicketDialog extends JDialog {
 	JLabel remainDateLabel = new JLabel();
 
 	/* 버튼 */
-	JButton beforeBtn = new JButton(new ImageIcon("ui/Remain_seat_popup/Before_Button.png"));
-	JButton useStartBtn = new JButton(new ImageIcon("ui/Remain_seat_popup//useStart_Button.png"));
+	JButton beforeBtn = new JButton(new ImageIcon("ui/button/BeforeButton.png"));
+	JButton useStartBtn = new JButton(new ImageIcon("ui/button/useStartButton.png"));
 	
 	public UseTicketDialog(String seatNum, Seat seat) {
 		SeatReportPanel.seat_reservation.setSeat_id(Integer.parseInt(seatNum));
@@ -98,7 +98,7 @@ public class UseTicketDialog extends JDialog {
 		}
 		
 		/* 버튼 설정 */
-		beforeBtn.setBounds(202, 340, 150, 80);
+		beforeBtn.setBounds(202, 340, 158, 88);
 		beforeBtn.setBorderPainted(false);
 		beforeBtn.setContentAreaFilled(false);
 		beforeBtn.addActionListener(new ActionListener() {
@@ -110,7 +110,7 @@ public class UseTicketDialog extends JDialog {
 			}
 		});
 		
-		useStartBtn.setBounds(402, 340, 150, 80);
+		useStartBtn.setBounds(402, 340, 158, 88);
 		useStartBtn.setBorderPainted(false);
 		useStartBtn.setContentAreaFilled(false);
 		useStartBtn.addActionListener(new ActionListener() {

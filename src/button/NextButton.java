@@ -11,7 +11,7 @@ public class NextButton extends JButton {
 	
 	public NextButton(JDialog parent) {
 		
-		setIcon(new ImageIcon("ui/study_room/NextButton.png"));
+		setIcon(new ImageIcon("ui/button/NextButton.png"));
 		setContentAreaFilled(false);
 		setBorderPainted(false);
 		addActionListener(new ActionListener() {

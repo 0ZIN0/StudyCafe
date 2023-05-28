@@ -33,7 +33,7 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 		};
 		
 		
-		ImageIcon buttonIcon = new ImageIcon("ui/결제 팝업/버튼_수정/CloseButton.png");
+		ImageIcon buttonIcon = new ImageIcon("ui/button/CloseButton.png");
 		JButton closeButton = new JButton(buttonIcon);
 		closeButton.setBorderPainted(false);
 		closeButton.setContentAreaFilled(false);
@@ -65,7 +65,7 @@ public class TimeOrPeriodChargeDialog extends JDialog {
 			}
 		});
 
-		closeButton.setBounds(300, 415, 150, 100);
+		closeButton.setBounds(300, 415, 158, 88);
 		add(closeButton);
 		TimeButton.setBounds(165, 162, 200, 200);
 		add(TimeButton);

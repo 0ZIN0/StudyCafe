@@ -51,8 +51,8 @@ public class OnePassChargeDialog extends JDialog {
 		ticketPanel.setLocation(53, 400);
 		add(ticketPanel);
 
-		ChargeTimeButton CloseButton = new ChargeTimeButton(new ImageIcon("ui/결제 팝업/버튼_수정/CloseButton.png"));
-		CloseButton.setBounds(207, 842, 150, 100);
+		ChargeTimeButton CloseButton = new ChargeTimeButton(new ImageIcon("ui/button/CloseButton.png"));
+		CloseButton.setBounds(207, 842, 158, 88);
 		add(CloseButton);
 		CloseButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -60,10 +60,10 @@ public class OnePassChargeDialog extends JDialog {
 			}
 		});
 
-		JButton NextButton = new JButton (new ImageIcon("ui/결제 팝업/버튼_수정/NextButton.png"));  // 다음버튼, (결제버튼)
+		JButton NextButton = new JButton (new ImageIcon("ui/button/NextButton.png"));  // 다음버튼, (결제버튼)
 		NextButton.setBorderPainted(false);
 		NextButton.setContentAreaFilled(false);
-		NextButton.setBounds(375, 842, 150, 100);
+		NextButton.setBounds(375, 842, 158, 88);
 		add(NextButton);	
 		NextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,7 +108,6 @@ public class OnePassChargeDialog extends JDialog {
 
 		
 		background.setBackground(new Color(0,0,0,0));
-		//background.setBackground(Color.blue);
 		add(background);
 		setModal(true);
 		setUndecorated(true);

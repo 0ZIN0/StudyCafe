@@ -50,7 +50,7 @@ public class CompletePaymentDialog extends JDialog {
 			};
 		};
 
-		ImageIcon buttonIcon2 = new ImageIcon("ui/결제 팝업/PayInfo_Compelete_4/MainButton.png");
+		ImageIcon buttonIcon2 = new ImageIcon("ui/button/MovetoMainButton.png");
 		JButton mainButton = new JButton(buttonIcon2);
 
 		mainButton.setBorderPainted(false);
@@ -84,7 +84,6 @@ public class CompletePaymentDialog extends JDialog {
 
 					if (SeatReportPanel.mySeat == 0) {
 						SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
-						System.out.println(ticket_value);
 						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
 
 						int seat = SeatReportPanel.seat_reservation.getSeat_id();

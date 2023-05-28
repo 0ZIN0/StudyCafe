@@ -41,9 +41,8 @@ public class InsertCardDialog extends JDialog {
 				g.drawImage(bgImage, 0, 0, this);
 			};
 		};
-
-		ImageIcon buttonIcon = new ImageIcon("ui/결제 팝업/PayInfo_CreditCard_3/closeButton.png");
-		JButton closeButton = new JButton(buttonIcon);
+		
+		JButton closeButton = new JButton(new ImageIcon("ui/button/CloseButton.png"));
 
 		JLabel howPrice = new JLabel();
 		howPrice.setText("결제하실 금액");
@@ -114,11 +113,6 @@ public class InsertCardDialog extends JDialog {
 			add(priceIs);
 		}
 		
-
-
-
-
-
 		closeButton.setBorderPainted(false);
 		closeButton.setContentAreaFilled(false);
 		closeButton.addActionListener(new ActionListener() {
@@ -150,7 +144,7 @@ public class InsertCardDialog extends JDialog {
 			}
 		});
 
-		closeButton.setBounds(300, 874, 150, 80);
+		closeButton.setBounds(300, 874, 158, 88);
 
 
 		add(closeButton);
@@ -164,10 +158,6 @@ public class InsertCardDialog extends JDialog {
 		setResizable(false);
 		setBounds(585, 40, 750, 1000);
 		setVisible(true);
-
-
-
-
 	}
 
 	public static int getAmountPaid() {

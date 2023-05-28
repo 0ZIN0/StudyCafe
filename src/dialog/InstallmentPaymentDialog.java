@@ -62,7 +62,7 @@ public class InstallmentPaymentDialog extends JDialog {
 		installmentLabel.setBounds(236, 180, 150, 62);
 		add(installmentLabel);
 
-		JButton closeButton = new JButton(new ImageIcon("ui/결제 팝업/PayInfo_Default_2/closeButton.png"));
+		JButton closeButton = new JButton(new ImageIcon("ui/button/CloseButton.png"));
 		closeButton.setBorderPainted(false);
 		closeButton.setContentAreaFilled(false);
 		closeButton.addActionListener(new ActionListener() {
@@ -87,7 +87,7 @@ public class InstallmentPaymentDialog extends JDialog {
 			}
 		});
 
-		JButton nextButton = new JButton (new ImageIcon("ui/결제 팝업/PayInfo_Default_2/NextButton.png"));
+		JButton nextButton = new JButton (new ImageIcon("ui/button/NextButton.png"));
 
 		nextButton.setBorderPainted(false);
 		nextButton.setContentAreaFilled(false);
@@ -97,8 +97,8 @@ public class InstallmentPaymentDialog extends JDialog {
 				InsertCardDialog insertCardDialog = new InsertCardDialog();
 			}
 		});
-		closeButton.setBounds(207, 350, 150, 80);
-		nextButton.setBounds(375, 350, 150, 80);
+		closeButton.setBounds(207, 350, 158, 88);
+		nextButton.setBounds(375, 350, 158, 88);
 
 		add(closeButton);
 		add(nextButton);
