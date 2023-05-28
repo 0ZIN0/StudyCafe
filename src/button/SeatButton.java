@@ -52,7 +52,7 @@ public class SeatButton extends JButton {
 				SeatReportPanel.seat_reservation.setSeat_id(Integer.parseInt(seatNum));
 				
 				if (use) {
-					if (SeatReportPanel.mySeat != 0) {
+					if (SeatReportPanel.mySeat == Integer.parseInt(seatNum)) {
 						// 내좌석을 눌렀을 때 나오는 팝업
 						JDialog mySeatPopup = new MySeatDialog(seatNum, seat);
 					}

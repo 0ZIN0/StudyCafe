@@ -195,4 +195,26 @@ public class SeatReservationDAO {
 			}
 		}
 	}
+	
+	public static String getUseTicket() {
+		String query4 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
+		try (Connection conn = OjdbcConnection.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query4);
+			) {
+				pstmt.setString(1, MainFrame.member.getMember_id());
+				
+				try (
+						ResultSet rs = pstmt.executeQuery();
+				) {
+					
+					rs.next();
+					return rs.getString("use_ticket_category");
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return null;
+	}
 }
