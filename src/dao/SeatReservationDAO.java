@@ -144,34 +144,38 @@ public class SeatReservationDAO {
 	
 	/** 남은 시간이 0이 되면 자동 퇴실 시키는 메서드*/
 	public static void autoLeaveSystem() {
-		List<Integer> leaveSeat = new ArrayList<>();
-		
+		// 지정한 좌석번호를 비어있음으로 수정한다
 		String query = "UPDATE seat SET seat_state = '비어있음' WHERE seat_id = ?";
+		// 지정한 좌석예약번호의 퇴실시간을 현재시간으로 수정한다
 		String query1 = "UPDATE seat_reservation SET seat_reservation_end_time = sysdate WHERE seat_reservation_id = ?";	
 		
 		try (Connection conn = OjdbcConnection.getConnection();
 				) {
+			// getRemainTimes() : 좌석예약의 남은 시간을 체크하는 메서드
 			for(CheckRemaintime remainTime : getRemainTimes()) {
 				PreparedStatement pstmt1 = conn.prepareStatement(query);
 				PreparedStatement pstmt2 = conn.prepareStatement(query1);
 				
+				// 잔여 시간이 0미만인 좌석예약의 좌석번호와 예약번호를 query에 지정
 				if(remainTime.getRemainTime() < 0) {
 					pstmt1.setInt(1, remainTime.getSeat_id());
 					pstmt1.executeUpdate();
 					pstmt2.setString(1, remainTime.getSeat_reservation_id());
 					pstmt2.executeUpdate();
-
+					
+					// 일회이용권이라면 좌석의 남은 시간을 0으로 수정
 					if(remainTime.getusing_ticket().equals("일회이용권")) {
 						String query2 = "UPDATE seat SET remain_time = 0 WHERE seat_id = ?";
 						PreparedStatement pstmt = conn.prepareStatement(query2);
 						pstmt.setInt(1, remainTime.getSeat_id());
 						pstmt.executeUpdate();
-
+						// 시간충전권이면 멤버의 남은 시간을 0으로 수정
 					} else if(remainTime.getusing_ticket().equals("시간충전권")) {
 						String query3 = "UPDATE member SET remain_time = 0 WHERE member_id = ?";
 						PreparedStatement pstmt = conn.prepareStatement(query3);
 						pstmt.setString(1, remainTime.getMember_id());
 						pstmt.executeUpdate();
+						// 기간 이용권이면 멤버의 남은 기간을 null로 수정
 					} else {
 						String query4 = "UPDATE member SET remain_date = null WHERE member_id = ?";
 						PreparedStatement pstmt = conn.prepareStatement(query4);

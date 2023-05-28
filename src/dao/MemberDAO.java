@@ -63,6 +63,7 @@ public class MemberDAO {
 		return 0;
 	}
 	
+	/** 멤버가 사용중인 이용권과 이용권에 따른 남은 시간 조회*/
 	public static int updateRemainTime(String memId) {
 		String query1 = "select\r\n"
 				+ "mem.member_id, (remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60))\r\n"

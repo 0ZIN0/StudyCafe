@@ -65,7 +65,11 @@ public class TicketOrderDAO {
 	}
 	
 	public static DefaultTableModel salesTableModel() {
-		DefaultTableModel model = new DefaultTableModel();
+		DefaultTableModel model = new DefaultTableModel() {
+			public boolean isCellEditable(int rowIndex, int mColIndex) {
+				return false;
+			}
+		};
 		
 		String[] header = new String[] {
 	    		"주문번호", "회원번호", "이용권번호", "결제 금액", "결제 상태", "결제 날짜"

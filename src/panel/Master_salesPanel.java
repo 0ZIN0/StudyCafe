@@ -17,14 +17,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import button.Downbutton;
 import button.Upbutton;
 import color.MyColor;
 import dao.TicketOrderDAO;
 import dto.Ticket_order;
+import renderer.MyTableCellRenderer;
+
 import java.awt.GridLayout;
 import javax.swing.border.LineBorder;
 
@@ -36,6 +41,7 @@ public class Master_salesPanel extends JPanel{
 	
 	public static DefaultTableModel model = TicketOrderDAO.salesTableModel();
 	public static JTable table = new JTable(model);
+	
 	JScrollPane scrollPane = new JScrollPane(table);
 
 	public static JButton yearupBtn = new Upbutton("year");
@@ -163,15 +169,18 @@ public class Master_salesPanel extends JPanel{
 		/*******************************************************************************/
 		
 		// table settings
+		table.getTableHeader().setReorderingAllowed(false);
+		table.getTableHeader().setResizingAllowed(false);
 		table.getTableHeader().setPreferredSize(new Dimension(100 ,50));
 		table.getTableHeader().setFont(new Font("Noto Sans KR Medium", Font.BOLD, 36));
 		table.setRowHeight(50);
 		table.setFont(new Font("Noto Sans KR Medium", Font.PLAIN, 20));
 		table.getTableHeader().setBackground(new Color(0xB8CFE5));
-		table.setCellSelectionEnabled(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setDragEnabled(false);
-		table.setEnabled(false);
+		table.putClientProperty(table, Boolean.FALSE);
+		table.setCellEditor(null);
+		//table.setEnabled(false);
 		/*******************************************************************************/
 		
 		// scrollPane settings
@@ -183,6 +192,22 @@ public class Master_salesPanel extends JPanel{
 		setBackground(new Color(73,67,69));
 		setSize(1700, 760);
 		setLayout(null);
+		
+		DefaultTableCellRenderer salesRenderer = new DefaultTableCellRenderer();
+		salesRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+		salesRenderer.setBackground(new Color(0xFFC7CE));
+		salesRenderer.setForeground(new Color(0x9C0006));
+		salesRenderer.setFont(new Font("Noto Sans KR Medium", Font.BOLD, 30));
+
+		table.getColumnModel().getColumn(5).setCellRenderer(salesRenderer);
+		
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		TableCellRenderer renderer = new MyTableCellRenderer();
+		try {
+			table.setDefaultRenderer(Class.forName("java.lang.Object"), renderer);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static void salesReset() {
