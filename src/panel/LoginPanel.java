@@ -174,9 +174,7 @@ public class LoginPanel extends JPanel {
 		loginButton.setFocusPainted(false);
 		loginButton.setBounds(510,590,400,148);
 		
-		
-		
-		
+
 		// 로그인 버튼 이벤트
 		loginButton.addActionListener(new ActionListener() {
 			
@@ -187,6 +185,7 @@ public class LoginPanel extends JPanel {
 				
 				
 				if(LoginDAO.checkmemberPhone(phoneNum)) {
+					new setPopup(new ImageIcon("ui/main/loginPopup/notmemberPhone.png"),230).setVisible(true);
 					return;
 				}
 				

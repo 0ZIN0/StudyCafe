@@ -123,8 +123,6 @@ public class MemberJoinPanel extends JPanel  {
 				String phoneNum = joinphoneField.getText();
 	            String password = new String(joinpasswordField.getPassword());
 	            String confirmPassword = new String(joinconfirmPasswordField.getPassword());
-//	            userPhoneNumber.setPhone(phoneNum);
-//	            userPhoneNumber.setPassword(password);
 	            
 	            // 휴대번호 양식 확인
 	            if(!Pattern.matches(phonnumRegular, phoneNum)) {  

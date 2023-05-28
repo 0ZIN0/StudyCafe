@@ -82,6 +82,7 @@ public class CompletePaymentDialog extends JDialog {
 					}
 
 					if (SeatReportPanel.mySeat == 0) {
+						SeatDAO.setOneDayReservation(SeatReportPanel.seat_reservation, ticket_value);
 						setSeatReportPanel();
 
 					} else {
@@ -148,6 +149,7 @@ public class CompletePaymentDialog extends JDialog {
 	}
 	
 	public void setSeatReportPanel() {
+		
 		SeatReportPanel.seat_reservation.setMember_id(MainFrame.member.getMember_id());
 		SeatDAO.setUseTicketReservation(SeatReportPanel.seat_reservation);
 		int seat = SeatReportPanel.seat_reservation.getSeat_id();
