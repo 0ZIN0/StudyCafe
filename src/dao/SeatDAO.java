@@ -226,7 +226,7 @@ public class SeatDAO {
 					) {
 				pstmt2.setInt(1, ticket_useable);
 				pstmt2.setString(2, seat_reservation.getSeat_id().toString());
-				System.out.println(pstmt2.executeUpdate());
+				pstmt2.executeUpdate();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -404,7 +404,6 @@ public class SeatDAO {
 				if (rs.getString("seat_state").equals("비어있음")) {
 					SeatReportPanel.seatBtns.get(seatNum).use = false;
 				} else {
-					System.out.println(rs.getInt("seat_id") - 1);
 					SeatReportPanel.seatBtns.get(rs.getInt("seat_id") - 1).use = true;
 				}
 			}

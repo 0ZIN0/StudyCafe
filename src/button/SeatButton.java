@@ -45,10 +45,6 @@ public class SeatButton extends JButton {
 		addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(btnId);
-				System.out.println("seatNum" + seatNum);
-				System.out.println("myseat" + SeatReportPanel.mySeat);
-
 				SeatReportPanel.seat_reservation.setSeat_id(Integer.parseInt(seatNum));
 				
 				if (use) {
