@@ -28,6 +28,7 @@ public class MasterLoginPanel extends JPanel{
 	//MasterLoginFrame masterLoginFrame = new MasterLoginFrame();
 	
 	NumberKeypad numpad= new NumberKeypad();
+	
 	JButton loginButton = new JButton(new ImageIcon("ui/master/masterLogin/Master_Login_Button.png"));
 	
 	// 필드 테두리 제거
@@ -68,6 +69,7 @@ public class MasterLoginPanel extends JPanel{
 		
 		// 넘패드 위치
 		numpad.setBounds(1080,50,550,690);
+		numpad.setTextField(userPhonNumber);
 		
 		
 		// 핸드폰 번호 입력 TextField 

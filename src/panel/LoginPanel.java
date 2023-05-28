@@ -83,7 +83,7 @@ public class LoginPanel extends JPanel {
 		add(numpad);
 		numpad.setBounds(1080,50,550,690);
 		numpad.setTextField(userPhoneNumber);
-		//setBounds(0,0,990,760);
+		
 		
 		add(userPhoneNumber);
 		add(userPass);
