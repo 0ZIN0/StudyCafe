@@ -180,10 +180,23 @@ public class Master_salesPanel extends JPanel{
 		add(scrollPane);
 		
 		// Panel settings
-		setOpaque(false);
+		setBackground(new Color(73,67,69));
 		setSize(1700, 760);
 		setLayout(null);
+	}
+	
+	public static void salesReset() {
+		date = LocalDate.now();
 		
+		Master_salesPanel.yearDigitLabel.setText(Integer.toString(Master_salesPanel.date.getYear()));
+		Master_salesPanel.monthDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getMonthValue()));
+		Master_salesPanel.dayDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getDayOfMonth()));
+		Master_salesPanel.isTodayLabel.setVisible(true);
+		
+		Master_salesPanel.yearAmount.setText(numberFormat.format(TicketOrderDAO.sales_year()) + "원");
+		Master_salesPanel.monthAmount.setText(numberFormat.format(TicketOrderDAO.sales_month()) + "원");
+		Master_salesPanel.dayAmount.setText(numberFormat.format(TicketOrderDAO.sales_day()) + "원");
+		Master_salesPanel.table.setModel(TicketOrderDAO.salesTableModel());
 		
 	}
 }

@@ -3,6 +3,7 @@ package frame;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -81,6 +82,9 @@ public class MasterMenuFrame extends JFrame{
 				
 				// USERSEARCH
 				MasterUsersearch.table.clearSelection();
+				
+				// SALES
+				Master_salesPanel.salesReset();
 			}
 		});
 		// 종료버튼 이벤트
