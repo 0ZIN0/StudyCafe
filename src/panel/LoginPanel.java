@@ -185,7 +185,7 @@ public class LoginPanel extends JPanel {
 				
 				
 				if(LoginDAO.checkmemberPhone(phoneNum)) {
-					new setPopup(new ImageIcon("ui/main/loginPopup/notmemberPhone.png"),230).setVisible(true);
+					new setPopup(new ImageIcon("ui/main/loginPopup/notmemberPhone.png"),300).setVisible(true);
 					return;
 				}
 				
