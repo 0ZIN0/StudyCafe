@@ -53,6 +53,20 @@ public class SelectSeatDialog extends JDialog {
 		
 		if (UseTicketButton.useSeat) {
 			useTicketBtn.setEnabled(false);
+			
+			if (UseTicketButton.oneday) {
+				dayTicketBtn.setEnabled(true);
+				timeTicketBtn.setEnabled(false);
+				termTicketBtn.setEnabled(false);
+			} else if (UseTicketButton.time) {
+				dayTicketBtn.setEnabled(false);
+				timeTicketBtn.setEnabled(true);
+				termTicketBtn.setEnabled(false);
+			} else if (UseTicketButton.period) {
+				dayTicketBtn.setEnabled(false);
+				timeTicketBtn.setEnabled(false);
+				termTicketBtn.setEnabled(true);
+			}
 		}
 		
 		
