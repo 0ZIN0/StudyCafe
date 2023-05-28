@@ -28,7 +28,7 @@ public class UpdateInfo implements Runnable {
 			try {
 				Thread.sleep(1000);
 				if(MainFrame.member != null && SeatReportPanel.seatBtns.size() == 32) {
-					
+					setSeatReport();
 					LockerDAO.updateLockerInfo();
 					setMyPage();
 					setLocker();
