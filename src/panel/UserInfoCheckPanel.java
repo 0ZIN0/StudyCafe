@@ -1,6 +1,7 @@
 package panel;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -16,10 +17,12 @@ import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 import dao.LoginDAO;
 import dialog.setPopup;
 import dto.MemberJoin;
+import frame.LoginFrame;
 
 public class UserInfoCheckPanel extends JPanel {
 	
@@ -29,8 +32,8 @@ public class UserInfoCheckPanel extends JPanel {
 	JCheckBox infoChkBox2 = new JCheckBox();
 	JCheckBox infoChkBox3 = new JCheckBox();
 	
-	public UserInfoCheckPanel(MemberJoin memberjoin, CardLayout card){
 	
+	public UserInfoCheckPanel(MemberJoin memberJoin){
 		setLayout(null);
 //		안쪽 프레임
 		BackgroundPanel agreeChkFrame = new BackgroundPanel(new ImageIcon("ui/UserAgree/Main_UserInfoCheck_Frame.jpg"));
@@ -56,6 +59,51 @@ public class UserInfoCheckPanel extends JPanel {
         infoChkBox1.setIcon(uncheckedIcon); // 체크박스 선택 안됬을때(Default Image)
         infoChkBox1.setSelectedIcon(checkedIcon);// 체크박스 선택 됐을때
         infoChkBox1.setOpaque(false); // 체크박스 투명하게
+        
+        //1번 체크박스(전체동의) 체크시 이벤트
+        infoChkBox1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(infoChkBox1.isSelected()) {
+					infoChkBox2.setSelected(true);
+					infoChkBox3.setSelected(true);
+				} else {
+					infoChkBox2.setSelected(false);
+					infoChkBox3.setSelected(false);
+				}
+			}
+		});
+        
+        //2번 체크박스 체크시 이벤트
+        infoChkBox2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(infoChkBox3.isSelected()) {
+					infoChkBox1.setSelected(true);
+				} 
+			}
+		});
+        
+        
+        //3번 체크박스 체크시 이벤트
+        infoChkBox3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(infoChkBox2.isSelected()) {
+					infoChkBox1.setSelected(true);
+				} 
+			}
+		});
+        
+        
+        
+        
+        
+        
+        
           
         agreeChkFrame.add(infoChkBox2);
         infoChkBox2.setBounds(410, 222, 50, 50);
@@ -73,16 +121,18 @@ public class UserInfoCheckPanel extends JPanel {
         JButton viewCont1 = new JButton(new ImageIcon("ui/UserAgree/ViewContents_Button.png")); 
         agreeChkFrame.add(viewCont1);
         viewCont1.setBounds(1150, 232, 100, 38); // 내용보기 버튼 위치 설정
-        viewCont1.setContentAreaFilled(false); // 내용보기 버튼 기본 배경 삭제
-        viewCont1.setOpaque(false); // 내용보기 버튼 이미지 투명
+        viewCont1.setBackground(new Color(72,67,69));
         viewCont1.setBorderPainted(false); // 버튼 클릭시 테두리 안나오게 
         viewCont1.setFocusPainted(false);
+        
+        
+      //viewCont1.setContentAreaFilled(false); // 내용보기 버튼 기본 배경 삭제
+        //viewCont1.setOpaque(false); // 내용보기 버튼 이미지 투명
         
         JButton viewCont2 = new JButton(new ImageIcon("ui/UserAgree/ViewContents_Button.png"));
         agreeChkFrame.add(viewCont2);
         viewCont2.setBounds(1150, 318, 100, 38);
-        viewCont2.setContentAreaFilled(false);
-        viewCont2.setOpaque(false);
+        viewCont2.setBackground(new Color(72,67,69));
         viewCont2.setBorderPainted(false);
         viewCont2.setFocusPainted(false);
         
@@ -107,24 +157,26 @@ public class UserInfoCheckPanel extends JPanel {
 		beforeBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				card.show(getParent(), "memberjoin");
+
+				LoginFrame.card.show(getParent(), "memberjoin");
 			}
 		});
-	
+		
 		nextBtn.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String phoneNum = memberjoin.getPhone();
-				String password = memberjoin.getPassword();
+				String phoneNum = memberJoin.getPhone();
+				String password = memberJoin.getPassword();
 				
 				if(infoChkBox1.isSelected() && infoChkBox2.isSelected() && infoChkBox3.isSelected()) {
 					if(LoginDAO.register(phoneNum, password) > 0) {
-						new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/sucessMemberjoin.png")).setVisible(true);
+						new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/sucessMemberjoin.png"), 300).setVisible(true);
 					}
-					card.show(getParent(), "login");
+					LoginFrame.masterBtn.setVisible(true);
+					LoginFrame.card.show(getParent(), "login");
 				} else {
-					new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/notAgree.png")).setVisible(true);
+					new setPopup(new ImageIcon("ui/UserAgree/useragrrPopup/notAgree.png"), 300).setVisible(true);
 					return;
 				} 
 	

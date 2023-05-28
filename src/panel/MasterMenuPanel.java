@@ -19,9 +19,9 @@ public class MasterMenuPanel extends JPanel{
 	MasterMenuFrame masterMenuFrame;
 	
 	
-	JButton UserDischargeBtn = new JButton(new ImageIcon("ui/master/masterMenu/UserDischarge_Button.png"));
-	JButton UserOutBtn= new JButton(new ImageIcon("ui/master/masterMenu/UserOut_Button.png"));
-	JButton UserSearchBtn= new JButton(new ImageIcon("ui/master/masterMenu/UserSearch_Button.png"));
+	JButton userDischargeBtn = new JButton(new ImageIcon("ui/master/masterMenu/UserDischarge_Button.png"));
+	JButton userOutBtn= new JButton(new ImageIcon("ui/master/masterMenu/UserOut_Button.png"));
+	JButton userSearchBtn= new JButton(new ImageIcon("ui/master/masterMenu/UserSearch_Button.png"));
 	JButton creditsBtn= new JButton(new ImageIcon("ui/master/masterMenu/credits_Button.png"));
 	
 	public MasterMenuPanel(CardLayout card) {
@@ -29,28 +29,28 @@ public class MasterMenuPanel extends JPanel{
 		setLayout(null);
 		setBackground(new Color(73,67,69));
 		
-		add(UserDischargeBtn);
-		add(UserOutBtn);
-		add(UserSearchBtn);
+		add(userDischargeBtn);
+		add(userOutBtn);
+		add(userSearchBtn);
 		add(creditsBtn);
 		
 		// 매출버튼
-		UserDischargeBtn.setBounds(415,45,480,380);
-		UserDischargeBtn.setBorderPainted(false);
-		UserDischargeBtn.setContentAreaFilled(false);
+		userDischargeBtn.setBounds(415,45,480,380);
+		userDischargeBtn.setBorderPainted(false);
+		userDischargeBtn.setContentAreaFilled(false);
 		
 		// 퇴실버튼
-		UserOutBtn.setBounds(415,395,480,380);
-		UserOutBtn.setBorderPainted(false);
-		UserOutBtn.setContentAreaFilled(false);
+		userOutBtn.setBounds(415,395,480,380);
+		userOutBtn.setBorderPainted(false);
+		userOutBtn.setContentAreaFilled(false);
 		
 		// 회원조회버튼
-		UserSearchBtn.setBounds(865,45,480,380);
-		UserSearchBtn.setBorderPainted(false);
-		UserSearchBtn.setContentAreaFilled(false);
+		userSearchBtn.setBounds(865,45,480,380);
+		userSearchBtn.setBorderPainted(false);
+		userSearchBtn.setContentAreaFilled(false);
 		
 		//회원조회버튼 이벤트
-		UserSearchBtn.addActionListener(new ActionListener() {
+		userSearchBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,6 +59,21 @@ public class MasterMenuPanel extends JPanel{
 			}
 		});
 		
+		userOutBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				card.show(getParent(), "kick");
+			}
+		});
+
+		userDischargeBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				card.show(getParent(), "sales");
+			}
+		});
 		
 		
 		

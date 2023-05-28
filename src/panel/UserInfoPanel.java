@@ -49,7 +49,7 @@ public class UserInfoPanel extends JPanel{
         
         seat = new JLabel(SeatDAO.isUsingMySeat(MainFrame.member.getMember_id()) + "번");
         
-        if(member.getMember_id() == null) {
+        if(SeatDAO.isUsingMySeat(MainFrame.member.getMember_id()) == 0) {
         	seat.setText("사용중인 좌석이 없습니다.");
         } else {
         	seat.setText(SeatDAO.isUsingMySeat(MainFrame.member.getMember_id()) + "번");

@@ -1,93 +1,40 @@
 package frame;
 
 import java.awt.CardLayout;
-
-
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.RootPaneContainer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 
-import dto.MemberJoin;
 import panel.BackgroundPanel;
-import panel.LoginPanel;
-import panel.MasterLoginPanel;
 import panel.MasterMenuPanel;
 import panel.MasterUsersearch;
-import panel.MemberJoinPanel;
+import panel.Master_LockerKickPanel;
+import panel.Master_SeatKickPanel;
+import panel.Master_StudyRoomKickPanel;
+import panel.Master_kickPanel;
+import panel.Master_salesPanel;
 import panel.NumberKeypad;
-import panel.TestPanel;
-import panel.UserInfoCheckPanel;
-import thread.TimeRun;
-import thread.UpdateInfo;
 
 public class MasterMenuFrame extends JFrame{
 	
 	
-	//MemberJoin memberjoin = new MemberJoin();
-	
 	CardLayout card = new CardLayout();
 	JPanel cardPanel = new JPanel();
 	
-	
-	
 	MasterMenuPanel masterMenuPanel = new MasterMenuPanel(card);
-//	TestPanel TestPanel = new TestPanel(); 
-	
 	MasterUsersearch masterUsersearch = new MasterUsersearch();
-	
+	Master_kickPanel kickPanel = new Master_kickPanel();
+	Master_salesPanel salesPanel = new Master_salesPanel();
 	BackgroundPanel background= new BackgroundPanel(new ImageIcon("ui/master/masterMenu/Select_Seat_Main_Background.jpg"));
 	JButton exitBtn = new JButton();
 	JButton backBtn = new JButton(new ImageIcon("ui/master/masterMenu/Back.png"));
 	JButton logoutBtn = new JButton(new ImageIcon("ui/master/masterMenu/Logout.png"));
 	
-	NumberKeypad numpad= new NumberKeypad();
-	//JPanel MasterLoginpanel = new JPanel();
-	//MasterLoginPanel masterloginpanel = new MasterLoginPanel();
-	
-	//MasterLoginPanel masterLoginPanel = new MasterLoginPanel();
-	
-	//LoginPanel loginpanel = new LoginPanel(card, this);
-	//MemberJoinPanel memberJoinPanel = new MemberJoinPanel(memberjoin,card);
-	//UserInfoCheckPanel userInfoCheckPanel = new UserInfoCheckPanel(memberjoin, card);
-	
-	//관리자 버튼
-	//JButton masterBtn = new JButton(new ImageIcon("ui/main/Master_Icon.png"));
-	
-	
-	//JPanel cardPanel = new JPanel();
-	// 쓰레드 클래스
-//	static TimeRun timeRun = new TimeRun(MainFrame.timeLabel);
-//	static UpdateInfo updateInfo = new UpdateInfo();
-	
-	
+	NumberKeypad numpad = new NumberKeypad();
 		
 	public MasterMenuFrame() {
 		
@@ -101,12 +48,11 @@ public class MasterMenuFrame extends JFrame{
 		cardPanel.setLayout(card);
 		background.add(cardPanel);
 		cardPanel.setBounds(110,240,1700,760);
-		cardPanel.setBorder(new LineBorder(Color.red,1));
 		
-		
-		cardPanel.add(masterUsersearch,"Usersearch");
 		cardPanel.add(masterMenuPanel,"menu");
-		
+		cardPanel.add(masterUsersearch,"Usersearch");
+		cardPanel.add(kickPanel, "kick");
+		cardPanel.add(salesPanel, "sales");
 		
 		backBtn.setBounds(113,113,112,40);
 		backBtn.setBorderPainted(false);
@@ -126,14 +72,17 @@ public class MasterMenuFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				card.show(cardPanel, "menu");
+				
+				// KICK
+				Master_SeatKickPanel.table.clearSelection();
+				Master_StudyRoomKickPanel.table.clearSelection();
+				Master_LockerKickPanel.table.clearSelection();
+				Master_kickPanel.seatBtn.doClick();
+				
+				// USERSEARCH
+				MasterUsersearch.table.clearSelection();
 			}
 		});
-		
-		
-		
-		
-		
-
 		// 종료버튼 이벤트
 		exitBtn.addActionListener(new ActionListener() {
 
@@ -142,25 +91,17 @@ public class MasterMenuFrame extends JFrame{
 				System.exit(0);
 			}
 		});
-//		exitBtn.setBounds(1700,80,100,100);
-//		background.add(exitBtn);
-		
+
 		// 로그아웃버튼 이벤트
 		logoutBtn.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new LoginFrame();
 				dispose();
-				
+				new LoginFrame();
 			}
 		});
 		
-		
-		
-		
-
-
 		setLayout(null);
 		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);

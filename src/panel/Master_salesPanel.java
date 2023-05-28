@@ -180,9 +180,9 @@ public class Master_salesPanel extends JPanel{
 		add(scrollPane);
 		
 		// Panel settings
-		setLayout(null);
 		setOpaque(false);
-		setSize(1700,760);
+		setSize(1700, 760);
+		setLayout(null);
 		
 		
 	}

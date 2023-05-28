@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class SeatReservationDAO {
 	public static List<CheckRemaintime> getRemainTimes() {
 		List<CheckRemaintime> remainTimes = new ArrayList<>();
 		
+		// 좌석의 이용권 카테고리마다 남은 시간 - (현재시간 - 입실시간)을 조회한다
 		String query1 = "SELECT \r\n"
 				+ "seat_reservation_id, res.seat_id, res.use_ticket_category, res.member_id, "
 				+ "(remain_time - ROUND((sysdate - seat_reservation_start_time) * 24 * 60)) as remain \r\n"
@@ -144,55 +146,42 @@ public class SeatReservationDAO {
 	public static void autoLeaveSystem() {
 		List<Integer> leaveSeat = new ArrayList<>();
 		
-		for(CheckRemaintime remainTime : getRemainTimes()) {
-			if(remainTime.getRemainTime() < 0) {
-				String query = "UPDATE seat SET seat_state = '비어있음' WHERE seat_id = ?";
-				String query1 = "UPDATE seat_reservation SET seat_reservation_end_time = sysdate WHERE seat_reservation_id = ?";
-				try (Connection conn = OjdbcConnection.getConnection();
-					PreparedStatement pstmt1 = conn.prepareStatement(query);
-					PreparedStatement pstmt2 = conn.prepareStatement(query1);
+		String query = "UPDATE seat SET seat_state = '비어있음' WHERE seat_id = ?";
+		String query1 = "UPDATE seat_reservation SET seat_reservation_end_time = sysdate WHERE seat_reservation_id = ?";	
+		
+		try (Connection conn = OjdbcConnection.getConnection();
 				) {
+			for(CheckRemaintime remainTime : getRemainTimes()) {
+				PreparedStatement pstmt1 = conn.prepareStatement(query);
+				PreparedStatement pstmt2 = conn.prepareStatement(query1);
+				
+				if(remainTime.getRemainTime() < 0) {
 					pstmt1.setInt(1, remainTime.getSeat_id());
 					pstmt1.executeUpdate();
 					pstmt2.setString(1, remainTime.getSeat_reservation_id());
 					pstmt2.executeUpdate();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				if(remainTime.getusing_ticket().equals("일회이용권")) {
-					String query2 = "UPDATE seat SET remain_time = 0 WHERE seat_id = ?";
-					try (Connection conn = OjdbcConnection.getConnection();
+
+					if(remainTime.getusing_ticket().equals("일회이용권")) {
+						String query2 = "UPDATE seat SET remain_time = 0 WHERE seat_id = ?";
 						PreparedStatement pstmt = conn.prepareStatement(query2);
-					) {
 						pstmt.setInt(1, remainTime.getSeat_id());
 						pstmt.executeUpdate();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				} else if(remainTime.getusing_ticket().equals("시간충전권")) {
-					String query3 = "UPDATE member SET remain_time = 0 WHERE member_id = ?";
-					try (Connection conn = OjdbcConnection.getConnection();
+
+					} else if(remainTime.getusing_ticket().equals("시간충전권")) {
+						String query3 = "UPDATE member SET remain_time = 0 WHERE member_id = ?";
 						PreparedStatement pstmt = conn.prepareStatement(query3);
-					) {
-						System.out.println(remainTime.getMember_id());
 						pstmt.setString(1, remainTime.getMember_id());
 						pstmt.executeUpdate();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				} else {
-					String query4 = "UPDATE member SET remain_date = null WHERE member_id = ?";
-					try (Connection conn = OjdbcConnection.getConnection();
+					} else {
+						String query4 = "UPDATE member SET remain_date = null WHERE member_id = ?";
 						PreparedStatement pstmt = conn.prepareStatement(query4);
-					) {
 						pstmt.setString(1, remainTime.getMember_id());
 						pstmt.executeUpdate();
-					} catch (Exception e) {
-						e.printStackTrace();
 					}
 				}
-				
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
