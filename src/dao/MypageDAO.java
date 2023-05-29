@@ -35,8 +35,7 @@ public class MypageDAO {
 
 	/** 상품명 */
 	public static String isUseTicket() {
-		String query = "SELECT USE_TICKET_CATEGORY FROM SEAT_RESERVATION\r\n"
-				+ "WHERE SEAT_RESERVATION_END_TIME IS NULL\r\n"
+		String query = "SELECT USE_TICKET_CATEGORY FROM SEAT_RESERVATION WHERE SEAT_RESERVATION_END_TIME IS NULL\r\n"
 				+ "AND MEMBER_ID = ?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();

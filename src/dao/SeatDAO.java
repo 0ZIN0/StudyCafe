@@ -324,6 +324,7 @@ public class SeatDAO {
 				} else {
 					UserInfoPanel.seat.setText("사용중인 좌석이 없습니다");
 					SeatReportPanel.seatInfoLabel.setText("사용중인 좌석이 없습니다.");
+					SeatReportPanel.mySeat = 0;
 				}
 			}
 		} catch (Exception e) {

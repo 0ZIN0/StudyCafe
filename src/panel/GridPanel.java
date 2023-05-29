@@ -192,7 +192,7 @@ public class GridPanel extends JPanel {
 		setLayout(grid);
 	}
 
-	// 예약된 정보들을 가져와 버튼에 색을 지정하는 메서드
+	/** 예약된 정보들을 가져와 버튼에 색을 지정하는 메서드 */
 	public void getReservationInfo(int btnNum) {
 		LocalDate labelDate = GridPanel.dateLabel.getSelectDay();
 		String studyroom_id = StudyRoomPanel.myStudyRoom_Reservation.getStudyRoom_id(); 
@@ -208,7 +208,8 @@ public class GridPanel extends JPanel {
 				LocalDateTime end = LocalDateTime.parse(studyRoom_reserv.getStudyRoom_end_dateTime(), formatter);
 				if (start.compareTo(selectDateTime) <= 0 && 
 						end.compareTo(selectDateTime) > 0) {
-					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) && btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
+					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) 
+							&& btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
 						btns.get(i).setEnabled(false);
 					}
 					if (selectTime.compareTo(GridPanel.startTimeLabel.getTime()) <= 0 &&

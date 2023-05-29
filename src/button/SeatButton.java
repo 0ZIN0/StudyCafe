@@ -41,10 +41,15 @@ public class SeatButton extends JButton {
 		} else {
 			setBackground(new Color(0xD9D9D9)); // 비어있는 좌석
 		}
-
+		
+		
 		addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				System.out.println(seatNum);
+				System.out.println(SeatReportPanel.mySeat);
+
 				SeatReportPanel.seat_reservation.setSeat_id(Integer.parseInt(seatNum));
 				
 				if (use) {

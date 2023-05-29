@@ -106,17 +106,6 @@ public class LoginFrame extends JFrame{
 		cardPanel.add(memberJoinPanel,"memberjoin");
 		cardPanel.add(userInfoCheckPanel, "userInfoCheck");
 
-		// 종료버튼 이벤트
-		exitBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
-		exitBtn.setBounds(1700,80,100,100);
-		background.add(exitBtn);
-
 		setLayout(null);
 		setUndecorated(true);
 		setBounds(0, 0, 1920, 1080);
