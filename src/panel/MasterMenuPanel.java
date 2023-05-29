@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
+import dialog.ProgramOffDialog;
 import frame.MasterMenuFrame;
 
 public class MasterMenuPanel extends JPanel{
@@ -22,7 +22,7 @@ public class MasterMenuPanel extends JPanel{
 	JButton userDischargeBtn = new JButton(new ImageIcon("ui/master/masterMenu/UserDischarge_Button.png"));
 	JButton userOutBtn= new JButton(new ImageIcon("ui/master/masterMenu/UserOut_Button.png"));
 	JButton userSearchBtn= new JButton(new ImageIcon("ui/master/masterMenu/UserSearch_Button.png"));
-	JButton creditsBtn= new JButton(new ImageIcon("ui/master/masterMenu/credits_Button.png"));
+	JButton exitBtn = new JButton(new ImageIcon("ui/master/KioskProgram_off_Button.png"));
 	
 	public MasterMenuPanel(CardLayout card) {
 		
@@ -32,7 +32,7 @@ public class MasterMenuPanel extends JPanel{
 		add(userDischargeBtn);
 		add(userOutBtn);
 		add(userSearchBtn);
-		add(creditsBtn);
+		add(exitBtn);
 		
 		// 매출버튼
 		userDischargeBtn.setBounds(415,45,480,380);
@@ -76,11 +76,18 @@ public class MasterMenuPanel extends JPanel{
 		});
 		
 		
+		exitBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JDialog programOff = new ProgramOffDialog();
+			}
+		});
 		
 		// 회원조회버튼
-		creditsBtn.setBounds(865,395,480,380);
-		creditsBtn.setBorderPainted(false);
-		creditsBtn.setContentAreaFilled(false);
+		exitBtn.setBounds(865,395,480,380);
+		exitBtn.setBorderPainted(false);
+		exitBtn.setContentAreaFilled(false);
 		
 	}
 

@@ -104,7 +104,7 @@ public class LockerPayDialog extends JDialog {
 			}
 		});
 		
-		next.setBounds(375,860, 150, 80);
+		next.setBounds(375,860, 158, 88);
 		add(next);
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

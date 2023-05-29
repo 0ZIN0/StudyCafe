@@ -136,7 +136,7 @@ public class PaymentDialog extends JDialog {
 
 		/* button */
 		closeBtn.setLocation(202, 410);
-		nextBtn.setBounds(402, 410, 150, 80);
+		nextBtn.setBounds(402, 410, 158, 88);
 
 		/* 기본 설정 */
 		paymentPanel.add(label1);

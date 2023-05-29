@@ -119,7 +119,6 @@ public class ExitDialog extends JDialog {
 		setVisible(true);
 	}
 	
-	// 아직 구현 안됨 구현해야함
 	public int setRemainMinute(int getRemainMinute) {
 		
 		return 0;

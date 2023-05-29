@@ -146,7 +146,7 @@ public class CompletePaymentDialog extends JDialog {
 			}
 		});
 
-		mainButton.setBounds(250, 320, 250, 80);
+		mainButton.setBounds(250, 320, 250, 88);
 
 		add(mainButton);
 
@@ -196,7 +196,8 @@ public class CompletePaymentDialog extends JDialog {
 				LocalDateTime end = LocalDateTime.parse(studyRoom_reserv.getStudyRoom_end_dateTime(), formatter);
 				if (start.compareTo(selectDateTime) <= 0 && 
 						end.compareTo(selectDateTime) > 0) {
-					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) && btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
+					for(int i = btns.indexOf(timeSelectBtn) - (btnNum - 1); i < btns.indexOf(timeSelectBtn) 
+							&& btns.indexOf(timeSelectBtn) - (btnNum - 1) >= 0; i++) {
 						btns.get(i).setEnabled(false);
 					}
 					if (selectTime.compareTo(GridPanel.startTimeLabel.getTime()) <= 0 &&
