@@ -40,7 +40,7 @@ public class OnePassChargePanel extends JPanel {
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간_choice.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간_choice.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice.png")	
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_revision.png")	
 	};
 
 	ImageIcon[] selectedIcons = new ImageIcon[] { 
@@ -49,7 +49,7 @@ public class OnePassChargePanel extends JPanel {
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_4시간_choice_line.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_6시간_choice_line.png"),
 			new ImageIcon("ui/결제 팝업/일회이용권/Button_8시간_choice_line.png"),
-			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_line.png")
+			new ImageIcon("ui/결제 팝업/일회이용권/Button_종일권_choice_line_revision.png")
 	};
 	
 	Ticket ticket;
