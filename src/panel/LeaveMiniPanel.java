@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import color.MyColor;
 import dto.Seat;
 
 public class LeaveMiniPanel extends JPanel {
@@ -38,13 +39,9 @@ public class LeaveMiniPanel extends JPanel {
 		
 		setPreferredSize(new Dimension(300, 100));
 		setLayout(null);
-		setBorder(new LineBorder(Color.BLACK, 2));
+		setBorder(new LineBorder(MyColor.BLACK));
 		setSize(630, 100);
 		setBackground(Color.WHITE);
 		setVisible(true);
-	}
-	
-	public JLabel getRemainTimeLabel() {
-		return remainTimeLabel;
 	}
 }
