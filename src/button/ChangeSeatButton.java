@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import dialog.MySeatDialog;
+import frame.MainFrame;
 import panel.SeatReportPanel;
 
 public class ChangeSeatButton extends JButton {
@@ -25,6 +26,7 @@ public class ChangeSeatButton extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				parent.dispose();
+				MainFrame.change = true;
 				setIcon(new ImageIcon("ui/myseat/Button_change_line.png"));
 				SeatReportPanel.seatInfoLabel.setText("원하시는 좌석을 선택해주세요.");
 				SeatReportPanel.seatInfoLabel.setBounds(437, 28, 700, 50);

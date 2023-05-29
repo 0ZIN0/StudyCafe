@@ -21,7 +21,7 @@ import label.SeatReportLabel;
 
 public class SeatDAO {
 
-	/* temp method */
+	/** temp method */
 	public static Member setMember(String phoneNumber) {
 		String query = "SELECT * FROM member WHERE phone_number=?";
 		Member member = new Member();
@@ -50,7 +50,7 @@ public class SeatDAO {
 		return member;
 	}
 
-	/* 유저의 잔여시간을 꺼내는 메서드 */
+	/** 유저의 잔여시간을 꺼내는 메서드 */
 	public static int getRemainTime(String member_id) {
 		String query = "SELECT * FROM MEMBER WHERE MEMBER_ID=?";
 		try (
@@ -71,7 +71,7 @@ public class SeatDAO {
 		return 0;
 	}
 
-	/* 좌석 이동 시 유저의 데이터를 변경하는 메서드 */
+	/** 좌석 이동 시 유저의 데이터를 변경하는 메서드 */
 	public static void setChangeSeat(String member_id, String seatNum) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION INNER JOIN SEAT USING(SEAT_ID) WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
 
@@ -126,7 +126,7 @@ public class SeatDAO {
 		}
 	}
 
-	/* 퇴실 처리 기능 */
+	/** 퇴실 처리 기능 */
 	public static void setCheckOut(String member_id) {
 		String query1 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
 		try (
@@ -177,7 +177,7 @@ public class SeatDAO {
 		}
 	}
 
-	/* 입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
+	/** 입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
 	public static void setReservation(Seat_reservation seat_reservation) {
 
 		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, ?, sysdate, NULL)";
@@ -205,7 +205,7 @@ public class SeatDAO {
 		}
 	}
 
-	/* (일회이용권 전용)입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
+	/** (일회이용권 전용)입실할 때 좌석 예약 테이블에 데이터 추가하는 메서드 */
 	public static void setOneDayReservation(Seat_reservation seat_reservation, Integer ticket_useable) {
 
 		String query1 = "INSERT INTO SEAT_RESERVATION VALUES ('SR-'|| seat_reservation_id_seq.nextval, ?, ?, ?, sysdate, NULL)";
@@ -283,7 +283,7 @@ public class SeatDAO {
 		return false;
 	}
 
-	/* 사용자가 사용하고 있는 좌석이 있는지 확인하는 메서드 */
+	/** 사용자가 사용하고 있는 좌석이 있는지 확인하는 메서드 */
 	public static int isUsingMySeat(String member_id) {
 
 		String query = "SELECT * FROM SEAT_RESERVATION INNER JOIN MEMBER USING (MEMBER_ID) WHERE MEMBER_ID=?";
@@ -319,8 +319,13 @@ public class SeatDAO {
 					ResultSet rs = pstmt.executeQuery();
 					) {
 				if(rs.next()) {
-					UserInfoPanel.seat.setText(rs.getInt("seat_id") + "번");
-					SeatReportPanel.seatInfoLabel.setText(rs.getInt("seat_id") + "번 좌석을 사용중입니다.");
+					if (MainFrame.change) {
+						SeatReportPanel.seatInfoLabel.setText("원하시는 좌석을 선택해주세요.");
+						SeatReportPanel.seatInfoLabel.setBounds(437, 28, 700, 50);
+					} else {
+						UserInfoPanel.seat.setText(rs.getInt("seat_id") + "번");
+						SeatReportPanel.seatInfoLabel.setText(rs.getInt("seat_id") + "번 좌석을 사용중입니다.");
+					}
 				} else {
 					UserInfoPanel.seat.setText("사용중인 좌석이 없습니다");
 					SeatReportPanel.seatInfoLabel.setText("사용중인 좌석이 없습니다.");
@@ -332,7 +337,7 @@ public class SeatDAO {
 		}
 	}
 
-	/* (일회이용권 전용) 이용권 연장 시 seat의 remain_time 시간 추가하는 메서드 */
+	/** (일회이용권 전용) 이용권 연장 시 seat의 remain_time 시간 추가하는 메서드 */
 	public static void plusOneDayTicket(Integer seat_id, Integer remain_time) {
 		String query = "UPDATE SEAT SET REMAIN_TIME=REMAIN_TIME+? WHERE SEAT_ID=?";
 		try (
@@ -391,7 +396,7 @@ public class SeatDAO {
 		return remain;
 	}
 	
-	/*좌석의 상태를 확인하여 seatButton의 use를 바꿔주는 메서드*/
+	/** 좌석의 상태를 확인하여 seatButton의 use를 바꿔주는 메서드*/
 	public static void checkUse() {
 		String query = "SELECT seat_id, seat_state FROM seat";
 		try (

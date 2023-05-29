@@ -42,6 +42,8 @@ public class MainFrame extends JFrame {
 	/* 레이아웃 */
 	public static CardLayout card = new CardLayout();
 	
+	public static boolean change;
+	
 	/* 이미지들 */
 	// 백그라운드 이미지
 	ImageIcon backgroundImageIcon = new ImageIcon("ui/background/Select_Seat_last_1.png");

@@ -101,6 +101,7 @@ public class ChangeSeatDialog extends JDialog {
 				
 				JDialog changeCompletionPopup = new ChangeCompletionDialog(seatNum);
 				UserInfoPanel.seat.setText(seatNum + "번");
+				MainFrame.change = false;
 			}
 		});
 		
