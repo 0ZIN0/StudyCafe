@@ -144,7 +144,7 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 
 # 📝 시작 가이드
 
-## 요구사항 (Requirements)
+### 요구사항 (Requirements)
 #### To set up the environment for running the program, the following components need to be provided:
 * [jdk1.8.0_281](https://www.oracle.com/kr/java/technologies/downloads/)
 * [Eclipse 4.19](https://www.eclipse.org/downloads/packages/)
