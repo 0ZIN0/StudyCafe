@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,6 +32,10 @@ import dto.Ticket_order;
 import renderer.MyTableCellRenderer;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+
 import javax.swing.border.LineBorder;
 
 public class Master_salesPanel extends JPanel{
@@ -151,13 +156,78 @@ public class Master_salesPanel extends JPanel{
 		
 		//buttons
 		yearupBtn.setBounds(1100, 34, 34, 25);
+		yearupBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (date.getYear() == LocalDate.now().getYear() &&
+						date.getMonthValue() > LocalDate.now().getMonthValue()) {
+					date = LocalDate.now();
+					setEnabled(false);
+				} else if(date.getYear() == LocalDate.now().getYear()) {
+					setEnabled(false);
+				} else {
+					date = date.plusYears(1);
+				}
+			}
+		});
 		yeardownBtn.setBounds(1100, 105, 34, 25);
+		yeardownBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					date = date.minusYears(1);
+					yearupBtn.setEnabled(true);
+					monthupBtn.setEnabled(true);
+					dayupBtn.setEnabled(true);
+			}
+		});
 		
 		monthupBtn.setBounds(1265, 34, 34, 25);
+		monthupBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(date.getYear() == LocalDate.now().getYear() && 
+						date.getMonthValue() == LocalDate.now().getMonthValue()) {
+					setEnabled(false);
+				} else {
+					date = date.plusMonths(1);		
+				}
+				
+			}
+		});
 		monthdownBtn.setBounds(1265, 105, 34, 25);
+		monthdownBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				date = date.minusMonths(1);
+				monthupBtn.setEnabled(true);
+			}
+		});
 		
 		dayupBtn.setBounds(1415, 34, 34, 25);
+		dayupBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(date.equals(LocalDate.now())) {
+					setEnabled(false);
+				} else {
+					date = date.plusDays(1);
+				}
+			}
+		});
 		daydownBtn.setBounds(1415, 105, 34, 25);
+		daydownBtn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				date = date.minusDays(1);	
+				dayupBtn.setEnabled(true);
+			}
+		});
 	
 		add(yearupBtn);
 		add(yeardownBtn);

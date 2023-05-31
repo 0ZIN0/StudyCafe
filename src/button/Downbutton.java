@@ -33,29 +33,9 @@ public class Downbutton extends JButton implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(type.equals("year")) {
-			Master_salesPanel.date = Master_salesPanel.date.minusYears(1);
-		} else if(type.equals("month")) {
-			Master_salesPanel.date = Master_salesPanel.date.minusMonths(1);
-
-		} else {
-			Master_salesPanel.date = Master_salesPanel.date.minusDays(1);
-
-		}
 		Master_salesPanel.yearDigitLabel.setText(Integer.toString(Master_salesPanel.date.getYear()));
 		Master_salesPanel.monthDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getMonthValue()));
 		Master_salesPanel.dayDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getDayOfMonth()));
-		
-		if(Master_salesPanel.date.equals(LocalDate.now())) {
-			Master_salesPanel.isTodayLabel.setVisible(true);
-		} else {
-			Master_salesPanel.isTodayLabel.setVisible(false);
-			Master_salesPanel.yearupBtn.setEnabled(true);
-			Master_salesPanel.monthupBtn.setEnabled(true);
-			Master_salesPanel.dayupBtn.setEnabled(true);
-		}
-		
-		Master_salesPanel.table.setModel(TicketOrderDAO.salesTableModel());
 		
 		NumberFormat numberFormat = NumberFormat.getInstance();
 		Master_salesPanel.yearAmount.setText(numberFormat.format(TicketOrderDAO.sales_year()) + "원");

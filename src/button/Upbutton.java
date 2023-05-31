@@ -36,35 +36,10 @@ public class Upbutton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(type.equals("year")) {
-			Master_salesPanel.date = Master_salesPanel.date.plusYears(1);
-		} else if(type.equals("month")) {
-			Master_salesPanel.date = Master_salesPanel.date.plusMonths(1);
 
-		} else {
-			Master_salesPanel.date = Master_salesPanel.date.plusDays(1);
-
-		}
 		Master_salesPanel.yearDigitLabel.setText(Integer.toString(Master_salesPanel.date.getYear()));
 		Master_salesPanel.monthDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getMonthValue()));
 		Master_salesPanel.dayDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getDayOfMonth()));
-		
-		if(Master_salesPanel.date.getYear() == LocalDate.now().getYear() && Master_salesPanel.date.getMonthValue() == LocalDate.now().getMonthValue()) {
-			Master_salesPanel.yearupBtn.setEnabled(false);
-			Master_salesPanel.monthupBtn.setEnabled(false);
-		}
-		
-		if(Master_salesPanel.date.equals(LocalDate.now())) {
-			Master_salesPanel.isTodayLabel.setVisible(true);
-			Master_salesPanel.yearupBtn.setEnabled(false);
-			Master_salesPanel.monthupBtn.setEnabled(false);
-			Master_salesPanel.dayupBtn.setEnabled(false);
-		} else {
-			Master_salesPanel.isTodayLabel.setVisible(false);
-		}
-		
-		Master_salesPanel.table.setModel(TicketOrderDAO.salesTableModel());
 		
 		NumberFormat numberFormat = NumberFormat.getInstance();
 		Master_salesPanel.yearAmount.setText(numberFormat.format(TicketOrderDAO.sales_year()) + "원");
