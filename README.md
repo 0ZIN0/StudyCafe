@@ -153,8 +153,8 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 ---
 
 # 🎢 기술 스택(Stacks)
-## Environment
+### Environment
 <img src="https://img.shields.io/badge/eclipse-2C2255?style=for-the-badge&logo=eclipse&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 
-## Development
+### Development
 <img src="https://img.shields.io/badge/java-2A6379?style=for-the-badge&logo=java&logoColor=white">  <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
