@@ -134,7 +134,7 @@ Furthermore, the kiosk provides a feature to view the daily (year, month, day) s
 
 Lastly, the administrator has the capability to manually shut down the kiosk if needed. This feature proves useful in unforeseen circumstances or when temporary suspension of the kiosk is necessary due to specific reasons.
 
-# 시작 가이드
+# 📝 시작 가이드
 
 ## 요구사항 (Requirements)
 #### To set up the environment for running the program, the following components need to be provided:
@@ -142,5 +142,9 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 * [Eclipse 4.19](https://www.eclipse.org/downloads/packages/)
 * [database 11g](https://www.oracle.com/database/technologies/xe-prior-release-downloads.html)
 
-```git
-$ git clone 
+# 🎢 기술 스택(Stacks)
+## Environment
+<img src="https://img.shields.io/badge/eclipse-2C2255?style=for-the-badge&logo=html5&logoColor=white">  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=html5&logoColor=white">
+
+## Development
+<img src="https://img.shields.io/badge/java-2A6379?style=for-the-badge&logo=html5&logoColor=white">  <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=html5&logoColor=white">
