@@ -140,4 +140,7 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 #### To set up the environment for running the program, the following components need to be provided:
 * [jdk1.8.0_281](https://www.oracle.com/kr/java/technologies/downloads/)
 * [Eclipse 4.19](https://www.eclipse.org/downloads/packages/)
-* 
+* [database 11g](https://www.oracle.com/database/technologies/xe-prior-release-downloads.html)
+
+```git
+$ git clone 
