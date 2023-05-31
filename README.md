@@ -4,7 +4,7 @@
   <img src="https://github.com/0ZIN0/StudyCafe/assets/132882290/896fae6b-3701-43e5-bdf7-98688ad7d21f">
 </p>
 
-# 🛠 Study Cafe Dev
+# 🛠 Study Cafe Kiosk Dev
 개발 기간 : 2023.05.03 ~ 2023.05.28
 
 ## 팀원 소개
@@ -85,6 +85,18 @@
 사용자의 편의성을 중점으로 UI/UX를 고려하여 개발하는 것으로 결정이 되었습니다.
 
 
+As the project's main theme was determined to be the development of a kiosk, our team conducted a meeting to discuss the specific focus of our project. Recently, 
+
+self-service laundromats and coin-operated karaoke rooms, which allow individuals to use the facilities independently, have gained popularity. Consequently, 
+
+kiosks have been extensively developed in places like convenience stores and cafes. Based on this trend, 
+
+our team has chosen to develop a kiosk specifically for study cafes as our project's main theme.
+
+During the meeting, it was decided that our team would prioritize the convenience of the users and develop a program that focuses on user-friendly UI/UX, 
+
+rather than simply creating a program that is convenient for the developers.
+
 ## 프로그램 소개
 
 저희가 개발한 스터디카페 키오스크는 개인석, 스터디룸, 사물함을 직접 구매하고 예약하는 기능을 갖춘 프로그램입니다.
@@ -110,3 +122,22 @@
 이는 예기치 않은 상황이나 특정 사유로 인해 키오스크를 일시적으로 중단해야 할 때 유용합니다.
 
 
+The study cafe kiosk developed by our team is a program equipped with features for purchasing and reserving individual seats, study rooms, and lockers.
+
+In the individual seat section, users can purchase three types of passes: one-time passes, time-based passes, and membership passes. Each pass offers various customization options for using the study cafe. The one-time pass allows users to directly select and purchase a specific seat.
+
+The study rooms operate on a reservation system. Users can check the time table and directly choose their desired study room, date, and time slot to make a reservation.
+
+In the administrator mode of the study cafe kiosk, there are functions for the administrator to view member information and restrict access to individual seats, study rooms, and lockers. The administrator can access and review the information of all members.
+
+Furthermore, the kiosk provides a feature to view the daily (year, month, day) sales revenue generated through kiosk purchases. This allows for easy tracking of sales statistics.
+
+Lastly, the administrator has the capability to manually shut down the kiosk if needed. This feature proves useful in unforeseen circumstances or when temporary suspension of the kiosk is necessary due to specific reasons.
+
+# 시작 가이드
+
+## 요구사항 (Requirements)
+#### To set up the environment for running the program, the following components need to be provided:
+* [jdk1.8.0_281](https://www.oracle.com/kr/java/technologies/downloads/)
+* [Eclipse 4.19](https://www.eclipse.org/downloads/packages/)
+* 
