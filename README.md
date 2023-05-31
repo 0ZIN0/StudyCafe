@@ -1,4 +1,6 @@
 # StudyCafe
+
+| member_id | phone_number | member_password |remain_time |remain_date |locker_number |locker_password |locker_remain_date |
 |---------|---------|---------|---------|---------|---------|---------|---------|
 M-1	010-1111-1111	000000	200	23/08/30	L-1	000000	23/05/30
 M-2	010-1112-1112	000000	200	23/08/30		000000	
