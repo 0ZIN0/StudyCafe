@@ -14,7 +14,9 @@ import dto.Seat;
 
 public class LeaveMainPanel extends JPanel {
 	
+	// 10분 남은 좌석들의 리스트를 가져옴
 	List<int[]> remainTime = SeatDAO.leaveSeat();
+	
 	public LeaveMainPanel() {
 		for(int i = 0; i < remainTime.size(); i++) {
 			LeaveMiniPanel miniPanel = new LeaveMiniPanel(remainTime, i);

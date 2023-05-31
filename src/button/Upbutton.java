@@ -50,6 +50,11 @@ public class Upbutton extends JButton implements ActionListener{
 		Master_salesPanel.monthDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getMonthValue()));
 		Master_salesPanel.dayDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getDayOfMonth()));
 		
+		if(Master_salesPanel.date.getYear() == LocalDate.now().getYear() && Master_salesPanel.date.getMonthValue() == LocalDate.now().getMonthValue()) {
+			Master_salesPanel.yearupBtn.setEnabled(false);
+			Master_salesPanel.monthupBtn.setEnabled(false);
+		}
+		
 		if(Master_salesPanel.date.equals(LocalDate.now())) {
 			Master_salesPanel.isTodayLabel.setVisible(true);
 			Master_salesPanel.yearupBtn.setEnabled(false);
