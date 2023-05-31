@@ -209,7 +209,7 @@ public class KickDAO {
 	
 	/** (스터디룸)예약 취소하기 버튼을 누르면 퇴실을 시켜버리는 메서드  */
 	public static void setStudyRoomUserOut(String studyroom_reservation_id) {
-		String query = "DELETE FROM STUDYROOM_RESERVATION WHERE STUDYROOM_ID=?";
+		String query = "DELETE FROM STUDYROOM_RESERVATION WHERE STUDYROOM_RESERVATION_ID=?";
 		try (
 				Connection conn = OjdbcConnection.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query);
