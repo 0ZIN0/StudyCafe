@@ -4,8 +4,12 @@
   <img src="https://github.com/0ZIN0/StudyCafe/assets/132882290/896fae6b-3701-43e5-bdf7-98688ad7d21f">
 </p>
 
+---
+
 # 🛠 Study Cafe Kiosk Dev
 개발 기간 : 2023.05.03 ~ 2023.05.28
+
+---
 
 ## 팀원 소개
 <table>
@@ -69,6 +73,8 @@
     <td>자신이 맡았던 역할</td>
   </tr>
 </table>
+
+---
 
 ## 프로젝트 동기
 
@@ -134,6 +140,8 @@ Furthermore, the kiosk provides a feature to view the daily (year, month, day) s
 
 Lastly, the administrator has the capability to manually shut down the kiosk if needed. This feature proves useful in unforeseen circumstances or when temporary suspension of the kiosk is necessary due to specific reasons.
 
+---
+
 # 📝 시작 가이드
 
 ## 요구사항 (Requirements)
@@ -141,6 +149,8 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 * [jdk1.8.0_281](https://www.oracle.com/kr/java/technologies/downloads/)
 * [Eclipse 4.19](https://www.eclipse.org/downloads/packages/)
 * [database 11g](https://www.oracle.com/database/technologies/xe-prior-release-downloads.html)
+
+---
 
 # 🎢 기술 스택(Stacks)
 ## Environment
