@@ -58,7 +58,7 @@ public class Master_salesPanel extends JPanel{
 	
 	public static JLabel yearDigitLabel = new JLabel(Integer.toString(date.getYear()));
 	public static JLabel monthDigitLabel = new JLabel(String.format("%02d", date.getMonthValue()));
-	public static JLabel dayDigitLabel = new JLabel(Integer.toString(date.getDayOfMonth()));
+	public static JLabel dayDigitLabel = new JLabel(String.format("%02d", date.getDayOfMonth()));
 	public static JLabel isTodayLabel = new JLabel("TODAY");
 	
 	JLabel yearLabel = new JLabel("년");
@@ -160,13 +160,15 @@ public class Master_salesPanel extends JPanel{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (date.getYear() == LocalDate.now().getYear() &&
-						date.getMonthValue() > LocalDate.now().getMonthValue()) {
+				if(date.plusYears(1).compareTo(LocalDate.now()) > 0) {
 					date = LocalDate.now();
-					setEnabled(false);
-				} else if(date.getYear() == LocalDate.now().getYear()) {
-					setEnabled(false);
-				} else {
+					yearupBtn.setEnabled(false);
+					monthupBtn.setEnabled(false);
+					dayupBtn.setEnabled(false);
+				} else if(date.plusYears(1).getYear() == LocalDate.now().getYear()) {
+					date = date.plusYears(1);
+					yearupBtn.setEnabled(false);
+				}else {
 					date = date.plusYears(1);
 				}
 			}
@@ -188,9 +190,21 @@ public class Master_salesPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(date.getYear() == LocalDate.now().getYear() && 
-						date.getMonthValue() == LocalDate.now().getMonthValue()) {
-					setEnabled(false);
+				
+				if(date.getYear() + 1 == LocalDate.now().getYear() &&
+						date.getMonthValue() == 12) {
+					yearupBtn.setEnabled(false);
+				}
+				
+				if(date.plusMonths(1).compareTo(LocalDate.now()) > 0) {
+					date = LocalDate.now();
+					monthupBtn.setEnabled(false);
+					dayupBtn.setEnabled(false);
+				}
+				else if(date.getYear() == LocalDate.now().getYear() &&
+						date.getMonthValue() + 1 == LocalDate.now().getMonthValue()) {
+					date = date.plusMonths(1);
+					monthupBtn.setEnabled(false);
 				} else {
 					date = date.plusMonths(1);		
 				}
@@ -204,6 +218,7 @@ public class Master_salesPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				date = date.minusMonths(1);
 				monthupBtn.setEnabled(true);
+				dayupBtn.setEnabled(true);
 			}
 		});
 		
@@ -212,11 +227,7 @@ public class Master_salesPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(date.equals(LocalDate.now())) {
-					setEnabled(false);
-				} else {
 					date = date.plusDays(1);
-				}
 			}
 		});
 		daydownBtn.setBounds(1415, 105, 34, 25);
