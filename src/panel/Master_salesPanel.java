@@ -49,12 +49,12 @@ public class Master_salesPanel extends JPanel{
 	
 	JScrollPane scrollPane = new JScrollPane(table);
 
-	public static JButton yearupBtn = new Upbutton("year");
-	public static JButton monthupBtn = new Upbutton("month");
-	public static JButton dayupBtn = new Upbutton("day");
-	JButton yeardownBtn = new Downbutton("year");	
-	JButton monthdownBtn = new Downbutton("month");
-	JButton daydownBtn = new Downbutton("day");
+	public static JButton yearupBtn = new Upbutton();
+	public static JButton monthupBtn = new Upbutton();
+	public static JButton dayupBtn = new Upbutton();
+	JButton yeardownBtn = new Downbutton();	
+	JButton monthdownBtn = new Downbutton();
+	JButton daydownBtn = new Downbutton();
 	
 	public static JLabel yearDigitLabel = new JLabel(Integer.toString(date.getYear()));
 	public static JLabel monthDigitLabel = new JLabel(String.format("%02d", date.getMonthValue()));
@@ -65,9 +65,9 @@ public class Master_salesPanel extends JPanel{
 	JLabel monthLabel = new JLabel("월");
 	JLabel dayLabel = new JLabel("일");
 	
-	JLabel yearSales = new JLabel("연매출 : ");
-	JLabel monthSales = new JLabel("월매출 : ");
 	JLabel daySales = new JLabel("일매출 : ");
+	JLabel monthSales = new JLabel("월매출 : ");
+	JLabel yearSales = new JLabel("연매출 : ");
 	
 	public static JLabel yearAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_year()) + "원");
 	public static JLabel monthAmount = new JLabel(numberFormat.format(TicketOrderDAO.sales_month()) + "원");

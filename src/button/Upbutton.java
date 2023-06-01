@@ -17,12 +17,10 @@ import panel.Master_salesPanel;
 
 public class Upbutton extends JButton implements ActionListener{
 	
-	String type;
 	LocalDate date = Master_salesPanel.date;
 	
-	public Upbutton(String type) {
+	public Upbutton() {
 		
-		this.type = type;
 		setEnabled(false);
 		
 		addActionListener(this);
@@ -42,6 +40,7 @@ public class Upbutton extends JButton implements ActionListener{
 			Master_salesPanel.monthupBtn.setEnabled(false);
 			Master_salesPanel.dayupBtn.setEnabled(false);
 		}
+		
 		Master_salesPanel.yearDigitLabel.setText(Integer.toString(Master_salesPanel.date.getYear()));
 		Master_salesPanel.monthDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getMonthValue()));
 		Master_salesPanel.dayDigitLabel.setText(String.format("%02d", Master_salesPanel.date.getDayOfMonth()));

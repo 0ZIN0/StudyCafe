@@ -15,12 +15,9 @@ import panel.Master_salesPanel;
 
 public class Downbutton extends JButton implements ActionListener{
 	
-	String type;
 	
-	public Downbutton(String type) {
-		
-		this.type = type;
-		
+	public Downbutton() {
+			
 		addActionListener(this);
 		
 		setIcon(new ImageIcon("ui/study_room/TimeUp_Button_02.png"));
