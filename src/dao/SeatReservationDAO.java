@@ -188,7 +188,7 @@ public class SeatReservationDAO {
 			e.printStackTrace();
 		}
 	}
-	
+	/*로그인한 사용자가 사용중인 티켓을 확인하는 메서드*/
 	public static String getUseTicket() {
 		String query4 = "SELECT * FROM SEAT_RESERVATION WHERE MEMBER_ID=? AND SEAT_RESERVATION_END_TIME IS NULL";
 		try (Connection conn = OjdbcConnection.getConnection();

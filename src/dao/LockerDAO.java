@@ -11,6 +11,7 @@ import frame.MainFrame;
 
 public class LockerDAO {
 	
+	/*사물함 순번으로 사용중인 멤버가 있는지 확인하는 메서드*/
 	public static List<String[]> isUse() {
 		List<String[]> lockerNums = new ArrayList<>();
 		String query = "SELECT numbers.num AS lockerNum, member.member_id\r\n"
@@ -38,6 +39,7 @@ public class LockerDAO {
 		return lockerNums;
 	}
 	
+	/*사물함의 남은기한과 현재시간을 비교하여 기한이 끝나면 사용자db의 사물함과 남은기한을 null로 바꾸는 메서드*/
 	public static void updateLockerInfo() {
 		String query = "UPDATE member set locker_number = null, locker_remain_date = null "
 				+ "WHERE locker_remain_date IS NOT NULL AND locker_number IS NOT NULL AND "
@@ -52,6 +54,7 @@ public class LockerDAO {
 		}
 	}
 	
+	/*사용중이 아닌 사물함의 갯수를 세는 메서드*/
 	public static int remainLocker() {
 		String query = "SELECT COUNT(*) FROM member WHERE locker_number IS NULL";
 		try (
