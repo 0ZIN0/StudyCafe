@@ -1,7 +1,7 @@
 # 🖥 Study Cafe Kiosk
 
 <p align="center">
-  <img src="https://github.com/0ZIN0/StudyCafe/assets/132882290/896fae6b-3701-43e5-bdf7-98688ad7d21f">
+  <img src="https://github.com/0ZIN0/StudyCafe/assets/132882290/896fae6b-3701-43e5-bdf7-98688ad7d21f" width=1000>
 </p>
 
 ---
