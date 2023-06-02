@@ -99,9 +99,9 @@ kiosks have been extensively developed in places like convenience stores and caf
 
 our team has chosen to develop a kiosk specifically for study cafes as our project's main theme.
 
-During the meeting, it was decided that our team would prioritize the convenience of the users and develop a program that focuses on user-friendly UI/UX, 
+During the meeting, it was decided that our team would prioritize the convenience of the users and develop a program 
 
-rather than simply creating a program that is convenient for the developers.
+that focuses on user-friendly UI/UX, rather than simply creating a program that is convenient for the developers.
 
 ## 프로그램 소개
 
