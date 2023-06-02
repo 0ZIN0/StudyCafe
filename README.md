@@ -152,7 +152,7 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 
 
 ### 프로그램 사용 전 환경 설정
-* eclipse에 DB 연동 [[how]](https://yermi.tistory.com/entry/OracleXE-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4eclipse%EC%97%90%EC%84%9C-Oracle-SQL-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0-Oracle-%ED%99%9C%EC%9A%A9%ED%95%98%EC%97%AC-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4%EC%97%90%EC%84%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%B6%9C%EB%A0%A5%ED%95%98%EA%B8%B0)
+* eclipse에 DB 연동 [[how]](https://coinco.tistory.com/110)
 * github에 존재하는 db 테이블을 생성 후 db 계정에 맞춰 eclipse 내 dao.OjdbcConnection 계정 설정
 ---
 
