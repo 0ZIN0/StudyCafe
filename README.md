@@ -95,9 +95,9 @@ As the project's main theme was determined to be the development of a kiosk, our
 
 Recently, self-service laundromats and coin-operated karaoke rooms, which allow individuals to use the facilities independently, have gained popularity. 
 
-Consequently, kiosks have been extensively developed in places like convenience stores and cafes. Based on this trend, 
+Consequently, kiosks have been extensively developed in places like convenience stores and cafes. 
 
-our team has chosen to develop a kiosk specifically for study cafes as our project's main theme.
+Based on this trend, our team has chosen to develop a kiosk specifically for study cafes as our project's main theme.
 
 During the meeting, it was decided that our team would prioritize the convenience of the users and develop a program 
 
