@@ -91,11 +91,11 @@
 사용자의 편의성을 중점으로 UI/UX를 고려하여 개발하는 것으로 결정이 되었습니다.
 
 
-As the project's main theme was determined to be the development of a kiosk, our team conducted a meeting to discuss the specific focus of our project. Recently, 
+As the project's main theme was determined to be the development of a kiosk, our team conducted a meeting to discuss the specific focus of our project. 
 
-self-service laundromats and coin-operated karaoke rooms, which allow individuals to use the facilities independently, have gained popularity. Consequently, 
+Recently, self-service laundromats and coin-operated karaoke rooms, which allow individuals to use the facilities independently, have gained popularity. 
 
-kiosks have been extensively developed in places like convenience stores and cafes. Based on this trend, 
+Consequently, kiosks have been extensively developed in places like convenience stores and cafes. Based on this trend, 
 
 our team has chosen to develop a kiosk specifically for study cafes as our project's main theme.
 
