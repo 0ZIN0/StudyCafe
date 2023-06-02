@@ -158,3 +158,6 @@ Lastly, the administrator has the capability to manually shut down the kiosk if 
 
 ### Development
 <img src="https://img.shields.io/badge/java-2A6379?style=for-the-badge&logo=java&logoColor=white">  <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
+
+### Design
+<img src="https://img.shields.io/badge/Adobe Photoshop-31A8FF?style=for-the-badge&logo=Adobe Photoshop&logoColor=white"> <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
